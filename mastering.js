@@ -1,4 +1,4 @@
-// Parâmetros Estáticos do Modo Presets
+// --- SCRIPT DO MOTOR DE ÁUDIO (DSP) ---
 const presetParams = {
   balanced: { lowShelf: 1.0, midPeak: -0.5, highShelf: 1.5, saturation: 0.1, sideGain: 1.2, compThreshold: -16, compRatio: 1.5, compAttack: 0.03, compRelease: 0.15, gainBoost: 4.0 },
   warm: { lowShelf: 3.0, midPeak: 1.0, highShelf: -1.0, saturation: 0.4, sideGain: 0.5, compThreshold: -18, compRatio: 2.0, compAttack: 0.05, compRelease: 0.2, gainBoost: 3.0 },
@@ -485,7 +485,9 @@ document.getElementById("p-btn-download").addEventListener("click", async () => 
     const l = document.createElement("a");
     l.href = url;
     l.download = `${pTargetFileName}_EstudioNeto_PresetMaster.wav`;
+    document.body.appendChild(l);
     l.click();
+    document.body.removeChild(l);
   } catch (err) {
     console.error(err);
     alert("Erro na renderização final.");
@@ -1095,7 +1097,9 @@ document.getElementById("r-btn-download").addEventListener("click", async () => 
     const l = document.createElement("a");
     l.href = url;
     l.download = `${rTargetFileName}_EstudioNeto_RefMaster.wav`;
+    document.body.appendChild(l);
     l.click();
+    document.body.removeChild(l);
   } catch (err) {
     console.error(err);
     alert("Erro na exportação de referência.");

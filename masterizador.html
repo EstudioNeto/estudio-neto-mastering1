@@ -60,9 +60,6 @@
       box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
     }
   </style>
-  
-  <!-- Script de Verificação e Veiculação do Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7887570051470520" crossorigin="anonymous"></script>
 </head>
 <body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
 
@@ -78,7 +75,7 @@
           </h1>
         </div>
         
-        <!-- Menu Principal de Navegação entre Páginas -->
+        <!-- Menu de Navegação -->
         <nav class="flex items-center gap-5 text-sm font-semibold">
           <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
           <a href="masterizador.html" class="text-white border-b-2 border-brand-accent pb-1">Masterizador</a>
@@ -100,19 +97,10 @@
     </div>
   </header>
 
-  <!-- ESPAÇO PUBLICITÁRIO 1: TOPO -->
-  <div class="max-w-6xl w-full mx-auto px-4 mt-4">
-    <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
-      <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
-      <div class="min-h-[90px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-lg">
-        <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Banner Topo (Ex: Leaderboard / Responsivo)</p>
-      </div>
-    </div>
-  </div>
-
   <!-- WORKSPACE 1: MASTERIZAÇÃO POR PRESETS -->
   <div id="workspace-presets" class="tab-content">
     <main class="max-w-6xl w-full mx-auto p-4 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Lado Esquerdo: Upload e Waveform -->
       <section class="lg:col-span-7 space-y-6">
         <div id="p-dropzone" class="border-2 border-dashed border-brand-border hover:border-brand-accent/50 transition-colors rounded-2xl p-8 bg-brand-card text-center cursor-pointer group">
           <input type="file" id="p-file-input" accept="audio/*" class="hidden">
@@ -213,14 +201,6 @@
             <button id="p-btn-download" disabled class="w-full bg-brand-success hover:bg-emerald-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
               Baixar Master WAV (Presets)
             </button>
-          </div>
-        </div>
-
-        <!-- ESPAÇO PUBLICITÁRIO 2 -->
-        <div class="bg-brand-card rounded-2xl border border-brand-border p-3 text-center">
-          <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
-          <div class="min-h-[160px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-xl">
-            <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Lateral Presets (Ex: Retângulo 300x250)</p>
           </div>
         </div>
       </section>
@@ -328,27 +308,9 @@
               </button>
             </div>
           </div>
-
-          <!-- ESPAÇO PUBLICITÁRIO 3 -->
-          <div class="bg-brand-card rounded-2xl border border-brand-border p-3 text-center">
-            <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
-            <div class="min-h-[160px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-xl">
-              <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Lateral Referência (Ex: Retângulo 300x250)</p>
-            </div>
-          </div>
         </div>
       </div>
     </main>
-  </div>
-
-  <!-- ESPAÇO PUBLICITÁRIO 4: RODAPÉ -->
-  <div class="max-w-6xl w-full mx-auto px-4 my-6">
-    <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
-      <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
-      <div class="min-h-[120px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-lg">
-        <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Banner Inferior (Ex: Retângulo / Responsivo)</p>
-      </div>
-    </div>
   </div>
 
   <!-- BASE DE CONHECIMENTO E SUPORTE -->
@@ -422,7 +384,6 @@
         <ul class="list-disc list-inside space-y-2 text-gray-400">
           <li><strong>Computação 100% Local (DSP):</strong> Toda a análise de áudio e os cálculos de processamento de sinal ocorrem localmente no seu computador através da tecnologia Web Audio API do seu próprio navegador. Seus arquivos originais <strong>nunca são enviados</strong> para os nossos servidores.</li>
           <li><strong>Segurança sobre Propriedade Intelectual:</strong> Não coletamos, armazenamos ou distribuímos suas faixas. Suas produções permanecem unicamente sob o seu domínio.</li>
-          <li><strong>Cookies e Monetização:</strong> Para viabilizar a gratuidade desta ferramenta sem limites de uso, exibimos anúncios contextuais por meio do Google AdSense. Esses parceiros podem usar cookies ou IDs anônimos para entregar conteúdos publicitários relevantes.</li>
         </ul>
       </div>
       <div class="text-right pt-2">
@@ -442,7 +403,7 @@
     </div>
   </footer>
 
-  <!-- Script do Web Worker Inline -->
+  <!-- Elemento de Script do Web Worker Inline -->
   <script id="wav-worker" type="javascript/worker">
     self.onmessage = function(e) {
       const { numOfChan, sampleRate, channelsData } = e.data;
@@ -484,7 +445,7 @@
     };
   </script>
 
-  <!-- Vinculação do Código Modular do Processamento -->
+  <!-- Vinculação do Código de Processamento -->
   <script src="mastering.js"></script>
 
 </body>

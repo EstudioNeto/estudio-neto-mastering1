@@ -201,7 +201,7 @@ function pBuildAudioGraph() {
 
   pMidGainNode.connect(pSaturatorNode);
   pSideSumNode.connect(pSideHpNode);
-  pSideHpNode.connect(pSideGainNode);
+  pSideGainNode.connect(pSideGainNode);
 
   pSaturatorNode.connect(pLeftMergeNode);
   pSideGainNode.connect(pLeftMergeNode);
@@ -214,8 +214,8 @@ function pBuildAudioGraph() {
   pRightMergeNode.connect(pChannelMergerNode, 0, 1);
 
   pChannelMergerNode.connect(pCompressorNode);
-  pCompressorNode.connect(pLimiterNode);
-  pLimiterNode.connect(pMasteringGainNode);
+  pChannelMergerNode.connect(pLimiterNode);
+  pChannelMergerNode.connect(pMasteringGainNode);
 
   pMasteringGainNode.connect(audioCtx.destination);
   pBypassGainNode.connect(audioCtx.destination);
@@ -405,7 +405,7 @@ document.getElementById("p-intensity-slider").addEventListener("input", pUpdateP
 document.getElementById("p-btn-download").addEventListener("click", async () => {
   if (!pTargetBuffer) return;
   pPause();
-  showLoader("Renderizando", "Exportando arquivo de áudio... Por favor, não feche a página.");
+  showLoader("Renderizando", "Processando arquivo de áudio... Por favor, não feche a página.");
 
   const params = presetParams[pCurrentPreset];
   const intensity = parseFloat(document.getElementById("p-intensity-slider").value);
@@ -1023,7 +1023,7 @@ document.getElementById("r-intensity-slider").addEventListener("input", () => {
 document.getElementById("r-btn-download").addEventListener("click", async () => {
   if (!rTargetBuffer) return;
   rPause();
-  showLoader("Renderizando", "Exportando arquivo de áudio... Por favor, não feche a página.");
+  showLoader("Renderizando", "Exportando arquivo de áudio de alta fidelidade...");
 
   const intensity = parseFloat(document.getElementById("r-intensity-slider").value);
   const duration = rTargetBuffer.duration;
@@ -1113,7 +1113,7 @@ document.getElementById("r-btn-download").addEventListener("click", async () => 
   os.start();
   try {
     const renderBuffer = await offlineCtx.startRendering();
-
+    
     // Revelar Barra de Progresso Real antes de iniciar a conversão do WAV
     loaderSpinner.classList.add("hidden");
     progressContainer.classList.remove("hidden");

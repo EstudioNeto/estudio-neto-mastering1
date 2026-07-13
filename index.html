@@ -185,7 +185,7 @@
   </div>
 
 
-  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO TRAVAR) ================= -->
+  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO INTERFERIR) ================= -->
   <div id="tab-mastering" class="tab-content hidden">
     
     <!-- WORKSPACE DE PRESETS -->
@@ -235,7 +235,7 @@
           </div>
         </section>
 
-        <!-- Lado Direito: Escolha de Preset e Download -->
+        <!-- Lado Direito -->
         <section class="lg:col-span-5 space-y-6">
           <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
             <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>⚡</span> Pré-ajustes da Cadeia</h2>
@@ -405,7 +405,7 @@
   <!-- ================= ABA 3: LOJA VIRTUAL ================= -->
   <div id="tab-store" class="tab-content hidden">
     
-    <!-- ESPAÇO PUBLICITÁRIO DO TOPO -->
+    <!-- ESPAÇO PUBLICITÁRIO DO TOPO (Ativo apenas nas abas comuns) -->
     <div class="max-w-6xl w-full mx-auto px-4 mt-4">
       <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
         <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
@@ -514,7 +514,7 @@
   </div>
 
 
-  <!-- BASE DE CONHECIMENTO E SUPORTE -->
+  <!-- BASE DE CONHECIMENTO E SUPORTE (Para indexação do AdSense) -->
   <section class="max-w-6xl w-full mx-auto px-4 my-8 border-t border-brand-border/50 pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
     <div class="lg:col-span-8 space-y-8 text-sm text-gray-400">
       <div>
@@ -586,71 +586,8 @@
   </footer>
 
 
-  <!-- SCRIPT UNIFICADO: CONTEÚDO ORIGINAL DE ÁUDIO + GERENCIADOR DE ROTAS SPA -->
+  <!-- SCRIPT ORIGINAL COMPLETO (SEM ALTERAÇÃO) -->
   <script>
-    // --- GERENCIADOR DE ABAS DA NAVEGAÇÃO SPA (Estúdio Neto) ---
-    const navWelcome = document.getElementById("nav-btn-welcome");
-    const navMastering = document.getElementById("nav-btn-mastering");
-    const navStore = document.getElementById("nav-btn-store");
-    const navPrograms = document.getElementById("nav-btn-programs");
-
-    const tabWelcome = document.getElementById("tab-welcome");
-    const tabMastering = document.getElementById("tab-mastering");
-    const tabStore = document.getElementById("tab-store");
-    const tabPrograms = document.getElementById("tab-programs");
-
-    const headerMode = document.getElementById("header-mode-selector");
-    const footerAd = document.getElementById("footer-ad-container");
-
-    function showTab(tabName) {
-      // Ocultar todos os containers
-      tabWelcome.classList.add("hidden");
-      tabMastering.classList.add("hidden");
-      tabStore.classList.add("hidden");
-      tabPrograms.classList.add("hidden");
-      headerMode.classList.add("hidden");
-      footerAd.classList.add("hidden");
-
-      // Resetar estilos dos botões de navegação
-      navWelcome.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      navMastering.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      navStore.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      navPrograms.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-
-      if (tabName === "welcome") {
-        tabWelcome.classList.remove("hidden");
-        footerAd.classList.remove("hidden");
-        navWelcome.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      } else if (tabName === "mastering") {
-        tabMastering.classList.remove("hidden");
-        headerMode.classList.remove("hidden");
-        navMastering.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-        // Disparar redimensionamento para ajustar as waveforms se já houver música carregada
-        window.dispatchEvent(new Event('resize'));
-      } else if (tabName === "store") {
-        tabStore.classList.remove("hidden");
-        footerAd.classList.remove("hidden");
-        navStore.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      } else if (tabName === "programs") {
-        tabPrograms.classList.remove("hidden");
-        footerAd.classList.remove("hidden");
-        navPrograms.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      }
-    }
-
-    navWelcome.addEventListener("click", () => showTab("welcome"));
-    navMastering.addEventListener("click", () => showTab("mastering"));
-    navStore.addEventListener("click", () => showTab("store"));
-    navPrograms.addEventListener("click", () => showTab("programs"));
-
-    // Interligar os botões de ação interna da Home Page
-    document.getElementById("hero-btn-mastering").addEventListener("click", () => showTab("mastering"));
-    document.getElementById("card-btn-mastering").addEventListener("click", () => showTab("mastering"));
-    document.getElementById("hero-btn-store").addEventListener("click", () => showTab("store"));
-    document.getElementById("card-btn-store").addEventListener("click", () => showTab("store"));
-
-
-    // ================= SCRIPT ORIGINAL DE ÁUDIO (DSP) =================
     // Parâmetros Estáticos do Modo Presets
     const presetParams = {
       balanced: { lowShelf: 1.0, midPeak: -0.5, highShelf: 1.5, saturation: 0.1, sideGain: 1.2, compThreshold: -16, compRatio: 1.5, compAttack: 0.03, compRelease: 0.15, gainBoost: 4.0 },
@@ -663,11 +600,26 @@
     // Frequências das 7 bandas de Equalização (Match EQ)
     const eqFrequencies = [60, 150, 400, 1100, 3000, 7000, 14000];
 
-    // Eventos de troca de sub-abas (Presets / Referência)
-    menuBtnPresets.addEventListener("click", () => switchAudioTab('presets'));
-    menuBtnReference.addEventListener("click", () => switchAudioTab('reference'));
+    // Variáveis de Estado Globais
+    let audioCtx = null;
+    let currentTab = 'presets'; // 'presets' ou 'reference'
 
-    function switchAudioTab(tab) {
+    // Elementos de Navegação do Menu
+    const menuBtnPresets = document.getElementById("menu-btn-presets");
+    const menuBtnReference = document.getElementById("menu-btn-reference");
+    const wsPresets = document.getElementById("workspace-presets");
+    const wsReference = document.getElementById("workspace-reference");
+
+    // Modal de carregamento global
+    const loaderModal = document.getElementById("loader-modal");
+    const loaderTitle = document.getElementById("loader-title");
+    const loaderText = document.getElementById("loader-text");
+
+    // Eventos de troca de abas no Menu
+    menuBtnPresets.addEventListener("click", () => switchTab('presets'));
+    menuBtnReference.addEventListener("click", () => switchTab('reference'));
+
+    function switchTab(tab) {
       if (currentTab === tab) return;
       currentTab = tab;
 
@@ -686,6 +638,16 @@
         wsReference.classList.remove("hidden");
         wsPresets.classList.add("hidden");
       }
+    }
+
+    function showLoader(title, text) {
+      loaderTitle.textContent = title;
+      loaderText.textContent = text;
+      loaderModal.classList.remove("opacity-0", "pointer-events-none");
+    }
+
+    function hideLoader() {
+      loaderModal.classList.add("opacity-0", "pointer-events-none");
     }
 
     // --- MÓDULO 1: DSP DO MODO PRESETS (VARIÁVEIS & FUNÇÕES) ---
@@ -828,8 +790,8 @@
       pRightMergeNode.connect(pChannelMergerNode, 0, 1);
 
       pChannelMergerNode.connect(pCompressorNode);
-      pCompressorNode.connect(pLimiterNode);
-      pLimiterNode.connect(pMasteringGainNode);
+      pChannelMergerNode.connect(pLimiterNode);
+      pChannelMergerNode.connect(pMasteringGainNode);
 
       pMasteringGainNode.connect(audioCtx.destination);
       pBypassGainNode.connect(audioCtx.destination);
@@ -1711,7 +1673,9 @@
         const l = document.createElement("a");
         l.href = url;
         l.download = `${rTargetFileName}_EstudioNeto_RefMaster.wav`;
+        document.body.appendChild(l);
         l.click();
+        document.body.removeChild(l);
       } catch (err) {
         console.error(err);
         alert("Erro na exportação de referência.");
@@ -1794,5 +1758,70 @@
       }
     });
   </script>
+
+  <!-- SCRIPT ADICIONAL DE NAVEGAÇÃO SPA (ESTÚDIO NETO) -->
+  <script>
+    const btnNavWelcome = document.getElementById("nav-btn-welcome");
+    const btnNavMastering = document.getElementById("nav-btn-mastering");
+    const btnNavStore = document.getElementById("nav-btn-store");
+    const btnNavPrograms = document.getElementById("nav-btn-programs");
+
+    const viewWelcome = document.getElementById("tab-welcome");
+    const viewMastering = document.getElementById("tab-mastering");
+    const viewStore = document.getElementById("tab-store");
+    const viewPrograms = document.getElementById("tab-programs");
+
+    const topModeSelector = document.getElementById("header-mode-selector");
+    const adFooter = document.getElementById("footer-ad-container");
+
+    function switchMainTab(target) {
+      // Ocultar todos os containers principais
+      viewWelcome.classList.add("hidden");
+      viewMastering.classList.add("hidden");
+      viewStore.classList.add("hidden");
+      viewPrograms.classList.add("hidden");
+      
+      topModeSelector.classList.add("hidden");
+      adFooter.classList.add("hidden");
+
+      // Resetar estilos ativos dos botões de navegação
+      btnNavWelcome.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
+      btnNavMastering.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
+      btnNavStore.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
+      btnNavPrograms.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
+
+      if (target === "welcome") {
+        viewWelcome.classList.remove("hidden");
+        adFooter.classList.remove("hidden");
+        btnNavWelcome.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
+      } else if (target === "mastering") {
+        viewMastering.classList.remove("hidden");
+        topModeSelector.classList.remove("hidden");
+        btnNavMastering.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
+        // Disparar redimensionamento para ajustar as waveforms se já houver música carregada
+        window.dispatchEvent(new Event('resize'));
+      } else if (target === "store") {
+        viewStore.classList.remove("hidden");
+        adFooter.classList.remove("hidden");
+        btnNavStore.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
+      } else if (target === "programs") {
+        viewPrograms.classList.remove("hidden");
+        adFooter.classList.remove("hidden");
+        btnNavPrograms.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
+      }
+    }
+
+    btnNavWelcome.addEventListener("click", () => switchMainTab("welcome"));
+    btnNavMastering.addEventListener("click", () => switchMainTab("mastering"));
+    btnNavStore.addEventListener("click", () => switchMainTab("store"));
+    btnNavPrograms.addEventListener("click", () => switchMainTab("programs"));
+
+    // Interligar os botões internos da Home Page de Boas-Vindas
+    document.getElementById("hero-btn-mastering").addEventListener("click", () => switchMainTab("mastering"));
+    document.getElementById("card-btn-mastering").addEventListener("click", () => switchMainTab("mastering"));
+    document.getElementById("hero-btn-store").addEventListener("click", () => switchMainTab("store"));
+    document.getElementById("card-btn-store").addEventListener("click", () => switchMainTab("store"));
+  </script>
+
 </body>
 </html>

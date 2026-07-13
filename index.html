@@ -138,10 +138,10 @@
           Uma plataforma integrada desenvolvida para fornecer soluções em processamento de áudio digital descentralizado, softwares de alta performance para shows ao vivo e utilitários de engenharia sonora.
         </p>
         <div class="flex flex-wrap justify-center gap-4 pt-4">
-          <button id="hero-btn-mastering" class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/20 text-sm">
+          <button id="hero-btn-mastering" class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/20 text-sm focus:outline-none">
             Acessar Masterizador Gratuito
           </button>
-          <button id="hero-btn-store" class="bg-brand-dark hover:bg-brand-card text-gray-300 border border-brand-border font-bold px-6 py-3 rounded-xl transition-all text-sm">
+          <button id="hero-btn-store" class="bg-brand-dark hover:bg-brand-card text-gray-300 border border-brand-border font-bold px-6 py-3 rounded-xl transition-all text-sm focus:outline-none">
             Conhecer Software Palco Mestre
           </button>
         </div>
@@ -157,7 +157,7 @@
           <p class="text-xs text-gray-400 leading-relaxed">
             Processe suas mixagens de áudio de forma ágil através de nossa cadeia de processamento por presets ou equalize seu espectro tonal mapeando-o de acordo com uma música de referência profissional.
           </p>
-          <button id="card-btn-mastering" class="text-xs text-brand-accent font-semibold inline-block hover:underline pt-2 text-left">Abrir Ferramenta →</button>
+          <button id="card-btn-mastering" class="text-xs text-brand-accent font-semibold inline-block hover:underline pt-2 text-left focus:outline-none">Abrir Ferramenta →</button>
         </div>
 
         <!-- Card 2 -->
@@ -165,9 +165,9 @@
           <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-brand-success text-xl">💻</div>
           <h3 class="text-lg font-bold text-white">Softwares Profissionais</h3>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Desenvolvemos programas otimizados e robustos para o sistema operacional Windows, desenhados para atender às demandas rigorosas de estabilidade e controle em performances artísticas em tempo real.
+            Desenvolvemos traumas otimizados e robustos para o sistema operacional Windows, desenhados para atender às demandas rigorosas de estabilidade e controle em performances artísticas em tempo real.
           </p>
-          <button id="card-btn-store" class="text-xs text-brand-success font-semibold inline-block hover:underline pt-2 text-left">Visitar Loja →</button>
+          <button id="card-btn-store" class="text-xs text-brand-success font-semibold inline-block hover:underline pt-2 text-left focus:outline-none">Visitar Loja →</button>
         </div>
 
         <!-- Card 3 -->
@@ -405,7 +405,7 @@
   <!-- ================= ABA 3: LOJA VIRTUAL ================= -->
   <div id="tab-store" class="tab-content hidden">
     
-    <!-- ESPAÇO PUBLICITÁRIO DO TOPO -->
+    <!-- ESPAÇO PUBLICITÁRIO DO TOPO (Ativo apenas nas abas comuns) -->
     <div class="max-w-6xl w-full mx-auto px-4 mt-4">
       <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
         <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
@@ -1679,7 +1679,6 @@
         hideLoader();
       }
     });
-
 
     // --- FUNÇÕES UTILITÁRIAS COMPARTILHADAS (WAV & MÉTROLOGIA) ---
     function makeSoftClipCurve(drive) {

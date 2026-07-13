@@ -20,6 +20,12 @@ const loaderModal = document.getElementById("loader-modal");
 const loaderTitle = document.getElementById("loader-title");
 const loaderText = document.getElementById("loader-text");
 
+// Elementos da Barra de Progresso Real
+const progressContainer = document.getElementById("progress-container");
+const progressBar = document.getElementById("progress-bar");
+const progressText = document.getElementById("progress-text");
+const loaderSpinner = document.getElementById("loader-spinner");
+
 const privacyModal = document.getElementById("privacy-modal");
 const btnPrivacy = document.getElementById("btn-privacy");
 const btnClosePrivacy = document.getElementById("btn-close-privacy");
@@ -66,6 +72,9 @@ function showLoader(title, text) {
 
 function hideLoader() {
   loaderModal.classList.add("opacity-0", "pointer-events-none");
+  progressContainer.classList.add("hidden");
+  progressText.classList.add("hidden");
+  loaderSpinner.classList.remove("hidden");
 }
 
 // --- PRESETS AUDIO LOGIC ---
@@ -396,7 +405,7 @@ document.getElementById("p-intensity-slider").addEventListener("input", pUpdateP
 document.getElementById("p-btn-download").addEventListener("click", async () => {
   if (!pTargetBuffer) return;
   pPause();
-  showLoader("Renderizando", "Processando arquivos de áudio em segundo plano com Web Worker...");
+  showLoader("Renderizando", "Exportando arquivo de áudio... Por favor, não feche a página.");
 
   const params = presetParams[pCurrentPreset];
   const intensity = parseFloat(document.getElementById("p-intensity-slider").value);
@@ -480,7 +489,19 @@ document.getElementById("p-btn-download").addEventListener("click", async () => 
   os.start();
   try {
     const renderBuffer = await offlineCtx.startRendering();
-    const wavBlob = await bufferToWavAsync(renderBuffer);
+    
+    // Revelar Barra de Progresso Real antes de iniciar a conversão do WAV
+    loaderSpinner.classList.add("hidden");
+    progressContainer.classList.remove("hidden");
+    progressText.classList.remove("hidden");
+    progressBar.style.width = "0%";
+    progressText.textContent = "0%";
+
+    const wavBlob = await bufferToWavWithProgress(renderBuffer, (percent) => {
+      progressBar.style.width = `${percent}%`;
+      progressText.textContent = `${percent}%`;
+    });
+
     const url = URL.createObjectURL(wavBlob);
     const l = document.createElement("a");
     l.href = url;
@@ -1002,7 +1023,7 @@ document.getElementById("r-intensity-slider").addEventListener("input", () => {
 document.getElementById("r-btn-download").addEventListener("click", async () => {
   if (!rTargetBuffer) return;
   rPause();
-  showLoader("Renderizando", "Exportando arquivo de áudio de alta fidelidade...");
+  showLoader("Renderizando", "Exportando arquivo de áudio... Por favor, não feche a página.");
 
   const intensity = parseFloat(document.getElementById("r-intensity-slider").value);
   const duration = rTargetBuffer.duration;
@@ -1092,7 +1113,19 @@ document.getElementById("r-btn-download").addEventListener("click", async () => 
   os.start();
   try {
     const renderBuffer = await offlineCtx.startRendering();
-    const wavBlob = await bufferToWavAsync(renderBuffer);
+
+    // Revelar Barra de Progresso Real antes de iniciar a conversão do WAV
+    loaderSpinner.classList.add("hidden");
+    progressContainer.classList.remove("hidden");
+    progressText.classList.remove("hidden");
+    progressBar.style.width = "0%";
+    progressText.textContent = "0%";
+
+    const wavBlob = await bufferToWavWithProgress(renderBuffer, (percent) => {
+      progressBar.style.width = `${percent}%`;
+      progressText.textContent = `${percent}%`;
+    });
+
     const url = URL.createObjectURL(wavBlob);
     const l = document.createElement("a");
     l.href = url;
@@ -1129,35 +1162,70 @@ function formatTime(seconds) {
   return `${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
 
-// Lógica de Renderização do Worker com Transferência Direta de RAM (Sem Clonagem / Sem Travamentos)
-function bufferToWavAsync(buffer) {
+// Conversão síncrona nativa segmentada (Sem Workers) para garantir estabilidade absoluta e exibir progresso
+function bufferToWavWithProgress(buffer, onProgress) {
   return new Promise((resolve) => {
-    const workerScript = document.getElementById('wav-worker').textContent;
-    const blob = new Blob([workerScript], { type: 'application/javascript' });
-    const worker = new Worker(URL.createObjectURL(blob));
-    
     const numOfChan = buffer.numberOfChannels;
     const sampleRate = buffer.sampleRate;
-    const channelsData = [];
-    const transferList = [];
-    
+    const totalSamples = buffer.length;
+    const length = totalSamples * numOfChan * 2 + 44;
+    const bufferArr = new ArrayBuffer(length);
+    const view = new DataView(bufferArr);
+    let pos = 0;
+
+    function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+    function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+
+    // Gravação do Cabeçalho WAV padrão de 44 Bytes
+    setUint32(0x46464952);                         // "RIFF"
+    setUint32(length - 8);
+    setUint32(0x45564157);                         // "WAVE"
+
+    setUint32(0x20746d66);                         // "fmt "
+    setUint32(16);                                 
+    setUint16(1);                                  // PCM
+    setUint16(numOfChan);
+    setUint32(sampleRate);
+    setUint32(sampleRate * 2 * numOfChan);  
+    setUint16(numOfChan * 2);                      
+    setUint16(16);                                 // 16-bit
+
+    setUint32(0x61746164);                         // "data"
+    setUint32(length - pos - 4);                   
+
+    const channels = [];
     for (let i = 0; i < numOfChan; i++) {
-      const srcData = buffer.getChannelData(i);
-      // Criar um novo Array Buffer estritamente para isolar do AudioBuffer original e transferir de forma direta
-      const copyData = new Float32Array(srcData.length);
-      copyData.set(srcData);
-      channelsData.push(copyData);
-      transferList.push(copyData.buffer); // Passagem física por referência (Tempo: 0ms)
+      channels.push(buffer.getChannelData(i));
     }
-    
-    worker.onmessage = function(e) {
-      const bufferArr = e.data;
-      const wavBlob = new Blob([bufferArr], { type: "audio/wav" });
-      worker.terminate();
-      resolve(wavBlob);
-    };
-    
-    worker.postMessage({ numOfChan, sampleRate, channelsData }, transferList);
+
+    let offset = 0;
+    const chunkSize = 150000; // Tamanho ideal de processamento por ciclo para evitar engasgos da CPU
+
+    function processChunk() {
+      const end = Math.min(offset + chunkSize, totalSamples);
+      for (; offset < end; offset++) {
+        for (let i = 0; i < numOfChan; i++) {
+          let sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (sample < 0 ? sample * 0x8000 : sample * 0x7FFF);
+          view.setInt16(pos, sample, true);
+          pos += 2;
+        }
+      }
+
+      // Calcula e atualiza a barra de progresso
+      const percent = Math.floor((offset / totalSamples) * 100);
+      onProgress(percent);
+
+      if (offset < totalSamples) {
+        // Pausa de 0ms para liberar a tela e desenhar a atualização gráfica
+        setTimeout(processChunk, 0);
+      } else {
+        const wavBlob = new Blob([bufferArr], { type: "audio/wav" });
+        resolve(wavBlob);
+      }
+    }
+
+    processChunk();
   });
 }
 

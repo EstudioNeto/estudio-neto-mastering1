@@ -75,7 +75,7 @@
           </h1>
         </div>
         
-        <!-- Menu de Navegação -->
+        <!-- Menu Principal de Navegação entre Páginas -->
         <nav class="flex items-center gap-5 text-sm font-semibold">
           <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
           <a href="masterizador.html" class="text-white border-b-2 border-brand-accent pb-1">Masterizador</a>
@@ -365,12 +365,20 @@
     </div>
   </section>
 
-  <!-- Modal de Carregamento e Progresso -->
+  <!-- Modal de Carregamento e Progresso Remodelado com Barra de Progresso Real -->
   <div id="loader-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="bg-brand-card border border-brand-border p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
-      <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <!-- Spinner Animado -->
+      <div id="loader-spinner" class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      
       <h3 id="loader-title" class="text-lg font-bold text-white">Carregando</h3>
       <p id="loader-text" class="text-sm text-gray-400">Por favor, aguarde...</p>
+      
+      <!-- Container da Barra de Progresso (Revelado por JS durante a codificação) -->
+      <div id="progress-container" class="w-full bg-brand-dark rounded-full h-2.5 hidden mt-4">
+        <div id="progress-bar" class="bg-brand-accent h-2.5 rounded-full transition-all duration-100" style="width: 0%"></div>
+      </div>
+      <span id="progress-text" class="text-xs font-mono text-brand-accent hidden">0%</span>
     </div>
   </div>
 
@@ -403,49 +411,7 @@
     </div>
   </footer>
 
-  <!-- Elemento de Script do Web Worker Inline -->
-  <script id="wav-worker" type="javascript/worker">
-    self.onmessage = function(e) {
-      const { numOfChan, sampleRate, channelsData } = e.data;
-      const length = channelsData[0].length * numOfChan * 2 + 44;
-      const bufferArr = new ArrayBuffer(length);
-      const view = new DataView(bufferArr);
-      let pos = 0;
-
-      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
-      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
-
-      setUint32(0x46464952);                         // "RIFF"
-      setUint32(length - 8);
-      setUint32(0x45564157);                         // "WAVE"
-
-      setUint32(0x20746d66);                         // "fmt "
-      setUint32(16);                                 
-      setUint16(1);                                  // PCM
-      setUint16(numOfChan);
-      setUint32(sampleRate);
-      setUint32(sampleRate * 2 * numOfChan);  
-      setUint16(numOfChan * 2);                      
-      setUint16(16);                                 // 16-bit
-
-      setUint32(0x61746164);                         // "data"
-      setUint32(length - pos - 4);                   
-
-      const totalSamples = channelsData[0].length;
-      for (let offset = 0; offset < totalSamples; offset++) {
-        for (let i = 0; i < numOfChan; i++) {
-          let sample = Math.max(-1, Math.min(1, channelsData[i][offset]));
-          sample = (sample < 0 ? sample * 0x8000 : sample * 0x7FFF);
-          view.setInt16(pos, sample, true);
-          pos += 2;
-        }
-      }
-
-      self.postMessage(bufferArr, [bufferArr]);
-    };
-  </script>
-
-  <!-- Vinculação do Código de Processamento -->
+  <!-- Vinculação do Código de Processamento Limpo -->
   <script src="mastering.js"></script>
 
 </body>

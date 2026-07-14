@@ -240,35 +240,35 @@
           <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
             <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>⚡</span> Pré-ajustes da Cadeia</h2>
             <div class="grid grid-cols-1 gap-2" id="preset-selector-group">
-              <button data-preset="balanced" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all">
+              <button data-preset="balanced" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-indigo-300">Balanced</p>
                   <p class="text-xs text-gray-400">Masterização transparente e comercial.</p>
                 </div>
                 <span class="text-xs">✔️</span>
               </button>
-              <button data-preset="warm" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all">
+              <button data-preset="warm" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-amber-400">Warm</p>
                   <p class="text-xs text-gray-400">Saturação estilo analógico (fita).</p>
                 </div>
                 <span class="text-xs hidden">✔️</span>
               </button>
-              <button data-preset="bright" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all">
+              <button data-preset="bright" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-sky-400">Bright</p>
                   <p class="text-xs text-gray-400">Abertura de agudos, foco no brilho.</p>
                 </div>
                 <span class="text-xs hidden">✔️</span>
               </button>
-              <button data-preset="punchy" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all">
+              <button data-preset="punchy" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-rose-400">Punchy</p>
                   <p class="text-xs text-gray-400">Ênfase em transitórios e pegada rítmica.</p>
                 </div>
                 <span class="text-xs hidden">✔️</span>
               </button>
-              <button data-preset="bass" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all">
+              <button data-preset="bass" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-purple-400">Bass Heavy</p>
                   <p class="text-xs text-gray-400">Grave forte mantido em mono estruturado.</p>
@@ -405,7 +405,7 @@
   <!-- ================= ABA 3: LOJA VIRTUAL ================= -->
   <div id="tab-store" class="tab-content hidden">
     
-    <!-- ESPAÇO PUBLICITÁRIO DO TOPO (Ativo apenas nas abas comuns) -->
+    <!-- ESPAÇO PUBLICITÁRIO DO TOPO -->
     <div class="max-w-6xl w-full mx-auto px-4 mt-4">
       <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
         <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
@@ -503,7 +503,7 @@
   </div>
 
 
-  <!-- ESPAÇO PUBLICITÁRIO 3: RODAPÉ (Ativo apenas nas abas comuns) -->
+  <!-- ESPAÇO PUBLICITÁRIO 3: RODAPÉ -->
   <div id="footer-ad-container" class="max-w-6xl w-full mx-auto px-4 my-6">
     <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
       <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
@@ -586,7 +586,7 @@
   </footer>
 
 
-  <!-- SCRIPT ORIGINAL COMPLETO DA CONVERSÃO DE ÁUDIO (SEM ALTERAÇÕES) -->
+  <!-- SCRIPT ORIGINAL COMPLETO (SEM NENHUMA ALTERAÇÃO) -->
   <script>
     // Parâmetros Estáticos do Modo Presets
     const presetParams = {
@@ -615,7 +615,7 @@
     const loaderTitle = document.getElementById("loader-title");
     const loaderText = document.getElementById("loader-text");
 
-    // Eventos de troca de abas no Menu de Áudio (Presets/Referência)
+    // Eventos de troca de abas no Menu
     menuBtnPresets.addEventListener("click", () => switchTab('presets'));
     menuBtnReference.addEventListener("click", () => switchTab('reference'));
 
@@ -1066,9 +1066,9 @@
         const l = document.createElement("a");
         l.href = url;
         l.download = `${pTargetFileName}_EstudioNeto_PresetMaster.wav`;
-        document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
+        document.body.appendChild(l); // ADICIONADO PARA CORRIGIR DOWNLOAD NO SAFARI/WINDOWS CHROME
         l.click();
-        document.body.removeChild(l); // Limpeza da memória
+        document.body.removeChild(l); // Limpeza de elemento
       } catch (err) {
         console.error(err);
         alert("Erro na renderização final.");
@@ -1758,70 +1758,5 @@
       }
     });
   </script>
-
-  <!-- SCRIPT ADICIONAL DE NAVEGAÇÃO SPA (ESTÚDIO NETO) -->
-  <script>
-    const btnNavWelcome = document.getElementById("nav-btn-welcome");
-    const btnNavMastering = document.getElementById("nav-btn-mastering");
-    const btnNavStore = document.getElementById("nav-btn-store");
-    const btnNavPrograms = document.getElementById("nav-btn-programs");
-
-    const viewWelcome = document.getElementById("tab-welcome");
-    const viewMastering = document.getElementById("tab-mastering");
-    const viewStore = document.getElementById("tab-store");
-    const viewPrograms = document.getElementById("tab-programs");
-
-    const topModeSelector = document.getElementById("header-mode-selector");
-    const adFooter = document.getElementById("footer-ad-container");
-
-    function switchMainTab(target) {
-      // Ocultar todos os containers principais
-      viewWelcome.classList.add("hidden");
-      viewMastering.classList.add("hidden");
-      viewStore.classList.add("hidden");
-      viewPrograms.classList.add("hidden");
-      
-      topModeSelector.classList.add("hidden");
-      adFooter.classList.add("hidden");
-
-      // Resetar estilos ativos dos botões de navegação
-      btnNavWelcome.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      btnNavMastering.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      btnNavStore.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-      btnNavPrograms.className = "text-gray-400 hover:text-white transition-all focus:outline-none";
-
-      if (target === "welcome") {
-        viewWelcome.classList.remove("hidden");
-        adFooter.classList.remove("hidden");
-        btnNavWelcome.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      } else if (target === "mastering") {
-        viewMastering.classList.remove("hidden");
-        topModeSelector.classList.remove("hidden");
-        btnNavMastering.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-        // Disparar redimensionamento para ajustar as waveforms se já houver música carregada
-        window.dispatchEvent(new Event('resize'));
-      } else if (target === "store") {
-        viewStore.classList.remove("hidden");
-        adFooter.classList.remove("hidden");
-        btnNavStore.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      } else if (target === "programs") {
-        viewPrograms.classList.remove("hidden");
-        adFooter.classList.remove("hidden");
-        btnNavPrograms.className = "text-white border-b-2 border-brand-accent pb-1 transition-all focus:outline-none";
-      }
-    }
-
-    btnNavWelcome.addEventListener("click", () => switchMainTab("welcome"));
-    btnNavMastering.addEventListener("click", () => switchMainTab("mastering"));
-    btnNavStore.addEventListener("click", () => switchMainTab("store"));
-    btnNavPrograms.addEventListener("click", () => switchMainTab("programs"));
-
-    // Interligar os botões internos da Home Page de Boas-Vindas
-    document.getElementById("hero-btn-mastering").addEventListener("click", () => switchMainTab("mastering"));
-    document.getElementById("card-btn-mastering").addEventListener("click", () => switchMainTab("mastering"));
-    document.getElementById("hero-btn-store").addEventListener("click", () => switchMainTab("store"));
-    document.getElementById("card-btn-store").addEventListener("click", () => switchMainTab("store"));
-  </script>
-
 </body>
 </html>

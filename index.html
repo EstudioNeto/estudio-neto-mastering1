@@ -185,7 +185,7 @@
   </div>
 
 
-  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO TRAVAR) ================= -->
+  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO INTERFERIR) ================= -->
   <div id="tab-mastering" class="tab-content hidden">
     
     <!-- WORKSPACE DE PRESETS -->
@@ -240,7 +240,7 @@
           <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
             <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>⚡</span> Pré-ajustes da Cadeia</h2>
             <div class="grid grid-cols-1 gap-2" id="preset-selector-group">
-              <button data-preset="balanced" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-border text-gray-300 flex justify-between items-center transition-all focus:outline-none">
+              <button data-preset="balanced" class="p-btn-preset w-full text-left p-3 rounded-xl border border-brand-accent/50 bg-brand-accent/10 text-white flex justify-between items-center transition-all focus:outline-none">
                 <div>
                   <p class="font-bold text-sm text-indigo-300">Balanced</p>
                   <p class="text-xs text-gray-400">Masterização transparente e comercial.</p>
@@ -514,7 +514,7 @@
   </div>
 
 
-  <!-- BASE DE CONHECIMENTO E SUPORTE (Para indexação do AdSense) -->
+  <!-- BASE DE CONHECIMENTO E SUPORTE -->
   <section class="max-w-6xl w-full mx-auto px-4 my-8 border-t border-brand-border/50 pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
     <div class="lg:col-span-8 space-y-8 text-sm text-gray-400">
       <div>
@@ -586,7 +586,7 @@
   </footer>
 
 
-  <!-- SCRIPT ORIGINAL COMPLETO DA CONVERSÃO DE ÁUDIO -->
+  <!-- SCRIPT ORIGINAL COMPLETO DA CONVERSÃO DE ÁUDIO (SEM ALTERAÇÕES) -->
   <script>
     // Parâmetros Estáticos do Modo Presets
     const presetParams = {
@@ -776,7 +776,7 @@
       pRightSideNode.connect(pSideSumNode);
 
       pMidGainNode.connect(pSaturatorNode);
-      pSideSumNode.connect(pSideHp);
+      pSideSumNode.connect(pSideHpNode);
       pSideHpNode.connect(pSideGainNode);
 
       pSaturatorNode.connect(pLeftMergeNode);
@@ -790,7 +790,7 @@
       pRightMergeNode.connect(pChannelMergerNode, 0, 1);
 
       pChannelMergerNode.connect(pCompressorNode);
-      pCompressorNode.connect(pLimiterNode);
+      pChannelMergerNode.connect(pLimiterNode);
       pLimiterNode.connect(pMasteringGainNode);
 
       pMasteringGainNode.connect(audioCtx.destination);
@@ -1061,18 +1061,24 @@
       os.start();
       try {
         const renderBuffer = await offlineCtx.startRendering();
-        const wavBlob = bufferToWav(renderBuffer);
-        const url = URL.createObjectURL(wavBlob);
-        const l = document.createElement("a");
-        l.href = url;
-        l.download = `${pTargetFileName}_EstudioNeto_PresetMaster.wav`;
-        document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
-        l.click();
-        document.body.removeChild(l); // Limpeza da memória
+        
+        // Let the browser paint the loader update before the heavy loop runs
+        showLoader("Renderizando", "Gerando arquivo WAV de alta qualidade...");
+        setTimeout(() => {
+          const wavBlob = bufferToWav(renderBuffer);
+          const url = URL.createObjectURL(wavBlob);
+          const l = document.createElement("a");
+          l.href = url;
+          l.download = `${pTargetFileName}_EstudioNeto_PresetMaster.wav`;
+          document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
+          l.click();
+          document.body.removeChild(l); // Limpeza da memória
+          URL.revokeObjectURL(url);
+          hideLoader();
+        }, 100);
       } catch (err) {
         console.error(err);
         alert("Erro na renderização final.");
-      } finally {
         hideLoader();
       }
     });
@@ -1668,18 +1674,24 @@
       os.start();
       try {
         const renderBuffer = await offlineCtx.startRendering();
-        const wavBlob = bufferToWav(renderBuffer);
-        const url = URL.createObjectURL(wavBlob);
-        const l = document.createElement("a");
-        l.href = url;
-        l.download = `${rTargetFileName}_EstudioNeto_RefMaster.wav`;
-        document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
-        l.click();
-        document.body.removeChild(l); // Limpeza da memória
+        
+        // Let the browser paint the loader update before the heavy loop runs
+        showLoader("Renderizando", "Gerando arquivo WAV de alta qualidade...");
+        setTimeout(() => {
+          const wavBlob = bufferToWav(renderBuffer);
+          const url = URL.createObjectURL(wavBlob);
+          const l = document.createElement("a");
+          l.href = url;
+          l.download = `${rTargetFileName}_EstudioNeto_RefMaster.wav`;
+          document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
+          l.click();
+          document.body.removeChild(l); // Limpeza da memória
+          URL.revokeObjectURL(url);
+          hideLoader();
+        }, 100);
       } catch (err) {
         console.error(err);
         alert("Erro na exportação de referência.");
-      } finally {
         hideLoader();
       }
     });

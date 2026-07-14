@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferramentas — Estúdio Neto</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Script de Verificação e Veiculação do Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7887570051470520" crossorigin="anonymous"></script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header Unificado -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🎛️</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Estúdio Neto
+        </h1>
+      </div>
+      
+      <!-- Menu de Opções -->
+      <nav class="flex items-center gap-5 text-sm font-semibold">
+        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
+        <a href="ferramentas.html" class="text-white border-b-2 border-brand-accent pb-1">Ferramentas</a>
+        <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
+        <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ESPAÇO PUBLICITÁRIO -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-4">
+    <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
+      <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
+      <div class="min-h-[90px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-lg">
+        <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Banner Topo (Ex: Leaderboard / Responsivo)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATÁLOGO DE FERRAMENTAS -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
+    <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Nossas Ferramentas de Áudio</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Cartão da Ferramenta de Masterização (VINCULADO AO GITHUB PAGES PARA NÃO TRAVAR) -->
+      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl flex flex-col justify-between space-y-4">
+        <div class="space-y-2">
+          <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-brand-accent text-xl">🎛️</div>
+          <h3 class="text-lg font-bold text-white">Masterizador de Áudio (Presets & Referência)</h3>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Processador de finalização acústica local. Execute sua masterização por meio de nossa cadeia analógica virtual ou envie uma faixa de referência comercial para moldar e equilibrar sua mixagem dinamicamente.
+          </p>
+        </div>
+        <div class="pt-2">
+          <!-- LINK DIRETO PARA O GITHUB PAGES ONDE A FERRAMENTA FUNCIONA LIGEIRA E SEM ADS -->
+          <a href="https://estudioneto.github.io/estudio-neto-mastering1/" target="_blank" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-all inline-block shadow-md">
+            Abrir Masterizador Grátis 🌐
+          </a>
+        </div>
+      </div>
+
+      <!-- Espaço reservado para futuras ferramentas -->
+      <div class="bg-brand-card/50 border border-dashed border-brand-border p-6 rounded-2xl flex items-center justify-center text-center">
+        <p class="text-xs text-gray-500">
+          Novas ferramentas e utilitários da Web Audio API serão adicionados aqui futuramente.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p class="font-bold text-gray-400 text-sm">Desenvolvido por Estúdio Neto</p>
+      <p class="text-[10px] text-gray-500">Toda a computação de DSP ocorre localmente no navegador, garantindo privacidade total sobre seus arquivos de áudio.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

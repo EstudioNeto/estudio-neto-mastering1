@@ -185,7 +185,7 @@
   </div>
 
 
-  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO INTERFERIR) ================= -->
+  <!-- ================= ABA 2: MASTERIZADOR (100% LIMPO DE ANÚNCIOS PARA NÃO TRAVAR) ================= -->
   <div id="tab-mastering" class="tab-content hidden">
     
     <!-- WORKSPACE DE PRESETS -->
@@ -235,7 +235,7 @@
           </div>
         </section>
 
-        <!-- Lado Direito -->
+        <!-- Lado Direito: Escolha de Preset e Download -->
         <section class="lg:col-span-5 space-y-6">
           <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
             <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>⚡</span> Pré-ajustes da Cadeia</h2>
@@ -586,7 +586,7 @@
   </footer>
 
 
-  <!-- SCRIPT ORIGINAL COMPLETO (SEM ALTERAÇÃO) -->
+  <!-- SCRIPT ORIGINAL COMPLETO DA CONVERSÃO DE ÁUDIO -->
   <script>
     // Parâmetros Estáticos do Modo Presets
     const presetParams = {
@@ -615,7 +615,7 @@
     const loaderTitle = document.getElementById("loader-title");
     const loaderText = document.getElementById("loader-text");
 
-    // Eventos de troca de abas no Menu
+    // Eventos de troca de abas no Menu de Áudio (Presets/Referência)
     menuBtnPresets.addEventListener("click", () => switchTab('presets'));
     menuBtnReference.addEventListener("click", () => switchTab('reference'));
 
@@ -776,7 +776,7 @@
       pRightSideNode.connect(pSideSumNode);
 
       pMidGainNode.connect(pSaturatorNode);
-      pSideSumNode.connect(pSideHpNode);
+      pSideSumNode.connect(pSideHp);
       pSideHpNode.connect(pSideGainNode);
 
       pSaturatorNode.connect(pLeftMergeNode);
@@ -790,8 +790,8 @@
       pRightMergeNode.connect(pChannelMergerNode, 0, 1);
 
       pChannelMergerNode.connect(pCompressorNode);
-      pChannelMergerNode.connect(pLimiterNode);
-      pChannelMergerNode.connect(pMasteringGainNode);
+      pCompressorNode.connect(pLimiterNode);
+      pLimiterNode.connect(pMasteringGainNode);
 
       pMasteringGainNode.connect(audioCtx.destination);
       pBypassGainNode.connect(audioCtx.destination);
@@ -1066,9 +1066,9 @@
         const l = document.createElement("a");
         l.href = url;
         l.download = `${pTargetFileName}_EstudioNeto_PresetMaster.wav`;
-        document.body.appendChild(l);
+        document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
         l.click();
-        document.body.removeChild(l);
+        document.body.removeChild(l); // Limpeza da memória
       } catch (err) {
         console.error(err);
         alert("Erro na renderização final.");
@@ -1673,9 +1673,9 @@
         const l = document.createElement("a");
         l.href = url;
         l.download = `${rTargetFileName}_EstudioNeto_RefMaster.wav`;
-        document.body.appendChild(l);
+        document.body.appendChild(l); // CORREÇÃO DE DOWNLOAD PARA O WINDOWS/MACOS
         l.click();
-        document.body.removeChild(l);
+        document.body.removeChild(l); // Limpeza da memória
       } catch (err) {
         console.error(err);
         alert("Erro na exportação de referência.");

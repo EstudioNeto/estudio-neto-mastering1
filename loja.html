@@ -64,7 +64,7 @@
     </div>
   </header>
 
-  <!-- ESPAÇO PUBLICITÁRIO -->
+  <!-- ESPAÇO PUBLICITÁRIO SUPERIOR -->
   <div class="max-w-6xl w-full mx-auto px-4 mt-4">
     <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center">
       <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
@@ -78,50 +78,51 @@
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
     <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Loja Virtual — Produtos Digitais</h2>
     
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+    <!-- Grade com 3 Produtos por Fileira Horizontal -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
       
       <!-- PRODUTO 1: Palco Mestre Vídeo Player -->
-      <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
-        <div class="p-6 md:p-8 space-y-6 flex-grow">
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
+        <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Software Desktop</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Windows 64-bit</span>
+            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Software Desktop</span>
+            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Win 64-bit</span>
+          </div>
+
+          <!-- Contêiner de Imagem com Fallback (.png) -->
+          <div class="aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-brand-border relative group flex items-center justify-center">
+            <img src="imagens/palcomestre.png" alt="Palco Mestre Vídeo Player" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">💻</span>
+              <span class="text-[10px] text-gray-500">imagens/palcomestre.png</span>
+            </div>
           </div>
           
           <div class="space-y-1">
-            <h2 class="text-xl md:text-2xl font-extrabold text-white">Palco Mestre Vídeo Player</h2>
-            <p class="text-xs font-semibold text-indigo-300">O reprodutor definitivo para apresentações e música ao vivo</p>
+            <h3 class="text-lg font-extrabold text-white">Palco Mestre Vídeo Player</h3>
+            <p class="text-[11px] text-indigo-300">O reprodutor de mídia para apresentações ao vivo</p>
           </div>
           
           <p class="text-xs leading-relaxed text-gray-400">
-            O Palco Mestre é o software de desktop ideal para cantores e instrumentistas de música ao vivo que necessitam de estabilidade. Agende, mude e organize suas playlists de vídeo e áudio em tempo real, eliminando interrupções indesejadas no palco.
+            Software projetado para cantores e instrumentistas que necessitam de estabilidade absoluta. Agende, mude e organize suas playlists de vídeo e áudio em tempo real, eliminando interrupções indesejadas durante os shows.
           </p>
 
-          <div class="border-t border-brand-border pt-4 space-y-3">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Compatibilidade e Requisitos:</h4>
-            <ul class="grid grid-cols-2 gap-1 text-[11px] text-indigo-400 pl-2">
-              <li>• Windows 11</li>
-              <li>• Windows 10</li>
-              <li>• Windows 8 / 8.1</li>
-              <li>• Windows 7</li>
+          <div class="border-t border-brand-border/60 pt-4 space-y-2">
+            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Requisitos e Suporte:</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
+              <li>✔ Compatível com Windows 7, 8, 10 e 11</li>
+              <li>✔ Otimizado para arquitetura 64-bit</li>
+              <li>✔ Suporte técnico incluso</li>
+              <li>✔ Licença vitalícia sem mensalidades</li>
             </ul>
           </div>
         </div>
         
-        <!-- Box de Venda Rápida Interno -->
-        <div class="p-6 bg-brand-dark/40 border-t md:border-t-0 md:border-l border-brand-border w-full md:w-64 shrink-0 flex flex-col justify-between text-center space-y-4">
-          <div class="space-y-1">
-            <span class="text-2xl block">💻</span>
-            <h3 class="font-extrabold text-white text-sm">Licença Vitalícia</h3>
-            <p class="text-[10px] text-gray-500">Instalador Digital Incluso</p>
-          </div>
-
-          <div class="space-y-1 text-left text-[10px] text-gray-400 border-y border-brand-border py-3">
-            <div class="flex justify-between"><span>Suporte técnico:</span> <span class="text-brand-success">✔ Sim</span></div>
-            <div class="flex justify-between"><span>Sem assinaturas:</span> <span class="text-brand-success">✔ Sim</span></div>
-          </div>
-
-          <!-- Botão de Compra Hotmart -->
+        <!-- Área de Compra -->
+        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
           <div class="flex justify-center">
             <a onclick="return false;" href="https://pay.hotmart.com/U100444535W?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
               <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
@@ -130,59 +131,48 @@
         </div>
       </div>
 
-      <!-- ESPAÇO PUBLICITÁRIO LATERAL -->
-      <div class="lg:col-span-1 bg-brand-card rounded-2xl border border-brand-border p-3 text-center self-stretch flex flex-col justify-between">
-        <div>
-          <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
-          <div class="min-h-[160px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-xl">
-            <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Lateral Loja (Ex: Retângulo 300x250)</p>
-          </div>
-        </div>
-        <p class="text-[9px] text-gray-600 mt-2 font-mono">Anúncios por Google AdSense</p>
-      </div>
-
       <!-- PRODUTO 2: Dominando a Mixagem no Reaper -->
-      <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
-        <div class="p-6 md:p-8 space-y-6 flex-grow">
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
+        <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Ebook Digital</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Formato PDF</span>
+            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Ebook Digital</span>
+            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Formato PDF</span>
+          </div>
+
+          <!-- Contêiner de Imagem com Fallback (.png) -->
+          <div class="aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-brand-border relative group flex items-center justify-center">
+            <img src="imagens/dominandomixagem.png" alt="Ebook Dominando a Mixagem no Reaper" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">📚</span>
+              <span class="text-[10px] text-gray-500">imagens/dominandomixagem.png</span>
+            </div>
           </div>
           
           <div class="space-y-1">
-            <h2 class="text-xl md:text-2xl font-extrabold text-white">Dominando a Mixagem no Reaper</h2>
-            <p class="text-xs font-semibold text-indigo-300">Aprenda a obter som de nível profissional com ferramentas nativas</p>
+            <h3 class="text-lg font-extrabold text-white">Dominando a Mixagem</h3>
+            <p class="text-[11px] text-indigo-300">Som de nível de estúdio com ferramentas nativas</p>
           </div>
           
           <p class="text-xs leading-relaxed text-gray-400">
-            Descubra como obter sonoridade de estúdio usando apenas o Reaper. Neste ebook prático, você aprenderá a dominar o ReaEQ, ReaComp e técnicas de roteamento avançado para estruturar mixagens com peso, definição e profundidade, sem depender de plugins caros.
+            Aprenda a obter sonoridade de estúdio usando apenas os recursos do Reaper. Guia focado no ReaEQ, ReaComp e roteamento de barramentos para estruturar mixagens com peso e definição, sem depender de plugins caros.
           </p>
 
-          <div class="border-t border-brand-border pt-4 space-y-2">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider">O que está incluso no material:</h4>
-            <ul class="grid grid-cols-2 gap-1 text-[11px] text-indigo-400 pl-2">
-              <li>• Guia ReaEQ & ReaComp</li>
-              <li>• Roteamento de barramentos</li>
-              <li>• Passo a passo da masterização</li>
-              <li>• Dicas para iniciantes</li>
+          <div class="border-t border-brand-border/60 pt-4 space-y-2">
+            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">O que está incluso:</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
+              <li>✔ Passo a passo do zero ao master</li>
+              <li>✔ Manual de compressores nativos</li>
+              <li>✔ Conceitos de roteamento de canais</li>
+              <li>✔ Download e leitura imediatos</li>
             </ul>
           </div>
         </div>
         
-        <!-- Box de Venda Rápida Ebook -->
-        <div class="p-6 bg-brand-dark/40 border-t md:border-t-0 md:border-l border-brand-border w-full md:w-64 shrink-0 flex flex-col justify-between text-center space-y-4">
-          <div class="space-y-1">
-            <span class="text-2xl block">📚</span>
-            <h3 class="font-extrabold text-white text-sm">Download Imediato</h3>
-            <p class="text-[10px] text-gray-500">Leitura em Celular, Tablet e PC</p>
-          </div>
-
-          <div class="space-y-1 text-left text-[10px] text-gray-400 border-y border-brand-border py-3">
-            <div class="flex justify-between"><span>Acesso vitalício:</span> <span class="text-brand-success">✔ Sim</span></div>
-            <div class="flex justify-between"><span>Material didático:</span> <span class="text-brand-success">✔ Sim</span></div>
-          </div>
-
-          <!-- Botão de Compra Hotmart Ebook -->
+        <!-- Área de Compra -->
+        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
           <div class="flex justify-center">
             <a onclick="return false;" href="https://pay.hotmart.com/O103179484A?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
               <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
@@ -191,46 +181,48 @@
         </div>
       </div>
 
-      <!-- PRODUTO 3: Mixagem Mestre no Reaper (Inserido) -->
-      <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
-        <div class="p-6 md:p-8 space-y-6 flex-grow">
+      <!-- PRODUTO 3: Mixagem Mestre no Reaper -->
+      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
+        <div class="space-y-4">
           <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Manual Prático</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Formato PDF</span>
+            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Manual Prático</span>
+            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Formato PDF</span>
+          </div>
+
+          <!-- Contêiner de Imagem com Fallback (.png) -->
+          <div class="aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-brand-border relative group flex items-center justify-center">
+            <img src="imagens/mixagemmestre.png" alt="Ebook Mixagem Mestre no Reaper" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">📘</span>
+              <span class="text-[10px] text-gray-500">imagens/mixagemmestre.png</span>
+            </div>
           </div>
           
           <div class="space-y-1">
-            <h2 class="text-xl md:text-2xl font-extrabold text-white">Mixagem Mestre no Reaper</h2>
-            <p class="text-xs font-semibold text-indigo-300">Guia de referência passo a passo focado no método e audição</p>
+            <h3 class="text-lg font-extrabold text-white">Mixagem Mestre no Reaper</h3>
+            <p class="text-[11px] text-indigo-300">Guia de referência passo a passo prático</p>
           </div>
           
-          <div class="text-xs text-gray-400 space-y-3 leading-relaxed">
-            <p>
-              Este guia foi desenhado para ser lido enquanto você opera o Reaper. Siga os passos na ordem apresentada para transformar uma gravação crua em uma música pronta para o mercado.
-            </p>
-            <p>
-              O Reaper (Rapid Environment for Audio Production) se destaca por não impor limitações artificiais. Diferente de outras DAWs que distinguem "faixas de áudio", "faixas auxiliares" e "faixas MIDI", no Reaper uma track é apenas uma track. Ela pode ser qualquer coisa.
-            </p>
-            <p>
-              Essa flexibilidade é sua maior arma na mixagem. Este manual foca no uso de ferramentas nativas (Stock Plugins), provando que você não precisa gastar fortunas para obter um som de alto nível. O segredo está no ouvido e no método.
-            </p>
+          <p class="text-xs leading-relaxed text-gray-400">
+            Manual feito para ser lido enquanto você opera a DAW. Siga os passos na ordem sugerida para direcionar faixas e estruturar cadeias de efeitos, provando que o método técnico e a audição superam gastos com ferramentas de terceiros.
+          </p>
+
+          <div class="border-t border-brand-border/60 pt-4 space-y-2">
+            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Abordagem de ensino:</h4>
+            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
+              <li>✔ Siga os passos na ordem apresentada</li>
+              <li>✔ Foco total em Stock Plugins (nativos)</li>
+              <li>✔ Roteamento flexível sem limites</li>
+              <li>✔ Download rápido em PDF interativo</li>
+            </ul>
           </div>
         </div>
         
-        <!-- Box de Venda Rápida Mixagem Mestre -->
-        <div class="p-6 bg-brand-dark/40 border-t md:border-t-0 md:border-l border-brand-border w-full md:w-64 shrink-0 flex flex-col justify-between text-center space-y-4">
-          <div class="space-y-1">
-            <span class="text-2xl block">📘</span>
-            <h3 class="font-extrabold text-white text-sm">Acesso Imediato</h3>
-            <p class="text-[10px] text-gray-500">Manual Interativo em PDF</p>
-          </div>
-
-          <div class="space-y-1 text-left text-[10px] text-gray-400 border-y border-brand-border py-3">
-            <div class="flex justify-between"><span>Leitura dinâmica:</span> <span class="text-brand-success">✔ Sim</span></div>
-            <div class="flex justify-between"><span>Uso de Stock Plugins:</span> <span class="text-brand-success">✔ Sim</span></div>
-          </div>
-
-          <!-- Botão de Compra Hotmart Mixagem Mestre -->
+        <!-- Área de Compra -->
+        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
           <div class="flex justify-center">
             <a onclick="return false;" href="https://pay.hotmart.com/U103231004P?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
               <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
@@ -240,6 +232,15 @@
       </div>
 
     </div>
+
+    <!-- ANÚNCIO DE RODAPÉ -->
+    <div class="bg-brand-card/60 border border-brand-border/80 rounded-xl p-2 text-center mt-8">
+      <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
+      <div class="min-h-[90px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-lg">
+        <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Banner Inferior Loja (Ex: Retângulo / Responsivo)</p>
+      </div>
+    </div>
+
   </main>
 
   <!-- Footer -->

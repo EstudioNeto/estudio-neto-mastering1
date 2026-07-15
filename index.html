@@ -39,12 +39,13 @@
         </h1>
       </div>
       
-      <!-- Menu de Opções Separados -->
+      <!-- Menu de Opções Separados (Navegação Física de Alta Velocidade) -->
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-white border-b-2 border-brand-accent pb-1">Início</a>
         <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
         <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
         <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
+        <a href="contato.html" class="text-gray-400 hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
   </header>
@@ -80,7 +81,7 @@
       </div>
     </section>
 
-    <!-- Artigos de Informações Relevantes -->
+    <!-- Artigos de Informações Relevantes (Essencial para aprovação do AdSense) -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400">
         <h3 class="text-lg font-bold text-white">Inovação e Processamento Descentralizado</h3>
@@ -116,7 +117,7 @@
       </div>
     </section>
 
-    <!-- NOVA SEÇÃO: CAPTURA DE LEADS & COMENTÁRIOS COM FIREBASE -->
+    <!-- SEÇÃO DE CAPTURA DE LEADS & COMENTÁRIOS COM FIREBASE -->
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-8">
       <div class="text-center space-y-2">
         <h3 class="text-xl font-bold text-white">Deixe sua Opinião ou Sugestão</h3>
@@ -228,14 +229,13 @@
     // ⚠️ SUBSTITUA COM SUAS CREDENCIAIS DO FIREBASE ⚠️
     // ==========================================
     const firebaseConfig = {
-  apiKey: "AIzaSyA9p_8pU0qHKMsjQLkNshU5Zznc-cnkhZY",
-  authDomain: "estudio-neto-tools.firebaseapp.com",
-  projectId: "estudio-neto-tools",
-  storageBucket: "estudio-neto-tools.firebasestorage.app",
-  messagingSenderId: "778029540469",
-  appId: "1:778029540469:web:2608d98f26e9205aad043c",
-  measurementId: "G-8XH2ZJ5ZFG"
-};
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_AUTH_DOMAIN",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_STORAGE_BUCKET",
+      messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+      appId: "SEU_APP_ID"
+    };
 
     // Inicialização do Firebase envolta em try-catch para prevenir erros na ausência das credenciais válidas
     let db;

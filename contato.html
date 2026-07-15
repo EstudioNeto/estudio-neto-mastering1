@@ -118,8 +118,8 @@
           </button>
 
           <!-- Mensagens de Feedback -->
-          <p id="success-feedback" class="hidden text-xs text-brand-success text-center font-semibold">✓ Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
-          <p id="error-feedback" class="hidden text-xs text-red-500 text-center font-semibold">Ocorreu um erro no preenchimento do formulário. Tente novamente.</p>
+          <p id="success-feedback" class="hidden text-xs text-brand-success text-center font-semibold">✓ Mensagem enviada com sucesso! Recebemos sua solicitação.</p>
+          <p id="error-feedback" class="hidden text-xs text-red-500 text-center font-semibold">Ocorreu um erro ao enviar sua mensagem. Tente novamente.</p>
         </form>
       </div>
 
@@ -157,34 +157,71 @@
     </div>
   </footer>
 
-  <script>
+  <!-- Scripts e Lógica do Firebase (Módulos v10) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // =======================================================
+    // ⚠️ COPIE E COLE AS MESMAS CHAVES UTILIZADAS NA HOME (index.html) ⚠️
+    // =======================================================
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_AUTH_DOMAIN",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_STORAGE_BUCKET",
+      messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+      appId: "SEU_APP_ID"
+    };
+
+    let db;
+    try {
+      if (firebaseConfig.apiKey !== "SUA_API_KEY") {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+      } else {
+        console.warn("Firebase: Insira as chaves de API reais do projeto para ativar o banco.");
+      }
+    } catch (e) {
+      console.error("Falha ao carregar o Firebase:", e);
+    }
+
     const form = document.getElementById('contact-form');
     const successMsg = document.getElementById('success-feedback');
     const errorMsg = document.getElementById('error-feedback');
     const btnSend = document.getElementById('btn-send');
 
-    // Manipulação do Formulário
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      if (!db) {
+        alert("Configuração do Firebase incompleta. Verifique as chaves no script do arquivo contato.html.");
+        return;
+      }
+
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const subject = document.getElementById('contact-subject').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
       btnSend.disabled = true;
       successMsg.classList.add('hidden');
       errorMsg.classList.add('hidden');
 
-      const name = document.getElementById('contact-name').value;
-      const email = document.getElementById('contact-email').value;
-      const subject = document.getElementById('contact-subject').value;
-      const message = document.getElementById('contact-message').value;
-
       try {
-        // Redirecionamento nativo amigável para envio de e-mail (mailto)
-        const mailtoLink = `mailto:estudioneto175@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Nome: " + name + "\nE-mail: " + email + "\n\nMensagem:\n" + message)}`;
-        
-        window.location.href = mailtoLink;
-        
+        // Envia os dados para a coleção 'contatos' no Firestore
+        await addDoc(collection(db, "contatos"), {
+          nome: name,
+          email: email,
+          assunto: subject,
+          mensagem: message,
+          timestamp: serverTimestamp()
+        });
+
         successMsg.classList.remove('hidden');
         form.reset();
       } catch (err) {
+        console.error("Erro ao salvar mensagem no Firestore:", err);
         errorMsg.classList.remove('hidden');
       } finally {
         btnSend.disabled = false;

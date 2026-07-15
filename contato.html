@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato — Estúdio Neto</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header Unificado -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🎛️</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Estúdio Neto
+        </h1>
+      </div>
+      
+      <!-- Menu de Opções Unificado -->
+      <nav class="flex items-center gap-5 text-sm font-semibold">
+        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
+        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
+        <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
+        <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
+        <a href="contato.html" class="text-white border-b-2 border-brand-accent pb-1">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DE CONTATO -->
+  <main class="max-w-4xl w-full mx-auto p-4 md:p-8 flex-grow space-y-10">
+    
+    <div class="text-center space-y-3 py-4">
+      <h2 class="text-3xl font-black text-white bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Fale Conosco</h2>
+      <p class="text-slate-400 text-sm max-w-lg mx-auto">Tem alguma dúvida técnica, sugestão para novas ferramentas ou problemas com alguma transação? Envie-nos uma mensagem.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Informações de Contato Lateral -->
+      <div class="space-y-6 md:col-span-1">
+        <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4">
+          <div class="space-y-1">
+            <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">E-mail de Suporte</span>
+            <p class="text-sm font-medium text-white break-words">estudioneto175@gmail.com</p>
+          </div>
+          
+          <div class="space-y-1">
+            <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Horário de Atendimento</span>
+            <p class="text-xs text-slate-400 leading-relaxed">Segunda a Sexta-feira<br>Das 09:00 às 18:00 (Horário de Brasília)</p>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Tempo de Resposta</span>
+            <p class="text-xs text-slate-400 leading-relaxed">Costumamos responder a todas as solicitações em até 48 horas úteis.</p>
+          </div>
+        </div>
+
+        <div class="bg-brand-card/40 border border-brand-border/60 p-5 rounded-xl text-xs text-gray-500 space-y-2">
+          <p class="font-semibold text-slate-400">🛡️ Canal Direto & Seguro</p>
+          <p class="leading-relaxed">Suas mensagens e dados pessoais enviados através deste canal são protegidos e tratados exclusivamente para fins de atendimento ao cliente.</p>
+        </div>
+      </div>
+
+      <!-- Formulário de Contato -->
+      <div class="md:col-span-2">
+        <form id="contact-form" class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl space-y-4 shadow-xl">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu Nome</label>
+              <input type="text" id="contact-name" required placeholder="Nome Completo" 
+                     class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu E-mail</label>
+              <input type="email" id="contact-email" required placeholder="seu@email.com" 
+                     class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Assunto</label>
+            <input type="text" id="contact-subject" required placeholder="Ex: Dúvida sobre o afinador" 
+                   class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Mensagem</label>
+            <textarea id="contact-message" required rows="6" placeholder="Escreva detalhadamente sua mensagem ou dúvida..." 
+                      class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all resize-none"></textarea>
+          </div>
+
+          <!-- Botão de Envio -->
+          <button type="submit" id="btn-send" class="w-full py-3 bg-brand-accent hover:bg-brand-accentHover text-white text-sm font-bold rounded-xl shadow-md transition-all">
+            Enviar Mensagem 📧
+          </button>
+
+          <!-- Mensagens de Feedback -->
+          <p id="success-feedback" class="hidden text-xs text-brand-success text-center font-semibold">✓ Mensagem enviada com sucesso! Entraremos em contato em breve.</p>
+          <p id="error-feedback" class="hidden text-xs text-red-500 text-center font-semibold">Ocorreu um erro no preenchimento do formulário. Tente novamente.</p>
+        </form>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal de Privacidade -->
+  <div id="privacy-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl max-w-lg w-full space-y-4 shadow-2xl relative mx-4">
+      <button id="btn-close-privacy" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl transition-colors">&times;</button>
+      <h3 class="text-lg font-bold text-white flex items-center gap-2">🛡️ Privacidade & Segurança</h3>
+      <div class="text-sm text-gray-300 space-y-3 max-h-96 overflow-y-auto pr-2">
+        <p>O <strong>Estúdio Neto</strong> valoriza a segurança e integridade das suas criações artísticas. Nosso compromisso operacional apoia-se em pilares rígidos:</p>
+        <ul class="list-disc list-inside space-y-2 text-gray-400">
+          <li><strong>Hospedagem Estática de Código:</strong> O portal é uma aplicação estática e não recolhe informações confidenciais do usuário em nossos servidores.</li>
+          <li><strong>Transações Seguras:</strong> Todos os produtos digitais comercializados através da nossa loja têm seus pagamentos e entregas processados com criptografia de ponta a ponta pela plataforma parceira Hotmart.</li>
+          <li><strong>Cookies de Monetização:</strong> Exibimos anúncios controlados pelo Google AdSense para manter o portal ativo. Cookies de terceiros podem ser utilizados para personalizar a exibição desses anúncios.</li>
+        </ul>
+      </div>
+      <div class="text-right pt-2">
+        <button id="btn-agree-privacy" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-md">Entendi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer com Privacidade no Rodapé (Exigência do AdSense) -->
+  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p class="font-bold text-gray-400 text-sm">Desenvolvido por Estúdio Neto</p>
+      <p class="text-[10px] text-gray-500">Toda a computação de DSP ocorre localmente no navegador, garantindo privacidade total sobre seus arquivos de áudio.</p>
+      <p class="pt-2">
+        <button id="btn-privacy" class="text-indigo-400 hover:text-indigo-300 font-semibold transition-colors focus:outline-none">Política de Privacidade & Segurança</button>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('success-feedback');
+    const errorMsg = document.getElementById('error-feedback');
+    const btnSend = document.getElementById('btn-send');
+
+    // Manipulação do Formulário
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      btnSend.disabled = true;
+      successMsg.classList.add('hidden');
+      errorMsg.classList.add('hidden');
+
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value;
+      const message = document.getElementById('contact-message').value;
+
+      try {
+        // Redirecionamento nativo amigável para envio de e-mail (mailto)
+        const mailtoLink = `mailto:estudioneto175@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Nome: " + name + "\nE-mail: " + email + "\n\nMensagem:\n" + message)}`;
+        
+        window.location.href = mailtoLink;
+        
+        successMsg.classList.remove('hidden');
+        form.reset();
+      } catch (err) {
+        errorMsg.classList.remove('hidden');
+      } finally {
+        btnSend.disabled = false;
+      }
+    });
+
+    // Lógica do Modal de Privacidade
+    const privacyModal = document.getElementById("privacy-modal");
+    const btnPrivacy = document.getElementById("btn-privacy");
+    const btnClosePrivacy = document.getElementById("btn-close-privacy");
+    const btnAgreePrivacy = document.getElementById("btn-agree-privacy");
+
+    btnPrivacy.addEventListener("click", () => {
+      privacyModal.classList.remove("opacity-0", "pointer-events-none");
+    });
+    const closePrivacy = () => {
+      privacyModal.classList.add("opacity-0", "pointer-events-none");
+    };
+    btnClosePrivacy.addEventListener("click", closePrivacy);
+    btnAgreePrivacy.addEventListener("click", closePrivacy);
+  </script>
+
+</body>
+</html>

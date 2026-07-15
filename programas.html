@@ -43,20 +43,69 @@
       <!-- Menu Principal de Navegação entre Páginas -->
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
-        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas</a>
+        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
         <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
         <a href="programas.html" class="text-white border-b-2 border-brand-accent pb-1">Programas e Apps</a>
+        <a href="contato.html" class="text-gray-400 hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL DA PÁGINA DE PROGRAMAS (EM BREVE) -->
-  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow flex flex-col items-center justify-center text-center py-24 space-y-4">
-    <div class="w-16 h-16 bg-brand-card border border-brand-border rounded-2xl flex items-center justify-center mx-auto text-3xl">⚙️</div>
-    <h2 class="text-2xl font-bold text-white">Catálogo de Programas e Aplicativos</h2>
-    <p class="text-sm text-gray-400 max-w-md mx-auto">
-      Estamos desenvolvendo uma seleção de softwares exclusivos focados em performance ao vivo, utilitários para estúdio e engenharia de áudio. Em breve, novos instaladores serão disponibilizados para download nesta seção.
-    </p>
+  <!-- CONTEÚDO PRINCIPAL DA PÁGINA DE PROGRAMAS -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-10">
+    
+    <!-- Introdução -->
+    <div class="text-center space-y-3 py-6">
+      <h2 class="text-3xl font-black text-white bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Programas e Utilitários</h2>
+      <p class="text-slate-400 text-sm max-w-lg mx-auto">Explore softwares desenvolvidos para otimização de estúdio, mentoria de mixagem e ferramentas de automação musical.</p>
+    </div>
+
+    <!-- Grade de Programas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Cartão: MixAssistant Pro -->
+      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-lg">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-brand-accent text-2xl">🤖</div>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full">Disponível</span>
+          </div>
+          <div class="space-y-1">
+            <h3 class="text-lg font-bold text-white">MixAssistant Pro</h3>
+            <p class="text-xs text-indigo-400 font-medium">Mentor & Assistente de Mixagem</p>
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            O MixAssistant Pro analisa as configurações do Reaper para otimizar o balanço e a clareza de suas produções. Ele atua como um mentor técnico, traduzindo conceitos complexos de mixagem em ações práticas. Com foco em equilíbrio e peso, o agente previne erros comuns de processamento dinâmico.
+          </p>
+        </div>
+        <div class="pt-2">
+          <a href="https://pay.hotmart.com/C106090515Y" target="_blank" class="w-full text-center bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-4 py-3 rounded-xl transition-all inline-block shadow-md">
+            Adquirir Licença Comercial 🌐
+          </a>
+        </div>
+      </div>
+
+      <!-- Placeholder: Em Desenvolvimento 1 -->
+      <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl flex flex-col justify-between opacity-75 border-dashed">
+        <div class="space-y-3 my-auto py-8 text-center">
+          <span class="text-3xl block text-gray-600">🎹</span>
+          <h4 class="text-sm font-semibold text-gray-400">Reprodutor de Backing Tracks</h4>
+          <p class="text-xs text-gray-500 max-w-xs mx-auto">Software focado em estabilidade e controle em tempo real de faixas de acompanhamento para shows.</p>
+          <span class="inline-block text-[9px] uppercase tracking-wider text-gray-600 font-bold bg-gray-500/5 px-2 py-0.5 rounded">Em Desenvolvimento</span>
+        </div>
+      </div>
+
+      <!-- Placeholder: Em Desenvolvimento 2 -->
+      <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl flex flex-col justify-between opacity-75 border-dashed">
+        <div class="space-y-3 my-auto py-8 text-center">
+          <span class="text-3xl block text-gray-600">🎚️</span>
+          <h4 class="text-sm font-semibold text-gray-400">Gerenciador de Plugins DSP</h4>
+          <p class="text-xs text-gray-500 max-w-xs mx-auto">Utilitário leve para mapeamento, organização e análise de latência de cadeias de efeitos.</p>
+          <span class="inline-block text-[9px] uppercase tracking-wider text-gray-600 font-bold bg-gray-500/5 px-2 py-0.5 rounded">Em Desenvolvimento</span>
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <!-- Footer -->

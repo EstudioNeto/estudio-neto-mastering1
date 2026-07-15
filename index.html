@@ -39,7 +39,7 @@
         </h1>
       </div>
       
-      <!-- Menu de Opções Separados (Navegação Física de Alta Velocidade) -->
+      <!-- Menu de Opções Separados -->
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-white border-b-2 border-brand-accent pb-1">Início</a>
         <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
@@ -80,7 +80,7 @@
       </div>
     </section>
 
-    <!-- Artigos de Informações Relevantes (Essencial para aprovação do AdSense) -->
+    <!-- Artigos de Informações Relevantes -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400">
         <h3 class="text-lg font-bold text-white">Inovação e Processamento Descentralizado</h3>
@@ -112,6 +112,67 @@
           <p class="text-xs text-gray-400 leading-relaxed">
             Ao abrir a nossa ferramenta de masterização no GitHub Pages, o processador calcula as curvas tonais de forma rápida e exporta o áudio diretamente em formato WAV linear sem perdas. O arquivo é baixado de forma nativa e segura para a sua máquina.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: CAPTURA DE LEADS & COMENTÁRIOS COM FIREBASE -->
+    <section class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-8">
+      <div class="text-center space-y-2">
+        <h3 class="text-xl font-bold text-white">Deixe sua Opinião ou Sugestão</h3>
+        <p class="text-xs text-gray-400 max-w-lg mx-auto">
+          Dúvidas sobre nossas ferramentas ou sugestões de novos recursos? Deixe seu comentário abaixo e participe da evolução do Estúdio Neto.
+        </p>
+      </div>
+
+      <!-- Formulário de Comentário (Captura de Lead) -->
+      <form id="comment-form" class="max-w-xl mx-auto space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu Nome</label>
+            <input type="text" id="lead-name" required placeholder="Nome Exemplo" 
+                   class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+          </div>
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu E-mail (Privado)</label>
+            <input type="email" id="lead-email" required placeholder="seu@email.com" 
+                   class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Comentário</label>
+          <textarea id="lead-comment" required rows="4" placeholder="Escreva sua mensagem aqui..." 
+                    class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all resize-none"></textarea>
+        </div>
+
+        <!-- Checkbox de Consentimento / Aceite de Leads -->
+        <div class="flex items-start gap-2.5 px-1 py-1">
+          <input type="checkbox" id="lead-optin" checked class="mt-1 h-4 w-4 rounded border-brand-border text-brand-accent focus:ring-brand-accent focus:ring-opacity-25 bg-[#080c16] cursor-pointer">
+          <label for="lead-optin" class="text-xs text-gray-400 select-none cursor-pointer">
+            Concordo em receber novidades, atualizações de softwares e conteúdos exclusivos do Estúdio Neto.
+          </label>
+        </div>
+
+        <!-- Botão de Envio -->
+        <button type="submit" id="btn-submit-comment" class="w-full py-3 bg-brand-accent hover:bg-brand-accentHover text-white text-sm font-bold rounded-xl shadow-md transition-all">
+          Enviar Comentário 🚀
+        </button>
+
+        <!-- Mensagens de Feedback -->
+        <p id="feedback-success" class="hidden text-xs text-brand-success text-center font-semibold">✓ Comentário enviado com sucesso e salvo em nossa lista!</p>
+        <p id="feedback-error" class="hidden text-xs text-red-500 text-center font-semibold">Ocorreu um erro ao enviar. Verifique a conexão.</p>
+      </form>
+
+      <!-- Divisor para Mural -->
+      <hr class="border-brand-border max-w-xl mx-auto" />
+
+      <!-- Mural Público de Comentários Carregados em Tempo Real -->
+      <div class="max-w-xl mx-auto space-y-4">
+        <h4 class="text-xs text-gray-400 uppercase tracking-wider font-semibold text-center">Mensagens Recentes</h4>
+        <div id="comments-container" class="space-y-3 max-h-96 overflow-y-auto pr-2">
+          <!-- Comentários serão inseridos aqui dinamicamente via JS -->
+          <p id="no-comments-msg" class="text-xs text-gray-500 text-center italic">Ainda não há mensagens no mural. Seja o primeiro a comentar!</p>
         </div>
       </div>
     </section>
@@ -158,6 +219,135 @@
     </div>
   </footer>
 
+  <!-- Integração com Firebase (Módulos v10) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // ==========================================
+    // ⚠️ SUBSTITUA COM SUAS CREDENCIAIS DO FIREBASE ⚠️
+    // ==========================================
+    const firebaseConfig = {
+      apiKey: "SUA_API_KEY",
+      authDomain: "SEU_AUTH_DOMAIN",
+      projectId: "SEU_PROJECT_ID",
+      storageBucket: "SEU_STORAGE_BUCKET",
+      messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+      appId: "SEU_APP_ID"
+    };
+
+    // Inicialização do Firebase envolta em try-catch para prevenir erros na ausência das credenciais válidas
+    let db;
+    try {
+      if (firebaseConfig.apiKey !== "SUA_API_KEY") {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        iniciarMural();
+      } else {
+        console.warn("Firebase: Por favor, substitua a configuração com as suas credenciais reais no código.");
+      }
+    } catch (e) {
+      console.error("Erro ao inicializar o Firebase: ", e);
+    }
+
+    const form = document.getElementById('comment-form');
+    const successMsg = document.getElementById('feedback-success');
+    const errorMsg = document.getElementById('feedback-error');
+    const btnSubmit = document.getElementById('btn-submit-comment');
+    const commentsContainer = document.getElementById('comments-container');
+    const noCommentsMsg = document.getElementById('no-comments-msg');
+
+    // Envio do Comentário e Captura de Lead
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!db) {
+        alert("Configuração do Firebase incompleta. Verifique as chaves no script do arquivo.");
+        return;
+      }
+
+      const nome = document.getElementById('lead-name').value.trim();
+      const email = document.getElementById('lead-email').value.trim();
+      const comentario = document.getElementById('lead-comment').value.trim();
+      const optin = document.getElementById('lead-optin').checked;
+
+      btnSubmit.disabled = true;
+      successMsg.classList.add('hidden');
+      errorMsg.classList.add('hidden');
+
+      try {
+        // Envia para a coleção 'comentarios' no Firestore
+        await addDoc(collection(db, "comentarios"), {
+          nome: nome,
+          email: email, // Armazenado secretamente para sua base de leads
+          comentario: comentario,
+          optInNewsletter: optin,
+          timestamp: serverTimestamp()
+        });
+
+        // Limpa campos e exibe sucesso
+        form.reset();
+        successMsg.classList.remove('hidden');
+      } catch (err) {
+        console.error("Erro ao salvar lead/comentário:", err);
+        errorMsg.classList.remove('hidden');
+      } finally {
+        btnSubmit.disabled = false;
+      }
+    });
+
+    // Função de escuta em tempo real do mural de comentários
+    function iniciarMural() {
+      const q = query(collection(db, "comentarios"), orderBy("timestamp", "desc"));
+      
+      onSnapshot(q, (snapshot) => {
+        commentsContainer.innerHTML = '';
+        
+        if (snapshot.empty) {
+          commentsContainer.appendChild(noCommentsMsg);
+          return;
+        }
+
+        snapshot.forEach((doc) => {
+          const dados = doc.data();
+          const timestamp = dados.timestamp ? dados.timestamp.toDate() : new Date();
+          const dataFormatada = timestamp.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+          
+          // Renderiza item de comentário preservando o e-mail (não renderizando na tela)
+          const commentDiv = document.createElement('div');
+          commentDiv.className = "bg-[#080c16]/50 border border-brand-border/60 p-4 rounded-xl text-xs space-y-1.5";
+          
+          // Sanitização nativa simples para evitar injeção de tags HTML (XSS)
+          const cleanNome = document.createTextNode(dados.nome);
+          const cleanComentario = document.createTextNode(dados.comentario);
+
+          const authorDiv = document.createElement('div');
+          authorDiv.className = "flex justify-between font-semibold text-slate-300";
+          
+          const nameSpan = document.createElement('span');
+          nameSpan.className = "text-indigo-300";
+          nameSpan.appendChild(cleanNome);
+          
+          const dateSpan = document.createElement('span');
+          dateSpan.className = "text-gray-500 font-mono text-[10px]";
+          dateSpan.textContent = dataFormatada;
+
+          authorDiv.appendChild(nameSpan);
+          authorDiv.appendChild(dateSpan);
+
+          const contentP = document.createElement('p');
+          contentP.className = "text-gray-400 leading-normal break-words";
+          contentP.appendChild(cleanComentario);
+
+          commentDiv.appendChild(authorDiv);
+          commentDiv.appendChild(contentP);
+          commentsContainer.appendChild(commentDiv);
+        });
+      });
+    }
+  </script>
+
+  <!-- Script Geral do Modal de Privacidade -->
   <script>
     const privacyModal = document.getElementById("privacy-modal");
     const btnPrivacy = document.getElementById("btn-privacy");

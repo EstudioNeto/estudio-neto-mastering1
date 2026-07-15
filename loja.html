@@ -56,9 +56,10 @@
       <!-- Menu de Opções -->
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
-        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas</a>
+        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
         <a href="loja.html" class="text-white border-b-2 border-brand-accent pb-1">Loja Virtual</a>
         <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
+        <a href="contato.html" class="text-gray-400 hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
   </header>
@@ -73,84 +74,119 @@
     </div>
   </div>
 
-  <!-- CONTEÚDO PRINCIPAL DA LOJA -->
+  <!-- CONTEÚDO PRINCIPAL DA LOJA (VITRINE MULTIPRODUTOS) -->
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
-    <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Loja Virtual</h2>
+    <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Loja Virtual — Produtos Digitais</h2>
     
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
       
-      <!-- Detalhes do Produto -->
-      <div class="lg:col-span-7 space-y-6">
-        <div class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl space-y-6">
-          <div class="flex items-center gap-3">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider">Software Desktop</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-xs uppercase tracking-wider">Windows 64-bit</span>
+      <!-- PRODUTO 1: Palco Mestre Vídeo Player -->
+      <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+        <div class="p-6 md:p-8 space-y-6 flex-grow">
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Software Desktop</span>
+            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Windows 64-bit</span>
           </div>
           
-          <h2 class="text-2xl md:text-3xl font-extrabold text-white">Palco Mestre Vídeo Player</h2>
-          <p class="text-sm font-semibold text-indigo-300">O reprodutor definitivo para apresentações e música ao vivo</p>
+          <div class="space-y-1">
+            <h2 class="text-xl md:text-2xl font-extrabold text-white">Palco Mestre Vídeo Player</h2>
+            <p class="text-xs font-semibold text-indigo-300">O reprodutor definitivo para apresentações e música ao vivo</p>
+          </div>
           
-          <p class="text-sm leading-relaxed text-gray-300">
-            O Palco Mestre é o software de desktop definitivo para cantores e instrumentistas de música ao vivo que não podem se dar ao luxo de parar uma apresentação para encontrar o próximo vídeo de acompanhamento. Agende, mude e controle sua playlist em tempo real, sem interrupções indesejadas no palco.
+          <p class="text-xs leading-relaxed text-gray-400">
+            O Palco Mestre é o software de desktop ideal para cantores e instrumentistas de música ao vivo que necessitam de estabilidade. Agende, mude e organize suas playlists de vídeo e áudio em tempo real, eliminando interrupções indesejadas no palco.
           </p>
 
-          <div class="border-t border-brand-border pt-4 space-y-2">
-            <h4 class="text-sm font-bold text-white uppercase tracking-wider">Sistemas Operacionais Compatíveis:</h4>
-            <p class="text-xs text-gray-400">O Palco Mestre Vídeo Player foi projetado e otimizado para o ambiente Windows nas seguintes versões de 64-bit:</p>
-            <ul class="list-disc list-inside text-xs text-indigo-400 space-y-1 pl-2">
-              <li>Windows 11</li>
-              <li>Windows 10</li>
-              <li>Windows 8 / 8.1</li>
-              <li>Windows 7</li>
+          <div class="border-t border-brand-border pt-4 space-y-3">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider">Compatibilidade e Requisitos:</h4>
+            <ul class="grid grid-cols-2 gap-1 text-[11px] text-indigo-400 pl-2">
+              <li>• Windows 11</li>
+              <li>• Windows 10</li>
+              <li>• Windows 8 / 8.1</li>
+              <li>• Windows 7</li>
             </ul>
           </div>
-
-          <div class="border-t border-brand-border pt-4">
-            <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-2">Arquitetura de Processamento</h4>
-            <p class="text-xs text-gray-400 leading-relaxed">
-              O instalador fornecido é compilado para sistemas de <strong>64-bit</strong>, que é o padrão estrutural para computadores modernos. Para o correto funcionamento, certifique-se de que seu sistema operacional Windows também utilize essa arquitetura.
-            </p>
-          </div>
         </div>
-      </div>
-
-      <!-- Box de Vendas Lateral -->
-      <div class="lg:col-span-5 space-y-6">
-        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 text-center space-y-6">
-          <div class="w-16 h-16 bg-brand-dark border border-brand-border rounded-2xl flex items-center justify-center mx-auto text-3xl">💻</div>
-          <div>
-            <h3 class="font-extrabold text-white text-lg">Adquirir Licença Vitalícia</h3>
-            <p class="text-xs text-gray-400 mt-1">Acesso imediato e atualizações de versão inclusas</p>
+        
+        <!-- Box de Venda Rápida Interno -->
+        <div class="p-6 bg-brand-dark/40 border-t md:border-t-0 md:border-l border-brand-border w-full md:w-64 shrink-0 flex flex-col justify-between text-center space-y-4">
+          <div class="space-y-1">
+            <span class="text-2xl block">💻</span>
+            <h3 class="font-extrabold text-white text-sm">Licença Vitalícia</h3>
+            <p class="text-[10px] text-gray-500">Instalador Digital Incluso</p>
           </div>
 
-          <div class="bg-brand-dark/60 border border-brand-border/50 rounded-xl p-4 text-left space-y-2">
-            <div class="flex justify-between items-center text-xs text-gray-400">
-              <span>Instalador digital</span>
-              <span class="text-brand-success">✔ Disponível</span>
-            </div>
-            <div class="flex justify-between items-center text-xs text-gray-400">
-              <span>Suporte técnico</span>
-              <span class="text-brand-success">✔ Incluso</span>
-            </div>
+          <div class="space-y-1 text-left text-[10px] text-gray-400 border-y border-brand-border py-3">
+            <div class="flex justify-between"><span>Suporte técnico:</span> <span class="text-brand-success">✔ Sim</span></div>
+            <div class="flex justify-between"><span>Sem assinaturas:</span> <span class="text-brand-success">✔ Sim</span></div>
           </div>
 
-          <!-- Botão de Compra Seguro Hotmart fornecido -->
-          <div class="flex justify-center pt-2">
+          <!-- Botão de Compra Hotmart -->
+          <div class="flex justify-center">
             <a onclick="return false;" href="https://pay.hotmart.com/U100444535W?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
               <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
             </a>
           </div>
-
-          <p class="text-[10px] text-gray-500 leading-relaxed font-mono">
-            Processamento criptografado de dados via Hotmart Checkout.
-          </p>
         </div>
+      </div>
 
-        <!-- ESPAÇO PUBLICITÁRIO LATERAL -->
-        <div class="bg-brand-card rounded-2xl border border-brand-border p-3 text-center">
+      <!-- ESPAÇO PUBLICITÁRIO LATERAL -->
+      <div class="lg:col-span-1 bg-brand-card rounded-2xl border border-brand-border p-3 text-center self-stretch flex flex-col justify-between">
+        <div>
           <span class="block text-[9px] uppercase tracking-wider text-gray-600 mb-1">Publicidade</span>
           <div class="min-h-[160px] flex items-center justify-center bg-brand-dark/40 border border-dashed border-brand-border/50 rounded-xl">
             <p class="text-xs text-gray-500 font-mono">Espaço de Anúncio - Lateral Loja (Ex: Retângulo 300x250)</p>
+          </div>
+        </div>
+        <p class="text-[9px] text-gray-600 mt-2 font-mono">Anúncios por Google AdSense</p>
+      </div>
+
+      <!-- PRODUTO 2: Dominando a Mixagem no Reaper (Inserido) -->
+      <div class="lg:col-span-2 bg-brand-card border border-brand-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+        <div class="p-6 md:p-8 space-y-6 flex-grow">
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-indigo-500/10 text-brand-accent font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Ebook Digital</span>
+            <span class="bg-emerald-500/10 text-brand-success font-bold px-3 py-1 rounded-full text-[10px] uppercase tracking-wider">Formato PDF</span>
+          </div>
+          
+          <div class="space-y-1">
+            <h2 class="text-xl md:text-2xl font-extrabold text-white">Dominando a Mixagem no Reaper</h2>
+            <p class="text-xs font-semibold text-indigo-300">Aprenda a obter som de nível profissional com ferramentas nativas</p>
+          </div>
+          
+          <p class="text-xs leading-relaxed text-gray-400">
+            Descubra como obter sonoridade de estúdio usando apenas o Reaper. Neste ebook prático, você aprenderá a dominar o ReaEQ, ReaComp e técnicas de roteamento avançado para estruturar mixagens com peso, definição e profundidade, sem depender de plugins caros.
+          </p>
+
+          <div class="border-t border-brand-border pt-4 space-y-2">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider">O que está incluso no material:</h4>
+            <ul class="grid grid-cols-2 gap-1 text-[11px] text-indigo-400 pl-2">
+              <li>• Guia ReaEQ & ReaComp</li>
+              <li>• Roteamento de barramentos</li>
+              <li>• Passo a passo da masterização</li>
+              <li>• Dicas para iniciantes</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Box de Venda Rápida Ebook -->
+        <div class="p-6 bg-brand-dark/40 border-t md:border-t-0 md:border-l border-brand-border w-full md:w-64 shrink-0 flex flex-col justify-between text-center space-y-4">
+          <div class="space-y-1">
+            <span class="text-2xl block">📚</span>
+            <h3 class="font-extrabold text-white text-sm">Download Imediato</h3>
+            <p class="text-[10px] text-gray-500">Leitura em Celular, Tablet e PC</p>
+          </div>
+
+          <div class="space-y-1 text-left text-[10px] text-gray-400 border-y border-brand-border py-3">
+            <div class="flex justify-between"><span>Acesso vitalício:</span> <span class="text-brand-success">✔ Sim</span></div>
+            <div class="flex justify-between"><span>Material didático:</span> <span class="text-brand-success">✔ Sim</span></div>
+          </div>
+
+          <!-- Botão de Compra Hotmart Ebook -->
+          <div class="flex justify-center">
+            <a onclick="return false;" href="https://pay.hotmart.com/O103179484A?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
+              <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
+            </a>
           </div>
         </div>
       </div>

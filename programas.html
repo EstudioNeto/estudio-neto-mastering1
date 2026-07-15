@@ -61,15 +61,27 @@
     </div>
 
     <!-- Grade de Programas -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
       
       <!-- Cartão: MixAssistant Pro -->
       <div class="bg-brand-card border border-brand-border p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-lg">
-        <div class="space-y-3">
+        <div class="space-y-4">
           <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-brand-accent text-2xl">🤖</div>
             <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full">Disponível</span>
           </div>
+
+          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
+          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
+            <img src="imagens/mixassistant.png" alt="MixAssistant Pro" 
+                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Caso a imagem não exista na pasta do GitHub, mostra o bloco de fallback abaixo -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">🤖</span>
+              <span class="text-[10px] text-gray-500">imagens/mixassistant.png</span>
+            </div>
+          </div>
+
           <div class="space-y-1">
             <h3 class="text-lg font-bold text-white">MixAssistant Pro</h3>
             <p class="text-xs text-indigo-400 font-medium">Mentor & Assistente de Mixagem</p>
@@ -87,11 +99,23 @@
 
       <!-- Cartão: MixGuide AI -->
       <div class="bg-brand-card border border-brand-border p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-lg">
-        <div class="space-y-3">
+        <div class="space-y-4">
           <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-brand-accent text-2xl">🎓</div>
             <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full">Disponível</span>
           </div>
+
+          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
+          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
+            <img src="imagens/mixguide.png" alt="MixGuide AI" 
+                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Caso a imagem não exista na pasta do GitHub, mostra o bloco de fallback abaixo -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">🎓</span>
+              <span class="text-[10px] text-gray-500">imagens/mixguide.png</span>
+            </div>
+          </div>
+
           <div class="space-y-1">
             <h3 class="text-lg font-bold text-white">MixGuide AI</h3>
             <p class="text-xs text-indigo-400 font-medium">Mentor Virtual de Engenharia de Áudio</p>
@@ -107,13 +131,25 @@
         </div>
       </div>
 
-      <!-- NOVO Cartão: ReaperChain Master -->
+      <!-- Cartão: ReaperChain Master -->
       <div class="bg-brand-card border border-brand-border p-6 rounded-2xl flex flex-col justify-between space-y-5 shadow-lg">
-        <div class="space-y-3">
+        <div class="space-y-4">
           <div class="flex items-center justify-between">
-            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center text-brand-accent text-2xl">⛓️</div>
             <span class="text-[10px] uppercase font-bold tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full">Disponível</span>
           </div>
+
+          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
+          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
+            <img src="imagens/reaperchain.png" alt="ReaperChain Master" 
+                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+            <!-- Caso a imagem não exista na pasta do GitHub, mostra o bloco de fallback abaixo -->
+            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+              <span class="text-4xl mb-1">⛓️</span>
+              <span class="text-[10px] text-gray-500">imagens/reaperchain.png</span>
+            </div>
+          </div>
+
           <div class="space-y-1">
             <h3 class="text-lg font-bold text-white">ReaperChain Master</h3>
             <p class="text-xs text-indigo-400 font-medium">Consultor Especializado em Reaper</p>

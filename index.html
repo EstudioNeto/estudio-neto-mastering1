@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estúdio Neto — Soluções e Engenharia de Áudio</title>
+  <meta name="description" content="Processadores de áudio digital locais executados diretamente em seu navegador. Acesse nossa suíte com masterização, removedor de vocais, afinador e conversores sem uploads.">
+  <meta name="keywords" content="estudio neto, masterizacao online, removedor vocal, afinador guitarra, conversor de audio, dsp local, web audio api">
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -61,7 +64,7 @@
   </div>
 
   <!-- CONTEÚDO EDITORIAL DA PÁGINA PRINCIPAL -->
-  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-12">
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-16">
     
     <!-- Seção de Boas-Vindas -->
     <section class="text-center py-10 md:py-16 bg-gradient-to-b from-brand-card to-transparent rounded-3xl border border-brand-border p-6 md:p-12 space-y-6">
@@ -81,39 +84,177 @@
       </div>
     </section>
 
-    <!-- Artigos de Informações Relevantes (Essencial para aprovação do AdSense) -->
+    <!-- GUIA DE RECURSOS ATIVOS -->
+    <section class="space-y-6">
+      <div class="text-center space-y-2">
+        <h3 class="text-2xl font-bold text-white">Ecossistema de Utilitários de Som</h3>
+        <p class="text-xs text-gray-400 max-w-lg mx-auto">Conheça as ferramentas e os algoritmos desenvolvidos para rodar de forma leve no seu dispositivo.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Recurso 1 -->
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
+          <span class="text-xl">🎛️</span>
+          <h4 class="font-bold text-white text-sm">Masterizador de Áudio</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Processamento multibanda e limitação true peak com carregamento rápido por presets ou análise de curvas em tempo real de faixas comerciais.</p>
+        </div>
+        <!-- Recurso 2 -->
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
+          <span class="text-xl">🎤</span>
+          <h4 class="font-bold text-white text-sm">Removedor de Vocais</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Utiliza redes de filtragem de sinal para separar as frequências da voz humana dos elementos instrumentais estéreo sem uploads.</p>
+        </div>
+        <!-- Recurso 3 -->
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
+          <span class="text-xl">🎸</span>
+          <h4 class="font-bold text-white text-sm">Afinador de Violão</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Mecanismo de análise harmônica de entrada que detecta e exibe a frequência fundamental do instrumento com ponteiro preciso em cents.</p>
+        </div>
+        <!-- Recurso 4 -->
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
+          <span class="text-xl">🎧</span>
+          <h4 class="font-bold text-white text-sm">Conversor de Áudio 8D</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Aplica panning estéreo de forma dinâmica modulada por LFO (oscilador de baixa frequência) combinado com reverberação de convolução.</p>
+        </div>
+        <!-- Recurso 5 -->
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
+          <span class="text-xl">🔄</span>
+          <h4 class="font-bold text-white text-sm">Conversor de Formatos</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Realiza reamostragem rápida de arquivos locais (MP3, WAV, FLAC, OGG, AAC) definindo taxa de bits e resolução de forma nativa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTRAL DE CONHECIMENTO & ENGENHARIA DE SOM -->
+    <section class="space-y-8 pt-8 border-t border-brand-border">
+      <div class="text-center space-y-2">
+        <h3 class="text-2xl font-bold text-white">Central de Conhecimento e Engenharia Acústica</h3>
+        <p class="text-xs text-gray-400 max-w-lg mx-auto">Entenda os conceitos técnicos e teóricos que fundamentam nossas soluções digitais.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-gray-400 leading-relaxed">
+        
+        <!-- Artigo 1 -->
+        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
+          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Masterização Digital</span>
+          <h4 class="text-lg font-bold text-white">O Papel do Headroom, Limitadores True Peak e Normalização LUFS</h4>
+          <p>
+            A etapa de masterização de áudio é o processo de preparação e transferência do som gravado de um meio contendo o arquivo final para uma mídia de armazenamento (o master). O objetivo principal é otimizar a reprodução sonora em todos os sistemas de escuta, corrigindo problemas de equalização rítmica e de balanço estéreo.
+          </p>
+          <p>
+            Para alcançar um resultado competitivo no mercado atual, o engenheiro de som precisa gerenciar o <strong>headroom</strong> (margem de segurança dinâmica que evita distorção indesejada). O uso de limitadores <strong>True Peak</strong> atua impedindo picos de distorção interamostral que surgem na conversão do sinal digital para analógico. Ademais, o monitoramento em <strong>LUFS</strong> (Loudness Units Full Scale) garante que a faixa esteja em conformidade com as diretrizes das principais plataformas de streaming (como -14 LUFS do Spotify).
+          </p>
+        </div>
+
+        <!-- Artigo 2 -->
+        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
+          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Isolamento Vocal</span>
+          <h4 class="text-lg font-bold text-white">A Ciência por trás do Cancelamento de Fase e Análise de Espectro</h4>
+          <p>
+            O isolamento ou a remoção de canais vocais em arquivos estéreo mixados apóia-se no controle geométrico das ondas. Historicamente, esse processo baseava-se em um método mecânico simples: inverter a fase elétrica de um canal lateral e somá-lo ao outro. Como os vocais principais costumam ser posicionados no centro do panorama da mixagem, essa inversão cancelava os elementos idênticos entre os canais.
+          </p>
+          <p>
+            Contudo, o método tradicional de fase sacrificava graves, bumbos e outros instrumentos centrais. Os processadores modernos utilizam redes de isolamento digital de sinais que analisam o som no domínio da frequência (usando transformadas matemáticas rápidas - FFT). Isso permite extrair timbres de forma inteligente, mapeando padrões acústicos para separar os stems sem destruir a integridade e dinâmica instrumental.
+          </p>
+        </div>
+
+        <!-- Artigo 3 -->
+        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
+          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Espacialização Psicoacústica</span>
+          <h4 class="text-lg font-bold text-white">O Processamento Binaural e a Geração de Órbitas Tridimensionais</h4>
+          <p>
+            O fenômeno conhecido comercialmente como áudio 8D baseia-se na aplicação de técnicas psicoacústicas de posicionamento tridimensional. Nosso cérebro utiliza pequenos atrasos de tempo (ITD) e variações sutis de volume (ILD) entre o ouvido esquerdo e o direito para determinar a exata localização espacial de um objeto que emite som em nosso ambiente de convívio diário.
+          </p>
+          <p>
+            Para reproduzir artificialmente essa percepção física, as ferramentas de áudio 8D usam um <strong>LFO (Low Frequency Oscillator)</strong> que oscila suavemente o panorama estéreo em um movimento circular constante ao redor da cabeça do ouvinte. Quando esse efeito de panning dinâmico é associado a um processador de reverberação física, criamos a ilusão de que o som está se deslocando por um ambiente acústico real. Por esse motivo mecânico, o uso de fones de ouvido estéreo é obrigatório para experimentar o efeito espacial sem crosstalk.
+          </p>
+        </div>
+
+        <!-- Artigo 4 -->
+        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
+          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Metronomia na Performance</span>
+          <h4 class="text-lg font-bold text-white">A Importância da Temporização e a Estabilidade de Guias no Palco</h4>
+          <p>
+            A manutenção de um andamento constante e sem oscilações é o alicerce para qualquer arranjo musical de alta qualidade. No cenário contemporâneo de apresentações ao vivo, o uso de metrônomos e <strong>click tracks</strong> sincronizados tornou-se fundamental para garantir que sequências eletrônicas, sintetizadores, iluminação e efeitos visuais andem perfeitamente alinhados à execução instrumental orgânica dos músicos.
+          </p>
+          <p>
+            Tanto os metrônomos digitais de prática quanto os sistemas de clique profissionais exigem geradores de clock de altíssima estabilidade. Pequenos desvios na latência de áudio do processador do computador podem gerar instabilidade rítmica imperceptível no início, mas que prejudica a coesão geral e a memória muscular dos músicos no palco. É por isso que otimizar o processamento de áudio para baixa latência é crucial para shows.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Artigos de Informações Relevantes de Apoio -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400">
+      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400 leading-relaxed">
         <h3 class="text-lg font-bold text-white">Inovação e Processamento Descentralizado</h3>
-        <p class="leading-relaxed">
+        <p>
           O avanço do processamento digital de sinais (DSP) nos navegadores modernos abriu novas fronteiras para produtores e engenheiros de áudio independentes. Hoje, algoritmos sofisticados de equalização, compressão e análise de fase dinâmica podem ser executados diretamente no cliente, proporcionando agilidade no fluxo de trabalho sem comprometer a fidelidade acústica.
+        </p>
+        <p>
+          A tecnologia Web Audio API permite que toda a computação de áudio seja gerada pelo processador local da sua máquina, economizando largura de banda, garantindo que o sinal não sofra latências causadas pela rede e mantendo a segurança dos arquivos originais.
         </p>
       </div>
 
-      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400">
+      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400 leading-relaxed">
         <h3 class="text-lg font-bold text-white">Estabilidade Crítica no Palco</h3>
-        <p class="leading-relaxed">
+        <p>
           Para artistas e cantores que se apresentam ao vivo, a estabilidade de seus reprodutores de áudio e vídeo é um fator decisivo. Softwares desenvolvidos sob arquiteturas robustas de baixo consumo garantem transições limpas e reprodução fluida das faixas de acompanhamento, permitindo que a performance ocorra sem imprevistos técnicos ou interrupções no palco.
+        </p>
+        <p>
+          Além disso, o uso de formatos lineares (como o WAV) reduz o trabalho de decodificação da CPU do computador durante o show, deixando o sistema livre para executar múltiplos instrumentos virtuais ou plugins de efeitos em tempo real com baixa latência.
         </p>
       </div>
     </section>
 
-    <!-- FAQ Teórica OBRIGATÓRIA para o AdSense -->
+    <!-- FAQ Teórica OBRIGATÓRIA para o AdSense (CONTEÚDO EXPANDIDO) -->
     <section class="space-y-6">
       <h3 class="text-lg font-bold text-white text-center">Perguntas Frequentes (FAQ)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
           <h4 class="font-bold text-indigo-300">Como funcionam as ferramentas do Estúdio Neto?</h4>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Nossas ferramentas de processamento de áudio digital rodam de forma isolada e local utilizando a placa de som do seu próprio navegador. Isso garante rapidez, privacidade absoluta sobre suas músicas e descarta a necessidade de uploads pesados para servidores externos.
+            Nossas ferramentas de processamento de áudio digital rodam de forma isolada e local utilizando a placa de som e a CPU do seu próprio navegador. Isso garante rapidez, privacidade absoluta sobre suas músicas e descarta a necessidade de uploads pesados para servidores externos.
           </p>
         </div>
+
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Como é feito o download dos arquivos masterizados?</h4>
+          <h4 class="font-bold text-indigo-300">Qual a segurança dos meus arquivos acústicos?</h4>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Ao abrir a nossa ferramenta de masterização no GitHub Pages, o processador calcula as curvas tonais de forma rápida e exporta o áudio diretamente em formato WAV linear sem perdas. O arquivo é baixado de forma nativa e segura para a sua máquina.
+            Como os algoritmos executam no formato client-side, seus dados não são enviados ou arquivados em nenhum banco de dados. Os arquivos de som permanecem na memória temporária do seu próprio computador e são descartados assim que a aba é fechada.
           </p>
         </div>
+
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
+          <h4 class="font-bold text-indigo-300">Quais formatos de arquivo são suportados para conversão?</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            O nosso decodificador suporta a maioria dos formatos de áudio legíveis pelos navegadores antigos ou atuais, incluindo WAV, MP3, FLAC, OGG, M4A, AAC e AIFF.
+          </p>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
+          <h4 class="font-bold text-indigo-300">O que é a tecnologia de Áudio 8D?</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            O processamento 8D é um efeito de áudio espacial que utiliza panning estéreo oscilante em conjunto com reverberação de convolução, simulando a sensação física de que o som se move em 360 graus ao redor da cabeça do ouvinte.
+          </p>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
+          <h4 class="font-bold text-indigo-300">Como o afinador de violão detecta a nota?</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            A ferramenta solicita permissão de áudio do microfone e analisa o espectro de sinal através do algoritmo de detecção YIN, identificando o timbre fundamental da corda e o desvio rítmico em cents.
+          </p>
+        </div>
+
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
+          <h4 class="font-bold text-indigo-300">É necessário instalar extensões no computador?</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Não. Toda a estrutura é baseada em HTML5, JavaScript e CSS3 nativos. Você só precisa abrir a página desejada em qualquer navegador moderno para começar a usar os utilitários imediatamente.
+          </p>
+        </div>
+
       </div>
     </section>
 
@@ -190,33 +331,104 @@
     </div>
   </div>
 
-  <!-- Modal de Privacidade -->
+  <!-- Modal de Privacidade e Termos de Uso -->
   <div id="privacy-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
     <div class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl max-w-lg w-full space-y-4 shadow-2xl relative mx-4">
       <button id="btn-close-privacy" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl transition-colors">&times;</button>
-      <h3 class="text-lg font-bold text-white flex items-center gap-2">🛡️ Privacidade & Segurança</h3>
+      <h3 class="text-lg font-bold text-white flex items-center gap-2">🛡️ Diretrizes de Privacidade & Termos de Uso</h3>
       <div class="text-sm text-gray-300 space-y-3 max-h-96 overflow-y-auto pr-2">
         <p>O <strong>Estúdio Neto</strong> valoriza a segurança e integridade das suas criações artísticas. Nosso compromisso operacional apoia-se em pilares rígidos:</p>
+        
+        <h4 class="font-bold text-white text-xs uppercase pt-2">1. Política de Privacidade</h4>
         <ul class="list-disc list-inside space-y-2 text-gray-400">
-          <li><strong>Hospedagem Estática de Código:</strong> O portal é uma aplicação estática e não recolhe informações confidenciais do usuário em nossos servidores.</li>
-          <li><strong>Transações Seguras:</strong> Todos os produtos digitais comercializados através da nossa loja têm seus pagamentos e entregas processados com criptografia de ponta a ponta pela plataforma parceira Hotmart.</li>
+          <li><strong>Hospedagem Estática de Código:</strong> O portal é uma aplicação estática e não recolhe informações confidenciais de áudio em nossos servidores.</li>
           <li><strong>Cookies de Monetização:</strong> Exibimos anúncios controlados pelo Google AdSense para manter o portal ativo. Cookies de terceiros podem ser utilizados para personalizar a exibição desses anúncios.</li>
         </ul>
+
+        <h4 class="font-bold text-white text-xs uppercase pt-2">2. Termos de Uso das Ferramentas</h4>
+        <p class="text-gray-400 leading-relaxed text-xs">
+          Ao utilizar nossos processadores acústicos baseados na Web Audio API, você concorda em cumprir estes termos. Todas as ações ocorrem no ambiente local do seu navegador, ficando sob total responsabilidade do usuário a guarda do material processado.
+        </p>
       </div>
       <div class="text-right pt-2">
-        <button id="btn-agree-privacy" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-md">Entendi</button>
+        <button id="btn-agree-privacy" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-md">Aceitar e Fechar</button>
       </div>
     </div>
   </div>
 
-  <!-- Footer com Privacidade no Rodapé (Exigência do AdSense) -->
-  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
-    <div class="max-w-6xl mx-auto px-4 space-y-2">
-      <p class="font-bold text-gray-400 text-sm">Desenvolvido por Estúdio Neto</p>
-      <p class="text-[10px] text-gray-500">Toda a computação de DSP ocorre localmente no navegador, garantindo privacidade total sobre seus arquivos de áudio.</p>
-      <p class="pt-2">
-        <button id="btn-privacy" class="text-indigo-400 hover:text-indigo-300 font-semibold transition-colors focus:outline-none">Política de Privacidade & Segurança</button>
-      </p>
+  <!-- RODAPÉ COMPLETO COM DIRETÓRIO DE LINKS (ESTILO ONLINE-CONVERT) -->
+  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Lado Esquerdo do Rodapé (Identidade de Marca) -->
+      <div class="col-span-12 md:col-span-4 space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px]">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Lado Direito do Rodapé (Diretório Mapeado em Colunas) -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        
+        <!-- Coluna 1: Soluções de Conversão -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><span class="text-gray-600 block cursor-default">Fórmula do Compasso (Em breve)</span></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 2: Estúdio Neto Ferramentas -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Empresa -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><span class="text-gray-600 block cursor-default">Sobre</span></li>
+            <li><span class="text-gray-600 block cursor-default">Metrologia</span></li>
+            <li><span class="text-gray-600 block cursor-default">Sustentabilidade</span></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Suporte e Contato -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEÇÃO INFERIOR DA DIVISÓRIA (CONFIRMANDO CRIAÇÃO E CONFORMIDADE) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-gray-400 font-semibold text-[11px]">
+        <button id="btn-privacy-footer" class="hover:text-white transition-colors focus:outline-none">Política de privacidade</button>
+        <span class="text-gray-600">|</span>
+        <button id="btn-terms-footer" class="hover:text-white transition-colors focus:outline-none">Termos de uso</button>
+        <span class="text-gray-600">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
     </div>
   </footer>
 
@@ -352,15 +564,21 @@
   <script>
     const privacyModal = document.getElementById("privacy-modal");
     const btnPrivacy = document.getElementById("btn-privacy");
+    const btnPrivacyFooter = document.getElementById("btn-privacy-footer");
+    const btnTermsFooter = document.getElementById("btn-terms-footer");
     const btnClosePrivacy = document.getElementById("btn-close-privacy");
     const btnAgreePrivacy = document.getElementById("btn-agree-privacy");
 
-    btnPrivacy.addEventListener("click", () => {
+    const openPrivacy = () => {
       privacyModal.classList.remove("opacity-0", "pointer-events-none");
-    });
+    };
     const closePrivacy = () => {
       privacyModal.classList.add("opacity-0", "pointer-events-none");
     };
+
+    btnPrivacy.addEventListener("click", openPrivacy);
+    if(btnPrivacyFooter) btnPrivacyFooter.addEventListener("click", openPrivacy);
+    if(btnTermsFooter) btnTermsFooter.addEventListener("click", openPrivacy);
     btnClosePrivacy.addEventListener("click", closePrivacy);
     btnAgreePrivacy.addEventListener("click", closePrivacy);
   </script>

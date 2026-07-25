@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo — Estúdio Neto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">⚙️</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Painel de Controle — Estúdio Neto
+        </h1>
+      </div>
+      <a href="loja.html" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">
+        Ir para a Loja →
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
+    
+    <!-- 1. CONFIGURAÇÃO DE SEGURANÇA GITHUB (Fica salvo localmente no navegador do usuário) -->
+    <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
+      <div class="flex items-center gap-2">
+        <span class="text-lg">🔑</span>
+        <h3 class="text-md font-bold text-white">Configuração de Sincronização com o GitHub</h3>
+      </div>
+      <p class="text-xs text-gray-400">Insira suas credenciais do GitHub. Elas permanecem criptografadas e salvas apenas na memória do seu navegador local.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="space-y-1">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Usuário do GitHub</label>
+          <input type="text" id="github-user" placeholder="ex: estudioneto" 
+                 class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Nome do Repositório</label>
+          <input type="text" id="github-repo" placeholder="ex: estudioneto.github.io" 
+                 class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+        </div>
+        <div class="space-y-1">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Token de Acesso Pessoal (PAT)</label>
+          <input type="password" id="github-token" placeholder="ghp_XXXXXXXXXXXXXXXXXXXX" 
+                 class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button id="btn-save-config" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">
+          Salvar Credenciais
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. FORMULÁRIO DE CADASTRO E PREVIEW -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Formulário (Lado Esquerdo) -->
+      <section class="lg:col-span-7 bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
+        <h3 class="text-md font-bold text-white uppercase tracking-wider">Novo Produto</h3>
+        
+        <form id="product-form" class="space-y-4 text-xs">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Tag Esquerda (ex: Ebook Digital)</label>
+              <input type="text" id="p-tag1" required placeholder="ex: Software Desktop" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Tag Direita (ex: Formato PDF)</label>
+              <input type="text" id="p-tag2" required placeholder="ex: Win 64-bit" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Título do Produto</label>
+              <input type="text" id="p-titulo" required placeholder="ex: Palco Mestre" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Subtítulo do Produto</label>
+              <input type="text" id="p-subtitulo" required placeholder="ex: O player definitivo" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-gray-400 font-semibold">Caminho da Imagem</label>
+            <input type="text" id="p-imagem" required placeholder="ex: imagens/palcomestre.png" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-gray-400 font-semibold">Descrição do Produto</label>
+            <textarea id="p-descricao" required rows="3" placeholder="Escreva o parágrafo de vendas do produto..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-gray-400 font-semibold">Características / Requisitos (Um por linha)</label>
+            <textarea id="p-requisitos" rows="3" placeholder="Insira os tópicos, um por linha..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Canal de Venda</label>
+              <select id="p-tipo-botao" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none cursor-pointer">
+                <option value="hotmart">Checkout Hotmart</option>
+                <option value="whatsapp">Saiba Mais (WhatsApp)</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Link de Checkout ou WhatsApp</label>
+              <input type="text" id="p-link" required placeholder="ex: https://pay.hotmart.com/... ou link wa.me" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+          </div>
+
+          <div class="pt-4 flex gap-3">
+            <button type="submit" id="btn-publish" class="flex-1 bg-brand-success hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-all shadow-md text-xs">
+              🚀 Publicar Produto na Loja
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Live Preview (Lado Direito) -->
+      <section class="lg:col-span-5 space-y-4 sticky top-24">
+        <h3 class="text-md font-bold text-white uppercase tracking-wider">Pré-visualização em Tempo Real</h3>
+        
+        <!-- Cartão idêntico ao da loja virtual -->
+        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-2xl">
+          <div class="space-y-4">
+            <div class="flex flex-wrap gap-2">
+              <span id="preview-tag1" class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 1</span>
+              <span id="preview-tag2" class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 2</span>
+            </div>
+
+            <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative flex items-center justify-center p-4">
+              <img id="preview-img" src="" alt="Imagem do produto" class="max-w-full max-h-full object-contain">
+            </div>
+            
+            <div class="space-y-1">
+              <h3 id="preview-titulo" class="text-lg font-extrabold text-white">Título do Produto</h3>
+              <p id="preview-subtitulo" class="text-[11px] text-indigo-300">Subtítulo curto em destaque</p>
+            </div>
+            
+            <p id="preview-descricao" class="text-xs leading-relaxed text-gray-400">
+              A descrição detalhada que você digitar no formulário aparecerá neste espaço.
+            </p>
+
+            <div class="border-t border-brand-border/60 pt-4 space-y-2">
+              <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Características:</h4>
+              <ul id="preview-requisitos" class="text-[11px] text-slate-400 space-y-1 pl-1">
+                <li>✔ Característica Exemplo</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="border-t border-brand-border/60 pt-4" id="preview-btn-container">
+            <!-- Botão Dinâmico -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3. GERENCIAR PRODUTOS CADASTRADOS (Pode excluir produtos daqui) -->
+    <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-border pb-3">
+        <h3 class="text-md font-bold text-white">Gerenciar Produtos em Linha</h3>
+        <button id="btn-load-list" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-all">
+          🔄 Carregar Lista Atual do GitHub
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead>
+            <tr class="border-b border-brand-border text-gray-400 font-semibold uppercase">
+              <th class="p-3">Título</th>
+              <th class="p-3">Tags</th>
+              <th class="p-3">Canal</th>
+              <th class="p-3 text-right">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-list" class="divide-y divide-brand-border text-gray-300">
+            <tr>
+              <td colspan="4" class="p-4 text-center text-gray-500 italic">Clique em "Carregar Lista" para listar os produtos atuais do repositório.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
+    © 2026 Estúdio Neto — Painel de Controle Estático
+  </footer>
+
+  <!-- SCRIPT DE SINCRONIZAÇÃO COM A API DO GITHUB -->
+  <script>
+    // Recupera dados salvos localmente
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('github-user').value = localStorage.getItem('git_user') || '';
+      document.getElementById('github-repo').value = localStorage.getItem('git_repo') || '';
+      document.getElementById('github-token').value = localStorage.getItem('git_token') || '';
+      updatePreview();
+    });
+
+    // Salvar configurações de forma local
+    document.getElementById('btn-save-config').addEventListener('click', () => {
+      const user = document.getElementById('github-user').value.trim();
+      const repo = document.getElementById('github-repo').value.trim();
+      const token = document.getElementById('github-token').value.trim();
+
+      localStorage.setItem('git_user', user);
+      localStorage.setItem('git_repo', repo);
+      localStorage.setItem('git_token', token);
+      alert("Credenciais do GitHub salvas com sucesso no seu navegador!");
+    });
+
+    // --- LOGICA DE PRÉ-VISUALIZAÇÃO EM TEMPO REAL ---
+    const form = document.getElementById('product-form');
+    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link'];
+    
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener('input', updatePreview);
+    });
+
+    function updatePreview() {
+      document.getElementById('preview-tag1').textContent = document.getElementById('p-tag1').value || 'TAG 1';
+      document.getElementById('preview-tag2').textContent = document.getElementById('p-tag2').value || 'TAG 2';
+      document.getElementById('preview-titulo').textContent = document.getElementById('p-titulo').value || 'Título do Produto';
+      document.getElementById('preview-subtitulo').textContent = document.getElementById('p-subtitulo').value || 'Subtítulo do Produto';
+      document.getElementById('preview-descricao').textContent = document.getElementById('p-descricao').value || 'A descrição detalhada que você digitar aparecerá neste espaço.';
+      
+      const imgPath = document.getElementById('p-imagem').value;
+      document.getElementById('preview-img').src = imgPath || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&auto=format&fit=crop';
+
+      // Atualiza lista de requisitos
+      const reqList = document.getElementById('preview-requisitos');
+      reqList.innerHTML = '';
+      const text = document.getElementById('p-requisitos').value.trim();
+      if (text) {
+        text.split('\n').forEach(line => {
+          if (line) reqList.innerHTML += `<li>✔ ${line}</li>`;
+        });
+      } else {
+        reqList.innerHTML = '<li>✔ Característica Exemplo</li>';
+      }
+
+      // Atualiza Botão de Preview
+      const btnContainer = document.getElementById('preview-btn-container');
+      const tipoBotao = document.getElementById('p-tipo-botao').value;
+      if (tipoBotao === 'hotmart') {
+        btnContainer.innerHTML = `
+          <div class="flex justify-center">
+            <div class="transition-transform hover:scale-105 inline-block cursor-pointer">
+              <img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar agora com a Hotmart">
+            </div>
+          </div>
+        `;
+      } else {
+        btnContainer.innerHTML = `
+          <div class="flex justify-center w-full">
+            <div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full cursor-pointer">
+              Saiba Mais
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // --- INTEGRAÇÃO COM A API DO GITHUB (LER, ADICIONAR E GRAVAR JSON) ---
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const user = localStorage.getItem('git_user');
+      const repo = localStorage.getItem('git_repo');
+      const token = localStorage.getItem('git_token');
+
+      if (!user || !repo || !token) {
+        alert("Por favor, preencha e salve suas credenciais do GitHub no topo do painel.");
+        return;
+      }
+
+      const confirmBtn = document.getElementById('btn-publish');
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = "Sincronizando com o GitHub...";
+
+      try {
+        // Passo 1: Busca o arquivo produtos.json atual do GitHub para pegar o SHA e o conteúdo
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;
+        const headers = {
+          "Authorization": `token ${token}`,
+          "Accept": "application/vnd.github.v3+json"
+        };
+
+        const getRes = await fetch(url, { headers });
+        if (!getRes.ok) {
+          throw new Error("Não foi possível carregar o arquivo produtos.json. Verifique o token e as credenciais.");
+        }
+
+        const fileData = await getRes.json();
+        const currentSha = fileData.sha;
+        
+        // Decodifica Base64 retornado pelo GitHub para string UTF-8
+        const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        let produtos = JSON.parse(decodedContent);
+
+        // Passo 2: Monta o novo produto objeto
+        const maxId = produtos.reduce((max, p) => p.id > max ? p.id : max, 0);
+        
+        const novoProduto = {
+          id: maxId + 1,
+          tag1: document.getElementById('p-tag1').value.trim(),
+          tag2: document.getElementById('p-tag2').value.trim(),
+          imagem: document.getElementById('p-imagem').value.trim(),
+          titulo: document.getElementById('p-titulo').value.trim(),
+          subtitulo: document.getElementById('p-subtitulo').value.trim(),
+          descricao: document.getElementById('p-descricao').value.trim(),
+          requisitos: document.getElementById('p-requisitos').value.trim().split('\n').filter(l => l !== ""),
+          tipo_botao: document.getElementById('p-tipo-botao').value,
+          link: document.getElementById('p-link').value.trim()
+        };
+
+        // Adiciona ao vetor
+        produtos.push(novoProduto);
+
+        // Converte de volta para string JSON formatada de forma legível
+        const updatedJsonString = JSON.stringify(produtos, null, 2);
+        
+        // Converte string UTF-8 de volta para Base64 respeitando acentuação
+        const encodedContent = btoa(encodeURIComponent(updatedJsonString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+          return String.fromCharCode('0x' + p1);
+        }));
+
+        // Passo 3: Envia a atualização (PUT) para o GitHub
+        const putRes = await fetch(url, {
+          method: "PUT",
+          headers,
+          body: JSON.stringify({
+            message: `Adicionado novo produto: ${novoProduto.titulo} via painel administrativo`,
+            content: encodedContent,
+            sha: currentSha
+          })
+        });
+
+        if (!putRes.ok) {
+          throw new Error("Falha no commit de upload do novo JSON.");
+        }
+
+        alert(`Sucesso! O produto "${novoProduto.titulo}" foi adicionado ao produtos.json e está a caminho da sua loja virtual.`);
+        form.reset();
+        updatePreview();
+        loadGitHubInventory();
+
+      } catch (err) {
+        console.error(err);
+        alert("Erro técnico: " + err.message);
+      } finally {
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = "🚀 Publicar Produto na Loja";
+      }
+    });
+
+    // --- SINC DA TABELA DE INVENTÁRIO (GERENCIADOR DE ESTOQUE) ---
+    document.getElementById('btn-load-list').addEventListener('click', loadGitHubInventory);
+
+    async function loadGitHubInventory() {
+      const user = localStorage.getItem('git_user');
+      const repo = localStorage.getItem('git_repo');
+      const token = localStorage.getItem('git_token');
+
+      if (!user || !repo) {
+        alert("Preencha e salve suas credenciais do GitHub no topo para carregar a lista.");
+        return;
+      }
+
+      const tableBody = document.getElementById('inventory-list');
+      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-indigo-400 font-semibold animate-pulse">Carregando dados...</td></tr>`;
+
+      try {
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json?v=` + Date.now();
+        const headers = token ? { "Authorization": `token ${token}` } : {};
+
+        const res = await fetch(url, { headers });
+        if (!res.ok) throw new Error("Não foi possível carregar o arquivo produtos.json.");
+
+        const fileData = await res.json();
+        const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        const produtos = JSON.parse(decodedContent);
+        tableBody.innerHTML = "";
+
+        if (produtos.length === 0) {
+          tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 italic">Nenhum produto cadastrado no banco.</td></tr>`;
+          return;
+        }
+
+        produtos.forEach(prod => {
+          const tr = document.createElement('tr');
+          tr.className = "border-b border-brand-border/60 hover:bg-brand-card/30 transition-colors";
+          tr.innerHTML = `
+            <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
+            <td class="p-3"><span class="bg-brand-dark px-2 py-0.5 rounded text-gray-400 font-mono text-[10px]">${prod.tag1}</span></td>
+            <td class="p-3 uppercase font-mono font-bold ${prod.tipo_botao === 'whatsapp' ? 'text-green-400' : 'text-indigo-400'}">${prod.tipo_botao}</td>
+            <td class="p-3 text-right">
+              <button onclick="excluirProduto(${prod.id}, '${prod.titulo}')" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white transition-all text-[10px] font-bold px-3 py-1 rounded-lg">Excluir</button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+
+      } catch (err) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-400 font-semibold">Erro: ${err.message}</td></tr>`;
+      }
+    }
+
+    // --- DELEÇÃO DE PRODUTO PELO PAINEL ---
+    window.excluirProduto = async function(id, titulo) {
+      if (!confirm(`Tem certeza de que deseja remover o produto "${titulo}" da sua loja virtual?`)) return;
+
+      const user = localStorage.getItem('git_user');
+      const repo = localStorage.getItem('git_repo');
+      const token = localStorage.getItem('git_token');
+
+      if (!token) {
+        alert("É necessário ter o Token de Acesso (PAT) salvo no painel para realizar exclusões.");
+        return;
+      }
+
+      showLoader();
+
+      try {
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;
+        const headers = {
+          "Authorization": `token ${token}`,
+          "Accept": "application/vnd.github.v3+json"
+        };
+
+        const getRes = await fetch(url, { headers });
+        const fileData = await getRes.json();
+        const currentSha = fileData.sha;
+        
+        const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        let produtos = JSON.parse(decodedContent);
+
+        // Filtra o produto fora da lista
+        produtos = produtos.filter(p => p.id !== id);
+
+        const updatedJsonString = JSON.stringify(produtos, null, 2);
+        const encodedContent = btoa(encodeURIComponent(updatedJsonString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+          return String.fromCharCode('0x' + p1);
+        }));
+
+        const putRes = await fetch(url, {
+          method: "PUT",
+          headers,
+          body: JSON.stringify({
+            message: `Removido produto: ${titulo} via painel administrativo`,
+            content: encodedContent,
+            sha: currentSha
+          })
+        });
+
+        if (!putRes.ok) throw new Error("Erro ao commitar alterações no GitHub.");
+
+        alert(`O produto "${titulo}" foi removido com sucesso.`);
+        loadGitHubInventory();
+
+      } catch (err) {
+        alert("Erro ao excluir: " + err.message);
+      }
+    };
+  </script>
+</body>
+</html>

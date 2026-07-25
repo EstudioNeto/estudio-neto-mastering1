@@ -43,13 +43,13 @@
 
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
     
-    <!-- 1. CONFIGURAÇÃO DE SEGURANÇA GITHUB (Fica salvo localmente no navegador do usuário) -->
+    <!-- 1. CONFIGURAÇÃO DE SEGURANÇA GITHUB -->
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
       <div class="flex items-center gap-2">
         <span class="text-lg">🔑</span>
         <h3 class="text-md font-bold text-white">Configuração de Sincronização com o GitHub</h3>
       </div>
-      <p class="text-xs text-gray-400">Insira suas credenciais do GitHub. Elas permanecem criptografadas e salvas apenas na memória do seu navegador local.</p>
+      <p class="text-xs text-gray-400">Insira suas credenciais do GitHub. Elas permanecem salvas localmente apenas no seu navegador.</p>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="space-y-1">
@@ -85,11 +85,11 @@
         <form id="product-form" class="space-y-4 text-xs">
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Tag Esquerda (ex: Ebook Digital)</label>
+              <label class="block text-gray-400 font-semibold">Tag Esquerda (ex: Software Desktop)</label>
               <input type="text" id="p-tag1" required placeholder="ex: Software Desktop" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
             </div>
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Tag Direita (ex: Formato PDF)</label>
+              <label class="block text-gray-400 font-semibold">Tag Direita (ex: Win 64-bit)</label>
               <input type="text" id="p-tag2" required placeholder="ex: Win 64-bit" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
             </div>
           </div>
@@ -118,6 +118,18 @@
           <div class="space-y-1">
             <label class="block text-gray-400 font-semibold">Características / Requisitos (Um por linha)</label>
             <textarea id="p-requisitos" rows="3" placeholder="Insira os tópicos, um por linha..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
+          </div>
+
+          <!-- NOVOS CAMPOS ADICIONADOS (OPCIONAIS) -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Link para Ver/Baixar Listas (Opcional)</label>
+              <input type="text" id="p-link-listas" placeholder="ex: https://site.com/lista.pdf" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Link para Baixar Amostras (Opcional)</label>
+              <input type="text" id="p-link-amostras" placeholder="ex: https://site.com/amostras.zip" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            </div>
           </div>
 
           <div class="grid grid-cols-2 gap-4">
@@ -174,15 +186,21 @@
               </ul>
             </div>
           </div>
-          
-          <div class="border-t border-brand-border/60 pt-4" id="preview-btn-container">
-            <!-- Botão Dinâmico -->
+
+          <!-- Área dos botões (Pré-visualização dos botões opcionais de download/amostra) -->
+          <div class="space-y-3">
+            <div id="preview-secondary-btn-container" class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold hidden">
+              <!-- Botões Secundários Dinâmicos -->
+            </div>
+            <div class="border-t border-brand-border/60 pt-3" id="preview-btn-container">
+              <!-- Botão Dinâmico -->
+            </div>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- 3. GERENCIAR PRODUTOS CADASTRADOS (Pode excluir produtos daqui) -->
+    <!-- 3. GERENCIAR PRODUTOS CADASTRADOS -->
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
       <div class="flex items-center justify-between border-b border-brand-border pb-3">
         <h3 class="text-md font-bold text-white">Gerenciar Produtos em Linha</h3>
@@ -240,7 +258,7 @@
 
     // --- LOGICA DE PRÉ-VISUALIZAÇÃO EM TEMPO REAL ---
     const form = document.getElementById('product-form');
-    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link'];
+    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link', 'p-link-listas', 'p-link-amostras'];
     
     inputs.forEach(id => {
       document.getElementById(id).addEventListener('input', updatePreview);
@@ -268,7 +286,34 @@
         reqList.innerHTML = '<li>✔ Característica Exemplo</li>';
       }
 
-      // Atualiza Botão de Preview
+      // Atualiza Botões Secundários no Preview
+      const secBtnContainer = document.getElementById('preview-secondary-btn-container');
+      const lListas = document.getElementById('p-link-listas').value.trim();
+      const lAmostras = document.getElementById('p-link-amostras').value.trim();
+
+      if (lListas || lAmostras) {
+        secBtnContainer.classList.remove('hidden');
+        secBtnContainer.className = `grid ${lListas && lAmostras ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-center text-[10px] font-bold`;
+        secBtnContainer.innerHTML = '';
+        if (lListas) {
+          secBtnContainer.innerHTML += `
+            <div class="border border-brand-border text-gray-400 py-2 rounded-lg flex items-center justify-center gap-1 cursor-pointer">
+              📁 Ver Listas
+            </div>
+          `;
+        }
+        if (lAmostras) {
+          secBtnContainer.innerHTML += `
+            <div class="border border-brand-border text-gray-400 py-2 rounded-lg flex items-center justify-center gap-1 cursor-pointer">
+              ⬇️ Baixar Amostras
+            </div>
+          `;
+        }
+      } else {
+        secBtnContainer.classList.add('hidden');
+      }
+
+      // Atualiza Botão Principal de Compra no Preview
       const btnContainer = document.getElementById('preview-btn-container');
       const tipoBotao = document.getElementById('p-tipo-botao').value;
       if (tipoBotao === 'hotmart') {
@@ -308,7 +353,6 @@
       confirmBtn.textContent = "Sincronizando com o GitHub...";
 
       try {
-        // Passo 1: Busca o arquivo produtos.json atual do GitHub para pegar o SHA e o conteúdo
         const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;
         const headers = {
           "Authorization": `token ${token}`,
@@ -323,14 +367,13 @@
         const fileData = await getRes.json();
         const currentSha = fileData.sha;
         
-        // Decodifica Base64 retornado pelo GitHub para string UTF-8
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
         let produtos = JSON.parse(decodedContent);
 
-        // Passo 2: Monta o novo produto objeto
+        // Passo 2: Monta o novo produto objeto (incluindo os dois novos parâmetros opcionais)
         const maxId = produtos.reduce((max, p) => p.id > max ? p.id : max, 0);
         
         const novoProduto = {
@@ -342,6 +385,8 @@
           subtitulo: document.getElementById('p-subtitulo').value.trim(),
           descricao: document.getElementById('p-descricao').value.trim(),
           requisitos: document.getElementById('p-requisitos').value.trim().split('\n').filter(l => l !== ""),
+          link_listas: document.getElementById('p-link-listas').value.trim() || "",
+          link_amostras: document.getElementById('p-link-amostras').value.trim() || "",
           tipo_botao: document.getElementById('p-tipo-botao').value,
           link: document.getElementById('p-link').value.trim()
         };
@@ -352,7 +397,6 @@
         // Converte de volta para string JSON formatada de forma legível
         const updatedJsonString = JSON.stringify(produtos, null, 2);
         
-        // Converte string UTF-8 de volta para Base64 respeitando acentuação
         const encodedContent = btoa(encodeURIComponent(updatedJsonString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
           return String.fromCharCode('0x' + p1);
         }));
@@ -372,7 +416,7 @@
           throw new Error("Falha no commit de upload do novo JSON.");
         }
 
-        alert(`Sucesso! O produto "${novoProduto.titulo}" foi adicionado ao produtos.json e está a caminho da sua loja virtual.`);
+        alert(`Sucesso! O produto "${novoProduto.titulo}" foi adicionado ao produtos.json e está no ar na sua loja virtual.`);
         form.reset();
         updatePreview();
         loadGitHubInventory();
@@ -453,8 +497,6 @@
         alert("É necessário ter o Token de Acesso (PAT) salvo no painel para realizar exclusões.");
         return;
       }
-
-      showLoader();
 
       try {
         const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;

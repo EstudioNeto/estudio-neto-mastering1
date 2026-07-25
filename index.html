@@ -102,7 +102,7 @@
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
           <span class="text-xl">🎤</span>
           <h4 class="font-bold text-white text-sm">Removedor de Vocais</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">Utiliza redes de filtragem de sinal para separar as frequências da voz humana dos elements instrumentais estéreo sem uploads.</p>
+          <p class="text-xs text-gray-400 leading-relaxed">Utiliza redes de filtragem de sinal para separar as frequências da voz humana dos elementos instrumentais estéreo sem uploads.</p>
         </div>
         <!-- Recurso 3 -->
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
@@ -151,7 +151,7 @@
           <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Isolamento Vocal</span>
           <h4 class="text-lg font-bold text-white">A Ciência por trás do Cancelamento de Fase e Análise de Espectro</h4>
           <p>
-            O isolamento ou a remoção de canais vocais em arquivos estéreo mixados apóia-se no controle geométrico das ondas. Historicamente, esse processo baseava-se em um método mecânico simples: inverter a fase elétrica de um canal lateral e somá-lo ao outro. Como os vocais principais costumam ser posicionados no centro do panorama da mixagem, essa inversão cancelava os elements idênticos entre os canais.
+            O isolamento ou a remoção de canais vocais em arquivos estéreo mixados apóia-se no controle geométrico das ondas. Historicamente, esse processo baseava-se em um método mecânico simples: inverter a fase elétrica de um canal lateral e somá-lo ao outro. Como os vocais principais costumam ser posicionados no centro do panorama da mixagem, essa inversão cancelava os elementos idênticos entre os canais.
           </p>
           <p>
             Contudo, o método tradicional de fase sacrificava graves, bumbos e outros instrumentos centrais. Os processadores modernos utilizam redes de isolamento digital de sinais que analisam o som no domínio da frequência (usando transformadas matemáticas rápidas - FFT). Isso permite extrair timbres de forma inteligente, mapeando padrões acústicos para separar os stems sem destruir a integridade e dinâmica instrumental.
@@ -208,7 +208,7 @@
       </div>
     </section>
 
-    <!-- FAQ Teórica OBRIGATÓRIA para o AdSense (CONTEÚDO EXPANDIDO) -->
+    <!-- FAQ Teórica OBRIGATÓRIA para o AdSense -->
     <section class="space-y-6">
       <h3 class="text-lg font-bold text-white text-center">Perguntas Frequentes (FAQ)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -441,25 +441,21 @@
     // ⚠️ SUBSTITUA COM SUAS CREDENCIAIS DO FIREBASE ⚠️
     // ==========================================
     const firebaseConfig = {
-  apiKey: "AIzaSyDC_9F2hyKCKLNmXXkgiiqeKB_jn7lvi7U",
-  authDomain: "estudio-neto-mastering.firebaseapp.com",
-  projectId: "estudio-neto-mastering",
-  storageBucket: "estudio-neto-mastering.firebasestorage.app",
-  messagingSenderId: "638820745329",
-  appId: "1:638820745329:web:bec70400528147877e1bd0",
-  measurementId: "G-S5CDVX07CF"
-};
+      apiKey: "AIzaSyDC_9F2hyKCKLNmXXkgiiqeKB_jn7lvi7U",
+      authDomain: "estudio-neto-mastering.firebaseapp.com",
+      projectId: "estudio-neto-mastering",
+      storageBucket: "estudio-neto-mastering.firebasestorage.app",
+      messagingSenderId: "638820745329",
+      appId: "1:638820745329:web:bec70400528147877e1bd0",
+      measurementId: "G-S5CDVX07CF"
+    };
 
-    // Inicialização do Firebase envolta em try-catch para prevenir erros na ausência das credenciais válidas
+    // Inicialização do Firebase
     let db;
     try {
-      if (firebaseConfig.apiKey !== "SUA_API_KEY") {
-        const app = initializeApp(firebaseConfig);
-        db = getFirestore(app);
-        iniciarMural();
-      } else {
-        console.warn("Firebase: Por favor, substitua a configuração com as suas credenciais reais no código.");
-      }
+      const app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      iniciarMural();
     } catch (e) {
       console.error("Erro ao inicializar o Firebase: ", e);
     }

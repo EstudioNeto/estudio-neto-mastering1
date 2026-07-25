@@ -83,218 +83,16 @@
     </div>
   </div>
 
-  <!-- CONTEÚDO PRINCIPAL DA LOJA (VITRINE MULTIPRODUTOS) -->
+  <!-- CONTEÚDO PRINCIPAL DA LOJA (VITRINE MULTIPRODUTOS DINÂMICA) -->
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
     <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Loja Virtual — Produtos Digitais</h2>
     
-    <!-- Grade de Produtos (O anúncio do Bailão foi integrado aqui de forma limpa) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-      
-      <!-- PRODUTO 1: Palco Mestre Vídeo Player -->
-      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
-        <div class="space-y-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Software Desktop</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Win 64-bit</span>
-          </div>
-
-          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
-          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
-            <img src="imagens/palcomestre.png" alt="Palco Mestre Vídeo Player" 
-                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
-            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
-              <span class="text-4xl mb-1">💻</span>
-              <span class="text-[10px] text-gray-500">imagens/palcomestre.png</span>
-            </div>
-          </div>
-          
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white">Palco Mestre Vídeo Player</h3>
-            <p class="text-[11px] text-indigo-300">O reprodutor de mídia para apresentações ao vivo</p>
-          </div>
-          
-          <p class="text-xs leading-relaxed text-gray-400">
-            Software projetado para cantores e instrumentistas que necessitam de estabilidade absoluta. Agende, mude e organize suas playlists de vídeo e áudio em tempo real, eliminando interrupções indesejadas durante os shows.
-          </p>
-
-          <div class="border-t border-brand-border/60 pt-4 space-y-2">
-            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Requisitos e Suporte:</h4>
-            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
-              <li>✔ Compatível com Windows 7, 8, 10 e 11</li>
-              <li>✔ Otimizado para arquitetura 64-bit</li>
-              <li>✔ Suporte técnico incluso</li>
-              <li>✔ Licença vitalícia sem mensalidades</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Área de Compra -->
-        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
-          <div class="flex justify-center">
-            <a onclick="return false;" href="https://pay.hotmart.com/U100444535W?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
-              <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- NOVO ANÚNCIO: Bailão MIDI — 500 Blocos (Focado na conversão direta via WhatsApp) -->
-      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
-        <div class="space-y-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Pacote MIDI</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Bônus Incluso</span>
-          </div>
-
-          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
-          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
-            <!-- Substitua o caminho da imagem se houver outra extensão de arquivo -->
-            <img src="imagens/bailao_midi.jpg" alt="Bailão MIDI - 500 Blocos com Letra" 
-                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
-            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
-              <span class="text-4xl mb-1">🎹</span>
-              <span class="text-[10px] text-gray-500">imagens/bailao_midi.jpg</span>
-            </div>
-          </div>
-          
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white">Bailão MIDI</h3>
-            <p class="text-[11px] text-indigo-300">500 Blocos com letra inclusa para teclados</p>
-          </div>
-          
-          <p class="text-xs leading-relaxed text-gray-400">
-            Adquira o repertório de bailão definitivo em formato MIDI totalmente editável. Ideal para apresentações ao vivo e ensaios rápidos. Acompanha programa exclusivo bônus para execução de arquivos no seu computador.
-          </p>
-
-          <div class="border-t border-brand-border/60 pt-4 space-y-2">
-            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">O que está incluso:</h4>
-            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
-              <li>✔ 500 Blocos MIDI com letra estruturada</li>
-              <li>✔ Bônus: Software reprodutor leve para PC</li>
-              <li>✔ Suporte direto pós-venda via WhatsApp</li>
-              <li>✔ Envio rápido e seguro por link de download</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Botão WhatsApp Estilo Instagram Ad -->
-        <div class="border-t border-brand-border/60 pt-4 text-center">
-          <div class="flex justify-center">
-            <a href="https://wa.me/5549998126934?text=Olá!%20Gostaria%20de%20saber%20mais%20detalhes%20sobre%20o%20pacote%20Bailão%20MIDI%20com%20500%20Blocos." target="_blank" 
-               class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full hover:scale-105 transition-transform duration-200">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/>
-              </svg>
-              Saiba Mais
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUTO 3: Dominando a Mixagem no Reaper -->
-      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
-        <div class="space-y-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Ebook Digital</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Formato PDF</span>
-          </div>
-
-          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
-          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
-            <img src="imagens/dominandomixagem.png" alt="Ebook Dominando a Mixagem no Reaper" 
-                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
-            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
-              <span class="text-4xl mb-1">📚</span>
-              <span class="text-[10px] text-gray-500">imagens/dominandomixagem.png</span>
-            </div>
-          </div>
-          
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white">Dominando a Mixagem</h3>
-            <p class="text-[11px] text-indigo-300">Som de nível de estúdio com ferramentas nativas</p>
-          </div>
-          
-          <p class="text-xs leading-relaxed text-gray-400">
-            Aprenda a obter sonoridade de estúdio usando apenas os recursos do Reaper. Guia focado no ReaEQ, ReaComp e roteamento de barramentos para estruturar mixagens com peso e definição, sem depender de plugins caros.
-          </p>
-
-          <div class="border-t border-brand-border/60 pt-4 space-y-2">
-            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">O que está incluso:</h4>
-            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
-              <li>✔ Passo a passo do zero ao master</li>
-              <li>✔ Manual de compressores nativos</li>
-              <li>✔ Conceitos de roteamento de canais</li>
-              <li>✔ Download e leitura imediatos</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Área de Compra -->
-        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
-          <div class="flex justify-center">
-            <a onclick="return false;" href="https://pay.hotmart.com/O103179484A?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
-              <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUTO 4: Mixagem Mestre no Reaper -->
-      <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg">
-        <div class="space-y-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Manual Prático</span>
-            <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">Formato PDF</span>
-          </div>
-
-          <!-- Contêiner de Imagem com object-contain para exibição 100% inteira -->
-          <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
-            <img src="imagens/mixagemmestre.png" alt="Ebook Mixagem Mestre no Reaper" 
-                 class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-            <!-- Exibido caso o arquivo de imagem não seja encontrado -->
-            <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
-              <span class="text-4xl mb-1">📘</span>
-              <span class="text-[10px] text-gray-500">imagens/mixagemmestre.png</span>
-            </div>
-          </div>
-          
-          <div class="space-y-1">
-            <h3 class="text-lg font-extrabold text-white">Mixagem Mestre no Reaper</h3>
-            <p class="text-[11px] text-indigo-300">Guia de referência passo a passo prático</p>
-          </div>
-          
-          <p class="text-xs leading-relaxed text-gray-400">
-            Manual feito para ser lido enquanto você opera a DAW. Siga os passos na ordem sugerida para direcionar faixas e estruturar cadeias de efeitos, provando que o método técnico e a audição superam gastos com ferramentas de terceiros.
-          </p>
-
-          <div class="border-t border-brand-border/60 pt-4 space-y-2">
-            <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Abordagem de ensino:</h4>
-            <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
-              <li>✔ Siga os passos na ordem apresentada</li>
-              <li>✔ Foco total em Stock Plugins (nativos)</li>
-              <li>✔ Roteamento flexível sem limites</li>
-              <li>✔ Download rápido em PDF interativo</li>
-            </ul>
-          </div>
-        </div>
-        
-        <!-- Área de Compra -->
-        <div class="border-t border-brand-border/60 pt-4 space-y-3 text-center">
-          <div class="flex justify-center">
-            <a onclick="return false;" href="https://pay.hotmart.com/U103231004P?checkoutMode=2" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
-              <img src='https://static.hotmart.com/img/btn-buy-green.png' alt="Comprar agora com a Hotmart">
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <!-- Contêiner onde os produtos carregados do JSON serão inseridos -->
+    <div id="produtos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+      <!-- SKELETON LOADER (Efeito de carregamento para melhor experiência de usuário) -->
+      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse"></div>
+      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden md:block"></div>
+      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden lg:block"></div>
     </div>
 
     <!-- ANÚNCIO DE RODAPÉ -->
@@ -312,14 +110,14 @@
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       
       <!-- Lado Esquerdo do Rodapé (Identidade de Marca) -->
-      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-3">
+      <div class="col-span-12 md:col-span-4 space-y-3">
+        <div class="flex items-center gap-3">
           <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
           </svg>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
-        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px]">
           Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
         </p>
       </div>
@@ -384,6 +182,109 @@
       </div>
     </div>
   </footer>
+
+  <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
+  <script>
+    async function carregarProdutos() {
+      const container = document.getElementById('produtos-container');
+      try {
+        // Faz a busca local ao arquivo de banco de dados estático
+        const response = await fetch('produtos.json');
+        const produtos = await response.json();
+        
+        container.innerHTML = ''; // Limpa o loader de skeleton
+
+        produtos.forEach(prod => {
+          let botaoHTML = '';
+          
+          // Renderiza o botão correto dependendo do tipo configurado no JSON
+          if (prod.tipo_botao === 'hotmart') {
+            botaoHTML = `
+              <div class="flex justify-center">
+                <a onclick="return false;" href="${prod.link}" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
+                  <img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar agora com a Hotmart">
+                </a>
+              </div>
+            `;
+          } else if (prod.tipo_botao === 'whatsapp') {
+            botaoHTML = `
+              <div class="flex justify-center w-full">
+                <a href="${prod.link}" target="_blank" 
+                   class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full hover:scale-105 transition-transform duration-200 text-decoration-none">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/>
+                  </svg>
+                  Saiba Mais
+                </a>
+              </div>
+            `;
+          }
+
+          // Monta a lista de requisitos/características
+          let requisitosHTML = '';
+          if (prod.requisitos && prod.requisitos.length > 0) {
+            requisitosHTML = `
+              <div class="border-t border-brand-border/60 pt-4 space-y-2">
+                <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Características:</h4>
+                <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
+                  ${prod.requisitos.map(req => `<li>✔ ${req}</li>`).join('')}
+                </ul>
+              </div>
+            `;
+          }
+
+          // Constrói o cartão com as classes do Tailwind
+          const card = document.createElement('div');
+          card.className = "bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg";
+          card.innerHTML = `
+            <div class="space-y-4">
+              <div class="flex flex-wrap gap-2">
+                <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">${prod.tag1}</span>
+                <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">${prod.tag2}</span>
+              </div>
+
+              <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
+                <img src="${prod.imagem}" alt="${prod.titulo}" 
+                     class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
+                  <span class="text-4xl mb-1">📦</span>
+                  <span class="text-[10px] text-gray-500">${prod.imagem}</span>
+                </div>
+              </div>
+              
+              <div class="space-y-1">
+                <h3 class="text-lg font-extrabold text-white">${prod.titulo}</h3>
+                <p class="text-[11px] text-indigo-300">${prod.subtitulo}</p>
+              </div>
+              
+              <p class="text-xs leading-relaxed text-gray-400">
+                ${prod.descricao}
+              </p>
+
+              ${requisitosHTML}
+            </div>
+            
+            <div class="border-t border-brand-border/60 pt-4">
+              ${botaoHTML}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+        // Caso a biblioteca do checkout do Hotmart esteja carregada, reinicializa para mapear os novos cartões
+        if (typeof window.importHotmart === 'function') {
+          // O script nativo da Hotmart age automaticamente sobre elementos criados dinamicamente com as classes correspondentes.
+        }
+
+      } catch (err) {
+        console.error("Erro ao carregar os dados de produtos da Loja:", err);
+      }
+    }
+
+    // Dispara a leitura quando a página é carregada
+    window.addEventListener('DOMContentLoaded', carregarProdutos);
+  </script>
 
 </body>
 </html>

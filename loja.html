@@ -183,16 +183,16 @@
     </div>
   </footer>
 
-  <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
+ <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
   <script>
     async function carregarProdutos() {
       const container = document.getElementById('produtos-container');
       try {
-        // Faz a busca local ao arquivo de banco de dados estático
-        const response = await fetch('produtos.json');
+        // Adicionamos '?v=' + Date.now() para forçar o navegador a ler o arquivo mais recente, ignorando o cache
+        const response = await fetch('produtos.json?v=' + Date.now());
         
         if (!response.ok) {
-          throw new Error("Arquivo produtos.json não foi encontrado ou falhou ao carregar.");
+          throw new Error("O arquivo produtos.json retornou status de erro na rede.");
         }
 
         const produtos = await response.json();
@@ -214,7 +214,7 @@
               <div class="flex justify-center w-full">
                 <a href="${prod.link}" target="_blank" 
                    class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full hover:scale-105 transition-transform duration-200 text-decoration-none">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www-w3-org-svg" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/>
                   </svg>
                   Saiba Mais
@@ -279,8 +279,11 @@
           <div class="col-span-12 text-center py-12 space-y-4">
             <span class="text-4xl">⚠️</span>
             <p class="text-sm text-red-400 font-semibold">Erro ao carregar o banco de dados de produtos.</p>
+            <p class="text-xs text-red-500 bg-brand-dark/50 py-2 px-3 rounded-lg max-w-lg mx-auto font-mono">
+              Detalhe técnico: ${err.message}
+            </p>
             <p class="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
-              Verifique se o arquivo <code class="bg-brand-dark px-1.5 py-0.5 rounded text-indigo-300">produtos.json</code> foi devidamente enviado ao repositório ou se há erros de formatação/sintaxe nele. (Lembre-se que requisições de rede local são bloqueadas sem um servidor web ativo).
+              Verifique se o arquivo <code class="bg-brand-dark px-1.5 py-0.5 rounded text-indigo-300">produtos.json</code> está salvo corretamente com as chaves de formatação.
             </p>
           </div>
         `;
@@ -291,5 +294,5 @@
     window.addEventListener('DOMContentLoaded', carregarProdutos);
   </script>
 
-</body>
+  </body>
 </html>

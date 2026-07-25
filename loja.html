@@ -190,14 +190,17 @@
       try {
         // Faz a busca local ao arquivo de banco de dados estático
         const response = await fetch('produtos.json');
-        const produtos = await response.json();
         
+        if (!response.ok) {
+          throw new Error("Arquivo produtos.json não foi encontrado ou falhou ao carregar.");
+        }
+
+        const produtos = await response.json();
         container.innerHTML = ''; // Limpa o loader de skeleton
 
         produtos.forEach(prod => {
           let botaoHTML = '';
           
-          // Renderiza o botão correto dependendo do tipo configurado no JSON
           if (prod.tipo_botao === 'hotmart') {
             botaoHTML = `
               <div class="flex justify-center">
@@ -220,7 +223,6 @@
             `;
           }
 
-          // Monta a lista de requisitos/características
           let requisitosHTML = '';
           if (prod.requisitos && prod.requisitos.length > 0) {
             requisitosHTML = `
@@ -233,7 +235,6 @@
             `;
           }
 
-          // Constrói o cartão com as classes do Tailwind
           const card = document.createElement('div');
           card.className = "bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg";
           card.innerHTML = `
@@ -272,13 +273,17 @@
           container.appendChild(card);
         });
 
-        // Caso a biblioteca do checkout do Hotmart esteja carregada, reinicializa para mapear os novos cartões
-        if (typeof window.importHotmart === 'function') {
-          // O script nativo da Hotmart age automaticamente sobre elementos criados dinamicamente com as classes correspondentes.
-        }
-
       } catch (err) {
         console.error("Erro ao carregar os dados de produtos da Loja:", err);
+        container.innerHTML = `
+          <div class="col-span-12 text-center py-12 space-y-4">
+            <span class="text-4xl">⚠️</span>
+            <p class="text-sm text-red-400 font-semibold">Erro ao carregar o banco de dados de produtos.</p>
+            <p class="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
+              Verifique se o arquivo <code class="bg-brand-dark px-1.5 py-0.5 rounded text-indigo-300">produtos.json</code> foi devidamente enviado ao repositório ou se há erros de formatação/sintaxe nele. (Lembre-se que requisições de rede local são bloqueadas sem um servidor web ativo).
+            </p>
+          </div>
+        `;
       }
     }
 

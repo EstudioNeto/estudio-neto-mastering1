@@ -89,7 +89,7 @@
     
     <!-- Contêiner onde os produtos carregados do JSON serão inseridos -->
     <div id="produtos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-      <!-- SKELETON LOADER (Efeito de carregamento para melhor experiência de usuário) -->
+      <!-- SKELETON LOADER -->
       <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse"></div>
       <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden md:block"></div>
       <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden lg:block"></div>
@@ -110,14 +110,14 @@
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       
       <!-- Lado Esquerdo do Rodapé (Identidade de Marca) -->
-      <div class="col-span-12 md:col-span-4 space-y-3">
-        <div class="flex items-center gap-3">
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
           <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
           </svg>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
-        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px]">
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
           Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
         </p>
       </div>
@@ -183,12 +183,11 @@
     </div>
   </footer>
 
- <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
+  <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
   <script>
     async function carregarProdutos() {
       const container = document.getElementById('produtos-container');
       try {
-        // Adicionamos '?v=' + Date.now() para forçar o navegador a ler o arquivo mais recente, ignorando o cache
         const response = await fetch('produtos.json?v=' + Date.now());
         
         if (!response.ok) {
@@ -214,13 +213,36 @@
               <div class="flex justify-center w-full">
                 <a href="${prod.link}" target="_blank" 
                    class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full hover:scale-105 transition-transform duration-200 text-decoration-none">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www-w3-org-svg" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/>
                   </svg>
                   Saiba Mais
                 </a>
               </div>
             `;
+          }
+
+          // Seção condicional de links secundários (Ver Listas e Baixar Amostras)
+          let linksSecundariosHTML = '';
+          if (prod.link_listas || prod.link_amostras) {
+            linksSecundariosHTML = `
+              <div class="grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-center text-[10px] font-bold">
+            `;
+            if (prod.link_listas) {
+              linksSecundariosHTML += `
+                <a href="${prod.link_listas}" target="_blank" class="border border-brand-border hover:border-indigo-500/50 text-gray-400 hover:text-white py-2 rounded-lg transition-colors flex items-center justify-center gap-1 text-decoration-none">
+                  📁 Ver Listas
+                </a>
+              `;
+            }
+            if (prod.link_amostras) {
+              linksSecundariosHTML += `
+                <a href="${prod.link_amostras}" target="_blank" class="border border-brand-border hover:border-indigo-500/50 text-gray-400 hover:text-white py-2 rounded-lg transition-colors flex items-center justify-center gap-1 text-decoration-none">
+                  ⬇️ Baixar Amostras
+                </a>
+              `;
+            }
+            linksSecundariosHTML += `</div>`;
           }
 
           let requisitosHTML = '';
@@ -266,8 +288,11 @@
               ${requisitosHTML}
             </div>
             
-            <div class="border-t border-brand-border/60 pt-4">
-              ${botaoHTML}
+            <div class="space-y-3">
+              ${linksSecundariosHTML}
+              <div class="border-t border-brand-border/60 pt-3">
+                ${botaoHTML}
+              </div>
             </div>
           `;
           container.appendChild(card);
@@ -294,5 +319,5 @@
     window.addEventListener('DOMContentLoaded', carregarProdutos);
   </script>
 
-  </body>
+</body>
 </html>

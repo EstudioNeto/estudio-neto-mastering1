@@ -83,6 +83,15 @@
         <h3 class="text-md font-bold text-white uppercase tracking-wider">Novo Produto</h3>
         
         <form id="product-form" class="space-y-4 text-xs">
+          <!-- Campo de Seleção do Destino -->
+          <div class="space-y-1">
+            <label class="block text-gray-400 font-semibold">Página de Destino (Arquivo JSON)</label>
+            <select id="p-destino" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none cursor-pointer font-bold">
+              <option value="produtos.json">🛒 Loja Virtual (produtos.json)</option>
+              <option value="programas.json">💻 Programas e Apps (programas.json)</option>
+            </select>
+          </div>
+
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1">
               <label class="block text-gray-400 font-semibold">Tag Esquerda (ex: Software Desktop)</label>
@@ -90,7 +99,7 @@
             </div>
             <div class="space-y-1">
               <label class="block text-gray-400 font-semibold">Tag Direita (ex: Win 64-bit)</label>
-              <input type="text" id="p-tag2" required placeholder="ex: Win 64-bit" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <input type="text" id="p-tag2" placeholder="ex: Win 64-bit" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
             </div>
           </div>
 
@@ -120,7 +129,6 @@
             <textarea id="p-requisitos" rows="3" placeholder="Insira os tópicos, um por linha..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
           </div>
 
-          <!-- NOVOS CAMPOS ADICIONADOS (OPCIONAIS) -->
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1">
               <label class="block text-gray-400 font-semibold">Link para Ver/Baixar Listas (Opcional)</label>
@@ -148,7 +156,7 @@
 
           <div class="pt-4 flex gap-3">
             <button type="submit" id="btn-publish" class="flex-1 bg-brand-success hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-all shadow-md text-xs">
-              🚀 Publicar Produto na Loja
+              🚀 Publicar Produto na Loja / Programas
             </button>
           </div>
         </form>
@@ -158,7 +166,6 @@
       <section class="lg:col-span-5 space-y-4 sticky top-24">
         <h3 class="text-md font-bold text-white uppercase tracking-wider">Pré-visualização em Tempo Real</h3>
         
-        <!-- Cartão idêntico ao da loja virtual -->
         <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-2xl">
           <div class="space-y-4">
             <div class="flex flex-wrap gap-2">
@@ -187,7 +194,6 @@
             </div>
           </div>
 
-          <!-- Área dos botões (Pré-visualização dos botões opcionais de download/amostra) -->
           <div class="space-y-3">
             <div id="preview-secondary-btn-container" class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold hidden">
               <!-- Botões Secundários Dinâmicos -->
@@ -202,11 +208,23 @@
 
     <!-- 3. GERENCIAR PRODUTOS CADASTRADOS -->
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-brand-border pb-3">
-        <h3 class="text-md font-bold text-white">Gerenciar Produtos em Linha</h3>
-        <button id="btn-load-list" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-all">
-          🔄 Carregar Lista Atual do GitHub
-        </button>
+      <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-brand-border pb-3 gap-3">
+        <div class="flex items-center gap-2">
+          <h3 class="text-md font-bold text-white">Gerenciar Itens</h3>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <label class="text-xs text-gray-400 font-semibold">Visualizar:</label>
+            <select id="manage-file-select" class="bg-[#080c16] border border-brand-border rounded-lg text-xs text-white px-3 py-1.5 outline-none cursor-pointer">
+              <option value="produtos.json">🛒 Loja Virtual (produtos.json)</option>
+              <option value="programas.json">💻 Programas e Apps (programas.json)</option>
+            </select>
+          </div>
+          <button id="btn-load-list" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-all">
+            🔄 Carregar Lista do GitHub
+          </button>
+        </div>
       </div>
 
       <div class="overflow-x-auto">
@@ -221,7 +239,7 @@
           </thead>
           <tbody id="inventory-list" class="divide-y divide-brand-border text-gray-300">
             <tr>
-              <td colspan="4" class="p-4 text-center text-gray-500 italic">Clique em "Carregar Lista" para listar os produtos atuais do repositório.</td>
+              <td colspan="4" class="p-4 text-center text-gray-500 italic">Selecione o arquivo e clique em "Carregar Lista" para listar os itens atuais.</td>
             </tr>
           </tbody>
         </table>
@@ -236,7 +254,6 @@
 
   <!-- SCRIPT DE SINCRONIZAÇÃO COM A API DO GITHUB -->
   <script>
-    // Recupera dados salvos localmente
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById('github-user').value = localStorage.getItem('git_user') || '';
       document.getElementById('github-repo').value = localStorage.getItem('git_repo') || '';
@@ -244,7 +261,6 @@
       updatePreview();
     });
 
-    // Salvar configurações de forma local
     document.getElementById('btn-save-config').addEventListener('click', () => {
       const user = document.getElementById('github-user').value.trim();
       const repo = document.getElementById('github-repo').value.trim();
@@ -256,9 +272,9 @@
       alert("Credenciais do GitHub salvas com sucesso no seu navegador!");
     });
 
-    // --- LOGICA DE PRÉ-VISUALIZAÇÃO EM TEMPO REAL ---
+    // --- LÓGICA DE PRÉ-VISUALIZAÇÃO EM TEMPO REAL ---
     const form = document.getElementById('product-form');
-    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link', 'p-link-listas', 'p-link-amostras'];
+    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link', 'p-link-listas', 'p-link-amostras', 'p-destino'];
     
     inputs.forEach(id => {
       document.getElementById(id).addEventListener('input', updatePreview);
@@ -274,7 +290,6 @@
       const imgPath = document.getElementById('p-imagem').value;
       document.getElementById('preview-img').src = imgPath || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&auto=format&fit=crop';
 
-      // Atualiza lista de requisitos
       const reqList = document.getElementById('preview-requisitos');
       reqList.innerHTML = '';
       const text = document.getElementById('p-requisitos').value.trim();
@@ -286,7 +301,6 @@
         reqList.innerHTML = '<li>✔ Característica Exemplo</li>';
       }
 
-      // Atualiza Botões Secundários no Preview
       const secBtnContainer = document.getElementById('preview-secondary-btn-container');
       const lListas = document.getElementById('p-link-listas').value.trim();
       const lAmostras = document.getElementById('p-link-amostras').value.trim();
@@ -313,7 +327,6 @@
         secBtnContainer.classList.add('hidden');
       }
 
-      // Atualiza Botão Principal de Compra no Preview
       const btnContainer = document.getElementById('preview-btn-container');
       const tipoBotao = document.getElementById('p-tipo-botao').value;
       if (tipoBotao === 'hotmart') {
@@ -342,6 +355,7 @@
       const user = localStorage.getItem('git_user');
       const repo = localStorage.getItem('git_repo');
       const token = localStorage.getItem('git_token');
+      const targetFile = document.getElementById('p-destino').value;
 
       if (!user || !repo || !token) {
         alert("Por favor, preencha e salve suas credenciais do GitHub no topo do painel.");
@@ -353,27 +367,30 @@
       confirmBtn.textContent = "Sincronizando com o GitHub...";
 
       try {
-        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/${targetFile}`;
         const headers = {
           "Authorization": `token ${token}`,
           "Accept": "application/vnd.github.v3+json"
         };
 
+        // Verifica se o arquivo existe
+        let currentSha = "";
+        let produtos = [];
+
         const getRes = await fetch(url, { headers });
-        if (!getRes.ok) {
-          throw new Error("Não foi possível carregar o arquivo produtos.json. Verifique o token e as credenciais.");
+        if (getRes.ok) {
+          const fileData = await getRes.json();
+          currentSha = fileData.sha;
+          
+          const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+
+          produtos = JSON.parse(decodedContent);
+        } else if (getRes.status !== 404) {
+          throw new Error(`Erro ao conectar com o arquivo ${targetFile}. Verifique as credenciais.`);
         }
 
-        const fileData = await getRes.json();
-        const currentSha = fileData.sha;
-        
-        const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        let produtos = JSON.parse(decodedContent);
-
-        // Passo 2: Monta o novo produto objeto (incluindo os dois novos parâmetros opcionais)
         const maxId = produtos.reduce((max, p) => p.id > max ? p.id : max, 0);
         
         const novoProduto = {
@@ -391,34 +408,38 @@
           link: document.getElementById('p-link').value.trim()
         };
 
-        // Adiciona ao vetor
         produtos.push(novoProduto);
 
-        // Converte de volta para string JSON formatada de forma legível
         const updatedJsonString = JSON.stringify(produtos, null, 2);
         
         const encodedContent = btoa(encodeURIComponent(updatedJsonString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
           return String.fromCharCode('0x' + p1);
         }));
 
-        // Passo 3: Envia a atualização (PUT) para o GitHub
+        const bodyData = {
+          message: `Adicionado novo produto: ${novoProduto.titulo} via painel administrativo ao ${targetFile}`,
+          content: encodedContent
+        };
+        if (currentSha) {
+          bodyData.sha = currentSha;
+        }
+
         const putRes = await fetch(url, {
           method: "PUT",
           headers,
-          body: JSON.stringify({
-            message: `Adicionado novo produto: ${novoProduto.titulo} via painel administrativo`,
-            content: encodedContent,
-            sha: currentSha
-          })
+          body: JSON.stringify(bodyData)
         });
 
         if (!putRes.ok) {
           throw new Error("Falha no commit de upload do novo JSON.");
         }
 
-        alert(`Sucesso! O produto "${novoProduto.titulo}" foi adicionado ao produtos.json e está no ar na sua loja virtual.`);
+        alert(`Sucesso! O produto "${novoProduto.titulo}" foi adicionado ao arquivo ${targetFile} com êxito.`);
         form.reset();
         updatePreview();
+        
+        // Ajusta seletor de visualização para o mesmo arquivo cadastrado para facilitar verificação
+        document.getElementById('manage-file-select').value = targetFile;
         loadGitHubInventory();
 
       } catch (err) {
@@ -426,17 +447,18 @@
         alert("Erro técnico: " + err.message);
       } finally {
         confirmBtn.disabled = false;
-        confirmBtn.textContent = "🚀 Publicar Produto na Loja";
+        confirmBtn.textContent = "🚀 Publicar Produto na Loja / Programas";
       }
     });
 
-    // --- SINC DA TABELA DE INVENTÁRIO (GERENCIADOR DE ESTOQUE) ---
+    // --- SYNC DA TABELA DE INVENTÁRIO (GERENCIADOR DE ESTOQUE) ---
     document.getElementById('btn-load-list').addEventListener('click', loadGitHubInventory);
 
     async function loadGitHubInventory() {
       const user = localStorage.getItem('git_user');
       const repo = localStorage.getItem('git_repo');
       const token = localStorage.getItem('git_token');
+      const targetFile = document.getElementById('manage-file-select').value;
 
       if (!user || !repo) {
         alert("Preencha e salve suas credenciais do GitHub no topo para carregar a lista.");
@@ -444,14 +466,18 @@
       }
 
       const tableBody = document.getElementById('inventory-list');
-      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-indigo-400 font-semibold animate-pulse">Carregando dados...</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-indigo-400 font-semibold animate-pulse">Carregando dados de ${targetFile}...</td></tr>`;
 
       try {
-        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json?v=` + Date.now();
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/${targetFile}?v=` + Date.now();
         const headers = token ? { "Authorization": `token ${token}` } : {};
 
         const res = await fetch(url, { headers });
-        if (!res.ok) throw new Error("Não foi possível carregar o arquivo produtos.json.");
+        if (res.status === 404) {
+          tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 italic">O arquivo "${targetFile}" ainda não existe no seu repositório. Ele será criado no primeiro envio.</td></tr>`;
+          return;
+        }
+        if (!res.ok) throw new Error("Não foi possível carregar o arquivo.");
 
         const fileData = await res.json();
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(function(c) {
@@ -462,7 +488,7 @@
         tableBody.innerHTML = "";
 
         if (produtos.length === 0) {
-          tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 italic">Nenhum produto cadastrado no banco.</td></tr>`;
+          tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 italic">Nenhum produto cadastrado neste arquivo.</td></tr>`;
           return;
         }
 
@@ -471,7 +497,10 @@
           tr.className = "border-b border-brand-border/60 hover:bg-brand-card/30 transition-colors";
           tr.innerHTML = `
             <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
-            <td class="p-3"><span class="bg-brand-dark px-2 py-0.5 rounded text-gray-400 font-mono text-[10px]">${prod.tag1}</span></td>
+            <td class="p-3">
+              <span class="bg-brand-dark px-2 py-0.5 rounded text-gray-400 font-mono text-[10px]">${prod.tag1}</span>
+              ${prod.tag2 ? `<span class="bg-slate-850 px-2 py-0.5 rounded text-gray-400 font-mono text-[10px] ml-1">${prod.tag2}</span>` : ''}
+            </td>
             <td class="p-3 uppercase font-mono font-bold ${prod.tipo_botao === 'whatsapp' ? 'text-green-400' : 'text-indigo-400'}">${prod.tipo_botao}</td>
             <td class="p-3 text-right">
               <button onclick="excluirProduto(${prod.id}, '${prod.titulo}')" class="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white transition-all text-[10px] font-bold px-3 py-1 rounded-lg">Excluir</button>
@@ -487,7 +516,8 @@
 
     // --- DELEÇÃO DE PRODUTO PELO PAINEL ---
     window.excluirProduto = async function(id, titulo) {
-      if (!confirm(`Tem certeza de que deseja remover o produto "${titulo}" da sua loja virtual?`)) return;
+      const targetFile = document.getElementById('manage-file-select').value;
+      if (!confirm(`Tem certeza de que deseja remover o produto "${titulo}" do arquivo ${targetFile}?`)) return;
 
       const user = localStorage.getItem('git_user');
       const repo = localStorage.getItem('git_repo');
@@ -499,7 +529,7 @@
       }
 
       try {
-        const url = `https://api.github.com/repos/${user}/${repo}/contents/produtos.json`;
+        const url = `https://api.github.com/repos/${user}/${repo}/contents/${targetFile}`;
         const headers = {
           "Authorization": `token ${token}`,
           "Accept": "application/vnd.github.v3+json"
@@ -515,7 +545,6 @@
 
         let produtos = JSON.parse(decodedContent);
 
-        // Filtra o produto fora da lista
         produtos = produtos.filter(p => p.id !== id);
 
         const updatedJsonString = JSON.stringify(produtos, null, 2);
@@ -527,7 +556,7 @@
           method: "PUT",
           headers,
           body: JSON.stringify({
-            message: `Removido produto: ${titulo} via painel administrativo`,
+            message: `Removido produto: ${titulo} do arquivo ${targetFile} via painel administrativo`,
             content: encodedContent,
             sha: currentSha
           })
@@ -535,7 +564,7 @@
 
         if (!putRes.ok) throw new Error("Erro ao commitar alterações no GitHub.");
 
-        alert(`O produto "${titulo}" foi removido com sucesso.`);
+        alert(`O produto "${titulo}" foi removido com sucesso de ${targetFile}.`);
         loadGitHubInventory();
 
       } catch (err) {

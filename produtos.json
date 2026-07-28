@@ -19,25 +19,6 @@
     "link": "https://pay.hotmart.com/U100444535W?checkoutMode=2"
   },
   {
-    "id": 2,
-    "tag1": "Pacote MIDI",
-    "tag2": "Bônus Incluso",
-    "imagem": "imagens/bailao_midi.jpg",
-    "titulo": "Bailão MIDI",
-    "subtitulo": "500 Blocos com letra inclusa para teclados",
-    "descricao": "Adquira o repertório de bailão definitivo em formato MIDI totalmente editável. Ideal para apresentações ao vivo e ensaios rápidos. Acompanha programa exclusivo bônus para execução de arquivos no seu computador.",
-    "requisitos": [
-      "500 Blocos MIDI com letra estruturada",
-      "Bônus: Software reprodutor leve para PC",
-      "Suporte direto pós-venda via WhatsApp",
-      "Envio rápido e seguro por link de download"
-    ],
-    "link_listas": "",
-    "link_amostras": "",
-    "tipo_botao": "whatsapp",
-    "link": "https://wa.me/5549998126934?text=Ola!%20Gostaria%20de%20saber%20mais%20detalhes%20sobre%20o%20pacote%20Bailao%20MIDI%20com%20500%20Blocos."
-  },
-  {
     "id": 3,
     "tag1": "Ebook Digital",
     "tag2": "Formato PDF",

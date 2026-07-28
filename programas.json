@@ -18,5 +18,25 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/G106756190F"
+  },
+  {
+    "id": 2,
+    "tag1": "Agente IA",
+    "tag2": "Mixagem",
+    "imagem": "imagens/reaper.png",
+    "titulo": "Assistente de Mixagem REAPER",
+    "subtitulo": "Pra sua mixagem",
+    "descricao": "\"O ReaMixer é um assistente virtual focado em otimizar o processo de mixagem de produtores musicais dentro do REAPER. Sem a necessidade de ferramentas de terceiros, o agente ajuda a estruturar etapas fundamentais como ganho inicial (gain staging), equalização corretiva, controle de dinâmica e efeitos de espaço (reverb e delay).\nCom uma abordagem metodológica e prática, o agente sugere cadeias de sinal lógicas e parâmetros iniciais de partida baseados nas características de cada projeto, ajudando o usuário a explorar o potencial das ferramentas nativas (ReaPlugins) e da biblioteca de efeitos JS do REAPER.\"",
+    "requisitos": [
+      "Assistente de mixagem: Focado em otimizar o processo de mixagem dentro do REAPER sem depender de ferramentas externas.",
+      "Estruturação de etapas: Orienta o usuário em processos fundamentais como ganho inicial, equalização corretiva, controle de dinâmica e efeitos de espaço.",
+      "Metodologia prática: Apresenta uma abordagem lógica e organizada para construir cadeias de sinal eficientes.",
+      "Configurações personalizadas: Sugere parâmetros iniciais adaptados às características de cada projeto.",
+      "Exploração de ferramentas nativas: Incentiva o uso dos ReaPlugins e da biblioteca JS do REAPER para aproveitar ao máximo os recursos internos."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/X106755563Y"
   }
 ]

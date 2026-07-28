@@ -82,5 +82,27 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/K106090727L"
+  },
+  {
+    "id": 5,
+    "tag1": "Agente IA",
+    "tag2": "Master",
+    "imagem": "imagens/reaperchain.png",
+    "titulo": "ReaperChain Master",
+    "subtitulo": "Consultor especializado",
+    "descricao": "Este agente atua como um consultor especializado em engenharia de áudio para usuários do DAW Reaper. Ele traduz necessidades artísticas em configurações técnicas concretas de plugins nativos e de terceiros. É a ponte essencial entre a teoria da produção musical e a implementação prática no estúdio.",
+    "requisitos": [
+      "Consultor especializado: Atua como um profissional virtual focado em engenharia de áudio para usuários do REAPER.",
+      "Tradução artística: Converte ideias criativas em configurações técnicas concretas.",
+      "Configurações técnicas: Orienta o uso de plugins nativos e de terceiros de forma eficiente.",
+      "Ponte teoria-prática: Conecta conceitos da produção musical com sua aplicação real no estúdio.",
+      "Suporte ao workflow: Facilita a organização e otimização do processo de mixagem e produção.",
+      "Flexibilidade de ferramentas: Permite explorar tanto recursos internos quanto externos do DAW.",
+      "Aplicação prática: Garante que as necessidades criativas sejam transformadas em resultados sonoros tangíveis."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/T106104675M"
   }
 ]

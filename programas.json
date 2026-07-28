@@ -104,5 +104,27 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/T106104675M"
+  },
+  {
+    "id": 6,
+    "tag1": "Software",
+    "tag2": "WIn 64-bit",
+    "imagem": "imagens/palcomestre.png",
+    "titulo": "Palco Mestre Vídeo Player - Para Música ao vivo",
+    "subtitulo": "O player definitivo",
+    "descricao": "O Palco Mestre é o software de desktop definitivo para cantores de música ao vivo que não podem se dar ao luxo de parar uma apresentação para encontrar o próximo vídeo. Agende, mude e controle sua playlist em tempo real, sem interrupções.\n\n Sistemas Operacionais Compatíveis\n\nO Palco Mestre Vídeo Player foi projetado e otimizado para o ambiente\nWindows. Ele é compatível com as seguintes versões:\n  - Windows 11\n  - Windows 10\n  - Windows 8 / 8.1\n  - Windows 7\n\n Arquitetura (64-bit)\n\nO instalador fornecido é compilado para sistemas 64-bit, que é o\npadrão para a maioria dos computadores modernos. Para o correto funcionamento,\nseu sistema operacional Windows também deve ser de 64-bit.",
+    "requisitos": [
+      "Software para cantores: Criado especialmente para apresentações ao vivo, evitando interrupções durante o show.",
+      "Controle em tempo real: Permite agendar, mudar e controlar playlists sem precisar parar a performance.",
+      "Compatibilidade Windows: Funciona em diversas versões do sistema operacional (Windows 7 até Windows 11).",
+      "Ambiente otimizado: Projetado para oferecer desempenho estável e fluido dentro do ecossistema Windows.",
+      "Arquitetura 64-bit: Instalador compilado para sistemas modernos, garantindo maior eficiência e compatibilidade.",
+      "Playlist contínua: Evita pausas entre vídeos, mantendo a fluidez da apresentação.",
+      "Ferramenta definitiva: Posiciona-se como solução completa para artistas que dependem de estabilidade e praticidade no palco."
+    ],
+    "link_listas": "",
+    "link_amostras": "https://youtu.be/Y7nP2bxDr0E?si=Np2ZD2rf3q3ksliO",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/U100444535W"
   }
 ]

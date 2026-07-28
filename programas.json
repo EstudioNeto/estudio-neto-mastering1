@@ -38,5 +38,27 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/X106755563Y"
+  },
+  {
+    "id": 3,
+    "tag1": "Agente IA",
+    "tag2": "Engenheiro de mixagem",
+    "imagem": "imagens/mixassistant.png",
+    "titulo": "MixAssistant Pro Engenheiro de mixagem",
+    "subtitulo": "Mix Pro",
+    "descricao": "O MixAssistant Pro é um engenheiro de mixagem assistente que analisa configurações do Reaper para otimizar o balanço e a clareza sonora. Ele atua como um mentor técnico, traduzindo conceitos de mixagem de alta qualidade em ações práticas para os seus projetos. Com foco em 'clareza e peso', o agente ajuda a evitar erros comuns de processamento, garantindo que suas produções tenham um padrão profissional.",
+    "requisitos": [
+      "Engenheiro de mixagem virtual: Atua como um assistente especializado que analisa configurações do REAPER para otimizar o som.",
+      "Análise técnica: Examina parâmetros do projeto para ajustar o balanço e a clareza sonora.",
+      "Mentoria prática: Traduz conceitos avançados de mixagem em ações aplicáveis ao dia a dia do produtor.",
+      "Foco em clareza e peso: Orienta o usuário a alcançar produções com impacto e definição profissional.",
+      "Prevenção de erros: Ajuda a evitar problemas recorrentes de processamento que comprometem a qualidade final.",
+      "Padrão profissional: Garante que os projetos sigam critérios de qualidade sonora reconhecidos no mercado.",
+      "Ações otimizadas: Sugere ajustes práticos e eficientes para melhorar o fluxo de trabalho dentro do REAPER."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/C106090515Y"
   }
 ]

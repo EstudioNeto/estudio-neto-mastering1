@@ -1,24 +1,5 @@
 [
   {
-    "id": 1,
-    "tag1": "Software Desktop",
-    "tag2": "Win 64-bit",
-    "imagem": "imagens/palcomestre.png",
-    "titulo": "Palco Mestre Vídeo Player",
-    "subtitulo": "O reprodutor de mídia para apresentações ao vivo",
-    "descricao": "Software projetado para cantores e instrumentistas que necessitam de estabilidade absoluta. Agende, mude e organize suas playlists de vídeo e áudio em tempo real, eliminando interrupções indesejadas durante os shows.",
-    "requisitos": [
-      "Compatível com Windows 7, 8, 10 e 11",
-      "Otimizado para arquitetura 64-bit",
-      "Suporte técnico incluso",
-      "Licença vitalícia sem mensalidades"
-    ],
-    "link_listas": "",
-    "link_amostras": "",
-    "tipo_botao": "hotmart",
-    "link": "https://pay.hotmart.com/U100444535W?checkoutMode=2"
-  },
-  {
     "id": 3,
     "tag1": "Ebook Digital",
     "tag2": "Formato PDF",

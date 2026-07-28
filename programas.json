@@ -60,5 +60,27 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/C106090515Y"
+  },
+  {
+    "id": 4,
+    "tag1": "Agente IA",
+    "tag2": "Mentor de áudio",
+    "imagem": "imagens/mixguide.png",
+    "titulo": "MixGuide AI",
+    "subtitulo": "Áudio",
+    "descricao": "O MixGuide AI é um mentor virtual de engenharia de áudio que auxilia produtores musicais a superarem a paralisia de análise através de feedback técnico estruturado. Ele utiliza conceitos fundamentais de mixagem para comparar produções amadoras com referências profissionais, oferecendo diretrizes claras para alcançar o peso e a profundidade desejados. É a ferramenta ideal para alunos que precisam traduzir a teoria do curso em decisões práticas de estúdio.",
+    "requisitos": [
+      "Mentor virtual: Atua como guia técnico para produtores musicais, oferecendo suporte direto em decisões de mixagem.",
+      "Superação da paralisia de análise: Ajuda o usuário a evitar bloqueios criativos por meio de feedback estruturado.",
+      "Feedback técnico: Fornece orientações claras e organizadas para melhorar o processo de produção.",
+      "Comparação com referências: Analisa produções amadoras em relação a padrões profissionais de áudio.",
+      "Diretrizes práticas: Traduz conceitos fundamentais de mixagem em ações aplicáveis no estúdio.",
+      "Foco em peso e profundidade: Orienta o produtor a alcançar impacto sonoro e clareza.",
+      "Ferramenta educacional: Ideal para estudantes que precisam transformar teoria em prática durante o aprendizado."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/K106090727L"
   }
 ]

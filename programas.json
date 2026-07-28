@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "tag1": "Agente IA",
+    "tag2": "Musical",
+    "imagem": "imagens/notamusical.png",
+    "titulo": "Nota Guia Musical",
+    "subtitulo": "Seu guia musical",
+    "descricao": "\"O NotaGuia é um assistente virtual pedagógico desenvolvido para apoiar o processo de ensino-aprendizagem da música. Projetado tanto para professores quanto para alunos de diferentes níveis, o agente atua como um facilitador de conceitos complexos da teoria musical, harmonia e percepção auditiva.\nPara os professores, o agente oferece suporte na elaboração de planos de aula, estruturação de cronogramas e desenvolvimento de exercícios práticos. Para os estudantes, funciona como um tutor de estudos personalizado, sugerindo rotinas de treino diárias, explicando regras harmônicas por meio de analogias simples e propondo atividades focadas no desenvolvimento técnico e auditivo de forma progressiva e equilibrada.\"",
+    "requisitos": [
+      "Assistente pedagógico: Atua como um recurso virtual voltado para apoiar o processo de ensino-aprendizagem da música.",
+      "Suporte a professores: Auxilia na elaboração de planos de aula, cronogramas e exercícios práticos.",
+      "Tutor personalizado: Oferece acompanhamento individualizado para estudantes, sugerindo rotinas de treino e explicações simplificadas.",
+      "Facilitador de teoria musical: Torna conceitos complexos de harmonia e percepção auditiva mais acessíveis por meio de analogias simples.",
+      "Desenvolvimento progressivo: Propõe atividades equilibradas que estimulam tanto a técnica quanto a percepção auditiva de forma gradual."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/G106756190F"
+  }
+]

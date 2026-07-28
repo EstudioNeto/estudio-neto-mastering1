@@ -77,27 +77,5 @@
     "link_amostras": "",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/R105620339G"
-  },
-  {
-    "id": 6,
-    "tag1": "MIDI",
-    "tag2": "Música ao vivo",
-    "imagem": "imagens/bailao_midi.jpg",
-    "titulo": "Bailão MIDI emendado com letra 500 blocos",
-    "subtitulo": "Seleção Profissional",
-    "descricao": "Roda em teclados e em programas que rodam midi no notbook.\nOs mídis são usados em teclados, estúdios e música ao vivo. A qualidade do midi\ndepende dos timbres do teclado usado para rodar o midi. No midi também é possivel\nalterar o tom, mutar qualquer pista que desejar, mas depende da tecnologia do teclado\nque está rodando o arquivo. Todos os midis tem letra e são emendados.\n+Bônus: Programa para rodar midi no computador.",
-    "requisitos": [
-      "Compatibilidade ampla: Funciona em teclados e programas que rodam MIDI em notebooks.",
-      "Aplicações diversas: Utilizado em teclados, estúdios e apresentações de música ao vivo.",
-      "Dependência dos timbres: A qualidade sonora do MIDI varia conforme os timbres do teclado usado.",
-      "Flexibilidade de edição: Permite alterar o tom e mutar pistas específicas, dependendo da tecnologia do teclado.",
-      "Arquivos com letra: Todos os arquivos MIDI possuem letras integradas.",
-      "Arquivos emendados: Os midis são contínuos e preparados para execução sem interrupções.",
-      "Programa para computador: Existe software dedicado para rodar MIDI diretamente no notebook."
-    ],
-    "link_listas": "",
-    "link_amostras": "",
-    "tipo_botao": "hotmart",
-    "link": "https://pay.hotmart.com/P106131608L"
   }
 ]

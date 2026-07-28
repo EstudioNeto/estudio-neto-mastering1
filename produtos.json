@@ -80,5 +80,25 @@
     "link_amostras": "https://drive.google.com/file/d/1VZN6gV8Eb2xE8SjZICdEANPGwt9CMltB/view?usp=drive_link",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/P106131608L"
+  },
+  {
+    "id": 7,
+    "tag1": "MIDI",
+    "tag2": "Baile MIDI",
+    "imagem": "imagens/bailemidi114.png",
+    "titulo": "BAILE PRONTO MIDI COM LETRA - 114 BLOCOS DE  MÚSICAS GAÚCHAS E BANDINHAS DO SUL + BÔNUS",
+    "subtitulo": "Midi com letra e emendado",
+    "descricao": "BAILE PRONTO MIDI COM LETRA Transforme qualquer evento em um verdadeiro baile com este pacote completo e exclusivo! Composto por 114 blocos de músicas em formato MIDI, este produto reúne os maiores sucessos da música gaúcha e das tradicionais bandinhas do Sul. Ideal para animar festas, encontros e celebrações, este material digital oferece versatilidade e praticidade.\n\nDestaques do Produto:\n\nRepertório Diversificado: Uma seleção incrível de músicas gaúchas e bandinhas tradicionais que encantam todos os públicos.\n\nFormatos MIDI: Alta compatibilidade para tocar em diferentes dispositivos e softwares.\n\nLetras Inclusas: Perfeito para acompanhar ou ensaiar cada canção.\n\nBônus Especial: Conteúdo adicional exclusivo para agregar ainda mais valor ao seu evento.\n\nSeja no palco, em um baile ou apenas entre amigos, o \"Baile Pronto MIDI com Letra\" é a solução ideal para criar momentos inesquecíveis ao som da cultura e tradição do Sul!",
+    "requisitos": [
+      "Repertório variado: Inclui 114 blocos de músicas que abrangem sucessos da música gaúcha e das tradicionais bandinhas do Sul.",
+      "Compatibilidade MIDI: Os arquivos em formato MIDI podem ser utilizados em diversos dispositivos e softwares, garantindo praticidade.",
+      "Letras inclusas: Cada música vem acompanhada de sua letra, ideal para ensaios, apresentações ou cantos coletivos.",
+      "Bônus exclusivo: Guia completo de canto para 1ª e 2ª voz + O Guia Completo para desenvolver a sua voz.",
+      "Versatilidade de uso: Perfeito para festas, encontros, celebrações ou até momentos descontraídos entre amigos."
+    ],
+    "link_listas": "https://drive.google.com/drive/folders/1FNgojuPVOG6OXQlcfFvtvlK4grrGj6cM?usp=drive_link",
+    "link_amostras": "https://drive.google.com/file/d/1uAB3PyLAd8ipZZfqL0SIm9sXpDizdDZ_/view?usp=drive_link",
+    "tipo_botao": "hotmart",
+    "link": "https://pay.hotmart.com/E99479240A"
   }
 ]

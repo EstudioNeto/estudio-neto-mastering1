@@ -126,5 +126,23 @@
     "link_amostras": "https://youtu.be/Y7nP2bxDr0E?si=Np2ZD2rf3q3ksliO",
     "tipo_botao": "hotmart",
     "link": "https://pay.hotmart.com/U100444535W"
+  },
+  {
+    "id": 7,
+    "tag1": "PlayStore",
+    "tag2": "APP",
+    "imagem": "imagens/sinosom.png",
+    "titulo": "SinoSom",
+    "subtitulo": "Mapeie as ressonâncias do seu ambiente",
+    "descricao": "O som se comporta de forma mecânica em ambientes fechados. Paredes rígidas paralelas criam nós acústicos, gerando o acúmulo de frequências ressonantes que geram desconforto auditivo e interferências invisíveis.\n\nO **Sinosom** foi criado para expor esses pontos de estagnação de energia sonora, entregando ao usuário diagnósticos simples e guias de harmonização rápidos para organizar seu espaço de forma psicoacusticamente agradável.",
+    "requisitos": [
+      "Em Residências: Remove o estresse oculto de som reverberante em salas de estar, quartos e escritórios, criando uma atmosfera verdadeiramente confortável para descanso.",
+      "Para Lojistas (Neuromarketing): Garante que a sua playlist comercial não dispute espaço com as imperfeições físicas das suas paredes. Menos ruído significa clientes confortáveis e comprando por mais tempo.",
+      "Escritórios, Clínicas e Técnicos: Oferece um laudo de engenharia detalhado com cálculos de cubagem de ar, posicionamento milimétrico de caixas e estimativa de pressão sonora ideal."
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "whatsapp",
+    "link": "https://estudioneto.github.io/sinosom/"
   }
 ]

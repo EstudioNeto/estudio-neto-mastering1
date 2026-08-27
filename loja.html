@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY67JDVNH9"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -15,33 +14,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              dark: '#070a13',
-              card: '#0f1423',
-              accent: '#6366f1',
-              accentHover: '#4f46e5',
-              success: '#10b981',
-              border: '#1e293b'
-            }
-          }
-        }
-      }
+      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', border: '#1e293b' } } } }
     }
   </script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- Header Mantido Escuro -->
   <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <span class="text-3xl">🎛️</span>
-        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
-          Estúdio Neto
-        </h1>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
       </div>
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
@@ -60,11 +43,9 @@
       <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse"></div>
       <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden sm:block"></div>
       <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden lg:block"></div>
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden lg:block"></div>
     </div>
   </main>
 
-  <!-- Rodapé Mantido Escuro -->
   <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <div class="flex items-center justify-center gap-3 mb-3">
@@ -82,7 +63,6 @@
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
         if (!response.ok) throw new Error("Erro na rede.");
-        
         const produtos = await response.json();
         container.innerHTML = ''; 
 
@@ -105,7 +85,6 @@
           `;
           container.appendChild(card);
         });
-
       } catch (err) {
         container.innerHTML = `<div class="col-span-12 text-center py-12"><p class="text-red-500">Erro: ${err.message}</p></div>`;
       }

@@ -144,5 +144,40 @@
     "link_amostras": "",
     "tipo_botao": "whatsapp",
     "link": "https://estudioneto.github.io/sinosom/"
+  },
+  {
+    "id": 8,
+    "tag1": "PLAYSTORE",
+    "tag2": "APP",
+    "imagem": "imagens/Palco.png",
+    "titulo": "Palco Mestre Player",
+    "subtitulo": "Palco Mestre Player: A ferramenta definitiva de vídeo e organização para a sua apresentação ao vivo!",
+    "descricao": "Palco Mestre Player: A ferramenta definitiva de vídeo e organização para a sua apresentação ao vivo!\nDesenvolvido sob medida para músicos solo, bandas, duplas, palestrantes e técnicos de palco, o Palco Mestre Player é um reprodutor de vídeo e gerenciador de repertório projetado para oferecer o máximo de estabilidade, controle e legibilidade durante as suas performances ao vivo em bares, palcos, igrejas e eventos.\nDiga adeus aos travamentos e interrupções que comprometem o seu show. O Palco Mestre Player foi otimizado para o ambiente de palco, oferecendo uma experiência visual limpa e ferramentas utilitárias que funcionam de forma prioritariamente offline.",
+    "requisitos": [
+      "RECURSOS PRINCIPAIS:",
+      "🎥 Transição de Vídeos Sem Interrupções (O Coração do App)",
+      "Gerencie sua playlist de forma dinâmica e em tempo real. Você pode navegar pela sua lista, alterar a ordem e escolher a próxima música que será tocada sem interromper ou pausar o vídeo que está sendo exibido na tela. Ideal para Loops de fundo, sincronização visual e transições suaves entre músicas.",
+      "🔵 Marcadores Visuais do Palco (Fila de Reprodução)",
+      "Identifique instantaneamente o status do seu show através de marcadores coloridos de alto contraste:",
+      "Azul Claro (🔵): Identifica o vídeo que está tocando no momento.",
+      "Laranja Palco (🟠): Destaca inteiramente a música que foi agendada para tocar em seguida na fila.",
+      "📺 Modo Palco Imersivo (Tela Cheia Real)",
+      "Com apenas um duplo clique rápido na janela de vídeo (ou pelo botão dedicado), o aplicativo entra no modo de Tela Cheia Imersiva. Nesse modo, os controles do player e todos os anúncios são completamente ocultados e destruídos da memória, garantindo que a tela fique 100% escura e profissional, sem gerar brilhos ou distrações no palco.",
+      "🔄 Layout Adaptativo de Duas Colunas",
+      "Use o seu celular ou tablet no pedestal! Em modo retrato (pé), o aplicativo organiza as listas verticalmente. Ao deitar o aparelho na horizontal (paisagem), a tela se divide automaticamente em duas colunas funcionais: o reprodutor com os controles na esquerda e a sua playlist organizada na direita (idêntico à versão de computador).",
+      "📅 Agenda de Shows Offline (Premium)",
+      "Um gerenciador de apresentações completo projetado para o músico. Cadastre seus shows diretamente no aplicativo com Nome do Show, Local do Bar, Data (via Calendário nativo), Horário (via Relógio nativo) e o Valor do Cache.",
+      "Legibilidade de Palco: Os shows são exibidos em letras brancas grandes e em negrito.",
+      "Sistema de Alertas: Escolha ser lembrado de cada apresentação com 1 hora, 1 dia ou 1 semana de antecedência por meio de notificações nativas, funcionando de forma 100% offline.",
+      "📺 Transmissão Direta para TV",
+      "Compartilhe o seu show visual com o público! Com um clique, acesse as configurações de espelhamento nativo do seu celular para enviar o sinal de vídeo para TVs, projetores ou receptores de tela do local do evento.",
+      "ASSINATURA PREMIUM (Remova Anúncios + Agenda de Shows)",
+      "Apoie o desenvolvimento contínuo do Palco Mestre! Por apenas R$ 7,90 mensais (recorrentes), você ativa a assinatura Premium que remove permanentemente 100% dos anúncios do aplicativo e libera o acesso ilimitado à Agenda de Shows offline.",
+      "Leve o profissionalismo do seu show para o próximo nível. Instale o Palco Mestre Player agora e tenha o controle total da sua apresentação na palma da sua mão!"
+    ],
+    "link_listas": "",
+    "link_amostras": "",
+    "tipo_botao": "whatsapp",
+    "link": "https://play.google.com/store/apps/details?id=com.exemplo.palcomestreplayer"
   }
 ]

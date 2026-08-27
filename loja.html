@@ -7,13 +7,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-PY67JDVNH9');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja Virtual — Estúdio Neto</title>
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -33,27 +31,11 @@
       }
     }
   </script>
-  <!-- Script de Verificação e Veiculação do Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7887570051470520" crossorigin="anonymous"></script>
-
-  <!-- Script de Checkout da Hotmart -->
-  <script type="text/javascript">
-    function importHotmart(){ 
-      var imported = document.createElement('script'); 
-      imported.src = 'https://static.hotmart.com/checkout/widget.min.js'; 
-      document.head.appendChild(imported); 
-      var link = document.createElement('link'); 
-      link.rel = 'stylesheet'; 
-      link.type = 'text/css'; 
-      link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css'; 
-      document.head.appendChild(link);	} 
-    importHotmart(); 
-  </script> 
 </head>
-<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+<body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- Header Unificado -->
-  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+  <!-- Header Mantido Escuro -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <span class="text-3xl">🎛️</span>
@@ -61,8 +43,6 @@
           Estúdio Neto
         </h1>
       </div>
-      
-      <!-- Menu de Opções -->
       <nav class="flex items-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
         <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
@@ -73,270 +53,64 @@
     </div>
   </header>
 
-  <!-- ESPAÇO PUBLICITÁRIO SUPERIOR -->
-  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
-    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
-      
-      <!-- Script Oficial Adsterra 728x90 -->
-      <script>
-        atOptions = {
-          'key' : '075895c4649089c88bfd69bcfe7dc655',
-          'format' : 'iframe',
-          'height' : 90,
-          'width' : 728,
-          'params' : {}
-        };
-      </script>
-      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
-
-    </div>
-  </div>
-  <!-- CONTEÚDO PRINCIPAL DA LOJA (VITRINE MULTIPRODUTOS DINÂMICA) -->
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
-    <h2 class="text-2xl font-bold text-white border-b border-brand-border pb-4">Loja Virtual — Produtos Digitais</h2>
+    <h2 class="text-2xl font-bold text-gray-900 border-b border-gray-200 pb-4">Loja Virtual — Produtos Digitais</h2>
     
-    <!-- Contêiner onde os produtos carregados do JSON serão inseridos -->
-    <div id="produtos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-      <!-- SKELETON LOADER -->
-      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse"></div>
-      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden md:block"></div>
-      <div class="bg-[#0f1423]/40 border border-[#1e293b]/60 rounded-2xl p-6 h-96 animate-pulse hidden lg:block"></div>
+    <div id="produtos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse"></div>
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden sm:block"></div>
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden lg:block"></div>
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden lg:block"></div>
     </div>
-
-    <!-- ANÚNCIO DE RODAPÉ -->
-    <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
-    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
-      
-      <!-- Script Oficial Adsterra 728x90 -->
-      <script>
-        atOptions = {
-          'key' : '075895c4649089c88bfd69bcfe7dc655',
-          'format' : 'iframe',
-          'height' : 90,
-          'width' : 728,
-          'params' : {}
-        };
-      </script>
-      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
-
-    </div>
-  </div>
   </main>
 
-  <!-- RODAPÉ COMPLETO COM DIRETÓRIO DE LINKS (ESTILO ONLINE-CONVERT) -->
-  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
-      
-      <!-- Lado Esquerdo do Rodapé (Identidade de Marca) -->
-      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-3">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-          </svg>
-          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
-        </div>
-        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
-        </p>
+  <!-- Rodapé Mantido Escuro -->
+  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <span class="text-base font-extrabold text-white">Estúdio Neto</span>
       </div>
-
-      <!-- Lado Direito do Rodapé (Diretório Mapeado em Colunas) -->
-      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-        
-        <!-- Coluna 1: Soluções de Conversão -->
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
-          </ul>
-        </div>
-
-        <!-- Coluna 2: Estúdio Neto Ferramentas -->
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
-          </ul>
-        </div>
-
-        <!-- Coluna 3: Empresa -->
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
-          </ul>
-        </div>
-
-        <!-- Coluna 4: Suporte e Contato -->
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- SEÇÃO INFERIOR DA DIVISÓRIA -->
-    <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
-      </div>
-      
-      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-gray-400 font-semibold text-[11px]">
-        <a href="privacidade.html" class="hover:text-white transition-colors text-decoration-none">Política de privacidade</a>
-        <span class="text-gray-600">|</span>
-        <a href="termos.html" class="hover:text-white transition-colors text-decoration-none">Termos de uso</a>
-        <span class="text-gray-600">|</span>
-        <span class="text-gray-500 cursor-default">PT 🌐</span>
-      </div>
+      <p class="text-gray-400 max-w-xs mx-auto leading-relaxed text-[11px]">
+        Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+      </p>
     </div>
   </footer>
 
-  <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS PRODUTOS (CONEXÃO COM O JSON) -->
   <script>
     async function carregarProdutos() {
       const container = document.getElementById('produtos-container');
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
+        if (!response.ok) throw new Error("Erro na rede.");
         
-        if (!response.ok) {
-          throw new Error("O arquivo produtos.json retornou status de erro na rede.");
-        }
-
         const produtos = await response.json();
-        container.innerHTML = ''; // Limpa o loader de skeleton
+        container.innerHTML = ''; 
 
         produtos.forEach(prod => {
-          let botaoHTML = '';
+          const card = document.createElement('a');
+          card.href = `produto.html?id=${prod.id}`;
+          card.className = "bg-white border border-gray-200 rounded-2xl p-5 flex flex-col text-center space-y-4 shadow-sm hover:shadow-lg hover:border-brand-accent transition-all cursor-pointer group text-decoration-none";
           
-          if (prod.tipo_botao === 'hotmart') {
-            botaoHTML = `
-              <div class="flex justify-center">
-                <a onclick="return false;" href="${prod.link}" class="hotmart-fb hotmart__button-checkout transition-transform hover:scale-105 inline-block">
-                  <img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar agora com a Hotmart">
-                </a>
-              </div>
-            `;
-          } else if (prod.tipo_botao === 'whatsapp') {
-            botaoHTML = `
-              <div class="flex justify-center w-full">
-                <a href="${prod.link}" target="_blank" 
-                   class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md text-xs tracking-wider uppercase flex items-center justify-center gap-2 w-full hover:scale-105 transition-transform duration-200 text-decoration-none">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/>
-                  </svg>
-                  Saiba Mais
-                </a>
-              </div>
-            `;
-          }
-
-          // Seção condicional de links secundários (Ver Listas e Baixar Amostras)
-          let linksSecundariosHTML = '';
-          if (prod.link_listas || prod.link_amostras) {
-            linksSecundariosHTML = `
-              <div class="grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-center text-[10px] font-bold">
-            `;
-            if (prod.link_listas) {
-              linksSecundariosHTML += `
-                <a href="${prod.link_listas}" target="_blank" class="border border-brand-border hover:border-indigo-500/50 text-gray-400 hover:text-white py-2 rounded-lg transition-colors flex items-center justify-center gap-1 text-decoration-none">
-                  📁 Ver Listas
-                </a>
-              `;
-            }
-            if (prod.link_amostras) {
-              linksSecundariosHTML += `
-                <a href="${prod.link_amostras}" target="_blank" class="border border-brand-border hover:border-indigo-500/50 text-gray-400 hover:text-white py-2 rounded-lg transition-colors flex items-center justify-center gap-1 text-decoration-none">
-                  ⬇️ Baixar Amostras
-                </a>
-              `;
-            }
-            linksSecundariosHTML += `</div>`;
-          }
-
-          let requisitosHTML = '';
-          if (prod.requisitos && prod.requisitos.length > 0) {
-            requisitosHTML = `
-              <div class="border-t border-brand-border/60 pt-4 space-y-2">
-                <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Características:</h4>
-                <ul class="text-[11px] text-slate-400 space-y-1 pl-1">
-                  ${prod.requisitos.map(req => `<li>✔ ${req}</li>`).join('')}
-                </ul>
-              </div>
-            `;
-          }
-
-          const card = document.createElement('div');
-          card.className = "bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-lg";
           card.innerHTML = `
-            <div class="space-y-4">
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">${prod.tag1}</span>
-                <span class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">${prod.tag2}</span>
-              </div>
-
-              <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative group flex items-center justify-center p-4">
-                <img src="${prod.imagem}" alt="${prod.titulo}" 
-                     class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
-                     onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                <div class="hidden absolute inset-0 flex flex-col items-center justify-center text-slate-700 bg-slate-950 font-mono text-center p-4">
-                  <span class="text-4xl mb-1">📦</span>
-                  <span class="text-[10px] text-gray-500">${prod.imagem}</span>
-                </div>
-              </div>
-              
-              <div class="space-y-1">
-                <h3 class="text-lg font-extrabold text-white">${prod.titulo}</h3>
-                <p class="text-[11px] text-indigo-300">${prod.subtitulo}</p>
-              </div>
-              
-              <p class="text-xs leading-relaxed text-gray-400">
-                ${prod.descricao}
-              </p>
-
-              ${requisitosHTML}
+            <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-50 relative p-4 flex items-center justify-center">
+              <img src="${prod.imagem}" alt="${prod.titulo}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none';">
             </div>
-            
-            <div class="space-y-3">
-              ${linksSecundariosHTML}
-              <div class="border-t border-brand-border/60 pt-3">
-                ${botaoHTML}
-              </div>
+            <div class="flex-grow flex flex-col justify-center">
+              <h3 class="text-base font-bold text-gray-900 leading-tight">${prod.titulo}</h3>
+              <p class="text-[11px] text-brand-accent font-semibold mt-1">${prod.subtitulo}</p>
+            </div>
+            <div class="w-full bg-indigo-50 text-brand-accent group-hover:bg-brand-accent group-hover:text-white text-xs font-bold py-2.5 rounded-lg transition-colors">
+              Ver Detalhes
             </div>
           `;
           container.appendChild(card);
         });
 
       } catch (err) {
-        console.error("Erro ao carregar os dados de produtos da Loja:", err);
-        container.innerHTML = `
-          <div class="col-span-12 text-center py-12 space-y-4">
-            <span class="text-4xl">⚠️</span>
-            <p class="text-sm text-red-400 font-semibold">Erro ao carregar o banco de dados de produtos.</p>
-            <p class="text-xs text-red-500 bg-brand-dark/50 py-2 px-3 rounded-lg max-w-lg mx-auto font-mono">
-              Detalhe técnico: ${err.message}
-            </p>
-            <p class="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
-              Verifique se o arquivo <code class="bg-brand-dark px-1.5 py-0.5 rounded text-indigo-300">produtos.json</code> está salvo corretamente com as chaves de formatação.
-            </p>
-          </div>
-        `;
+        container.innerHTML = `<div class="col-span-12 text-center py-12"><p class="text-red-500">Erro: ${err.message}</p></div>`;
       }
     }
-
-    // Dispara a leitura quando a página é carregada
     window.addEventListener('DOMContentLoaded', carregarProdutos);
   </script>
-
-
 </body>
 </html>

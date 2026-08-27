@@ -28,6 +28,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
+  <!-- HEADER -->
   <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -38,13 +39,16 @@
     </div>
   </header>
 
+  <!-- CONTEÚDO PRINCIPAL -->
   <main class="max-w-5xl w-full mx-auto p-4 md:p-8 flex-grow">
     <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-3xl p-6 md:p-12 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-10 items-center hidden">
       
+      <!-- IMAGEM -->
       <div class="bg-gray-50 border border-gray-100 rounded-2xl p-8 flex items-center justify-center aspect-square">
         <img id="detalhe-imagem" src="" alt="" class="max-w-full max-h-full object-contain drop-shadow-xl">
       </div>
 
+      <!-- INFORMAÇÕES -->
       <div class="space-y-6">
         <div class="flex flex-wrap gap-2" id="detalhe-tags"></div>
         <div>
@@ -53,12 +57,16 @@
         </div>
         <p id="detalhe-descricao" class="text-sm text-gray-600 leading-relaxed"></p>
 
+        <!-- CARACTERÍSTICAS -->
         <div id="detalhe-requisitos-container" class="border-t border-gray-200 pt-4">
           <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-2">Características Principais:</h4>
           <ul id="detalhe-requisitos" class="text-sm text-gray-600 space-y-1.5 list-disc list-inside"></ul>
         </div>
 
-        <div id="detalhe-links-secundarios" class="flex flex-wrap gap-3 pt-2"></div>
+        <!-- BOTÕES SECUNDÁRIOS (LISTAS E AMOSTRAS) -->
+        <div id="detalhe-links-secundarios" class="w-full pt-2"></div>
+        
+        <!-- BOTÃO PRINCIPAL DE COMPRA -->
         <div id="detalhe-botao-compra" class="pt-4 border-t border-gray-200"></div>
       </div>
     </div>
@@ -66,6 +74,7 @@
     <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações do produto...</div>
   </main>
 
+  <!-- RODAPÉ -->
   <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8 text-center">
     © 2026 Estúdio Neto
   </footer>
@@ -90,15 +99,18 @@
           statusMsg.textContent = "Produto não encontrado."; return;
         }
 
+        // DADOS BÁSICOS
         document.getElementById('detalhe-imagem').src = prod.imagem;
         document.getElementById('detalhe-titulo').textContent = prod.titulo;
         document.getElementById('detalhe-subtitulo').textContent = prod.subtitulo;
         document.getElementById('detalhe-descricao').textContent = prod.descricao;
 
+        // TAGS
         const tagsContainer = document.getElementById('detalhe-tags');
         if(prod.tag1) tagsContainer.innerHTML += `<span class="bg-indigo-100 text-indigo-700 font-bold px-3 py-1 rounded-full text-[10px] uppercase">${prod.tag1}</span>`;
         if(prod.tag2) tagsContainer.innerHTML += `<span class="bg-emerald-100 text-emerald-700 font-bold px-3 py-1 rounded-full text-[10px] uppercase">${prod.tag2}</span>`;
 
+        // REQUISITOS
         const reqList = document.getElementById('detalhe-requisitos');
         if (prod.requisitos && prod.requisitos.length > 0) {
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
@@ -106,6 +118,24 @@
           document.getElementById('detalhe-requisitos-container').style.display = 'none';
         }
 
+        // BOTÕES DE AMOSTRAS E LISTAS BEM DESTACADOS
+        const linksSec = document.getElementById('detalhe-links-secundarios');
+        if (prod.link_listas || prod.link_amostras) {
+          linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
+          
+          let botoesHtml = '';
+          if (prod.link_listas) {
+            botoesHtml += `<a href="${prod.link_listas}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">📁 Ver Lista</a>`;
+          }
+          if (prod.link_amostras) {
+            botoesHtml += `<a href="${prod.link_amostras}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">⬇️ Baixar Amostra</a>`;
+          }
+          linksSec.innerHTML = botoesHtml;
+        } else {
+          linksSec.style.display = 'none';
+        }
+
+        // BOTÃO DE COMPRA/WHATSAPP
         const btnCompra = document.getElementById('detalhe-botao-compra');
         if (prod.tipo_botao === 'hotmart') {
           btnCompra.innerHTML = `<a onclick="return false;" href="${prod.link}" class="hotmart-fb hotmart__button-checkout inline-block hover:scale-105 transition-transform"><img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar"></a>`;

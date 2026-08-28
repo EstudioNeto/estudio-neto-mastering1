@@ -319,7 +319,6 @@
         btnContainer.innerHTML = `<div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl text-xs uppercase flex justify-center text-center">WhatsApp</div>`;
       }
 
-      // PREVIEW DOS 3 DEPOIMENTOS
       const depo1Text = document.getElementById('p-depo1-texto').value.trim();
       const depo2Text = document.getElementById('p-depo2-texto').value.trim();
       const depo3Text = document.getElementById('p-depo3-texto').value.trim();
@@ -380,10 +379,8 @@
       
       document.getElementById('p-video').value = prod.video_url || '';
       
-      // Carrega o depoimento 1 (suporta o formato antigo também)
       document.getElementById('p-depo1-texto').value = prod.depo1_texto || prod.depoimento_texto || '';
       document.getElementById('p-depo1-autor').value = prod.depo1_autor || prod.depoimento_autor || '';
-      // Carrega o 2 e 3
       document.getElementById('p-depo2-texto').value = prod.depo2_texto || '';
       document.getElementById('p-depo2-autor').value = prod.depo2_autor || '';
       document.getElementById('p-depo3-texto').value = prod.depo3_texto || '';
@@ -474,14 +471,15 @@
             <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
             <td class="p-3 text-right">
               <button onclick="carregarParaEdicao(${prod.id})" class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-lg">Editar</button>
-              <button onclick="excluirProduto(${prod.id}, '${prod.titulo}')" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
+              <button onclick="excluirProduto(${prod.id})" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
             </td></tr>`;
         });
       } catch (err) { tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-red-400">Erro.</td></tr>`; }
     });
 
-    window.excluirProduto = async function(id, titulo) {
-      if (!confirm(`Remover "${titulo}"?`)) return;
+    window.excluirProduto = async function(id) {
+      const prod = localInventory.find(p => p.id === id);
+      if (!confirm(`Remover "${prod ? prod.titulo : 'este produto'}"?`)) return;
       const targetFile = document.getElementById('manage-file-select').value;
       const user = localStorage.getItem('git_user'), repo = localStorage.getItem('git_repo'), token = localStorage.getItem('git_token');
       try {

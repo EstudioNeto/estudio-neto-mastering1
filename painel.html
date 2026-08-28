@@ -363,9 +363,14 @@
     });
 
     window.carregarParaEdicao = function(id) {
-      const prod = localInventory.find(p => p.id === id);
-      if (!prod) return;
-      editingProductId = id;
+      // Blindagem para texto/número na busca
+      const prod = localInventory.find(p => String(p.id) === String(id));
+      if (!prod) {
+        alert("Erro: Produto não encontrado nos dados da página.");
+        return;
+      }
+      
+      editingProductId = prod.id;
       editingFile = document.getElementById('manage-file-select').value;
       document.getElementById('p-destino').value = editingFile; document.getElementById('p-destino').disabled = true;
 
@@ -391,7 +396,7 @@
       document.getElementById('p-tipo-botao').value = prod.tipo_botao || 'hotmart';
       document.getElementById('p-link').value = prod.link || '';
 
-      document.getElementById('form-mode-title').textContent = `✏️ Editando Produto (ID: ${id})`;
+      document.getElementById('form-mode-title').textContent = `✏️ Editando Produto (ID: ${prod.id})`;
       document.getElementById('btn-publish').textContent = "💾 Salvar Alterações";
       document.getElementById('btn-cancel-edit').classList.remove('hidden');
       document.getElementById('product-form').scrollIntoView({ behavior: 'smooth' });
@@ -415,7 +420,14 @@
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         let produtos = JSON.parse(decodedContent);
 
-        const editId = editingProductId || (produtos.reduce((max, p) => p.id > max ? p.id : max, 0) + 1);
+        // Garante geração de ID numérico seguro
+        let maxId = 0;
+        produtos.forEach(p => {
+          let num = parseInt(p.id);
+          if(!isNaN(num) && num > maxId) maxId = num;
+        });
+        const editId = editingProductId || (maxId + 1);
+
         const produtoDados = {
           id: editId,
           tag1: document.getElementById('p-tag1').value.trim(), tag2: document.getElementById('p-tag2').value.trim(),
@@ -434,7 +446,7 @@
         };
 
         if (editingProductId) {
-          const idx = produtos.findIndex(p => p.id === editingProductId);
+          const idx = produtos.findIndex(p => String(p.id) === String(editingProductId));
           if (idx !== -1) produtos[idx] = produtoDados; else produtos.push(produtoDados);
         } else { produtos.push(produtoDados); }
 
@@ -467,19 +479,22 @@
         if (localInventory.length === 0) return tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-center italic">Vazio.</td></tr>`;
         
         localInventory.forEach(prod => {
+          // Os aspas simples no clique previnem erros se o ID for texto
           tableBody.innerHTML += `<tr class="border-b border-brand-border/60 hover:bg-brand-card/30">
             <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
             <td class="p-3 text-right">
-              <button onclick="carregarParaEdicao(${prod.id})" class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-lg">Editar</button>
-              <button onclick="excluirProduto(${prod.id})" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
+              <button onclick="carregarParaEdicao('${prod.id}')" class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-lg">Editar</button>
+              <button onclick="excluirProduto('${prod.id}')" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
             </td></tr>`;
         });
       } catch (err) { tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-red-400">Erro.</td></tr>`; }
     });
 
     window.excluirProduto = async function(id) {
-      const prod = localInventory.find(p => p.id === id);
+      // Blindagem para texto/número na busca
+      const prod = localInventory.find(p => String(p.id) === String(id));
       if (!confirm(`Remover "${prod ? prod.titulo : 'este produto'}"?`)) return;
+      
       const targetFile = document.getElementById('manage-file-select').value;
       const user = localStorage.getItem('git_user'), repo = localStorage.getItem('git_repo'), token = localStorage.getItem('git_token');
       try {
@@ -487,11 +502,14 @@
         const getRes = await fetch(url, { headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" }});
         const fileData = await getRes.json();
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-        let produtos = JSON.parse(decodedContent).filter(p => p.id !== id);
+        
+        let produtos = JSON.parse(decodedContent).filter(p => String(p.id) !== String(id));
         const encodedContent = btoa(encodeURIComponent(JSON.stringify(produtos, null, 2)).replace(/%([0-9A-F]{2})/g, (m, p1) => String.fromCharCode('0x' + p1)));
-        await fetch(url, { method: "PUT", headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" }, body: JSON.stringify({ message: "Removido", content: encodedContent, sha: fileData.sha }) });
-        alert("Excluído!"); document.getElementById('btn-load-list').click();
-      } catch(e) { alert("Erro ao excluir."); }
+        
+        await fetch(url, { method: "PUT", headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" }, body: JSON.stringify({ message: "Removido via painel", content: encodedContent, sha: fileData.sha }) });
+        alert("Excluído!"); 
+        document.getElementById('btn-load-list').click();
+      } catch(e) { alert("Erro ao excluir: " + e.message); }
     };
   </script>
 </body>

@@ -103,15 +103,9 @@
           <div class="border-t border-brand-border/60 pt-4 space-y-4">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider">🚀 Elementos de Landing Page (Opcional)</h4>
             
-            <div class="grid grid-cols-2 gap-4">
-              <div class="space-y-1">
-                <label class="block text-gray-400 font-semibold">Link Vídeo Vendas (YouTube)</label>
-                <input type="text" id="p-video" placeholder="ex: https://youtube.com/watch?v=..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
-              </div>
-              <div class="space-y-1">
-                <label class="block text-gray-400 font-semibold">Contador Regressivo (Data Limite)</label>
-                <input type="datetime-local" id="p-datalimite" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none cursor-pointer">
-              </div>
+            <div class="space-y-1">
+              <label class="block text-gray-400 font-semibold">Link Vídeo Vendas (YouTube)</label>
+              <input type="text" id="p-video" placeholder="ex: https://youtube.com/watch?v=..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
 
             <!-- DEPOIMENTO 1 -->
@@ -385,7 +379,6 @@
       document.getElementById('p-requisitos').value = Array.isArray(prod.requisitos) ? prod.requisitos.join('\n') : '';
       
       document.getElementById('p-video').value = prod.video_url || '';
-      document.getElementById('p-datalimite').value = prod.data_limite || '';
       
       // Carrega o depoimento 1 (suporta o formato antigo também)
       document.getElementById('p-depo1-texto').value = prod.depo1_texto || prod.depoimento_texto || '';
@@ -433,7 +426,6 @@
           subtitulo: document.getElementById('p-subtitulo').value.trim(), descricao: document.getElementById('p-descricao').value.trim(),
           requisitos: document.getElementById('p-requisitos').value.trim().split('\n').filter(l => l !== ""),
           video_url: document.getElementById('p-video').value.trim(),
-          data_limite: document.getElementById('p-datalimite').value,
           depo1_texto: document.getElementById('p-depo1-texto').value.trim(),
           depo1_autor: document.getElementById('p-depo1-autor').value.trim(),
           depo2_texto: document.getElementById('p-depo2-texto').value.trim(),

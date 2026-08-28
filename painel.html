@@ -114,13 +114,40 @@
               </div>
             </div>
 
-            <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Texto do Depoimento Principal</label>
-              <textarea id="p-depo-texto" rows="2" placeholder="O melhor investimento que já fiz..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
+            <!-- DEPOIMENTO 1 -->
+            <div class="bg-brand-dark/50 p-3 rounded-xl border border-brand-border space-y-3">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Texto do Depoimento 1</label>
+                <textarea id="p-depo1-texto" rows="2" placeholder="O melhor investimento que já fiz..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Autor do Depoimento 1</label>
+                <input type="text" id="p-depo1-autor" placeholder="ex: João Silva - Produtor" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
             </div>
-            <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Nome do Autor do Depoimento</label>
-              <input type="text" id="p-depo-autor" placeholder="ex: João Silva - Produtor" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+
+            <!-- DEPOIMENTO 2 -->
+            <div class="bg-brand-dark/50 p-3 rounded-xl border border-brand-border space-y-3">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Texto do Depoimento 2</label>
+                <textarea id="p-depo2-texto" rows="2" placeholder="..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Autor do Depoimento 2</label>
+                <input type="text" id="p-depo2-autor" placeholder="ex: Marcos T." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
+            </div>
+
+            <!-- DEPOIMENTO 3 -->
+            <div class="bg-brand-dark/50 p-3 rounded-xl border border-brand-border space-y-3">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Texto do Depoimento 3</label>
+                <textarea id="p-depo3-texto" rows="2" placeholder="..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Autor do Depoimento 3</label>
+                <input type="text" id="p-depo3-autor" placeholder="ex: Ricardo S." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
             </div>
           </div>
           <!-- FIM BLOCO LANDING PAGE -->
@@ -162,8 +189,56 @@
 
       <section class="lg:col-span-5 space-y-4 sticky top-24 hidden lg:block">
         <h3 class="text-md font-bold text-white uppercase tracking-wider">Como fica na loja</h3>
-        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 shadow-2xl">
-          <p class="text-xs text-gray-400 italic">O sistema salva todos os dados para renderizar a página do produto automaticamente (com vídeo, depoimentos e contador) quando os campos forem preenchidos.</p>
+        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 shadow-2xl overflow-y-auto max-h-[85vh] custom-scrollbar">
+          
+          <div class="space-y-4">
+            <div class="flex flex-wrap gap-2">
+              <span id="preview-tag1" class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 1</span>
+              <span id="preview-tag2" class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 2</span>
+            </div>
+            
+            <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative flex items-center justify-center p-4">
+              <img id="preview-img" src="" alt="Imagem" class="max-w-full max-h-full object-contain">
+            </div>
+
+            <div class="space-y-1">
+              <h3 id="preview-titulo" class="text-lg font-extrabold text-white">Título</h3>
+              <p id="preview-subtitulo" class="text-[11px] text-indigo-300">Subtítulo</p>
+            </div>
+            
+            <p id="preview-descricao" class="text-xs leading-relaxed text-gray-400">Descrição...</p>
+            
+            <div class="border-t border-brand-border/60 pt-4 space-y-2">
+              <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Características:</h4>
+              <ul id="preview-requisitos" class="text-[11px] text-slate-400 space-y-1 pl-1"></ul>
+            </div>
+
+            <div id="preview-btn-container" class="border-t border-brand-border/60 pt-4"></div>
+
+            <!-- PREVIEW DEPOIMENTOS -->
+            <div id="preview-depoimentos-container" class="space-y-3 pt-4 border-t border-brand-border/60 hidden">
+              <h4 class="text-[11px] font-bold text-white uppercase tracking-wider mb-2">Depoimentos na Página:</h4>
+              
+              <div id="preview-depo1" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-3 relative mt-3 text-gray-800">
+                <div class="absolute -top-2 left-3 bg-gray-50 px-1 text-yellow-400 text-[10px]">★★★★★</div>
+                <p id="preview-depo1-texto" class="text-[10px] italic font-medium"></p>
+                <p id="preview-depo1-autor" class="text-[9px] font-extrabold uppercase mt-1"></p>
+              </div>
+              
+              <div id="preview-depo2" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-3 relative mt-3 text-gray-800">
+                <div class="absolute -top-2 left-3 bg-gray-50 px-1 text-yellow-400 text-[10px]">★★★★★</div>
+                <p id="preview-depo2-texto" class="text-[10px] italic font-medium"></p>
+                <p id="preview-depo2-autor" class="text-[9px] font-extrabold uppercase mt-1"></p>
+              </div>
+              
+              <div id="preview-depo3" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-3 relative mt-3 text-gray-800">
+                <div class="absolute -top-2 left-3 bg-gray-50 px-1 text-yellow-400 text-[10px]">★★★★★</div>
+                <p id="preview-depo3-texto" class="text-[10px] italic font-medium"></p>
+                <p id="preview-depo3-autor" class="text-[9px] font-extrabold uppercase mt-1"></p>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
     </div>
@@ -190,15 +265,33 @@
     </section>
   </main>
 
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #070a13; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+  </style>
+
   <script>
     let localInventory = [];
     let editingProductId = null;
     let editingFile = "";
 
+    const inputsToWatch = [
+      'p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 
+      'p-tipo-botao', 'p-depo1-texto', 'p-depo1-autor', 'p-depo2-texto', 'p-depo2-autor', 'p-depo3-texto', 'p-depo3-autor'
+    ];
+
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById('github-user').value = localStorage.getItem('git_user') || '';
       document.getElementById('github-repo').value = localStorage.getItem('git_repo') || '';
       document.getElementById('github-token').value = localStorage.getItem('git_token') || '';
+      
+      inputsToWatch.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.addEventListener('input', updatePreview);
+      });
+      updatePreview();
     });
 
     document.getElementById('btn-save-config').addEventListener('click', () => {
@@ -208,12 +301,72 @@
       alert("Credenciais salvas!");
     });
 
+    function updatePreview() {
+      document.getElementById('preview-tag1').textContent = document.getElementById('p-tag1').value || 'TAG 1';
+      document.getElementById('preview-tag2').textContent = document.getElementById('p-tag2').value || 'TAG 2';
+      document.getElementById('preview-titulo').textContent = document.getElementById('p-titulo').value || 'Título do Produto';
+      document.getElementById('preview-subtitulo').textContent = document.getElementById('p-subtitulo').value || 'Subtítulo do Produto';
+      document.getElementById('preview-descricao').textContent = document.getElementById('p-descricao').value || 'A descrição detalhada...';
+      document.getElementById('preview-img').src = document.getElementById('p-imagem').value || '';
+
+      const reqList = document.getElementById('preview-requisitos');
+      reqList.innerHTML = '';
+      const text = document.getElementById('p-requisitos').value.trim();
+      if (text) text.split('\n').forEach(line => { if (line) reqList.innerHTML += `<li>✔ ${line}</li>`; });
+      else reqList.innerHTML = '<li>✔ Característica Exemplo</li>';
+
+      const btnContainer = document.getElementById('preview-btn-container');
+      const tipoBotao = document.getElementById('p-tipo-botao').value;
+      if (tipoBotao === 'hotmart') {
+        btnContainer.innerHTML = `<div class="flex justify-center"><img src="https://static.hotmart.com/img/btn-buy-green.png" class="h-10"></div>`;
+      } else if (tipoBotao === 'padrao') {
+        btnContainer.innerHTML = `<div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl text-xs uppercase flex justify-center text-center">Comprar Agora</div>`;
+      } else {
+        btnContainer.innerHTML = `<div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl text-xs uppercase flex justify-center text-center">WhatsApp</div>`;
+      }
+
+      // PREVIEW DOS 3 DEPOIMENTOS
+      const depo1Text = document.getElementById('p-depo1-texto').value.trim();
+      const depo2Text = document.getElementById('p-depo2-texto').value.trim();
+      const depo3Text = document.getElementById('p-depo3-texto').value.trim();
+      
+      const depoContainer = document.getElementById('preview-depoimentos-container');
+      const d1 = document.getElementById('preview-depo1');
+      const d2 = document.getElementById('preview-depo2');
+      const d3 = document.getElementById('preview-depo3');
+
+      if(depo1Text || depo2Text || depo3Text) {
+        depoContainer.classList.remove('hidden');
+        
+        if(depo1Text) {
+          d1.classList.remove('hidden');
+          document.getElementById('preview-depo1-texto').textContent = `"${depo1Text}"`;
+          document.getElementById('preview-depo1-autor').textContent = document.getElementById('p-depo1-autor').value || "Cliente";
+        } else d1.classList.add('hidden');
+
+        if(depo2Text) {
+          d2.classList.remove('hidden');
+          document.getElementById('preview-depo2-texto').textContent = `"${depo2Text}"`;
+          document.getElementById('preview-depo2-autor').textContent = document.getElementById('p-depo2-autor').value || "Cliente";
+        } else d2.classList.add('hidden');
+
+        if(depo3Text) {
+          d3.classList.remove('hidden');
+          document.getElementById('preview-depo3-texto').textContent = `"${depo3Text}"`;
+          document.getElementById('preview-depo3-autor').textContent = document.getElementById('p-depo3-autor').value || "Cliente";
+        } else d3.classList.add('hidden');
+      } else {
+        depoContainer.classList.add('hidden');
+      }
+    }
+
     document.getElementById('btn-cancel-edit').addEventListener('click', () => {
       editingProductId = null; editingFile = ""; document.getElementById('product-form').reset();
       document.getElementById('form-mode-title').textContent = "Novo Produto";
       document.getElementById('btn-publish').textContent = "🚀 Publicar Produto";
       document.getElementById('btn-cancel-edit').classList.add('hidden');
       document.getElementById('p-destino').disabled = false;
+      updatePreview();
     });
 
     window.carregarParaEdicao = function(id) {
@@ -233,8 +386,15 @@
       
       document.getElementById('p-video').value = prod.video_url || '';
       document.getElementById('p-datalimite').value = prod.data_limite || '';
-      document.getElementById('p-depo-texto').value = prod.depoimento_texto || '';
-      document.getElementById('p-depo-autor').value = prod.depoimento_autor || '';
+      
+      // Carrega o depoimento 1 (suporta o formato antigo também)
+      document.getElementById('p-depo1-texto').value = prod.depo1_texto || prod.depoimento_texto || '';
+      document.getElementById('p-depo1-autor').value = prod.depo1_autor || prod.depoimento_autor || '';
+      // Carrega o 2 e 3
+      document.getElementById('p-depo2-texto').value = prod.depo2_texto || '';
+      document.getElementById('p-depo2-autor').value = prod.depo2_autor || '';
+      document.getElementById('p-depo3-texto').value = prod.depo3_texto || '';
+      document.getElementById('p-depo3-autor').value = prod.depo3_autor || '';
       
       document.getElementById('p-link-listas').value = prod.link_listas || '';
       document.getElementById('p-link-amostras').value = prod.link_amostras || '';
@@ -245,6 +405,7 @@
       document.getElementById('btn-publish').textContent = "💾 Salvar Alterações";
       document.getElementById('btn-cancel-edit').classList.remove('hidden');
       document.getElementById('product-form').scrollIntoView({ behavior: 'smooth' });
+      updatePreview();
     };
 
     document.getElementById('product-form').addEventListener('submit', async (e) => {
@@ -273,8 +434,12 @@
           requisitos: document.getElementById('p-requisitos').value.trim().split('\n').filter(l => l !== ""),
           video_url: document.getElementById('p-video').value.trim(),
           data_limite: document.getElementById('p-datalimite').value,
-          depoimento_texto: document.getElementById('p-depo-texto').value.trim(),
-          depoimento_autor: document.getElementById('p-depo-autor').value.trim(),
+          depo1_texto: document.getElementById('p-depo1-texto').value.trim(),
+          depo1_autor: document.getElementById('p-depo1-autor').value.trim(),
+          depo2_texto: document.getElementById('p-depo2-texto').value.trim(),
+          depo2_autor: document.getElementById('p-depo2-autor').value.trim(),
+          depo3_texto: document.getElementById('p-depo3-texto').value.trim(),
+          depo3_autor: document.getElementById('p-depo3-autor').value.trim(),
           link_listas: document.getElementById('p-link-listas').value.trim(), link_amostras: document.getElementById('p-link-amostras').value.trim(),
           tipo_botao: document.getElementById('p-tipo-botao').value, link: document.getElementById('p-link').value.trim()
         };

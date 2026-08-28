@@ -7,13 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' }
-          }
-        }
-      }
+      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
     }
   </script>
 </head>
@@ -23,13 +17,9 @@
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
         <span class="text-3xl">⚙️</span>
-        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
-          Painel de Controle — Estúdio Neto
-        </h1>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Painel de Controle — Estúdio Neto</h1>
       </div>
-      <a href="loja.html" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">
-        Ir para a Loja →
-      </a>
+      <a href="loja.html" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">Ir para a Loja →</a>
     </div>
   </header>
 
@@ -38,27 +28,24 @@
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
       <div class="flex items-center gap-2">
         <span class="text-lg">🔑</span>
-        <h3 class="text-md font-bold text-white">Configuração de Sincronização com o GitHub</h3>
+        <h3 class="text-md font-bold text-white">Configuração do GitHub</h3>
       </div>
-      <p class="text-xs text-gray-400">Insira suas credenciais do GitHub. Elas permanecem salvas localmente apenas no seu navegador.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="space-y-1">
-          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Usuário do GitHub</label>
-          <input type="text" id="github-user" placeholder="ex: estudioneto" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Usuário</label>
+          <input type="text" id="github-user" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white outline-none focus:border-brand-accent">
         </div>
         <div class="space-y-1">
-          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Nome do Repositório</label>
-          <input type="text" id="github-repo" placeholder="ex: estudioneto.github.io" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Repositório</label>
+          <input type="text" id="github-repo" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white outline-none focus:border-brand-accent">
         </div>
         <div class="space-y-1">
-          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Token de Acesso Pessoal (PAT)</label>
-          <input type="password" id="github-token" placeholder="ghp_XXXXXXXXXXXXXXXXXXXX" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white focus:border-brand-accent outline-none">
+          <label class="block text-[10px] text-gray-400 uppercase font-semibold">Token (PAT)</label>
+          <input type="password" id="github-token" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2 text-xs text-white outline-none focus:border-brand-accent">
         </div>
       </div>
       <div class="flex justify-end">
-        <button id="btn-save-config" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">
-          Salvar Credenciais
-        </button>
+        <button id="btn-save-config" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-4 py-2 rounded-lg transition-all">Salvar Credenciais</button>
       </div>
     </section>
 
@@ -69,7 +56,7 @@
         <form id="product-form" class="space-y-4 text-xs">
           <div class="space-y-1">
             <label class="block text-gray-400 font-semibold">Página de Destino (Arquivo JSON)</label>
-            <select id="p-destino" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none cursor-pointer font-bold">
+            <select id="p-destino" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white font-bold outline-none cursor-pointer">
               <option value="produtos.json">🛒 Loja Virtual (produtos.json)</option>
               <option value="programas.json">💻 Programas e Apps (programas.json)</option>
             </select>
@@ -77,148 +64,131 @@
 
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Tag Esquerda (ex: Software Desktop)</label>
-              <input type="text" id="p-tag1" required placeholder="ex: Software Desktop" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Tag 1 (ex: Software)</label>
+              <input type="text" id="p-tag1" required class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Tag Direita (ex: Win 64-bit)</label>
-              <input type="text" id="p-tag2" placeholder="ex: Win 64-bit" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Tag 2 (ex: VST)</label>
+              <input type="text" id="p-tag2" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Título do Produto</label>
-              <input type="text" id="p-titulo" required placeholder="ex: Palco Mestre" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Título</label>
+              <input type="text" id="p-titulo" required class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Subtítulo do Produto</label>
-              <input type="text" id="p-subtitulo" required placeholder="ex: O player definitivo" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Subtítulo</label>
+              <input type="text" id="p-subtitulo" required class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
           </div>
 
           <div class="space-y-1">
-            <label class="block text-gray-400 font-semibold">Caminho da Imagem</label>
-            <input type="text" id="p-imagem" required placeholder="ex: imagens/palcomestre.png" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+            <label class="block text-gray-400 font-semibold">Caminho da Imagem Capa</label>
+            <input type="text" id="p-imagem" required class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
           </div>
 
           <div class="space-y-1">
             <label class="block text-gray-400 font-semibold">Descrição do Produto</label>
-            <textarea id="p-descricao" required rows="3" placeholder="Escreva o parágrafo de vendas do produto..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
+            <textarea id="p-descricao" required rows="3" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
           </div>
 
           <div class="space-y-1">
-            <label class="block text-gray-400 font-semibold">Características / Requisitos (Um por linha)</label>
-            <textarea id="p-requisitos" rows="3" placeholder="Insira os tópicos, um por linha..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none resize-none"></textarea>
+            <label class="block text-gray-400 font-semibold">Características (Uma por linha)</label>
+            <textarea id="p-requisitos" rows="3" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
+          <!-- BLOCO DE LANDING PAGE -->
+          <div class="border-t border-brand-border/60 pt-4 space-y-4">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider">🚀 Elementos de Landing Page (Opcional)</h4>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Link Vídeo Vendas (YouTube)</label>
+                <input type="text" id="p-video" placeholder="ex: https://youtube.com/watch?v=..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Contador Regressivo (Data Limite)</label>
+                <input type="datetime-local" id="p-datalimite" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none cursor-pointer">
+              </div>
+            </div>
+
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Link para Ver/Baixar Listas (Opcional)</label>
-              <input type="text" id="p-link-listas" placeholder="ex: https://site.com/lista.pdf" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Texto do Depoimento Principal</label>
+              <textarea id="p-depo-texto" rows="2" placeholder="O melhor investimento que já fiz..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none resize-none"></textarea>
             </div>
             <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Link para Baixar Amostras (Opcional)</label>
-              <input type="text" id="p-link-amostras" placeholder="ex: https://site.com/amostras.zip" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+              <label class="block text-gray-400 font-semibold">Nome do Autor do Depoimento</label>
+              <input type="text" id="p-depo-autor" placeholder="ex: João Silva - Produtor" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
             </div>
           </div>
+          <!-- FIM BLOCO LANDING PAGE -->
 
-          <div class="grid grid-cols-2 gap-4">
-            <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Canal de Venda</label>
-              <select id="p-tipo-botao" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none cursor-pointer">
-                <option value="hotmart">Checkout Hotmart</option>
-                <option value="padrao">Checkout Padrão (Links Externos)</option>
-                <option value="whatsapp">Saiba Mais (WhatsApp)</option>
-              </select>
+          <div class="border-t border-brand-border/60 pt-4 space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Link p/ Ver Lista (Opcional)</label>
+                <input type="text" id="p-link-listas" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Link p/ Baixar Amostra (Opcional)</label>
+                <input type="text" id="p-link-amostras" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
             </div>
-            <div class="space-y-1">
-              <label class="block text-gray-400 font-semibold">Link de Checkout ou WhatsApp</label>
-              <input type="text" id="p-link" required placeholder="Coloque o link da Hotmart, Mercado Pago ou WhatsApp" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white focus:border-brand-accent outline-none">
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Canal de Venda</label>
+                <select id="p-tipo-botao" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none cursor-pointer">
+                  <option value="hotmart">Checkout Hotmart</option>
+                  <option value="padrao">Checkout Padrão (Link Externo)</option>
+                  <option value="whatsapp">Saiba Mais (WhatsApp)</option>
+                </select>
+              </div>
+              <div class="space-y-1">
+                <label class="block text-gray-400 font-semibold">Link de Compra / WhatsApp</label>
+                <input type="text" id="p-link" required class="w-full bg-[#080c16] border border-brand-border rounded-xl px-3 py-2 text-white outline-none">
+              </div>
             </div>
           </div>
 
           <div class="pt-4 flex gap-3">
-            <button type="button" id="btn-cancel-edit" class="hidden flex-1 bg-slate-850 hover:bg-slate-800 text-gray-300 font-bold py-3 rounded-xl transition-all shadow-md text-xs border border-brand-border">
-              ❌ Cancelar Edição
-            </button>
-            <button type="submit" id="btn-publish" class="flex-1 bg-brand-success hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition-all shadow-md text-xs">
-              🚀 Publicar Produto na Loja
-            </button>
+            <button type="button" id="btn-cancel-edit" class="hidden flex-1 bg-slate-850 hover:bg-slate-800 text-gray-300 font-bold py-3 rounded-xl border border-brand-border">❌ Cancelar</button>
+            <button type="submit" id="btn-publish" class="flex-1 bg-brand-success hover:bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-md">🚀 Publicar Produto</button>
           </div>
         </form>
       </section>
 
-      <section class="lg:col-span-5 space-y-4 sticky top-24">
-        <h3 class="text-md font-bold text-white uppercase tracking-wider">Pré-visualização em Tempo Real</h3>
-        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-2xl">
-          <div class="space-y-4">
-            <div class="flex flex-wrap gap-2">
-              <span id="preview-tag1" class="bg-indigo-500/10 text-brand-accent font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 1</span>
-              <span id="preview-tag2" class="bg-emerald-500/10 text-brand-success font-bold px-2.5 py-0.5 rounded-full text-[9px] uppercase tracking-wider">TAG 2</span>
-            </div>
-            <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 border border-brand-border relative flex items-center justify-center p-4">
-              <img id="preview-img" src="" alt="Imagem do produto" class="max-w-full max-h-full object-contain">
-            </div>
-            <div class="space-y-1">
-              <h3 id="preview-titulo" class="text-lg font-extrabold text-white">Título do Produto</h3>
-              <p id="preview-subtitulo" class="text-[11px] text-indigo-300">Subtítulo curto em destaque</p>
-            </div>
-            <p id="preview-descricao" class="text-xs leading-relaxed text-gray-400">A descrição detalhada que você digitar no formulário aparecerá neste espaço.</p>
-            <div class="border-t border-brand-border/60 pt-4 space-y-2">
-              <h4 class="text-[11px] font-bold text-white uppercase tracking-wider">Características:</h4>
-              <ul id="preview-requisitos" class="text-[11px] text-slate-400 space-y-1 pl-1">
-                <li>✔ Característica Exemplo</li>
-              </ul>
-            </div>
-          </div>
-          <div class="space-y-3">
-            <div id="preview-secondary-btn-container" class="grid grid-cols-2 gap-2 text-center text-[10px] font-bold hidden"></div>
-            <div class="border-t border-brand-border/60 pt-3" id="preview-btn-container"></div>
-          </div>
+      <section class="lg:col-span-5 space-y-4 sticky top-24 hidden lg:block">
+        <h3 class="text-md font-bold text-white uppercase tracking-wider">Como fica na loja</h3>
+        <div class="bg-brand-card border border-brand-border rounded-2xl p-6 shadow-2xl">
+          <p class="text-xs text-gray-400 italic">O sistema salva todos os dados para renderizar a página do produto automaticamente (com vídeo, depoimentos e contador) quando os campos forem preenchidos.</p>
         </div>
       </section>
     </div>
 
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-4">
       <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-brand-border pb-3 gap-3">
-        <h3 class="text-md font-bold text-white">Gerenciar Produtos em Linha</h3>
-        <div class="flex flex-wrap items-center gap-3">
-          <div class="flex items-center gap-1.5">
-            <label class="text-xs text-gray-400 font-semibold">Visualizar:</label>
-            <select id="manage-file-select" class="bg-[#080c16] border border-brand-border rounded-lg text-xs text-white px-3 py-1.5 outline-none cursor-pointer">
-              <option value="produtos.json">🛒 Loja Virtual (produtos.json)</option>
-              <option value="programas.json">💻 Programas e Apps (programas.json)</option>
-            </select>
-          </div>
-          <button id="btn-load-list" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition-all">
-            🔄 Carregar Lista do GitHub
-          </button>
+        <h3 class="text-md font-bold text-white">Gerenciar Produtos</h3>
+        <div class="flex items-center gap-3">
+          <select id="manage-file-select" class="bg-[#080c16] border border-brand-border rounded-lg text-xs text-white px-3 py-1.5 outline-none cursor-pointer">
+            <option value="produtos.json">🛒 Loja Virtual</option>
+            <option value="programas.json">💻 Programas</option>
+          </select>
+          <button id="btn-load-list" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-semibold px-4 py-1.5 rounded-lg">🔄 Carregar Lista</button>
         </div>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-xs text-left">
-          <thead>
-            <tr class="border-b border-brand-border text-gray-400 font-semibold uppercase">
-              <th class="p-3">Título</th>
-              <th class="p-3">Tags</th>
-              <th class="p-3">Canal</th>
-              <th class="p-3 text-right">Ação</th>
-            </tr>
-          </thead>
+          <thead><tr class="border-b border-brand-border text-gray-400 font-semibold uppercase"><th class="p-3">Título</th><th class="p-3 text-right">Ação</th></tr></thead>
           <tbody id="inventory-list" class="divide-y divide-brand-border text-gray-300">
-            <tr>
-              <td colspan="4" class="p-4 text-center text-gray-500 italic">Clique em "Carregar Lista" para listar os produtos atuais do repositório.</td>
-            </tr>
+            <tr><td colspan="2" class="p-4 text-center text-gray-500 italic">Clique em "Carregar Lista".</td></tr>
           </tbody>
         </table>
       </div>
     </section>
   </main>
-
-  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
-    © 2026 Estúdio Neto — Painel de Controle Estático
-  </footer>
 
   <script>
     let localInventory = [];
@@ -229,70 +199,21 @@
       document.getElementById('github-user').value = localStorage.getItem('git_user') || '';
       document.getElementById('github-repo').value = localStorage.getItem('git_repo') || '';
       document.getElementById('github-token').value = localStorage.getItem('git_token') || '';
-      updatePreview();
     });
 
     document.getElementById('btn-save-config').addEventListener('click', () => {
       localStorage.setItem('git_user', document.getElementById('github-user').value.trim());
       localStorage.setItem('git_repo', document.getElementById('github-repo').value.trim());
       localStorage.setItem('git_token', document.getElementById('github-token').value.trim());
-      alert("Credenciais do GitHub salvas com sucesso!");
+      alert("Credenciais salvas!");
     });
 
-    const form = document.getElementById('product-form');
-    const inputs = ['p-tag1', 'p-tag2', 'p-titulo', 'p-subtitulo', 'p-imagem', 'p-descricao', 'p-requisitos', 'p-tipo-botao', 'p-link', 'p-link-listas', 'p-link-amostras'];
-    
-    inputs.forEach(id => document.getElementById(id).addEventListener('input', updatePreview));
-
-    function updatePreview() {
-      document.getElementById('preview-tag1').textContent = document.getElementById('p-tag1').value || 'TAG 1';
-      document.getElementById('preview-tag2').textContent = document.getElementById('p-tag2').value || 'TAG 2';
-      document.getElementById('preview-titulo').textContent = document.getElementById('p-titulo').value || 'Título do Produto';
-      document.getElementById('preview-subtitulo').textContent = document.getElementById('p-subtitulo').value || 'Subtítulo do Produto';
-      document.getElementById('preview-descricao').textContent = document.getElementById('p-descricao').value || 'A descrição detalhada que você digitar aparecerá neste espaço.';
-      document.getElementById('preview-img').src = document.getElementById('p-imagem').value || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=100&auto=format&fit=crop';
-
-      const reqList = document.getElementById('preview-requisitos');
-      reqList.innerHTML = '';
-      const text = document.getElementById('p-requisitos').value.trim();
-      if (text) {
-        text.split('\n').forEach(line => { if (line) reqList.innerHTML += `<li>✔ ${line}</li>`; });
-      } else {
-        reqList.innerHTML = '<li>✔ Característica Exemplo</li>';
-      }
-
-      const secBtnContainer = document.getElementById('preview-secondary-btn-container');
-      const lListas = document.getElementById('p-link-listas').value.trim();
-      const lAmostras = document.getElementById('p-link-amostras').value.trim();
-
-      if (lListas || lAmostras) {
-        secBtnContainer.classList.remove('hidden');
-        secBtnContainer.className = `grid ${lListas && lAmostras ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-center text-[10px] font-bold`;
-        secBtnContainer.innerHTML = '';
-        if (lListas) secBtnContainer.innerHTML += `<div class="border border-brand-border text-gray-400 py-2 rounded-lg">📁 Ver Listas</div>`;
-        if (lAmostras) secBtnContainer.innerHTML += `<div class="border border-brand-border text-gray-400 py-2 rounded-lg">⬇️ Baixar Amostras</div>`;
-      } else {
-        secBtnContainer.classList.add('hidden');
-      }
-
-      const btnContainer = document.getElementById('preview-btn-container');
-      const tipoBotao = document.getElementById('p-tipo-botao').value;
-      if (tipoBotao === 'hotmart') {
-        btnContainer.innerHTML = `<div class="flex justify-center"><img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar"></div>`;
-      } else if (tipoBotao === 'padrao') {
-        btnContainer.innerHTML = `<div class="flex justify-center w-full"><div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl shadow-md text-xs tracking-wider uppercase flex justify-center w-full">Comprar Agora</div></div>`;
-      } else {
-        btnContainer.innerHTML = `<div class="flex justify-center w-full"><div class="bg-[#25D366] text-white font-extrabold px-6 py-3 rounded-xl shadow-md text-xs tracking-wider uppercase flex justify-center w-full">Saiba Mais</div></div>`;
-      }
-    }
-
     document.getElementById('btn-cancel-edit').addEventListener('click', () => {
-      editingProductId = null; editingFile = ""; form.reset();
+      editingProductId = null; editingFile = ""; document.getElementById('product-form').reset();
       document.getElementById('form-mode-title').textContent = "Novo Produto";
-      document.getElementById('btn-publish').textContent = "🚀 Publicar Produto na Loja";
+      document.getElementById('btn-publish').textContent = "🚀 Publicar Produto";
       document.getElementById('btn-cancel-edit').classList.add('hidden');
       document.getElementById('p-destino').disabled = false;
-      updatePreview();
     });
 
     window.carregarParaEdicao = function(id) {
@@ -300,8 +221,7 @@
       if (!prod) return;
       editingProductId = id;
       editingFile = document.getElementById('manage-file-select').value;
-      document.getElementById('p-destino').value = editingFile;
-      document.getElementById('p-destino').disabled = true;
+      document.getElementById('p-destino').value = editingFile; document.getElementById('p-destino').disabled = true;
 
       document.getElementById('p-tag1').value = prod.tag1 || '';
       document.getElementById('p-tag2').value = prod.tag2 || '';
@@ -310,26 +230,31 @@
       document.getElementById('p-imagem').value = prod.imagem || '';
       document.getElementById('p-descricao').value = prod.descricao || '';
       document.getElementById('p-requisitos').value = Array.isArray(prod.requisitos) ? prod.requisitos.join('\n') : '';
+      
+      document.getElementById('p-video').value = prod.video_url || '';
+      document.getElementById('p-datalimite').value = prod.data_limite || '';
+      document.getElementById('p-depo-texto').value = prod.depoimento_texto || '';
+      document.getElementById('p-depo-autor').value = prod.depoimento_autor || '';
+      
       document.getElementById('p-link-listas').value = prod.link_listas || '';
       document.getElementById('p-link-amostras').value = prod.link_amostras || '';
       document.getElementById('p-tipo-botao').value = prod.tipo_botao || 'hotmart';
       document.getElementById('p-link').value = prod.link || '';
 
-      updatePreview();
       document.getElementById('form-mode-title').textContent = `✏️ Editando Produto (ID: ${id})`;
       document.getElementById('btn-publish').textContent = "💾 Salvar Alterações";
       document.getElementById('btn-cancel-edit').classList.remove('hidden');
       document.getElementById('product-form').scrollIntoView({ behavior: 'smooth' });
     };
 
-    form.addEventListener('submit', async (e) => {
+    document.getElementById('product-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const user = localStorage.getItem('git_user'), repo = localStorage.getItem('git_repo'), token = localStorage.getItem('git_token');
       const targetFile = editingProductId ? editingFile : document.getElementById('p-destino').value;
-
       if (!user || !repo || !token) return alert("Preencha as credenciais.");
+      
       const confirmBtn = document.getElementById('btn-publish');
-      confirmBtn.disabled = true; confirmBtn.textContent = "Gravando no GitHub...";
+      confirmBtn.disabled = true; confirmBtn.textContent = "Gravando...";
 
       try {
         const url = `https://api.github.com/repos/${user}/${repo}/contents/${targetFile}`;
@@ -342,35 +267,28 @@
         const editId = editingProductId || (produtos.reduce((max, p) => p.id > max ? p.id : max, 0) + 1);
         const produtoDados = {
           id: editId,
-          tag1: document.getElementById('p-tag1').value.trim(),
-          tag2: document.getElementById('p-tag2').value.trim(),
-          imagem: document.getElementById('p-imagem').value.trim(),
-          titulo: document.getElementById('p-titulo').value.trim(),
-          subtitulo: document.getElementById('p-subtitulo').value.trim(),
-          descricao: document.getElementById('p-descricao').value.trim(),
+          tag1: document.getElementById('p-tag1').value.trim(), tag2: document.getElementById('p-tag2').value.trim(),
+          imagem: document.getElementById('p-imagem').value.trim(), titulo: document.getElementById('p-titulo').value.trim(),
+          subtitulo: document.getElementById('p-subtitulo').value.trim(), descricao: document.getElementById('p-descricao').value.trim(),
           requisitos: document.getElementById('p-requisitos').value.trim().split('\n').filter(l => l !== ""),
-          link_listas: document.getElementById('p-link-listas').value.trim(),
-          link_amostras: document.getElementById('p-link-amostras').value.trim(),
-          tipo_botao: document.getElementById('p-tipo-botao').value,
-          link: document.getElementById('p-link').value.trim()
+          video_url: document.getElementById('p-video').value.trim(),
+          data_limite: document.getElementById('p-datalimite').value,
+          depoimento_texto: document.getElementById('p-depo-texto').value.trim(),
+          depoimento_autor: document.getElementById('p-depo-autor').value.trim(),
+          link_listas: document.getElementById('p-link-listas').value.trim(), link_amostras: document.getElementById('p-link-amostras').value.trim(),
+          tipo_botao: document.getElementById('p-tipo-botao').value, link: document.getElementById('p-link').value.trim()
         };
 
         if (editingProductId) {
           const idx = produtos.findIndex(p => p.id === editingProductId);
           if (idx !== -1) produtos[idx] = produtoDados; else produtos.push(produtoDados);
-        } else {
-          produtos.push(produtoDados);
-        }
+        } else { produtos.push(produtoDados); }
 
         const encodedContent = btoa(encodeURIComponent(JSON.stringify(produtos, null, 2)).replace(/%([0-9A-F]{2})/g, (m, p1) => String.fromCharCode('0x' + p1)));
-        const putRes = await fetch(url, {
-          method: "PUT",
-          headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" },
-          body: JSON.stringify({ message: "Atualização via painel", content: encodedContent, sha: fileData.sha })
-        });
-
+        const putRes = await fetch(url, { method: "PUT", headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" }, body: JSON.stringify({ message: "Atualização via painel", content: encodedContent, sha: fileData.sha }) });
         if (!putRes.ok) throw new Error("Erro na gravação.");
-        alert("Gravado com sucesso!");
+        
+        alert("Salvo com sucesso!");
         document.getElementById('btn-cancel-edit').click();
         document.getElementById('manage-file-select').value = targetFile;
         document.getElementById('btn-load-list').click();
@@ -382,32 +300,27 @@
       const targetFile = document.getElementById('manage-file-select').value;
       const tableBody = document.getElementById('inventory-list');
       if (!user || !repo) return alert("Preencha credenciais.");
-      tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center">Carregando...</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-center">Carregando...</td></tr>`;
 
       try {
         const url = `https://api.github.com/repos/${user}/${repo}/contents/${targetFile}?v=` + Date.now();
         const res = await fetch(url, { headers: token ? { "Authorization": `token ${token}` } : {} });
-        if (!res.ok) throw new Error("Erro ao carregar.");
+        if (!res.ok) throw new Error("Erro.");
         const fileData = await res.json();
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         localInventory = JSON.parse(decodedContent);
         tableBody.innerHTML = "";
-
-        if (localInventory.length === 0) return tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center italic">Vazio.</td></tr>`;
-
+        if (localInventory.length === 0) return tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-center italic">Vazio.</td></tr>`;
+        
         localInventory.forEach(prod => {
-          tableBody.innerHTML += `
-            <tr class="border-b border-brand-border/60 hover:bg-brand-card/30">
-              <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
-              <td class="p-3"><span class="bg-brand-dark px-2 py-0.5 rounded text-gray-400 font-mono text-[10px]">${prod.tag1}</span></td>
-              <td class="p-3 uppercase font-mono font-bold text-indigo-400">${prod.tipo_botao}</td>
-              <td class="p-3 text-right">
-                <button onclick="carregarParaEdicao(${prod.id})" class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-lg">Editar</button>
-                <button onclick="excluirProduto(${prod.id}, '${prod.titulo}')" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
-              </td>
-            </tr>`;
+          tableBody.innerHTML += `<tr class="border-b border-brand-border/60 hover:bg-brand-card/30">
+            <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
+            <td class="p-3 text-right">
+              <button onclick="carregarParaEdicao(${prod.id})" class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-lg">Editar</button>
+              <button onclick="excluirProduto(${prod.id}, '${prod.titulo}')" class="bg-red-600/20 text-red-400 px-3 py-1 rounded-lg">Excluir</button>
+            </td></tr>`;
         });
-      } catch (err) { tableBody.innerHTML = `<tr><td colspan="4" class="p-4 text-red-400">Erro: ${err.message}</td></tr>`; }
+      } catch (err) { tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-red-400">Erro.</td></tr>`; }
     });
 
     window.excluirProduto = async function(id, titulo) {
@@ -420,16 +333,10 @@
         const fileData = await getRes.json();
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         let produtos = JSON.parse(decodedContent).filter(p => p.id !== id);
-        
         const encodedContent = btoa(encodeURIComponent(JSON.stringify(produtos, null, 2)).replace(/%([0-9A-F]{2})/g, (m, p1) => String.fromCharCode('0x' + p1)));
-        const putRes = await fetch(url, {
-          method: "PUT",
-          headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" },
-          body: JSON.stringify({ message: "Removido via painel", content: encodedContent, sha: fileData.sha })
-        });
-        if (!putRes.ok) throw new Error("Erro");
+        await fetch(url, { method: "PUT", headers: { "Authorization": `token ${token}`, "Accept": "application/vnd.github.v3+json" }, body: JSON.stringify({ message: "Removido", content: encodedContent, sha: fileData.sha }) });
         alert("Excluído!"); document.getElementById('btn-load-list').click();
-      } catch(e) { alert("Erro ao excluir: " + e.message); }
+      } catch(e) { alert("Erro ao excluir."); }
     };
   </script>
 </body>

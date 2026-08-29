@@ -59,45 +59,31 @@
 
         <div id="detalhe-links-secundarios" class="w-full pt-4"></div>
         
-        <!-- Bloco de Conversão (Contador + Botão + Compartilhamento) -->
+        <!-- Bloco de Conversão -->
         <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mt-6 space-y-4">
-          <div id="detalhe-countdown-container" class="hidden text-center bg-red-50 border border-red-200 p-4 rounded-xl">
-            <p class="text-[10px] font-extrabold text-red-600 uppercase tracking-widest mb-2 animate-pulse">⚡ Oferta Expira Em:</p>
-            <div id="countdown-timer" class="flex justify-center gap-3 text-red-700 font-extrabold text-xl font-mono"></div>
-          </div>
-          
           <div id="detalhe-botao-compra" class="w-full"></div>
 
           <!-- BOTÕES DE COMPARTILHAMENTO -->
           <div class="pt-5 mt-5 border-t border-gray-200 flex flex-col items-center justify-center gap-3">
             <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Compartilhe com amigos:</span>
-            <div class="flex gap-4" id="share-buttons-container">
-              <!-- Gerado via JavaScript -->
-            </div>
+            <div class="flex gap-4" id="share-buttons-container"></div>
           </div>
         </div>
 
-        <div id="detalhe-depoimento-container" class="hidden bg-white border border-gray-200 shadow-sm rounded-xl p-5 mt-6 relative">
-          <div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div>
-          <p id="detalhe-depo-texto" class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed"></p>
-          <p id="detalhe-depo-autor" class="text-xs font-extrabold text-gray-900 uppercase tracking-wider"></p>
-        </div>
+        <!-- CONTAINER MÚLTIPLOS DEPOIMENTOS -->
+        <div id="detalhe-depoimentos-container" class="space-y-4 pt-4"></div>
+
       </div>
     </div>
     
     <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
   </main>
 
-  <!-- RODAPÉ COMPLETO -->
   <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
-      
-      <!-- Lado Esquerdo do Rodapé -->
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-          </svg>
+          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
         <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
@@ -105,7 +91,6 @@
         </p>
       </div>
 
-      <!-- Lado Direito do Rodapé (Colunas) -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
@@ -141,7 +126,6 @@
       </div>
     </div>
 
-    <!-- SEÇÃO INFERIOR DA DIVISÓRIA -->
     <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
         Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
@@ -168,7 +152,7 @@
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
         const produtos = await response.json();
-        const prod = produtos.find(p => p.id === productId);
+        const prod = produtos.find(p => String(p.id) === String(productId));
         if (!prod) return statusMsg.textContent = "Produto não encontrado.";
 
         // INFO BÁSICA
@@ -201,32 +185,23 @@
           }
         }
 
-        // DEPOIMENTO
-        if (prod.depoimento_texto) {
-          document.getElementById('detalhe-depoimento-container').classList.remove('hidden');
-          document.getElementById('detalhe-depo-texto').textContent = `"${prod.depoimento_texto}"`;
-          document.getElementById('detalhe-depo-autor').textContent = prod.depoimento_autor || "Cliente Satisfeito";
+        // DEPOIMENTOS
+        const depoContainer = document.getElementById('detalhe-depoimentos-container');
+        let htmlDepoimentos = '';
+        
+        const d1Texto = prod.depo1_texto || prod.depoimento_texto;
+        const d1Autor = prod.depo1_autor || prod.depoimento_autor;
+        
+        if (d1Texto) {
+          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${d1Texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${d1Autor || 'Cliente'}</p></div>`;
         }
-
-        // CONTADOR
-        if (prod.data_limite) {
-          const targetDate = new Date(prod.data_limite).getTime();
-          if (targetDate > Date.now()) {
-            document.getElementById('detalhe-countdown-container').classList.remove('hidden');
-            setInterval(() => {
-              const now = Date.now();
-              const distance = targetDate - now;
-              if (distance < 0) return document.getElementById('countdown-timer').innerHTML = "OFERTA ENCERRADA";
-              
-              const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-              const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-              const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-              const s = Math.floor((distance % (1000 * 60)) / 1000);
-              
-              document.getElementById('countdown-timer').innerHTML = `${d}d : ${h}h : ${m}m : ${s}s`;
-            }, 1000);
-          }
+        if (prod.depo2_texto) {
+          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${prod.depo2_texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${prod.depo2_autor || 'Cliente'}</p></div>`;
         }
+        if (prod.depo3_texto) {
+          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${prod.depo3_texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${prod.depo3_autor || 'Cliente'}</p></div>`;
+        }
+        depoContainer.innerHTML = htmlDepoimentos;
 
         // BOTÕES SECUNDÁRIOS
         const linksSec = document.getElementById('detalhe-links-secundarios');
@@ -248,24 +223,15 @@
           btnCompra.innerHTML = `<a href="${prod.link}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-8 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center gap-2 hover:scale-105 transition-all text-decoration-none w-full">Falar no WhatsApp</a>`;
         }
 
-        // INJETAR LINKS DE COMPARTILHAMENTO
+        // COMPARTILHAMENTO
         const pageUrl = encodeURIComponent(window.location.href);
         const shareText = encodeURIComponent(`Dá uma olhada neste produto incrível: ${prod.titulo}`);
         const shareContainer = document.getElementById('share-buttons-container');
         
         shareContainer.innerHTML = `
-          <!-- WhatsApp -->
-          <a href="https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}" target="_blank" class="bg-[#25D366] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no WhatsApp">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/></svg>
-          </a>
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="bg-[#1877F2] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no Facebook">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-          <!-- Copiar Link -->
-          <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copiado! Agora você pode colar no Instagram ou onde quiser.');" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:scale-110 hover:bg-gray-300 transition-transform shadow-md" title="Copiar Link">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-          </button>
+          <a href="https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}" target="_blank" class="bg-[#25D366] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no WhatsApp"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/></svg></a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="bg-[#1877F2] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no Facebook"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copiado!');" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:scale-110 hover:bg-gray-300 transition-transform shadow-md" title="Copiar Link"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg></button>
         `;
 
         statusMsg.style.display = 'none';

@@ -116,11 +116,69 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-brand-border py-6 bg-brand-dark/50 text-center text-xs text-gray-500">
-    <div class="max-w-6xl mx-auto px-4 space-y-2">
-      <p class="font-bold text-gray-400 text-sm">Desenvolvido por Estúdio Neto</p>
-      <p class="text-[10px] text-gray-500">Toda a computação de DSP ocorre localmente no navegador, garantindo privacidade total sobre seus arquivos de áudio.</p>
+  <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
     </div>
   </footer>
 

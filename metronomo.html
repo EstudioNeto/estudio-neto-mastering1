@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Metrônomo Online Interativo | Estúdio Neto</title>
+    <meta name="description" content="Pratique seu ritmo com nosso metrônomo online gratuito. Ajuste o BPM, escolha fórmulas de compasso e selecione diferentes timbres de clique diretamente no seu navegador."/>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilização customizada para os sliders para manter a consistência visual */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Menu de Navegação -->
+    <header class="w-full bg-slate-950/80 backdrop-blur border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">⏱️</span>
+                <span class="text-xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                    Metrônomo Digital
+                </span>
+            </div>
+            <!-- Botão de retorno solicitado -->
+            <a href="https://www.estudioneto.com.br/" 
+               class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-blue-300 hover:text-white border border-blue-500/40 hover:border-blue-400 rounded-full hover:bg-blue-500/10 transition-all">
+                <span>↩</span> Voltar ao Estúdio Neto
+            </a>
+        </div>
+    </header>
+    <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-10 w-full space-y-12">
+        
+        <!-- Bloco do Metrônomo -->
+        <section class="bg-slate-950 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-8 shadow-xl">
+            
+            <!-- Indicadores de Batida (Pendulum Visual) -->
+            <div id="beat-indicator-container" class="flex justify-center gap-4 py-4">
+                <!-- Inserido dinamicamente via JS de acordo com a métrica selecionada -->
+            </div>
+
+            <!-- Controle de BPM -->
+            <div class="space-y-6 text-center">
+                <div class="flex items-baseline justify-center gap-2">
+                    <!-- Input numérico integrado ao design -->
+                    <input type="number" id="bpm-number" min="40" max="240" value="120"
+                           class="w-32 text-center text-6xl font-black bg-transparent border-none outline-none text-white tabular-nums focus:ring-0 select-all" />
+                    <span class="text-xl text-slate-500 font-semibold">BPM</span>
+                </div>
+                
+                <!-- Ajuste fino de BPM (Botões de incremento) -->
+                <div class="flex justify-center gap-4">
+                    <button id="bpm-minus" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-lg font-bold transition">-</button>
+                    <button id="bpm-plus" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded text-lg font-bold transition">+</button>
+                </div>
+
+                <input type="range" id="bpm-slider" min="40" max="240" step="1" value="120"
+                       class="w-full h-2 bg-slate-800 rounded-full appearance-none cursor-pointer outline-none"/>
+            </div>
+
+            <hr class="border-slate-800" />
+
+            <!-- Seletores de Configuração (Grade de Controles) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tipo de Som -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-slate-400 uppercase tracking-wider text-center font-medium">Timbre</label>
+                    <select id="sound-select" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white text-sm focus:border-blue-500 outline-none cursor-pointer">
+                        <option value="click">Clique Digital</option>
+                        <option value="wood">Bloco de Madeira</option>
+                        <option value="beep">Beep Clássico</option>
+                        <option value="cowbell">Cowbell (Sino)</option>
+                    </select>
+                </div>
+
+                <!-- Tempos por Compasso -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-slate-400 uppercase tracking-wider text-center font-medium">Fórmula de Compasso</label>
+                    <select id="beat-select" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2.5 text-white text-sm focus:border-blue-500 outline-none cursor-pointer">
+                        <option value="2">2/4 (Duplo)</option>
+                        <option value="3">3/4 (Tríplice)</option>
+                        <option value="4" selected>4/4 (Quádruplo)</option>
+                        <option value="6">6/8 (Sextuplo)</option>
+                    </select>
+                </div>
+
+                <!-- Volume -->
+                <div class="space-y-2">
+                    <label class="block text-xs text-slate-400 uppercase tracking-wider text-center font-medium">
+                        Volume <span id="volume-label" class="text-blue-400 tabular-nums">(80%)</span>
+                    </label>
+                    <div class="bg-slate-900 border border-slate-800 rounded-lg px-3 flex items-center h-[46px]">
+                        <input type="range" id="volume-slider" min="0" max="100" step="1" value="80"
+                               class="w-full h-2 bg-slate-800 rounded-full appearance-none cursor-pointer outline-none"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de Ação -->
+            <div class="space-y-4">
+                <button id="play-btn" class="w-full py-4 text-xl font-bold rounded-xl text-white bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg hover:shadow-blue-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all duration-150">
+                    ▶ Iniciar
+                </button>
+                <p class="text-center text-xs text-slate-500">
+                    Dica: Pressione a tecla <kbd class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded text-slate-400 text-[11px]">Espaço</kbd> para iniciar ou pausar.
+                </p>
+            </div>
+        </section>
+
+        <!-- Artigos e Orientações de Estudo -->
+        <article class="space-y-10 text-slate-300 leading-relaxed">
+            
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold text-white border-l-4 border-blue-500 pl-3">A Importância do Metrônomo nos Estudos Musicais</h2>
+                <p>
+                    O metrônomo é um assistente fundamental para o desenvolvimento da percepção rítmica. Ele atua como uma referência temporal constante, traduzindo o andamento da música em pulsações medidas em Batidas Por Minuto (BPM).
+                </p>
+                <p>
+                    Tanto para estudantes iniciantes que buscam estabilizar a execução instrumental quanto para profissionais em fase de gravação, o hábito de estudar sob uma referência temporal regular evita flutuações indesejadas de velocidade e fortalece a memória muscular.
+                </p>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold text-white border-l-4 border-blue-500 pl-3">Guia Prático para Estudar com Metrônomo</h2>
+                <p>
+                    Para obter bons resultados ao utilizar o metrônomo no seu cronograma de estudos diários, considere as etapas a seguir:
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-6 pt-2">
+                    <div class="bg-slate-950 border border-slate-800/80 p-5 rounded-xl space-y-2">
+                        <h3 class="text-lg font-bold text-blue-300">1. Andamento de Conforto</h3>
+                        <p class="text-sm text-slate-400">
+                            Inicie a passagem musical em uma velocidade reduzida onde seja possível tocar todas as notas com precisão física e mental. Não tenha pressa em acelerar.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800/80 p-5 rounded-xl space-y-2">
+                        <h3 class="text-lg font-bold text-blue-300">2. Subida Progressiva</h3>
+                        <p class="text-sm text-slate-400">
+                            Após executar a passagem corretamente de forma consistente por três vezes seguidas, aumente o andamento de 4 a 6 BPM e repita o processo.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800/80 p-5 rounded-xl space-y-2">
+                        <h3 class="text-lg font-bold text-blue-300">3. Internalização do Ritmo</h3>
+                        <p class="text-sm text-slate-400">
+                            Procure focar na pulsação e tente antecipar mentalmente o próximo clique, alinhando o ataque do seu instrumento exatamente no centro do pulso sonoro.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold text-white border-l-4 border-blue-500 pl-3">Diferença entre Metrônomo e Guia de Clique (Click Track)</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-950/60 p-5 rounded-xl border border-slate-800/50">
+                        <h3 class="font-bold text-white mb-2">Metrônomo Comum</h3>
+                        <p class="text-sm text-slate-400">
+                            Dispositivo ou aplicação que gera uma pulsação regular em uma velocidade estática determinada pelo usuário. É ideal para aquecimentos, exercícios técnicos estruturados e estudo individual.
+                        </p>
+                    </div>
+                    <div class="bg-slate-950/60 p-5 rounded-xl border border-slate-800/50">
+                        <h3 class="font-bold text-white mb-2">Guia de Clique (Click Track)</h3>
+                        <p class="text-sm text-slate-400">
+                            Uma faixa de áudio integrada a uma DAW (Estação de Trabalho de Áudio Digital) que acompanha arranjos mais complexos. Ela pode sofrer variações programadas de andamento e compasso ao longo de um projeto musical.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+<!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+    <!-- Rodapé -->
+    <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Lógica de Controle do Metrônomo em Javascript (Web Audio API) -->
+    <script>
+        // Configurações do mecanismo de áudio
+        let audioContext = null;
+        let isPlaying = false;
+        
+        let bpm = 120;
+        let beatsPerMeasure = 4;
+        let currentBeatInMeasure = 0;
+        
+        let nextNoteTime = 0.0;     // Momento em que o próximo clique deve soar
+        let scheduleAheadTime = 0.1; // Janela de agendamento (em segundos)
+        let lookahead = 25.0;       // Frequência de verificação do temporizador (em milissegundos)
+        let timerID = null;         
+        
+        let soundType = 'click';
+        let volume = 0.8;
+        let volumeNode = null;
+
+        // Fila para sincronizar a animação visual com as batidas de áudio precisas
+        let notesInQueue = [];
+
+        // Elementos da Interface (DOM)
+        const playBtn = document.getElementById('play-btn');
+        const bpmSlider = document.getElementById('bpm-slider');
+        const bpmNumber = document.getElementById('bpm-number');
+        const bpmMinus = document.getElementById('bpm-minus');
+        const bpmPlus = document.getElementById('bpm-plus');
+        const soundSelect = document.getElementById('sound-select');
+        const beatSelect = document.getElementById('beat-select');
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeLabel = document.getElementById('volume-label');
+        const beatIndicatorContainer = document.getElementById('beat-indicator-container');
+
+        // Cria e renderiza os pontos de pulsação baseados no compasso escolhido
+        function setupVisualIndicators() {
+            beatIndicatorContainer.innerHTML = '';
+            for (let i = 0; i < beatsPerMeasure; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `w-8 h-8 rounded-full border-2 transition-all duration-75 bg-slate-800 border-slate-700`;
+                indicator.setAttribute('data-index', i);
+                beatIndicatorContainer.appendChild(indicator);
+            }
+        }
+
+        // Atualiza a visualização dos pontos na tela
+        function updateVisualIndicators(currentBeat) {
+            const indicators = beatIndicatorContainer.querySelectorAll('div');
+            indicators.forEach((indicator, index) => {
+                if (index === currentBeat) {
+                    if (currentBeat === 0) {
+                        // Destaque para o primeiro tempo do compasso (acento forte)
+                        indicator.className = 'w-8 h-8 rounded-full border-2 transition-all duration-75 bg-blue-500 border-blue-400 scale-110 shadow-[0_0_10px_rgba(59,130,246,0.8)]';
+                    } else {
+                        // Tempo fraco
+                        indicator.className = 'w-8 h-8 rounded-full border-2 transition-all duration-75 bg-slate-400 border-slate-300 scale-105';
+                    }
+                } else {
+                    indicator.className = 'w-8 h-8 rounded-full border-2 transition-all duration-75 bg-slate-800 border-slate-700';
+                }
+            });
+        }
+
+        // Calcula e avança para a próxima batida
+        function nextNote() {
+            const secondsPerBeat = 60.0 / bpm;
+            nextNoteTime += secondsPerBeat; // Adiciona o tempo de batida ao último evento agendado
+
+            // Avança no compasso
+            currentBeatInMeasure = (currentBeatInMeasure + 1) % beatsPerMeasure;
+        }
+
+        // Sintetiza os timbres sonoros em tempo real
+        function scheduleNote(beatNumber, time) {
+            // Sincroniza batida com a fila visual
+            notesInQueue.push({ note: beatNumber, time: time });
+
+            if (volume === 0) return; // Mudo
+
+            // Criação dos nós de áudio
+            const osc = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            osc.connect(gainNode);
+            gainNode.connect(volumeNode);
+
+            // Definição das frequências e decaimentos dependendo do tipo de som selecionado
+            const isFirstBeat = (beatNumber === 0);
+
+            switch (soundType) {
+                case 'beep':
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(isFirstBeat ? 1000 : 800, time);
+                    gainNode.gain.setValueAtTime(1, time);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+                    osc.start(time);
+                    osc.stop(time + 0.12);
+                    break;
+
+                case 'wood':
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(isFirstBeat ? 900 : 650, time);
+                    osc.frequency.exponentialRampToValueAtTime(150, time + 0.05);
+                    gainNode.gain.setValueAtTime(1, time);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.05);
+                    osc.start(time);
+                    osc.stop(time + 0.06);
+                    break;
+
+                case 'cowbell':
+                    // Simulação sintética simples de sino metálico composto por dois osciladores
+                    const osc2 = audioContext.createOscillator();
+                    osc2.connect(gainNode);
+                    
+                    osc.type = 'square';
+                    osc2.type = 'square';
+                    
+                    const rootFreq = isFirstBeat ? 800 : 587;
+                    osc.frequency.setValueAtTime(rootFreq, time);
+                    osc2.frequency.setValueAtTime(rootFreq * 1.45, time); // intervalo metálico desafinado de propósito
+                    
+                    gainNode.gain.setValueAtTime(1, time);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.15);
+                    
+                    osc.start(time);
+                    osc2.start(time);
+                    osc.stop(time + 0.16);
+                    osc2.stop(time + 0.16);
+                    break;
+
+                case 'click':
+                default:
+                    // Clique digital seco com decaimento extremamente rápido
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(isFirstBeat ? 1600 : 1200, time);
+                    osc.frequency.exponentialRampToValueAtTime(100, time + 0.015);
+                    gainNode.gain.setValueAtTime(1, time);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, time + 0.02);
+                    osc.start(time);
+                    osc.stop(time + 0.025);
+                    break;
+            }
+        }
+
+        // Função de verificação periódica que alimenta o buffer do Web Audio API
+        function scheduler() {
+            while (nextNoteTime < audioContext.currentTime + scheduleAheadTime) {
+                scheduleNote(currentBeatInMeasure, nextNoteTime);
+                nextNote();
+            }
+            timerID = setTimeout(scheduler, lookahead);
+        }
+
+        // Loop de renderização visual (alinhando com a taxa de atualização da tela)
+        function draw() {
+            let currentTime = audioContext ? audioContext.currentTime : 0;
+            
+            while (notesInQueue.length && notesInQueue[0].time < currentTime) {
+                updateVisualIndicators(notesInQueue[0].note);
+                notesInQueue.shift();
+            }
+            requestAnimationFrame(draw);
+        }
+
+        // Gerencia os estados de reprodução do metrônomo
+        function togglePlay() {
+            // Inicializa ou retoma o contexto de áudio em resposta à ação do usuário
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                volumeNode = audioContext.createGain();
+                volumeNode.gain.value = volume;
+                volumeNode.connect(audioContext.destination);
+            }
+
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
+            isPlaying = !isPlaying;
+
+            if (isPlaying) {
+                currentBeatInMeasure = 0;
+                nextNoteTime = audioContext.currentTime + 0.05;
+                playBtn.textContent = '■ Parar';
+                playBtn.classList.remove('from-blue-500', 'to-blue-700');
+                playBtn.classList.add('from-red-600', 'to-red-800');
+                scheduler();
+            } else {
+                clearTimeout(timerID);
+                playBtn.textContent = '▶ Iniciar';
+                playBtn.classList.remove('from-red-600', 'to-red-800');
+                playBtn.classList.add('from-blue-500', 'to-blue-700');
+                
+                // Limpa pontos ativos ao desligar
+                const indicators = beatIndicatorContainer.querySelectorAll('div');
+                indicators.forEach(indicator => {
+                    indicator.className = 'w-8 h-8 rounded-full border-2 transition-all duration-75 bg-slate-800 border-slate-700';
+                });
+            }
+        }
+
+        // Tratamento e sincronização dos inputs de BPM
+        function updateBPM(newBPM) {
+            let val = parseInt(newBPM);
+            if (isNaN(val)) return;
+            
+            // Força limites de segurança
+            if (val < 40) val = 40;
+            if (val > 240) val = 240;
+
+            bpm = val;
+            bpmSlider.value = val;
+            bpmNumber.value = val;
+        }
+
+        // Eventos e Escuta de Inputs
+        bpmSlider.addEventListener('input', (e) => updateBPM(e.target.value));
+        bpmNumber.addEventListener('change', (e) => updateBPM(e.target.value));
+        
+        bpmMinus.addEventListener('click', () => {
+            updateBPM(bpm - 1);
+        });
+
+        bpmPlus.addEventListener('click', () => {
+            updateBPM(bpm + 1);
+        });
+
+        soundSelect.addEventListener('change', (e) => {
+            soundType = e.target.value;
+        });
+
+        beatSelect.addEventListener('change', (e) => {
+            beatsPerMeasure = parseInt(e.target.value);
+            setupVisualIndicators();
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            const percentage = e.target.value;
+            volume = percentage / 100;
+            volumeLabel.textContent = `(${percentage}%)`;
+            if (volumeNode) {
+                volumeNode.gain.setValueAtTime(volume, audioContext.currentTime);
+            }
+        });
+
+        playBtn.addEventListener('click', togglePlay);
+
+        // Atalho por teclado (Barra de Espaço)
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                // Impede rolagem de página acidental com a tecla de espaço
+                e.preventDefault();
+                togglePlay();
+            }
+        });
+
+        // Configuração Inicial de Elementos
+        setupVisualIndicators();
+        requestAnimationFrame(draw);
+    </script>
+    
+    </div>
+  </div>
+</body>
+</html>

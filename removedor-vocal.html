@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Removedor Vocal Local - Estúdio Neto</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- LAME MP3 Encoder Client-Side -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      background: #1e293b;
+      height: 6px;
+      border-radius: 3px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -5px;
+      background-color: #6366f1;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+    }
+    input[type="range"]::-moz-range-track {
+      background: #1e293b;
+      height: 6px;
+      border-radius: 3px;
+    }
+    input[type="range"]::-moz-range-thumb {
+      background-color: #6366f1;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="border-b border-brand-border bg-brand-dark/90 py-4 px-6 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🎤</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Removedor Vocal Local
+        </h1>
+      </div>
+      
+      <a href="https://www.estudioneto.com.br/index.html" class="text-xs text-gray-400 hover:text-white transition-all border border-brand-border hover:border-brand-accent/40 bg-brand-dark px-4 py-2 rounded-xl flex items-center gap-2 font-semibold focus:outline-none">
+        <span>🏠</span> Voltar ao Estúdio Neto
+      </a>
+      
+    </div>
+  </header>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- CONTEÚDO DA FERRAMENTA -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-12">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- Lado Esquerdo: Player -->
+      <section class="lg:col-span-7 space-y-6">
+        <div id="p-dropzone" class="border-2 border-dashed border-brand-border hover:border-brand-accent/50 transition-colors rounded-2xl p-8 bg-brand-card text-center cursor-pointer group">
+          <input type="file" id="p-file-input" accept="audio/*" class="hidden">
+          <div class="flex flex-col items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-indigo-500/10 flex items-center justify-center text-brand-accent group-hover:scale-105 transition-transform">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            </div>
+            <div>
+              <p class="font-semibold text-white">Selecione o arquivo de áudio</p>
+              <p class="text-xs text-gray-400 mt-1">Formatos suportados: MP3, WAV, FLAC, M4A ou AAC (Processamento 100% Local)</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="p-player-container" class="bg-brand-card rounded-2xl border border-brand-border p-6 hidden space-y-6">
+          <div class="flex items-start justify-between gap-4">
+            <div class="truncate">
+              <p class="text-xs text-gray-400 font-mono">Processamento de Áudio Ativo</p>
+              <h3 id="p-track-name" class="font-bold text-white truncate text-base mb-2">Nome_da_Faixa.mp3</h3>
+              <button id="p-btn-reset" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold border border-brand-border hover:border-brand-accent/40 bg-brand-dark px-3 py-1.5 rounded-lg transition-all inline-flex items-center gap-1 focus:outline-none">
+                🔄 Enviar Outra Música
+              </button>
+            </div>
+            <div id="p-time-display" class="text-sm font-mono text-brand-accent">0:00 / 0:00</div>
+          </div>
+          <div class="relative bg-brand-dark rounded-xl overflow-hidden">
+            <canvas id="p-waveform-canvas" class="w-full h-24 block cursor-pointer"></canvas>
+            <div id="p-playhead" class="absolute top-0 left-0 w-0.5 h-full bg-brand-accent pointer-events-none shadow-[0_0_8px_#6366f1]"></div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <button id="p-btn-play" class="w-12 h-12 rounded-full bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition-all">
+                <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+              <button id="p-btn-stop" class="w-10 h-10 rounded-full bg-brand-border hover:bg-red-500/20 text-gray-300 flex items-center justify-center transition-all">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+              </button>
+            </div>
+            <div class="flex bg-brand-dark p-1 rounded-xl border border-brand-border">
+              <button id="p-btn-mode-b" class="px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white">B (Original)</button>
+              <button id="p-btn-mode-a" class="px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md">A (Processado)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Lado Direito: Mixer e Parâmetros -->
+      <section class="lg:col-span-5 space-y-6">
+        
+        <!-- Mixer de Canais (Stems) -->
+        <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>🎛️</span> Mixer de Canais (Mesa de Som)</h2>
+          
+          <div class="space-y-4">
+            <!-- Canal Graves -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">🔊 Graves (Baixo e Bumbo)</label>
+                <span id="p-vol-bass-val" class="text-sm font-mono text-brand-accent font-bold">100%</span>
+              </div>
+              <input type="range" id="p-vol-bass-slider" min="0" max="150" step="5" value="100" class="w-full">
+            </div>
+
+            <!-- Canal Voz -->
+            <div class="space-y-2 pt-2 border-t border-brand-border/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">🎤 Vocais Isolados</label>
+                <span id="p-vol-vocal-val" class="text-sm font-mono text-brand-accent font-bold">0%</span>
+              </div>
+              <input type="range" id="p-vol-vocal-slider" min="0" max="150" step="5" value="0" class="w-full">
+            </div>
+
+            <!-- Canal Instrumentos -->
+            <div class="space-y-2 pt-2 border-t border-brand-border/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">🎸 Harmonia (Guitarras e Teclados)</label>
+                <span id="p-vol-inst-val" class="text-sm font-mono text-brand-accent font-bold">100%</span>
+              </div>
+              <input type="range" id="p-vol-inst-slider" min="0" max="150" step="5" value="100" class="w-full">
+            </div>
+          </div>
+        </div>
+
+        <!-- Ajustes Finos de Engenharia -->
+        <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
+          <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2"><span>🛠️</span> Ajustes do Filtro de Isolação</h3>
+          
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">Crossover de Graves (Frequência do Baixo)</label>
+                <span id="p-crossover-val" class="text-sm font-mono text-indigo-400 font-bold">120 Hz</span>
+              </div>
+              <input type="range" id="p-crossover-slider" min="40" max="250" step="5" value="120" class="w-full">
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-brand-border/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">Compressão Cirúrgica Dinâmica (Gating)</label>
+                <span id="p-gate-val" class="text-sm font-mono text-indigo-400 font-bold">50%</span>
+              </div>
+              <input type="range" id="p-gate-slider" min="0" max="100" step="5" value="50" class="w-full">
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-brand-border/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">Atenuação de Reverb / Laterais</label>
+                <span id="p-reverb-attenuation-val" class="text-sm font-mono text-indigo-400 font-bold">50%</span>
+              </div>
+              <input type="range" id="p-reverb-attenuation-slider" min="0" max="100" step="5" value="50" class="w-full">
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-brand-border/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs text-gray-400 font-semibold">Filtro Antirruído de Reverb</label>
+                <span id="p-reverb-lowcut-val" class="text-sm font-mono text-indigo-400 font-bold">300 Hz</span>
+              </div>
+              <input type="range" id="p-reverb-lowcut-slider" min="100" max="600" step="10" value="300" class="w-full">
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel de Exportação Customizada -->
+        <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-4">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>💾</span> Painel de Exportação Customizada</h2>
+          
+          <p class="text-xs text-gray-400">Selecione quais tracks deseja incluir no download:</p>
+          
+          <div class="space-y-3">
+            <!-- Checkbox Graves -->
+            <label class="flex items-center gap-3 bg-brand-dark p-3 rounded-xl border border-brand-border/40 cursor-pointer hover:border-brand-accent/40 transition-colors">
+              <input type="checkbox" id="p-exp-bass" checked class="w-4 h-4 text-brand-accent bg-brand-dark border-brand-border rounded focus:ring-brand-accent cursor-pointer">
+              <div>
+                <p class="text-sm font-bold text-white">🔊 Graves (Baixo & Bumbo)</p>
+                <p class="text-[10px] text-gray-500">Contém as frequências subgraves e de pegada rítmica</p>
+              </div>
+            </label>
+
+            <!-- Checkbox Vocais -->
+            <label class="flex items-center gap-3 bg-brand-dark p-3 rounded-xl border border-brand-border/40 cursor-pointer hover:border-brand-accent/40 transition-colors">
+              <input type="checkbox" id="p-exp-vocal" class="w-4 h-4 text-brand-accent bg-brand-dark border-brand-border rounded focus:ring-brand-accent cursor-pointer">
+              <div>
+                <p class="text-sm font-bold text-white">🎤 Vocais (Voz Principal)</p>
+                <p class="text-[10px] text-gray-500">Contém a faixa vocal média-aguda isolada</p>
+              </div>
+            </label>
+
+            <!-- Checkbox Harmonia -->
+            <label class="flex items-center gap-3 bg-brand-dark p-3 rounded-xl border border-brand-border/40 cursor-pointer hover:border-brand-accent/40 transition-colors">
+              <input type="checkbox" id="p-exp-inst" checked class="w-4 h-4 text-brand-accent bg-brand-dark border-brand-border rounded focus:ring-brand-accent cursor-pointer">
+              <div>
+                <p class="text-sm font-bold text-white">🎸 Harmonia (Guitarras e Teclados)</p>
+                <p class="text-[10px] text-gray-500">Contém sintetizadores, pianos, guitarras e efeitos laterais</p>
+              </div>
+            </label>
+          </div>
+
+          <!-- Formato do Arquivo -->
+          <div class="space-y-2 pt-2 border-t border-brand-border/40">
+            <label class="text-xs text-gray-400 font-semibold block">Formato do Arquivo</label>
+            <select id="p-export-format" class="w-full bg-brand-dark border border-brand-border rounded-xl px-4 py-2.5 text-sm font-semibold text-white focus:outline-none focus:border-brand-accent">
+              <option value="wav">WAV 24-bit (Qualidade de Estúdio)</option>
+              <option value="mp3">MP3 320kbps (Alta Qualidade Comprimida)</option>
+            </select>
+          </div>
+
+          <!-- Formato de Exportação -->
+          <div class="space-y-2 pt-2 border-t border-brand-border/40">
+            <label class="text-xs text-gray-400 font-semibold block">Formato da Exportação</label>
+            <div class="grid grid-cols-2 gap-2 bg-brand-dark p-1 rounded-xl border border-brand-border">
+              <button id="p-btn-exp-mix" class="py-2 text-xs font-bold rounded-lg bg-brand-accent text-white transition-all focus:outline-none">Mix Único</button>
+              <button id="p-btn-exp-multi" class="py-2 text-xs font-bold rounded-lg text-gray-400 hover:text-white transition-all focus:outline-none">Separadas (Multitrack)</button>
+            </div>
+          </div>
+
+          <button id="p-btn-download" disabled class="w-full bg-brand-success hover:bg-emerald-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+            Baixar Tracks Selecionadas
+          </button>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Modal de Carregamento -->
+  <div id="loader-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-brand-card border border-brand-border p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <h3 id="loader-title" class="text-lg font-bold text-white">Carregando</h3>
+      <p id="loader-text" class="text-sm text-gray-400">Por favor, aguarde...</p>
+    </div>
+  </div>
+
+  <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PROCESSAMENTO DE ÁUDIO NATIVO -->
+  <script>
+    // 1. Variáveis de Estado Global de Áudio e DOM
+    let audioCtx = null;
+    let targetBuffer = null;
+    let processedBuffer = null;
+    let sourceNode = null;
+    let processorNode = null;
+    let isPlaying = false;
+    let startTime = 0;
+    let pauseTime = 0;
+    let currentMode = 'A'; // 'A' = Processado, 'B' = Original
+    let targetFileName = "";
+    let exportMode = 'mix'; // 'mix' ou 'multi'
+
+    // Elementos DOM Globais (Mapeados na inicialização para evitar ReferenceError)
+    let fileInput, dropzone, playerContainer, btnPlay, btnStop, btnModeA, btnModeB, btnReset, btnDownload;
+    let sliderCrossover, sliderReverbAttenuation, sliderReverbLowCut, sliderGate;
+    let sliderVolBass, sliderVolVocal, sliderVolInst;
+    let valCrossover, valReverbAttenuation, valReverbLowCut, valGate;
+    let valVolBass, valVolVocal, valVolInst, selectFormat;
+    let checkExpBass, checkExpVocal, checkExpInst, btnExpMix, btnExpMulti;
+    let loaderModal, loaderTitle, loaderText;
+
+    // Filtros persistentes e envelopes dinâmicos do player
+    let lp_L1 = 0, lp_L2 = 0;
+    let lp_R1 = 0, lp_R2 = 0;
+    let lp_treble = 0;
+    let lp_Side_LC1 = 0, lp_Side_LC2 = 0;
+    let env_M = 0, env_S = 0;
+
+    // 2. Funções de Controle de Tela (Modais) Globais
+    function showLoader(title, text) {
+      if (loaderModal && loaderTitle && loaderText) {
+        loaderTitle.textContent = title;
+        loaderText.textContent = text;
+        loaderModal.classList.remove("opacity-0", "pointer-events-none");
+      }
+    }
+
+    function hideLoader() {
+      if (loaderModal) {
+        loaderModal.classList.add("opacity-0", "pointer-events-none");
+      }
+    }
+
+    // Limitador de pico (Soft-Clipper) transparente para evitar clipping digital na saída final
+    function limitSample(x) {
+      const threshold = 0.85;
+      const limit = 0.98;
+      if (x > threshold) {
+        return threshold + (limit - threshold) * Math.tanh((x - threshold) / (limit - threshold));
+      } else if (x < -threshold) {
+        return -threshold + (limit - threshold) * Math.tanh((x + threshold) / (limit - threshold));
+      }
+      return x;
+    }
+
+    // Renderiza um buffer dinâmico de áudio com base em ganhos específicos de Graves, Voz e Instrumentos
+    function renderBuffer(gainBass, gainVocal, gainInst) {
+      if (!targetBuffer) return null;
+      const sampleRate = targetBuffer.sampleRate;
+      const length = targetBuffer.length;
+      const outBuffer = audioCtx.createBuffer(2, length, sampleRate);
+      
+      const leftIn = targetBuffer.getChannelData(0);
+      const rightIn = targetBuffer.numberOfChannels > 1 ? targetBuffer.getChannelData(1) : leftIn;
+      
+      const leftOut = outBuffer.getChannelData(0);
+      const rightOut = outBuffer.getChannelData(1);
+      
+      // Captura segura de controles globais
+      const crossoverFreq = parseFloat(sliderCrossover.value);
+      const reverbAttenuation = parseFloat(sliderReverbAttenuation.value) / 100;
+      const reverbLowCutFreq = parseFloat(sliderReverbLowCut.value);
+      const gateStrength = parseFloat(sliderGate.value) / 100;
+      
+      const dt = 1 / sampleRate;
+      const rc = 1 / (2 * Math.PI * crossoverFreq);
+      const alpha = dt / (rc + dt);
+      
+      // Filtro Low-Cut para cauda de Reverb (Side)
+      const rc_LC = 1 / (2 * Math.PI * reverbLowCutFreq);
+      const alpha_LC = dt / (rc_LC + dt);
+      
+      // Excitador de Agudos (Shelving em 5000Hz)
+      const rc_T = 1 / (2 * Math.PI * 5000);
+      const alpha_T = dt / (rc_T + dt);
+      
+      let lp_L1_loc = 0, lp_L2_loc = 0;
+      let lp_R1_loc = 0, lp_R2_loc = 0;
+      let lp_treble_loc = 0;
+      let lp_Side_LC1_loc = 0, lp_Side_LC2_loc = 0;
+      
+      let env_M_loc = 0;
+      let env_S_loc = 0;
+      
+      for (let i = 0; i < length; i++) {
+        const l = leftIn[i];
+        const r = rightIn[i];
+        
+        lp_L1_loc += alpha * (l - lp_L1_loc);
+        lp_L2_loc += alpha * (lp_L1_loc - lp_L2_loc);
+        const bass_L = lp_L2_loc;
+        
+        lp_R1_loc += alpha * (r - lp_R1_loc);
+        lp_R2_loc += alpha * (lp_R1_loc - lp_R2_loc);
+        const bass_R = lp_R2_loc;
+        
+        const bass_L_warm = Math.tanh(bass_L * 1.05) * gainBass;
+        const bass_R_warm = Math.tanh(bass_R * 1.05) * gainBass;
+        
+        const L_high = l - bass_L;
+        const R_high = r - bass_R;
+        
+        const Center_high = (L_high + R_high) * 0.5;
+        const Side_high = (L_high - R_high) * 0.5;
+        
+        const abs_M = Math.abs(Center_high);
+        const abs_S = Math.abs(Side_high);
+        env_M_loc += (abs_M > env_M_loc ? 0.05 : 0.005) * (abs_M - env_M_loc);
+        env_S_loc += (abs_S > env_S_loc ? 0.05 : 0.005) * (abs_S - env_S_loc);
+        
+        const center_dominance = env_M_loc / (env_S_loc + 0.01);
+        let dynamic_gate = 1.0;
+        if (center_dominance > 1.1) {
+          const compression = (center_dominance - 1.1) * 0.5 * gateStrength;
+          dynamic_gate = Math.max(1.0 - gateStrength * 0.75, 1.0 - compression);
+        }
+        
+        const Side_filtered = Side_high * (1 - reverbAttenuation);
+        lp_Side_LC1_loc += alpha_LC * (Side_filtered - lp_Side_LC1_loc);
+        lp_Side_LC2_loc += alpha_LC * (lp_Side_LC1_loc - lp_Side_LC2_loc);
+        const Side_low_mud = lp_Side_LC2_loc;
+        const Side_clean_reverb = Side_filtered - Side_low_mud;
+        
+        const Side_reverb_final = Side_clean_reverb * gainInst + Side_low_mud * gainVocal;
+        
+        lp_treble_loc += alpha_T * (Side_reverb_final - lp_treble_loc);
+        const Side_high_only = Side_reverb_final - lp_treble_loc;
+        const Side_enhanced = Side_reverb_final + Side_high_only * 0.25;
+        
+        const Stem_Vocal = Center_high * dynamic_gate;
+        const Vocal_mixed = Stem_Vocal * gainVocal;
+        
+        leftOut[i] = limitSample((Vocal_mixed + Side_enhanced) + bass_L_warm);
+        rightOut[i] = limitSample((Vocal_mixed - Side_enhanced) + bass_R_warm);
+      }
+      return outBuffer;
+    }
+
+    // Geração de áudio WAV de 24-bit PCM Linear
+    function bufferToWav(buffer) {
+      let numOfChan = buffer.numberOfChannels,
+          length = buffer.length * numOfChan * 3 + 44, // 24-bit
+          bufferArr = new ArrayBuffer(length),
+          view = new DataView(bufferArr),
+          channels = [], i, sample,
+          offset = 0,
+          pos = 0;
+
+      setUint32(0x46464952);                         // "RIFF"
+      setUint32(length - 8);
+      setUint32(0x45564157);                         // "WAVE"
+
+      setUint32(0x20746d66);                         // "fmt "
+      setUint32(16);                                 
+      setUint16(1);                                  // PCM
+      setUint16(numOfChan);
+      setUint32(buffer.sampleRate);
+      setUint32(buffer.sampleRate * 3 * numOfChan);  // Byte rate
+      setUint16(numOfChan * 3);                      // Block align
+      setUint16(24);                                 // 24-bit
+
+      setUint32(0x61746164);                         // "data"
+      setUint32(length - pos - 4);                   
+
+      for (i = 0; i < numOfChan; i++) {
+        channels.push(buffer.getChannelData(i));
+      }
+
+      while (pos < length) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (sample < 0 ? sample * 0x800000 : sample * 0x7FFFFF);
+          
+          view.setInt8(pos, sample & 0xFF);
+          view.setInt8(pos + 1, (sample >> 8) & 0xFF);
+          view.setInt8(pos + 2, (sample >> 16) & 0xFF);
+          pos += 3;
+        }
+        offset++;
+      }
+
+      return new Blob([bufferArr], { type: "audio/wav" });
+
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+    }
+
+    // Geração de áudio MP3 de 320kbps de Alta Qualidade (LameJS Client-side)
+    function bufferToMp3(buffer, bitrate = 320) {
+      const sampleRate = buffer.sampleRate;
+      const left = buffer.getChannelData(0);
+      const right = buffer.numberOfChannels > 1 ? buffer.getChannelData(1) : left;
+      
+      const mp3Encoder = new lamejs.Mp3Encoder(2, sampleRate, bitrate);
+      const mp3Data = [];
+      const sampleBlockSize = 1152;
+      
+      // lamejs requer arrays do tipo Int16 para codificação
+      const leftInt16 = new Int16Array(left.length);
+      const rightInt16 = new Int16Array(right.length);
+      for (let i = 0; i < left.length; i++) {
+        let sL = Math.max(-1, Math.min(1, left[i]));
+        leftInt16[i] = sL < 0 ? sL * 0x8000 : sL * 0x7FFF;
+        
+        let sR = Math.max(-1, Math.min(1, right[i]));
+        rightInt16[i] = sR < 0 ? sR * 0x8000 : sR * 0x7FFF;
+      }
+      
+      for (let i = 0; i < leftInt16.length; i += sampleBlockSize) {
+        const leftChunk = leftInt16.subarray(i, i + sampleBlockSize);
+        const rightChunk = rightInt16.subarray(i, i + sampleBlockSize);
+        const mp3buf = mp3Encoder.encodeBuffer(leftChunk, rightChunk);
+        if (mp3buf.length > 0) {
+          mp3Data.push(new Uint8Array(mp3buf));
+        }
+      }
+      
+      const endBuf = mp3Encoder.flush();
+      if (endBuf.length > 0) {
+        mp3Data.push(new Uint8Array(endBuf));
+      }
+      
+      return new Blob(mp3Data, { type: "audio/mp3" });
+    }
+
+    // Download físico de arquivos WAV ou MP3
+    function triggerDownload(buffer, suffix, format = "wav") {
+      let blob;
+      let filename = `${targetFileName}${suffix}_24bit.wav`;
+      
+      if (format === "mp3") {
+        blob = bufferToMp3(buffer, 320); // Exportação fixa em 320kbps para alta fidelidade comprimida
+        filename = `${targetFileName}${suffix}_320k.mp3`;
+      } else {
+        blob = bufferToWav(buffer);
+      }
+
+      const url = URL.createObjectURL(blob);
+      const l = document.createElement("a");
+      l.href = url;
+      l.download = filename;
+      document.body.appendChild(l);
+      l.click();
+      document.body.removeChild(l);
+      URL.revokeObjectURL(url);
+    }
+
+    // Decodificador de Audio Seguro Retrocompatível
+    function decodeAudioDataSafe(audioCtx, arrayBuffer) {
+      return new Promise((resolve, reject) => {
+        try {
+          const res = audioCtx.decodeAudioData(arrayBuffer, resolve, (err) => {
+            reject(err || new Error("Formato de arquivo não suportado ou corrompido."));
+          });
+          if (res && typeof res.then === "function") {
+            res.then(resolve).catch(reject);
+          }
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }
+
+    // Carrega o arquivo para a memória de forma segura
+    async function loadFile(file) {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      targetFileName = file.name.split('.').slice(0, -1).join('.');
+      
+      try {
+        showLoader("Carregando", "Processando arquivo de áudio..."); 
+        const arrayBuffer = await file.arrayBuffer();
+        targetBuffer = await decodeAudioDataSafe(audioCtx, arrayBuffer);
+        
+        document.getElementById("p-dropzone").classList.add("hidden");
+        document.getElementById("p-player-container").classList.remove("hidden");
+        document.getElementById("p-btn-download").disabled = false;
+        document.getElementById("p-track-name").textContent = file.name;
+        
+        applyDSP();
+        drawWaveform();
+        updatePlaybackTime(0);
+      } catch (err) {
+        console.error("Erro no processamento:", err);
+        alert("Erro ao ler o arquivo de áudio: " + err.message + "\n\nSe possível, tente recarregar a página e selecionar outro arquivo.");
+      } finally {
+        hideLoader();
+      }
+    }
+
+    // Playback de áudio em tempo real com mesa de som
+    function play() {
+      if (!targetBuffer) return;
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      
+      sourceNode = audioCtx.createBufferSource();
+      sourceNode.buffer = targetBuffer;
+      
+      processorNode = audioCtx.createScriptProcessor(4096, 2, 2);
+      
+      // Resetar os estados de frequências e envelopes acumulados
+      lp_L1 = 0; lp_L2 = 0;
+      lp_R1 = 0; lp_R2 = 0;
+      lp_treble = 0;
+      lp_Side_LC1 = 0; lp_Side_LC2 = 0;
+      env_M = 0; env_S = 0;
+
+      processorNode.onaudioprocess = function(e) {
+        const leftIn = e.inputBuffer.getChannelData(0);
+        const rightIn = e.inputBuffer.numberOfChannels > 1 ? e.inputBuffer.getChannelData(1) : leftIn;
+        
+        const leftOut = e.outputBuffer.getChannelData(0);
+        const rightOut = e.outputBuffer.getChannelData(1);
+        
+        const crossoverFreq = parseFloat(sliderCrossover.value);
+        const reverbAttenuation = parseFloat(sliderReverbAttenuation.value) / 100;
+        const reverbLowCutFreq = parseFloat(sliderReverbLowCut.value);
+        const gateStrength = parseFloat(sliderGate.value) / 100;
+        
+        // Ganhos do Mixer
+        const gainBass = parseFloat(sliderVolBass.value) / 100;
+        const gainVocal = parseFloat(sliderVolVocal.value) / 100;
+        const gainInst = parseFloat(sliderVolInst.value) / 100;
+        
+        const dt = 1 / audioCtx.sampleRate;
+        const rc = 1 / (2 * Math.PI * crossoverFreq);
+        const alpha = dt / (rc + dt);
+        
+        const rc_LC = 1 / (2 * Math.PI * reverbLowCutFreq);
+        const alpha_LC = dt / (rc_LC + dt);
+        
+        const rc_T = 1 / (2 * Math.PI * 5000);
+        const alpha_T = dt / (rc_T + dt);
+        
+        for (let i = 0; i < e.inputBuffer.length; i++) {
+          const l = leftIn[i];
+          const r = rightIn[i];
+          
+          if (currentMode === 'A') {
+            lp_L1 += alpha * (l - lp_L1);
+            lp_L2 += alpha * (lp_L1 - lp_L2);
+            const bass_L = lp_L2;
+            
+            lp_R1 += alpha * (r - lp_R1);
+            lp_R2 += alpha * (lp_R1 - lp_R2);
+            const bass_R = lp_R2;
+            
+            const bass_L_warm = Math.tanh(bass_L * 1.05) * gainBass;
+            const bass_R_warm = Math.tanh(bass_R * 1.05) * gainBass;
+            
+            const L_high = l - bass_L;
+            const R_high = r - bass_R;
+            
+            const Center_high = (L_high + R_high) * 0.5;
+            const Side_high = (L_high - R_high) * 0.5;
+            
+            // Compressor Dinâmico (Gating)
+            const abs_M = Math.abs(Center_high);
+            const abs_S = Math.abs(Side_high);
+            env_M += (abs_M > env_M ? 0.05 : 0.005) * (abs_M - env_M);
+            env_S += (abs_S > env_S ? 0.05 : 0.005) * (abs_S - env_S);
+            
+            const center_dominance = env_M / (env_S + 0.01);
+            let dynamic_gate = 1.0;
+            if (center_dominance > 1.1) {
+              const compression = (center_dominance - 1.1) * 0.5 * gateStrength;
+              dynamic_gate = Math.max(1.0 - gateStrength * 0.75, 1.0 - compression);
+            }
+            
+            const Center_filtered = Center_high * dynamic_gate;
+            const Side_filtered = Side_high * (1 - reverbAttenuation);
+            
+            // Filtro antirruído no reverb lateral da voz
+            lp_Side_LC1 += alpha_LC * (Side_filtered - lp_Side_LC1);
+            lp_Side_LC2 += alpha_LC * (lp_Side_LC1 - lp_Side_LC2);
+            const Side_low_mud = lp_Side_LC2;
+            const Side_clean_reverb = Side_filtered - Side_low_mud;
+            const Side_reverb_final = Side_clean_reverb * gainInst + Side_low_mud * gainVocal;
+            
+            lp_treble += alpha_T * (Side_reverb_final - lp_treble);
+            const Side_high_only = Side_reverb_final - lp_treble;
+            const Side_enhanced = Side_reverb_final + Side_high_only * 0.25;
+            
+            // Stems
+            const Stem_Vocal = Center_filtered;
+            
+            // Reconstrução com ganhos do Mixer
+            const Vocal_mixed = Stem_Vocal * gainVocal;
+            
+            leftOut[i] = limitSample((Vocal_mixed + Side_enhanced) + bass_L_warm);
+            rightOut[i] = limitSample((Vocal_mixed - Side_enhanced) + bass_R_warm);
+          } else {
+            leftOut[i] = l;
+            rightOut[i] = r;
+          }
+        }
+      };
+
+      sourceNode.connect(processorNode);
+      processorNode.connect(audioCtx.destination);
+      
+      const offset = pauseTime;
+      sourceNode.start(0, offset);
+      startTime = audioCtx.currentTime - offset;
+      isPlaying = true;
+      btnPlay.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+      tick();
+    }
+
+    function pause() {
+      if (!isPlaying) return;
+      sourceNode.stop();
+      processorNode.disconnect();
+      pauseTime = audioCtx.currentTime - startTime;
+      isPlaying = false;
+      btnPlay.innerHTML = `<svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+    }
+
+    function stop() {
+      if (isPlaying) {
+        sourceNode.stop();
+        processorNode.disconnect();
+        isPlaying = false;
+      }
+      pauseTime = 0;
+      updatePlaybackTime(0);
+      btnPlay.innerHTML = `<svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+    }
+
+    function tick() {
+      if (!isPlaying) return;
+      const elapsed = audioCtx.currentTime - startTime;
+      if (elapsed >= targetBuffer.duration) {
+        stop();
+        return;
+      }
+      updatePlaybackTime(elapsed);
+      requestAnimationFrame(tick);
+    }
+
+    function updatePlaybackTime(seconds) {
+      const current = formatTime(seconds);
+      const total = formatTime(targetBuffer ? targetBuffer.duration : 0);
+      document.getElementById("p-time-display").textContent = `${current} / ${total}`;
+      if (targetBuffer) {
+        const percent = (seconds / targetBuffer.duration) * 100;
+        document.getElementById("p-playhead").style.width = `${percent}%`;
+      }
+    }
+
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    function applyDSP() {
+      if (!targetBuffer) return;
+      const gainBass = parseFloat(sliderVolBass.value) / 100;
+      const gainVocal = parseFloat(sliderVolVocal.value) / 100;
+      const gainInst = parseFloat(sliderVolInst.value) / 100;
+      processedBuffer = renderBuffer(gainBass, gainVocal, gainInst);
+    }
+
+    // Desenha as ondas sonoras de forma segura
+    function drawWaveform() {
+      const canvas = document.getElementById("p-waveform-canvas");
+      const ctx = canvas.getContext("2d");
+      
+      let parentWidth = canvas.parentElement ? canvas.parentElement.clientWidth : 0;
+      if (parentWidth <= 0) parentWidth = 600; 
+
+      const width = canvas.width = parentWidth;
+      const height = canvas.height = 96;
+      const rawData = targetBuffer.getChannelData(0);
+      const step = Math.ceil(rawData.length / width);
+      const amp = height / 2;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(15, 20, 35, 0.8)";
+      ctx.fillRect(0, 0, width, height);
+
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, "#818cf8");
+      grad.addColorStop(0.5, "#4f46e5");
+      grad.addColorStop(1, "#818cf8");
+      ctx.fillStyle = grad;
+
+      for (let i = 0; i < width; i++) {
+        let min = 1.0; let max = -1.0;
+        for (let j = 0; j < step; j++) {
+          const d = rawData[i * step + j];
+          if (d < min) min = d;
+          if (d > max) max = d;
+        }
+        ctx.fillRect(i, (1 + min) * amp, 1.5, Math.max(1, (max - min) * amp));
+      }
+    }
+
+    // 3. Inicialização de Elementos e Vinculações de Eventos de Forma Segura (DOM Carregada)
+    window.addEventListener("DOMContentLoaded", () => {
+      
+      fileInput = document.getElementById("p-file-input");
+      dropzone = document.getElementById("p-dropzone");
+      playerContainer = document.getElementById("p-player-container");
+      btnPlay = document.getElementById("p-btn-play");
+      btnStop = document.getElementById("p-btn-stop");
+      btnModeA = document.getElementById("p-btn-mode-a");
+      btnModeB = document.getElementById("p-btn-mode-b");
+      btnReset = document.getElementById("p-btn-reset");
+      btnDownload = document.getElementById("p-btn-download");
+      
+      sliderCrossover = document.getElementById("p-crossover-slider");
+      sliderReverbAttenuation = document.getElementById("p-reverb-attenuation-slider");
+      sliderReverbLowCut = document.getElementById("p-reverb-lowcut-slider");
+      sliderGate = document.getElementById("p-gate-slider");
+      
+      // Mixer
+      sliderVolBass = document.getElementById("p-vol-bass-slider");
+      sliderVolVocal = document.getElementById("p-vol-vocal-slider");
+      sliderVolInst = document.getElementById("p-vol-inst-slider");
+      
+      valCrossover = document.getElementById("p-crossover-val");
+      valReverbAttenuation = document.getElementById("p-reverb-attenuation-val");
+      valReverbLowCut = document.getElementById("p-reverb-lowcut-val");
+      valGate = document.getElementById("p-gate-val");
+      
+      valVolBass = document.getElementById("p-vol-bass-val");
+      valVolVocal = document.getElementById("p-vol-vocal-val");
+      valVolInst = document.getElementById("p-vol-inst-val");
+
+      // Custom Export Checkboxes, botões e formatos
+      checkExpBass = document.getElementById("p-exp-bass");
+      checkExpVocal = document.getElementById("p-exp-vocal");
+      checkExpInst = document.getElementById("p-exp-inst");
+      btnExpMix = document.getElementById("p-btn-exp-mix");
+      btnExpMulti = document.getElementById("p-btn-exp-multi");
+      selectFormat = document.getElementById("p-export-format");
+
+      loaderModal = document.getElementById("loader-modal");
+      loaderTitle = document.getElementById("loader-title");
+      loaderText = document.getElementById("loader-text");
+
+      // Liga os cliques e arrastes de arquivos de forma assíncrona blindada
+      dropzone.addEventListener("click", () => fileInput.click());
+      dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("border-brand-accent"); });
+      dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-brand-accent"));
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("border-brand-accent");
+        if (e.dataTransfer.files.length > 0) loadFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) loadFile(e.target.files[0]);
+      });
+
+      // Vincula os controles do Mixer
+      sliderVolBass.addEventListener("input", () => {
+        valVolBass.textContent = `${sliderVolBass.value}%`;
+        applyDSP();
+      });
+
+      sliderVolVocal.addEventListener("input", () => {
+        valVolVocal.textContent = `${sliderVolVocal.value}%`;
+        applyDSP();
+      });
+
+      sliderVolInst.addEventListener("input", () => {
+        valVolInst.textContent = `${sliderVolInst.value}%`;
+        applyDSP();
+      });
+
+      // Vincula os controles de Ajustes
+      sliderCrossover.addEventListener("input", () => {
+        valCrossover.textContent = `${sliderCrossover.value} Hz`;
+        showLoader("Ajustando", "Recalculando...");
+        setTimeout(() => { applyDSP(); hideLoader(); }, 50);
+      });
+
+      sliderReverbAttenuation.addEventListener("input", () => {
+        valReverbAttenuation.textContent = `${sliderReverbAttenuation.value}%`;
+        showLoader("Ajustando", "Recalculando...");
+        setTimeout(() => { applyDSP(); hideLoader(); }, 50);
+      });
+
+      sliderReverbLowCut.addEventListener("input", () => {
+        valReverbLowCut.textContent = `${sliderReverbLowCut.value} Hz`;
+        showLoader("Ajustando", "Recalculando...");
+        setTimeout(() => { applyDSP(); hideLoader(); }, 50);
+      });
+
+      sliderGate.addEventListener("input", () => {
+        valGate.textContent = `${sliderGate.value}%`;
+        showLoader("Ajustando", "Recalculando...");
+        setTimeout(() => { applyDSP(); hideLoader(); }, 50);
+      });
+
+      // Eventos do Formato de Ondas e cliques em timeline
+      window.addEventListener("resize", () => { if (targetBuffer) drawWaveform(); });
+
+      // Eventos de Playback
+      btnPlay.addEventListener("click", () => isPlaying ? pause() : play());
+      btnStop.addEventListener("click", () => stop());
+
+      btnModeA.addEventListener("click", () => {
+        currentMode = 'A';
+        btnModeA.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md focus:outline-none";
+        btnModeB.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white focus:outline-none";
+      });
+
+      btnModeB.addEventListener("click", () => {
+        currentMode = 'B';
+        btnModeB.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md focus:outline-none";
+        btnModeA.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white focus:outline-none";
+      });
+
+      btnReset.addEventListener("click", () => {
+        stop();
+        targetBuffer = null;
+        processedBuffer = null;
+        playerContainer.classList.add("hidden");
+        dropzone.classList.remove("hidden");
+        btnDownload.disabled = true;
+        fileInput.value = "";
+      });
+
+      // Eventos do formato de exportação
+      btnExpMix.addEventListener("click", () => {
+        exportMode = 'mix';
+        btnExpMix.className = "py-2 text-xs font-bold rounded-lg bg-brand-accent text-white transition-all focus:outline-none";
+        btnExpMulti.className = "py-2 text-xs font-bold rounded-lg text-gray-400 hover:text-white transition-all focus:outline-none";
+      });
+
+      btnExpMulti.addEventListener("click", () => {
+        exportMode = 'multi';
+        btnExpMulti.className = "py-2 text-xs font-bold rounded-lg bg-brand-accent text-white transition-all focus:outline-none";
+        btnExpMix.className = "py-2 text-xs font-bold rounded-lg text-gray-400 hover:text-white transition-all focus:outline-none";
+      });
+
+      // Evento de Download Customizado (Sequencial para multitrack / WAV ou MP3)
+      btnDownload.addEventListener("click", () => {
+        if (!targetBuffer) return;
+        pause();
+
+        const expBass = checkExpBass.checked;
+        const expVocal = checkExpVocal.checked;
+        const expInst = checkExpInst.checked;
+        const selectedFormat = selectFormat.value; // "wav" ou "mp3"
+
+        if (!expBass && !expVocal && !expInst) {
+          alert("Por favor, selecione ao menos uma track para download.");
+          return;
+        }
+
+        if (exportMode === 'mix') {
+          showLoader("Processando", `Exportando mixagem combinada em ${selectedFormat.toUpperCase()}...`);
+          setTimeout(() => {
+            const bassG = expBass ? 1.0 : 0.0;
+            const vocalG = expVocal ? 1.0 : 0.0;
+            const instG = expInst ? 1.0 : 0.0;
+            const rendered = renderBuffer(bassG, vocalG, instG);
+            triggerDownload(rendered, "_MixCustomizada", selectedFormat);
+            hideLoader();
+          }, 100);
+        } else {
+          let tasks = [];
+          if (expBass) tasks.push({ b: 1.0, v: 0.0, i: 0.0, name: "_Graves_Baixo_Bumbo" });
+          if (expVocal) tasks.push({ b: 0.0, v: 1.0, i: 0.0, name: "_Vocais_Isolados" });
+          if (expInst) tasks.push({ b: 0.0, v: 0.0, i: 1.0, name: "_Harmonia_Instrumental" });
+
+          let index = 0;
+          function renderNext() {
+            if (index >= tasks.length) {
+              hideLoader();
+              return;
+            }
+            const currentTask = tasks[index];
+            showLoader("Processando", `Exportando track ${index + 1} de ${tasks.length}: ${currentTask.name.replace('_','').replace(/_/g,' ')} em ${selectedFormat.toUpperCase()}`);
+            
+            setTimeout(() => {
+              const rendered = renderBuffer(currentTask.b, currentTask.v, currentTask.i);
+              triggerDownload(rendered, currentTask.name, selectedFormat);
+              index++;
+              renderNext();
+            }, 200);
+          }
+          renderNext();
+        }
+      });
+    });
+  </script>
+
+
+</body>
+</html>

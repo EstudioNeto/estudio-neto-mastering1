@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio Neto — Conversor de Áudio 8D Profissional</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      background: #1e293b;
+      height: 6px;
+      border-radius: 3px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -5px;
+      background-color: #6366f1;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+    }
+    input[type="range"]::-moz-range-track {
+      background: #1e293b;
+      height: 6px;
+      border-radius: 3px;
+    }
+    input[type="range"]::-moz-range-thumb {
+      background-color: #6366f1;
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">🎧</span>
+          <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+            Estúdio Neto 8D Spatial
+          </h1>
+        </div>
+        <!-- Botão Voltar ao Estúdio Neto -->
+        <a href="https://www.estudioneto.com.br/" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">
+          ← Voltar ao Estúdio Neto
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- WORKSPACE PRINCIPAL -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Lado Esquerdo: Upload, Player e Visualizer -->
+    <section class="lg:col-span-7 space-y-6">
+      <!-- Upload Zone -->
+      <div id="dropzone" class="border-2 border-dashed border-brand-border hover:border-brand-accent/50 transition-colors rounded-2xl p-8 bg-brand-card text-center cursor-pointer group">
+        <input type="file" id="file-input" accept="audio/*" class="hidden">
+        <div class="flex flex-col items-center gap-4">
+          <div class="w-16 h-16 rounded-full bg-indigo-500/10 flex items-center justify-center text-brand-accent group-hover:scale-105 transition-transform">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">Selecione seu arquivo de áudio</p>
+            <p class="text-xs text-gray-400 mt-1">Arraste a música para cá ou clique para buscar</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Player de Áudio -->
+      <div id="player-container" class="bg-brand-card rounded-2xl border border-brand-border p-6 hidden space-y-6">
+        <div class="flex items-center justify-between">
+          <div class="truncate">
+            <p class="text-xs text-gray-400 font-mono">Modo 8D Ativo</p>
+            <h3 id="track-name" class="font-bold text-white truncate text-base">Faixa.mp3</h3>
+          </div>
+          <div id="time-display" class="text-sm font-mono text-brand-accent">0:00 / 0:00</div>
+        </div>
+        <div class="relative bg-brand-dark rounded-xl overflow-hidden">
+          <canvas id="waveform-canvas" class="w-full h-24 block cursor-pointer"></canvas>
+          <div id="playhead" class="absolute top-0 left-0 w-0.5 h-full bg-brand-accent pointer-events-none shadow-[0_0_8px_#6366f1]"></div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <button id="btn-play" class="w-12 h-12 rounded-full bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition-all">
+              <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <button id="btn-stop" class="w-10 h-10 rounded-full bg-brand-border hover:bg-red-500/20 text-gray-300 flex items-center justify-center transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+            </button>
+          </div>
+          <div class="flex bg-brand-dark p-1 rounded-xl border border-brand-border">
+            <button id="btn-bypass" class="px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white">Estéreo Tradicional</button>
+            <button id="btn-effect" class="px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md">Áudio 8D</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lado Direito: Parâmetros e Download -->
+    <section class="lg:col-span-5 space-y-6">
+      <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>🎚️</span> Ajustes de Imersão</h2>
+        
+        <!-- Presets rápidos -->
+        <div class="grid grid-cols-2 gap-2" id="preset-selector-group">
+          <button data-preset="suave" class="p-btn-preset text-xs p-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-300 font-bold transition-all">
+            ✨ Suave
+          </button>
+          <button data-preset="classico" class="p-btn-preset text-xs p-2.5 rounded-lg border border-brand-accent/50 bg-brand-accent/10 text-white font-bold transition-all">
+            🌀 Clássico
+          </button>
+          <button data-preset="intenso" class="p-btn-preset text-xs p-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-300 font-bold transition-all">
+            ⚡ Intenso
+          </button>
+          <button data-preset="onirico" class="p-btn-preset text-xs p-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-300 font-bold transition-all">
+            🌌 Onírico
+          </button>
+        </div>
+
+        <!-- Velocidade de Rotação -->
+        <div class="space-y-2 pt-2 border-t border-brand-border">
+          <div class="flex justify-between items-center">
+            <label class="text-xs text-gray-400 font-semibold">Velocidade da Órbita</label>
+            <span id="val-speed" class="text-xs font-mono text-brand-accent font-bold">0.15 Hz</span>
+          </div>
+          <input type="range" id="slider-speed" min="0.05" max="1.50" step="0.01" value="0.15" class="w-full">
+        </div>
+
+        <!-- Profundidade do Panning -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label class="text-xs text-gray-400 font-semibold">Profundidade Estéreo</label>
+            <span id="val-depth" class="text-xs font-mono text-brand-accent font-bold">85%</span>
+          </div>
+          <input type="range" id="slider-depth" min="0" max="100" step="1" value="85" class="w-full">
+        </div>
+
+        <!-- Reverb Decay -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label class="text-xs text-gray-400 font-semibold">Ambiente (Reverb Decay)</label>
+            <span id="val-decay" class="text-xs font-mono text-brand-accent font-bold">2.2s</span>
+          </div>
+          <input type="range" id="slider-decay" min="0.5" max="5.0" step="0.1" value="2.2" class="w-full">
+        </div>
+
+        <!-- Reverb Mix -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label class="text-xs text-gray-400 font-semibold">Mix do Ambiente</label>
+            <span id="val-mix" class="text-xs font-mono text-brand-accent font-bold">25%</span>
+          </div>
+          <input type="range" id="slider-mix" min="0" max="100" step="1" value="25" class="w-full">
+        </div>
+
+        <!-- Download Button -->
+        <div class="pt-4 border-t border-brand-border">
+          <button id="btn-download" disabled class="w-full bg-brand-success hover:bg-emerald-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+            Processar e Baixar WAV (8D)
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- TEXTOS INFORMATIVOS E EXPLICATIVOS -->
+  <section class="max-w-6xl w-full mx-auto p-4 md:p-8 space-y-12 text-gray-300 border-t border-brand-border">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- O que é -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>🔬</span> Psicoacústica: Como o Som Rotaciona
+        </h3>
+        <p class="text-sm leading-relaxed text-gray-400">
+          O formato de áudio conhecido popularmente como <strong>8D</strong> simula a percepção de uma fonte sonora orbitando em 360 graus em torno do ouvinte. Diferente de gravações tradicionais onde os instrumentos possuem posições fixas à esquerda ou à direita, o processamento 8D altera dinamicamente a fase e o panorama estéreo de maneira contínua.
+        </p>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Esta ilusão acústica é intensificada através de um espaço reverberante simulado, recriando a sensação física de que as ondas sonoras se chocam contra paredes de um ambiente antes de alcançarem seus canais auditivos, gerando profundidade e distanciamento tridimensional.
+        </p>
+      </div>
+
+      <!-- Fones de Ouvido -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>🎧</span> Por que é necessário usar fones?
+        </h3>
+        <p class="text-sm leading-relaxed text-gray-400">
+          O efeito 8D baseia-se diretamente na separação absoluta de áudio direcionada a cada ouvido (escuta binaural). Quando ouvimos através de caixas de som comuns, ocorre o fenômeno físico de <em>crosstalk</em>: o ouvido direito capta parcialmente o som emitido pela caixa esquerda, o que neutraliza as diferenças de fase e tempo necessárias para enganar nosso sistema nervoso.
+        </p>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Com fones de ouvido (especialmente modelos over-ear com isolamento passivo), o isolamento do sinal em cada canal é completo, permitindo que a variação de volume e os micro-atrasos nas fases do sinal simulem perfeitamente a direção esférica do som.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal de Carregamento -->
+  <div id="loader-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-brand-card border border-brand-border p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <h3 id="loader-title" class="text-lg font-bold text-white">Processando</h3>
+      <p id="loader-text" class="text-sm text-gray-400">Aguardando arquivo...</p>
+    </div>
+  </div>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PROCESSAMENTO DE ÁUDIO 8D (DSP) -->
+  <script>
+    // Variáveis Globais
+    let audioCtx = null;
+    let targetBuffer = null;
+    let sourceNode = null;
+    let startTime = 0;
+    let pauseTime = 0;
+    let isPlaying = false;
+    let isBypassed = false;
+    let fileName = "";
+
+    // Parâmetros de Modulação
+    let currentPreset = "classico";
+    const presets = {
+      suave: { speed: 0.10, depth: 70, decay: 1.5, mix: 15 },
+      classico: { speed: 0.15, depth: 85, decay: 2.2, mix: 25 },
+      intenso: { speed: 0.30, depth: 100, decay: 1.8, mix: 35 },
+      onirico: { speed: 0.07, depth: 95, decay: 3.8, mix: 45 }
+    };
+
+    // Nós de Áudio Principal
+    let dryGain = null, wetGain = null, bypassGain = null, effectGain = null;
+    let stereoPanner = null, reverbConvolver = null;
+    let panOscillator = null, panOscGain = null;
+
+    // Elementos DOM
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("file-input");
+    const playerContainer = document.getElementById("player-container");
+    const btnPlay = document.getElementById("btn-play");
+    const btnStop = document.getElementById("btn-stop");
+    const btnBypass = document.getElementById("btn-bypass");
+    const btnEffect = document.getElementById("btn-effect");
+    const btnDownload = document.getElementById("btn-download");
+    const trackNameDisp = document.getElementById("track-name");
+    const timeDisp = document.getElementById("time-display");
+    const playhead = document.getElementById("playhead");
+    const waveCanvas = document.getElementById("waveform-canvas");
+
+    // Controles Sliders
+    const sliderSpeed = document.getElementById("slider-speed");
+    const sliderDepth = document.getElementById("slider-depth");
+    const sliderDecay = document.getElementById("slider-decay");
+    const sliderMix = document.getElementById("slider-mix");
+
+    // Visualizadores Sliders
+    const valSpeed = document.getElementById("val-speed");
+    const valDepth = document.getElementById("val-depth");
+    const valDecay = document.getElementById("val-decay");
+    const valMix = document.getElementById("val-mix");
+
+    // Loader Modal
+    const loaderModal = document.getElementById("loader-modal");
+    const loaderTitle = document.getElementById("loader-title");
+    const loaderText = document.getElementById("loader-text");
+
+    function showLoader(title, text) {
+      loaderTitle.textContent = title;
+      loaderText.textContent = text;
+      loaderModal.classList.remove("opacity-0", "pointer-events-none");
+    }
+
+    function hideLoader() {
+      loaderModal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    // Gerenciador de Arquivos
+    dropzone.addEventListener("click", () => fileInput.click());
+    dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("border-brand-accent"); });
+    dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-brand-accent"));
+    dropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropzone.classList.remove("border-brand-accent");
+      if (e.dataTransfer.files.length > 0) handleLoadFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) handleLoadFile(e.target.files[0]);
+    });
+
+    async function handleLoadFile(file) {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      fileName = file.name.split('.').slice(0, -1).join('.');
+      showLoader("Processando", "Decodificando arquivo de áudio de forma local...");
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        targetBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+        
+        dropzone.classList.add("hidden");
+        playerContainer.classList.remove("hidden");
+        btnDownload.disabled = false;
+        trackNameDisp.textContent = file.name;
+
+        buildAudioPipeline();
+        drawWaveform();
+        updateTimeDisplay(0);
+      } catch (err) {
+        console.error(err);
+        alert("Falha ao abrir o áudio. Tente outro formato.");
+      } finally {
+        hideLoader();
+      }
+    }
+
+    // Construção do Gráfico de Efeitos Web Audio API
+    function buildAudioPipeline() {
+      // Nós de Controle Geral
+      bypassGain = audioCtx.createGain();
+      effectGain = audioCtx.createGain();
+
+      // Panner Estéreo e Modulor LFO
+      stereoPanner = audioCtx.createStereoPanner();
+      panOscillator = audioCtx.createOscillator();
+      panOscGain = audioCtx.createGain();
+
+      panOscillator.type = 'sine';
+      panOscillator.frequency.value = parseFloat(sliderSpeed.value);
+      panOscGain.gain.value = parseFloat(sliderDepth.value) / 100;
+
+      // Conexão do Modulador ao Parâmetro do Panner
+      panOscillator.connect(panOscGain);
+      panOscGain.connect(stereoPanner.pan);
+
+      // Bloco de Reverberação Física (Convolução)
+      reverbConvolver = audioCtx.createConvolver();
+      updateReverbImpulse();
+
+      dryGain = audioCtx.createGain();
+      wetGain = audioCtx.createGain();
+
+      // Ajustes de Intensidade de Mixagem do Reverb
+      const mixVal = parseFloat(sliderMix.value) / 100;
+      dryGain.gain.value = 1.0 - (mixVal * 0.5); // Proteção de atenuação seca
+      wetGain.gain.value = mixVal;
+
+      // Montagem das Conexões
+      // Caminho com Efeito (8D)
+      stereoPanner.connect(dryGain);
+      stereoPanner.connect(reverbConvolver);
+      reverbConvolver.connect(wetGain);
+
+      dryGain.connect(effectGain);
+      wetGain.connect(effectGain);
+
+      // Envia ao destino físico
+      bypassGain.connect(audioCtx.destination);
+      effectGain.connect(audioCtx.destination);
+
+      panOscillator.start();
+      updatePipelineValues();
+    }
+
+    function updateReverbImpulse() {
+      const decay = parseFloat(sliderDecay.value);
+      reverbConvolver.buffer = generateSyntheticImpulse(decay);
+    }
+
+    // Sintetizador de Resposta de Impulso para Reverb Espacial Local
+    function generateSyntheticImpulse(decayTime) {
+      const sampleRate = audioCtx ? audioCtx.sampleRate : 44100;
+      const length = sampleRate * decayTime;
+      const impulseBuffer = audioCtx.createBuffer(2, length, sampleRate);
+      const left = impulseBuffer.getChannelData(0);
+      const right = impulseBuffer.getChannelData(1);
+
+      for (let i = 0; i < length; i++) {
+        const percent = i / length;
+        const fade = Math.pow(1 - percent, 2.5); // Curva de atenuação exponencial
+        left[i] = (Math.random() * 2 - 1) * fade;
+        right[i] = (Math.random() * 2 - 1) * fade;
+      }
+      return impulseBuffer;
+    }
+
+    // Atualização dos Controles em Tempo Real
+    function updatePipelineValues() {
+      if (!audioCtx || !targetBuffer) return;
+
+      const speedVal = parseFloat(sliderSpeed.value);
+      const depthVal = parseFloat(sliderDepth.value) / 100;
+      const mixVal = parseFloat(sliderMix.value) / 100;
+
+      valSpeed.textContent = speedVal.toFixed(2) + " Hz";
+      valDepth.textContent = Math.round(depthVal * 100) + "%";
+      valDecay.textContent = parseFloat(sliderDecay.value).toFixed(1) + "s";
+      valMix.textContent = Math.round(mixVal * 100) + "%";
+
+      if (isBypassed) {
+        bypassGain.gain.setTargetAtTime(1.0, audioCtx.currentTime, 0.02);
+        effectGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.02);
+      } else {
+        bypassGain.gain.setTargetAtTime(0.0, audioCtx.currentTime, 0.02);
+        effectGain.gain.setTargetAtTime(1.0, audioCtx.currentTime, 0.02);
+      }
+
+      // Aplica parâmetros dinâmicos de modulação espacial
+      panOscillator.frequency.setTargetAtTime(speedVal, audioCtx.currentTime, 0.05);
+      panOscGain.gain.setTargetAtTime(depthVal, audioCtx.currentTime, 0.05);
+
+      dryGain.gain.setTargetAtTime(1.0 - (mixVal * 0.5), audioCtx.currentTime, 0.05);
+      wetGain.gain.setTargetAtTime(mixVal * 0.8, audioCtx.currentTime, 0.05);
+    }
+
+    // Controles do reprodutor
+    function play() {
+      if (!targetBuffer) return;
+      if (audioCtx.state === "suspended") audioCtx.resume();
+
+      sourceNode = audioCtx.createBufferSource();
+      sourceNode.buffer = targetBuffer;
+
+      // Envia aos dois caminhos principais
+      sourceNode.connect(stereoPanner);
+      sourceNode.connect(bypassGain);
+
+      const offset = pauseTime;
+      sourceNode.start(0, offset);
+      startTime = audioCtx.currentTime - offset;
+      isPlaying = true;
+      btnPlay.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+      tick();
+    }
+
+    function pause() {
+      if (!isPlaying) return;
+      sourceNode.stop();
+      pauseTime = audioCtx.currentTime - startTime;
+      isPlaying = false;
+      btnPlay.innerHTML = `<svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+    }
+
+    function stop() {
+      if (isPlaying) {
+        sourceNode.stop();
+        isPlaying = false;
+      }
+      pauseTime = 0;
+      updateTimeDisplay(0);
+      btnPlay.innerHTML = `<svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+    }
+
+    function tick() {
+      if (!isPlaying) return;
+      const elapsed = audioCtx.currentTime - startTime;
+      if (elapsed >= targetBuffer.duration) {
+        stop();
+        return;
+      }
+      updateTimeDisplay(elapsed);
+      requestAnimationFrame(tick);
+    }
+
+    function updateTimeDisplay(seconds) {
+      const current = formatTime(seconds);
+      const total = formatTime(targetBuffer ? targetBuffer.duration : 0);
+      timeDisp.textContent = `${current} / ${total}`;
+      if (targetBuffer) {
+        const percent = (seconds / targetBuffer.duration) * 100;
+        playhead.style.width = `${percent}%`;
+      }
+    }
+
+    // Formatação de minutos/segundos
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // Renderização Visual da Waveform
+    function drawWaveform() {
+      const ctx = waveCanvas.getContext("2d");
+      const width = waveCanvas.width = waveCanvas.parentElement.clientWidth;
+      const height = waveCanvas.height = 96;
+      const rawData = targetBuffer.getChannelData(0);
+      const step = Math.ceil(rawData.length / width);
+      const amp = height / 2;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(15, 20, 35, 0.8)";
+      ctx.fillRect(0, 0, width, height);
+
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, "#a5b4fc");
+      grad.addColorStop(0.5, "#6366f1");
+      grad.addColorStop(1, "#a5b4fc");
+      ctx.fillStyle = grad;
+
+      for (let i = 0; i < width; i++) {
+        let min = 1.0; let max = -1.0;
+        for (let j = 0; j < step; j++) {
+          const d = rawData[i * step + j];
+          if (d < min) min = d;
+          if (d > max) max = d;
+        }
+        ctx.fillRect(i, (1 + min) * amp, 1.5, Math.max(1, (max - min) * amp));
+      }
+    }
+
+    // Controle de cliques na Waveform
+    waveCanvas.addEventListener("click", (e) => {
+      if (!targetBuffer) return;
+      const rect = waveCanvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const targetTime = (clickX / rect.width) * targetBuffer.duration;
+      const wasPlaying = isPlaying;
+      if (isPlaying) sourceNode.stop();
+      pauseTime = targetTime;
+      updateTimeDisplay(targetTime);
+      if (wasPlaying) play();
+    });
+
+    btnPlay.addEventListener("click", () => isPlaying ? pause() : play());
+    btnStop.addEventListener("click", () => stop());
+
+    // Switch de Bypass do Efeito 8D
+    btnBypass.addEventListener("click", () => {
+      isBypassed = true;
+      btnBypass.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md";
+      btnEffect.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
+      updatePipelineValues();
+    });
+
+    btnEffect.addEventListener("click", () => {
+      isBypassed = false;
+      btnEffect.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all bg-brand-accent text-white shadow-md";
+      btnBypass.className = "px-4 py-1.5 rounded-lg text-sm font-bold transition-all text-gray-400 hover:text-white";
+      updatePipelineValues();
+    });
+
+    // Listeners para Sliders de Controle
+    sliderSpeed.addEventListener("input", updatePipelineValues);
+    sliderDepth.addEventListener("input", updatePipelineValues);
+    sliderDecay.addEventListener("input", () => {
+      updateReverbImpulse();
+      updatePipelineValues();
+    });
+    sliderMix.addEventListener("input", updatePipelineValues);
+
+    // Eventos do Grupo de Presets
+    document.getElementById("preset-selector-group").addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+
+      document.querySelectorAll(".p-btn-preset").forEach(b => {
+        b.className = "p-btn-preset text-xs p-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-300 font-bold transition-all";
+      });
+
+      btn.className = "p-btn-preset text-xs p-2.5 rounded-lg border border-brand-accent/50 bg-brand-accent/10 text-white font-bold transition-all";
+      
+      currentPreset = btn.getAttribute("data-preset");
+      const config = presets[currentPreset];
+
+      // Seta valores nos Sliders
+      sliderSpeed.value = config.speed;
+      sliderDepth.value = config.depth;
+      sliderDecay.value = config.decay;
+      sliderMix.value = config.mix;
+
+      updateReverbImpulse();
+      updatePipelineValues();
+    });
+
+    // --- PROCESSAMENTO FINAL OFFLINE E EXPORTAÇÃO WAV ---
+    btnDownload.addEventListener("click", async () => {
+      if (!targetBuffer) return;
+      pause();
+      showLoader("Renderizando", "Exportando arquivo de áudio de alta fidelidade...");
+
+      // Parâmetros para renderização idênticos aos controles atuais
+      const speedVal = parseFloat(sliderSpeed.value);
+      const depthVal = parseFloat(sliderDepth.value) / 100;
+      const decayVal = parseFloat(sliderDecay.value);
+      const mixVal = parseFloat(sliderMix.value) / 100;
+
+      const duration = targetBuffer.duration;
+      const sampleRate = targetBuffer.sampleRate;
+
+      const offlineCtx = new OfflineAudioContext(2, duration * sampleRate, sampleRate);
+      const os = offlineCtx.createBufferSource();
+      os.buffer = targetBuffer;
+
+      const oPanner = offlineCtx.createStereoPanner();
+      const oReverb = offlineCtx.createConvolver();
+      
+      // Cria Resposta de Impulso Sintética Offline
+      const length = sampleRate * decayVal;
+      const impulseBuffer = offlineCtx.createBuffer(2, length, sampleRate);
+      const left = impulseBuffer.getChannelData(0);
+      const right = impulseBuffer.getChannelData(1);
+      for (let i = 0; i < length; i++) {
+        const percent = i / length;
+        const fade = Math.pow(1 - percent, 2.5);
+        left[i] = (Math.random() * 2 - 1) * fade;
+        right[i] = (Math.random() * 2 - 1) * fade;
+      }
+      oReverb.buffer = impulseBuffer;
+
+      const oDry = offlineCtx.createGain();
+      const oWet = offlineCtx.createGain();
+      oDry.gain.value = 1.0 - (mixVal * 0.5);
+      oWet.gain.value = mixVal * 0.8;
+
+      // Pipeline de modulação do Panner Offline
+      os.connect(oPanner);
+      oPanner.connect(oDry);
+      oPanner.connect(oReverb);
+      oReverb.connect(oWet);
+
+      oDry.connect(offlineCtx.destination);
+      oWet.connect(offlineCtx.destination);
+
+      // Simulação matemática do LFO para o Stereo Pan em Offline Context
+      const totalPoints = duration * sampleRate;
+      const lfoFrequency = speedVal;
+      oPanner.pan.setValueAtTime(0, 0);
+      for (let i = 0; i < totalPoints; i += 2048) {
+        const time = i / sampleRate;
+        const currentPan = Math.sin(2 * Math.PI * lfoFrequency * time) * depthVal;
+        oPanner.pan.setValueAtTime(currentPan, time);
+      }
+
+      os.start();
+      try {
+        const renderBuffer = await offlineCtx.startRendering();
+        const wavBlob = bufferToWav(renderBuffer);
+        const url = URL.createObjectURL(wavBlob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${fileName}_EstudioNeto_8D.wav`;
+        link.click();
+      } catch (err) {
+        console.error(err);
+        alert("Erro na exportação do áudio.");
+      } finally {
+        hideLoader();
+      }
+    });
+
+    // Função de Codificação para Contêiner WAV PCM de 16-bits
+    function bufferToWav(buffer) {
+      let numOfChan = buffer.numberOfChannels,
+          length = buffer.length * numOfChan * 2 + 44,
+          bufferArr = new ArrayBuffer(length),
+          view = new DataView(bufferArr),
+          channels = [], i, sample,
+          offset = 0,
+          pos = 0;
+
+      setUint32(0x46464952);                         // "RIFF"
+      setUint32(length - 8);
+      setUint32(0x45564157);                         // "WAVE"
+
+      setUint32(0x20746d66);                         // "fmt "
+      setUint32(16);                                 
+      setUint16(1);                                  // PCM
+      setUint16(numOfChan);
+      setUint32(buffer.sampleRate);
+      setUint32(buffer.sampleRate * 2 * numOfChan);  
+      setUint16(numOfChan * 2);                      
+      setUint16(16);                                 // 16-bit
+
+      setUint32(0x61746164);                         // "data"
+      setUint32(length - pos - 4);                   
+
+      for (i = 0; i < numOfChan; i++) {
+        channels.push(buffer.getChannelData(i));
+      }
+
+      while (pos < length) {
+        for (i = 0; i < numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset]));
+          sample = (sample < 0 ? sample * 0x8000 : sample * 0x7FFF);
+          view.setInt16(pos, sample, true);
+          pos += 2;
+        }
+        offset++;
+      }
+
+      return new Blob([bufferArr], { type: "audio/wav" });
+
+      function setUint16(data) { view.setUint16(pos, data, true); pos += 2; }
+      function setUint32(data) { view.setUint32(pos, data, true); pos += 4; }
+    }
+
+    // Window Resize Event
+    window.addEventListener("resize", () => {
+      if (targetBuffer) drawWaveform();
+    });
+  </script>
+</body>
+</html>

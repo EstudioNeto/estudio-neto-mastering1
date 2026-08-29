@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afinador de Guitarra Online — Estúdio Neto</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header Simplificado com Botão de Voltar -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🎸</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Estúdio Neto — Afinador de Instrumentos
+        </h1>
+      </div>
+      
+      <!-- Botão Voltar -->
+      <a href="https://www.estudioneto.com.br/index.html" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">
+        ← Voltar ao Estúdio Neto
+      </a>
+    </div>
+  </header>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL (AFINADOR INTERATIVO) -->
+  <main class="max-w-4xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
+    
+    <!-- Painel do Afinador -->
+    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xl">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl font-bold text-white">Afinador Digital de Precisão</h2>
+        <p class="text-xs text-gray-400">Selecione o modo de afinação, ative o microfone e toque uma corda por vez.</p>
+      </div>
+
+      <!-- Seleção de Modo -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <label for="tuning-select" class="text-xs text-gray-400 uppercase tracking-wider">Modo de Afinação:</label>
+        <select id="tuning-select" class="bg-brand-dark border border-brand-border rounded-lg px-3 py-2 text-white text-sm focus:border-brand-accent outline-none cursor-pointer w-full sm:w-auto">
+          <option value="chromatic">Cromático (Qualquer Nota)</option>
+          <option value="standard">Padrão (E A D G B E)</option>
+          <option value="drop-d">Drop D (D A D G B E)</option>
+          <option value="half-step-down">Meio Tom Abaixo (Eb Ab Db Gb Bb Eb)</option>
+          <option value="dadgad">DADGAD</option>
+        </select>
+      </div>
+
+      <!-- Interface Visual do Ponteiro -->
+      <div class="relative h-44 rounded-xl border border-brand-border bg-brand-dark/50 overflow-hidden flex flex-col items-center justify-end pb-4">
+        
+        <!-- Arco Guia de Cents -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+          <div class="w-72 h-72 border-t-2 border-dashed border-gray-500 rounded-full translate-y-24"></div>
+        </div>
+
+        <!-- Linhas de Referência -->
+        <div class="absolute bottom-4 left-1/4 w-0.5 h-3 bg-gray-600"></div>
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-0.5 h-5 bg-brand-success"></div>
+        <div class="absolute bottom-4 left-3/4 w-0.5 h-3 bg-gray-600"></div>
+
+        <!-- Ponteiro Físico -->
+        <div id="needle" class="absolute bottom-4 left-1/2 w-0.5 h-28 bg-brand-accent origin-bottom -translate-x-1/2 transition-transform duration-100 ease-out" style="transform: rotate(0deg);">
+          <div class="w-2 h-2 rounded-full bg-brand-accent -translate-x-1/3 -translate-y-1/2"></div>
+        </div>
+
+        <!-- Exibição Digital de Informações -->
+        <div class="z-10 text-center space-y-1">
+          <div id="note-display" class="text-5xl font-black text-white tracking-tight">-</div>
+          <div id="freq-display" class="text-xs text-gray-500 font-mono">0.00 Hz</div>
+          <div id="cents-display" class="text-xs font-semibold text-gray-400">Aguardando áudio</div>
+        </div>
+      </div>
+
+      <!-- Botão de Ação Principal -->
+      <div class="flex justify-center">
+        <button id="mic-btn" class="w-full sm:w-64 py-3.5 text-sm font-bold rounded-xl text-white bg-brand-accent hover:bg-brand-accentHover shadow-md transition-all duration-200">
+          🎤 Iniciar Afinador por Microfone
+        </button>
+      </div>
+
+      <!-- Informação de Privacidade -->
+      <div class="flex items-center gap-3 bg-[#0d111d] border border-brand-border rounded-lg px-4 py-3 text-xs text-gray-400">
+        <span class="text-brand-success text-base">🛡️</span>
+        <p><strong>Privacidade Garantida:</strong> A análise das ondas sonoras ocorre localmente no seu computador. Nenhum áudio é transmitido ou gravado pelo Estúdio Neto.</p>
+      </div>
+    </div>
+
+    <!-- Seção de Tons de Referência (Tocar de Ouvido) -->
+    <div class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-4">
+      <h3 class="text-lg font-bold text-white text-center sm:text-left">Tons de Referência (Afinação de Ouvido)</h3>
+      <p class="text-xs text-gray-400">Se preferir afinar de ouvido, clique em uma das cordas abaixo para gerar a frequência pura correspondente.</p>
+      
+      <div id="reference-buttons-container" class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <!-- Inseridos via JavaScript dinamicamente baseado na afinação selecionada -->
+      </div>
+      <div class="text-center">
+        <button id="stop-tones-btn" class="hidden text-xs text-red-400 hover:text-red-300 font-semibold underline mt-2">
+          Parar som de referência
+        </button>
+      </div>
+    </div>
+
+    <!-- TEXTOS INFORMATIVOS E TUTORIAIS -->
+    <article class="space-y-10 text-gray-300 pt-4 border-t border-brand-border">
+      
+      <!-- Como Funciona -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">Como Usar o Afinador Online</h2>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Nossa ferramenta detecta automaticamente a nota musical correspondente à vibração do seu instrumento em tempo real. Siga as etapas básicas abaixo:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+          <div class="bg-brand-card border border-brand-border p-4 rounded-xl space-y-1">
+            <span class="text-brand-accent font-bold text-sm">Passo 1</span>
+            <h4 class="text-white font-bold text-sm">Permita o Acesso</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">Clique em "Iniciar Afinador por Microfone" e conceda a permissão necessária para captação do áudio no navegador.</p>
+          </div>
+          <div class="bg-brand-card border border-brand-border p-4 rounded-xl space-y-1">
+            <span class="text-brand-accent font-bold text-sm">Passo 2</span>
+            <h4 class="text-white font-bold text-sm">Toque a Corda</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">Toque uma única corda e observe o ponteiro. Se o ponteiro estiver à esquerda, a nota está abaixo do tom (flat); se estiver à direita, está acima (sharp).</p>
+          </div>
+          <div class="bg-brand-card border border-brand-border p-4 rounded-xl space-y-1">
+            <span class="text-brand-accent font-bold text-sm">Passo 3</span>
+            <h4 class="text-white font-bold text-sm">Ajuste as Tarraxas</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">Aperte ou afrouxe a tarraxa suavemente até que o ponteiro se estabilize exatamente no centro e o display acuse a cor verde de nota afinada.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frequências Padrão -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">Notas e Frequências (Padrão EADGBE)</h2>
+        <p class="text-sm text-gray-400">
+          A afinação padrão de seis cordas de violão e guitarra (da mais grossa à mais fina) baseia-se na escala temperada internacional (Lá 440 Hz):
+        </p>
+        <div class="overflow-x-auto bg-brand-card border border-brand-border rounded-xl">
+          <table class="w-full text-xs text-left">
+            <thead>
+              <tr class="border-b border-brand-border bg-brand-dark/40">
+                <th class="p-3 text-white font-semibold">Corda</th>
+                <th class="p-3 text-white font-semibold">Nota Musical</th>
+                <th class="p-3 text-white font-semibold">Frequência Alvo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-border text-gray-400">
+              <tr><td class="p-3 font-medium text-white">6ª Corda (Mi Grave)</td><td class="p-3 font-mono">E (Mi) / E2</td><td class="p-3">82.41 Hz</td></tr>
+              <tr><td class="p-3 font-medium text-white">5ª Corda</td><td class="p-3 font-mono">A (Lá) / A2</td><td class="p-3">110.00 Hz</td></tr>
+              <tr><td class="p-3 font-medium text-white">4ª Corda</td><td class="p-3 font-mono">D (Ré) / D3</td><td class="p-3">146.83 Hz</td></tr>
+              <tr><td class="p-3 font-medium text-white">3ª Corda</td><td class="p-3 font-mono">G (Sol) / G3</td><td class="p-3">196.00 Hz</td></tr>
+              <tr><td class="p-3 font-medium text-white">2ª Corda</td><td class="p-3 font-mono">B (Si) / B3</td><td class="p-3">246.94 Hz</td></tr>
+              <tr><td class="p-3 font-medium text-white">1ª Corda (Mi Agudo)</td><td class="p-3 font-mono">E (Mi) / E4</td><td class="p-3">329.63 Hz</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Afinações Alternativas -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white">Métodos de Afinações Alternativas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-brand-card/50 border border-brand-border p-5 rounded-xl space-y-2">
+            <h4 class="text-sm font-bold text-white">Drop D</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Consiste em baixar a 6ª corda (Mi) em um tom completo para Ré (D2). É muito utilizada no rock e metal para facilitar a execução de acordes de quintas (power chords) com apenas uma pestana.
+            </p>
+          </div>
+          <div class="bg-brand-card/50 border border-brand-border p-5 rounded-xl space-y-2">
+            <h4 class="text-sm font-bold text-white">Meio Tom Abaixo</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Todas as cordas são transpostas meio tom abaixo (Eb Standard). Reduz levemente a tensão mecânica sobre o braço do instrumento e facilita o alcance de notas agudas pelos vocalistas.
+            </p>
+          </div>
+          <div class="bg-brand-card/50 border border-brand-border p-5 rounded-xl space-y-2">
+            <h4 class="text-sm font-bold text-white">DADGAD</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Afinação aberta muito comum em arranjos folk e música acústica celta. Permite dedilhados abertos com sonoridades ricas em harmônicos e ressonâncias naturais de cordas soltas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Perguntas Frequentes -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold text-white">Perguntas Frequentes (FAQ)</h2>
+        <div class="space-y-3">
+          <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-1">
+            <h4 class="text-sm font-bold text-white">Por que o afinador oscila muito ou não reconhece a nota?</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              O excesso de ruídos de fundo (como ventiladores ou ecos do ambiente) pode atrapalhar a análise de frequência. Procure um espaço silencioso, aproxime o tampo acústico ou o alto-falante do microfone e palhete uma nota limpa, esperando o som vibrar livremente.
+            </p>
+          </div>
+          <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-1">
+            <h4 class="text-sm font-bold text-white">O que significa o indicador em Cents?</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Os "cents" são subdivisões de um semitom (o menor intervalo físico entre uma casa e outra no braço do instrumento). Cada semitom equivale a 100 cents. Estar em 0 cents significa que a nota está perfeitamente afinada.
+            </p>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+ <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE PROCESSAMENTO DO AFINADOR -->
+  <script>
+    // Configurações e Mapeamentos de Notas
+    const noteNames = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    
+    // Dados de Afinações Predefinidas
+    const tuningPresets = {
+      standard: [
+        { note: "E2", freq: 82.41 },
+        { note: "A2", freq: 110.00 },
+        { note: "D3", freq: 146.83 },
+        { note: "G3", freq: 196.00 },
+        { note: "B3", freq: 246.94 },
+        { note: "E4", freq: 329.63 }
+      ],
+      "drop-d": [
+        { note: "D2", freq: 73.42 },
+        { note: "A2", freq: 110.00 },
+        { note: "D3", freq: 146.83 },
+        { note: "G3", freq: 196.00 },
+        { note: "B3", freq: 246.94 },
+        { note: "E4", freq: 329.63 }
+      ],
+      "half-step-down": [
+        { note: "Eb2", freq: 77.78 },
+        { note: "Ab2", freq: 103.83 },
+        { note: "Db3", freq: 138.59 },
+        { note: "Gb3", freq: 185.00 },
+        { note: "Bb3", freq: 233.08 },
+        { note: "Eb4", freq: 311.13 }
+      ],
+      dadgad: [
+        { note: "D2", freq: 73.42 },
+        { note: "A2", freq: 110.00 },
+        { note: "D3", freq: 146.83 },
+        { note: "G3", freq: 196.00 },
+        { note: "A3", freq: 220.00 },
+        { note: "D4", freq: 293.66 }
+      ]
+    };
+
+    // Controle de Contexto de Áudio
+    let audioContext = null;
+    let analyserNode = null;
+    let micStream = null;
+    let isTuning = false;
+    let activeOscillator = null;
+
+    // Elementos DOM
+    const micBtn = document.getElementById('mic-btn');
+    const needle = document.getElementById('needle');
+    const noteDisplay = document.getElementById('note-display');
+    const freqDisplay = document.getElementById('freq-display');
+    const centsDisplay = document.getElementById('cents-display');
+    const tuningSelect = document.getElementById('tuning-select');
+    const refContainer = document.getElementById('reference-buttons-container');
+    const stopTonesBtn = document.getElementById('stop-tones-btn');
+
+    // Inicializa botões de referência com base na seleção
+    function updateReferenceButtons() {
+      refContainer.innerHTML = '';
+      const preset = tuningSelect.value;
+      
+      // Se for cromático, usa o padrão EADGBE apenas como exemplo de referência
+      const notes = preset === 'chromatic' ? tuningPresets.standard : tuningPresets[preset];
+      
+      notes.forEach((item) => {
+        const btn = document.createElement('button');
+        btn.className = "bg-brand-dark hover:bg-brand-accent/20 border border-brand-border text-white text-xs font-mono font-bold py-2 rounded-lg transition-all flex flex-col items-center justify-center gap-1";
+        btn.innerHTML = `<span>🔊</span> <span>${item.note}</span>`;
+        btn.addEventListener('click', () => playReferenceTone(item.freq));
+        refContainer.appendChild(btn);
+      });
+    }
+
+    // Tocar Som de Referência
+    function playReferenceTone(frequency) {
+      if (activeOscillator) {
+        activeOscillator.stop();
+        activeOscillator.disconnect();
+      }
+      
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      
+      osc.type = 'sine'; // onda senoidal pura
+      osc.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      
+      gain.gain.setValueAtTime(0.15, audioContext.currentTime); // volume seguro
+      
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      
+      osc.start();
+      activeOscillator = osc;
+      stopTonesBtn.classList.remove('hidden');
+    }
+
+    // Parar todos os sons ativos
+    stopTonesBtn.addEventListener('click', () => {
+      if (activeOscillator) {
+        activeOscillator.stop();
+        activeOscillator.disconnect();
+        activeOscillator = null;
+      }
+      stopTonesBtn.classList.add('hidden');
+    });
+
+    // Eventos de Seleção de Afinação
+    tuningSelect.addEventListener('change', () => {
+      updateReferenceButtons();
+    });
+
+    // Início / Parada do Microfone
+    micBtn.addEventListener('click', async () => {
+      if (isTuning) {
+        stopMicrophone();
+        return;
+      }
+
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyserNode = audioContext.createAnalyser();
+        analyserNode.fftSize = 2048;
+        
+        const source = audioContext.createMediaStreamSource(micStream);
+        source.connect(analyserNode);
+
+        isTuning = true;
+        micBtn.innerHTML = "❌ Parar Afinador";
+        micBtn.className = "w-full sm:w-64 py-3.5 text-sm font-bold rounded-xl text-white bg-red-600 hover:bg-red-500 shadow-md transition-all duration-200";
+        
+        requestAnimationFrame(updateTunerLoop);
+      } catch (err) {
+        alert("Não foi possível acessar o microfone. Verifique as permissões do seu navegador.");
+      }
+    });
+
+    function stopMicrophone() {
+      if (micStream) {
+        micStream.getTracks().forEach(track => track.stop());
+      }
+      isTuning = false;
+      micBtn.innerHTML = "🎤 Iniciar Afinador por Microfone";
+      micBtn.className = "w-full sm:w-64 py-3.5 text-sm font-bold rounded-xl text-white bg-brand-accent hover:bg-brand-accentHover shadow-md transition-all duration-200";
+      
+      // Reset displays
+      needle.style.transform = `rotate(0deg)`;
+      noteDisplay.innerHTML = "-";
+      freqDisplay.innerHTML = "0.00 Hz";
+      centsDisplay.innerHTML = "Aguardando áudio";
+      centsDisplay.className = "text-xs font-semibold text-gray-400";
+    }
+
+    // Processador Loop Espectral (Autocorrelação)
+    const buffer = new Float32Array(2048);
+    function updateTunerLoop() {
+      if (!isTuning) return;
+
+      analyserNode.getFloatTimeDomainData(buffer);
+      const frequency = autoCorrelate(buffer, audioContext.sampleRate);
+
+      if (frequency !== -1 && frequency > 50 && frequency < 1000) {
+        freqDisplay.innerHTML = `${frequency.toFixed(2)} Hz`;
+        processPitch(frequency);
+      }
+      
+      requestAnimationFrame(updateTunerLoop);
+    }
+
+    // Algoritmo de Autocorrelação Clássico para Detecção de Fundamental
+    function autoCorrelate(buf, sampleRate) {
+      let SIZE = buf.length;
+      let rms = 0;
+
+      for (let i = 0; i < SIZE; i++) {
+        let val = buf[i];
+        rms += val * val;
+      }
+      rms = Math.sqrt(rms / SIZE);
+      if (rms < 0.015) return -1; // Sinal muito fraco
+
+      let r1 = 0, r2 = SIZE - 1;
+      let thres = 0.2;
+      for (let i = 0; i < SIZE / 2; i++) {
+        if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+      }
+      for (let i = SIZE - 1; i >= SIZE / 2; i--) {
+        if (Math.abs(buf[i]) < thres) { r2 = i; break; }
+      }
+
+      buf = buf.slice(r1, r2);
+      SIZE = buf.length;
+
+      let c = new Float32Array(SIZE);
+      for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE - i; j++) {
+          c[i] = c[i] + buf[j] * buf[j + i];
+        }
+      }
+
+      let d = 0;
+      while (c[d] > c[d + 1]) d++;
+      let maxval = -1, maxpos = -1;
+      for (let i = d; i < SIZE; i++) {
+        if (c[i] > maxval) {
+          maxval = c[i];
+          maxpos = i;
+        }
+      }
+      let T0 = maxpos;
+      return sampleRate / T0;
+    }
+
+    // Processamento da nota detectada vs. Nota Alvo
+    function processPitch(frequency) {
+      const selectedPreset = tuningSelect.value;
+      
+      // Encontra a nota musical correspondente na escala de 12 semitons
+      const noteNum = 12 * (Math.log(frequency / 440) / Math.log(2));
+      const roundedNote = Math.round(noteNum) + 69;
+      const noteName = noteNames[roundedNote % 12];
+      
+      // Frequência esperada exata para a nota identificada
+      const idealFreq = 440 * Math.pow(2, (roundedNote - 69) / 12);
+      
+      // Cálculo de desvio em cents
+      let cents = Math.round(1200 * Math.log2(frequency / idealFreq));
+
+      // Se não for modo cromático, limita a comparação às cordas do instrumento
+      if (selectedPreset !== 'chromatic') {
+        const targetNotes = tuningPresets[selectedPreset];
+        // Encontra a corda mais próxima do preset
+        let closestTarget = targetNotes[0];
+        let minDiff = Math.abs(frequency - closestTarget.freq);
+        
+        targetNotes.forEach(item => {
+          let diff = Math.abs(frequency - item.freq);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestTarget = item;
+          }
+        });
+
+        // Força cents e nota baseados no alvo do preset
+        cents = Math.round(1200 * Math.log2(frequency / closestTarget.freq));
+        noteDisplay.innerHTML = closestTarget.note.replace(/[0-9]/g, '');
+      } else {
+        noteDisplay.innerHTML = noteName;
+      }
+
+      // Limita a rotação máxima do ponteiro visual para (-45 a 45 graus)
+      let rotationAngle = cents;
+      if (rotationAngle < -50) rotationAngle = -50;
+      if (rotationAngle > 50) rotationAngle = 50;
+
+      // Rotaciona o ponteiro real
+      needle.style.transform = `rotate(${rotationAngle}deg)`;
+
+      // Atualiza feedbacks de cor e texto
+      if (Math.abs(cents) <= 4) {
+        centsDisplay.innerHTML = "Afinada! (Estável)";
+        centsDisplay.className = "text-xs font-semibold text-brand-success";
+        noteDisplay.className = "text-5xl font-black text-brand-success tracking-tight";
+      } else if (cents < 0) {
+        centsDisplay.innerHTML = `${cents} cents abaixo (Aperte)`;
+        centsDisplay.className = "text-xs font-semibold text-amber-500";
+        noteDisplay.className = "text-5xl font-black text-white tracking-tight";
+      } else {
+        centsDisplay.innerHTML = `+${cents} cents acima (Afrouxe)`;
+        centsDisplay.className = "text-xs font-semibold text-amber-500";
+        noteDisplay.className = "text-5xl font-black text-white tracking-tight";
+      }
+    }
+
+    // Inicialização da interface
+    updateReferenceButtons();
+  </script>
+</body>
+</html>

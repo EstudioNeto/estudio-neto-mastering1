@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortador de Áudio Online — Estúdio Neto</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header Unificado -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">✂️</span>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+          Cortador de Áudio
+        </h1>
+      </div>
+      
+      <!-- Botão de Retorno solicitado -->
+      <a href="https://www.estudioneto.com.br/" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-indigo-300 hover:text-white border border-indigo-500/40 hover:border-indigo-400 rounded-full hover:bg-indigo-500/10 transition-all">
+        <span>↩</span> Voltar ao Estúdio Neto
+      </a>
+    </div>
+  </header>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- CATÁLOGO DE FERRAMENTAS (ÁREA DE TRABALHO) -->
+  <main class="max-w-4xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
+    
+    <div class="text-center space-y-3">
+      <h2 class="text-3xl font-black text-white bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Edite e Modele Seus Arquivos</h2>
+      <p class="text-slate-400 text-sm max-w-xl mx-auto">Remova partes indesejadas, defina pontos de entrada e saída com transições suaves e exporte localmente com total privacidade.</p>
+    </div>
+
+    <!-- Interface Principal do Cortador -->
+    <section class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xl">
+      
+      <!-- Zona de Upload de Arquivo -->
+      <div id="upload-zone" class="border-2 border-dashed border-brand-border hover:border-brand-accent rounded-xl p-8 text-center cursor-pointer transition-colors bg-[#080b16]">
+        <input type="file" id="audio-input" accept="audio/*" class="hidden" />
+        <div class="space-y-4">
+          <span class="text-5xl block">📥</span>
+          <p class="text-sm text-gray-300 font-medium">Clique para selecionar ou arraste seu arquivo de áudio aqui</p>
+          <p class="text-xs text-gray-500">Formatos suportados: MP3, WAV, FLAC, M4A, AAC (Máx. 120MB)</p>
+        </div>
+      </div>
+
+      <!-- Área de Edição (Inicialmente Oculta) -->
+      <div id="trimmer-workspace" class="hidden space-y-6">
+        
+        <!-- Canvas da Waveform -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-xs text-slate-400 px-1">
+            <span>Representação de Onda</span>
+            <span id="file-info" class="text-brand-accent font-semibold">Carregado</span>
+          </div>
+          <div class="relative bg-slate-950 border border-brand-border rounded-xl p-2 h-40 overflow-hidden">
+            <canvas id="waveform-canvas" class="w-full h-full"></canvas>
+            <div id="play-head" class="absolute top-0 bottom-0 left-0 w-0.5 bg-red-500 transition-all duration-75 pointer-events-none hidden"></div>
+          </div>
+        </div>
+
+        <!-- Controles de Seleção Temporal -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Ponto de Início -->
+          <div class="bg-brand-dark/50 border border-brand-border/60 p-4 rounded-xl space-y-3">
+            <div class="flex justify-between items-center">
+              <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">Início do Corte</label>
+              <span id="start-time-val" class="text-sm font-mono text-white">0.00s</span>
+            </div>
+            <input type="range" id="slider-start" min="0" max="100" step="0.01" value="0" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none" />
+          </div>
+
+          <!-- Ponto de Término -->
+          <div class="bg-brand-dark/50 border border-brand-border/60 p-4 rounded-xl space-y-3">
+            <div class="flex justify-between items-center">
+              <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">Fim do Corte</label>
+              <span id="end-time-val" class="text-sm font-mono text-white">0.00s</span>
+            </div>
+            <input type="range" id="slider-end" min="0" max="100" step="0.01" value="100" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none" />
+          </div>
+        </div>
+
+        <!-- Configurações de Fades / Transições -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Fade-In -->
+          <div class="bg-brand-dark/50 border border-brand-border/60 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">Fade-In (Entrada)</label>
+              <span id="fade-in-val" class="text-xs font-mono text-white">0.0s</span>
+            </div>
+            <input type="range" id="slider-fade-in" min="0" max="10" step="0.1" value="0" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none" />
+          </div>
+
+          <!-- Fade-Out -->
+          <div class="bg-brand-dark/50 border border-brand-border/60 p-4 rounded-xl space-y-2">
+            <div class="flex justify-between items-center">
+              <label class="text-xs text-slate-400 font-medium uppercase tracking-wider">Fade-Out (Saída)</label>
+              <span id="fade-out-val" class="text-xs font-mono text-white">0.0s</span>
+            </div>
+            <input type="range" id="slider-fade-out" min="0" max="10" step="0.1" value="0" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer outline-none" />
+          </div>
+
+          <!-- Curva de Transição -->
+          <div class="bg-brand-dark/50 border border-brand-border/60 p-4 rounded-xl space-y-2">
+            <label class="block text-xs text-slate-400 font-medium uppercase tracking-wider">Modelo de Curva</label>
+            <select id="fade-type" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-white text-xs outline-none cursor-pointer focus:border-brand-accent">
+              <option value="linear" selected>Curva Linear</option>
+              <option value="exponential">Curva Exponencial</option>
+              <option value="s-curve">Curva S-Curve</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Botões de Controle e Ação -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+          <!-- Pré-ouvir -->
+          <button id="btn-play" class="flex-1 py-3 font-semibold rounded-xl text-white bg-slate-800 hover:bg-slate-700 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+            <span id="play-icon">▶</span> <span id="play-text">Pré-visualizar</span>
+          </button>
+          
+          <!-- Cortar e Exportar -->
+          <button id="btn-export" class="flex-1 py-3 font-bold rounded-xl text-white bg-gradient-to-br from-indigo-500 to-indigo-700 hover:from-indigo-600 hover:to-indigo-800 shadow-md hover:shadow-indigo-500/10 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+            <span>💾</span> Exportar Resultado (WAV)
+          </button>
+        </div>
+
+        <!-- Feedback de Processamento -->
+        <div id="processing-indicator" class="hidden text-center text-xs text-brand-accent animate-pulse font-medium">
+          Processando e renderizando o sinal... Aguarde.
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Artigos e Explicações Acadêmicas (Exclusivos e Didáticos) -->
+    <article class="space-y-12 text-slate-300 leading-relaxed text-sm md:text-base">
+      
+      <section class="space-y-4">
+        <h3 class="text-2xl font-bold text-white border-l-4 border-indigo-500 pl-3">O que é a Manipulação Temporal (Corte)?</h3>
+        <p>
+          O corte de áudio representa o controle sobre o início e término físico de um evento sonoro. Em gravações brutas, seja de voz ou instrumentos, é comum a captura de silêncios iniciais, ruídos ambientais não intencionais, ou decaimentos prolongados que comprometem o ritmo do arranjo.
+        </p>
+        <p>
+          Isolar fragmentos com precisão matemática ajuda na organização do arranjo estrutural de uma música, na eliminação de perdas dinâmicas em fita ou no gerenciamento de arquivos pesados de edição.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-2xl font-bold text-white border-l-4 border-indigo-500 pl-3">A Importância das Curvas de Atenuação (Fades)</h3>
+        <p>
+          Quando interrompemos uma forma de onda abruptamente no meio de seu ciclo elétrico, geramos uma descontinuidade na variação da pressão do alto-falante. Essa transição violenta gera um ruído transitório conhecido acusticamente como "clique" ou estalo digital.
+        </p>
+        <p>
+          Para evitar essa degradação harmônica, aplicamos envelopes de ganho de atenuação gradual:
+        </p>
+        <div class="grid md:grid-cols-3 gap-6 pt-2">
+          <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+            <h4 class="font-bold text-indigo-300 mb-2">Linear</h4>
+            <p class="text-xs text-slate-400">
+              O nível do volume decai em velocidade constante do início ao fim. Indicado para cortes muito rápidos e edições utilitárias simples.
+            </p>
+          </div>
+          <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+            <h4 class="font-bold text-indigo-300 mb-2">Exponencial</h4>
+            <p class="text-xs text-slate-400">
+              O decaimento simula a percepção logarítmica do ouvido humano, parecendo mais gradual no início e acentuado no final. Muito agradável para transições instrumentais.
+            </p>
+          </div>
+          <div class="bg-brand-card border border-brand-border p-5 rounded-xl">
+            <h4 class="font-bold text-indigo-300 mb-2">Curva-S (S-Curve)</h4>
+            <p class="text-xs text-slate-400">
+              Entrada e saída atenuadas de forma circular, com suavização nas pontas do gradiente. Ideal para crossfades exigentes e trabalhos acústicos sofisticados.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-2xl font-bold text-white border-l-4 border-indigo-500 pl-3">Vantagens do Processamento no Lado do Cliente</h3>
+        <p>
+          Diferente das plataformas convencionais de edição online que realizam o processamento dos arquivos em servidores distantes, esta ferramenta processa as amostras inteiramente no seu computador por meio da <strong>Web Audio API</strong>.
+        </p>
+        <p>
+          Isso significa que o seu arquivo de voz ou música não é transmitido ou guardado em nenhum banco de dados externo, preservando plenamente a segurança e integridade de sua propriedade intelectual em conformidade técnica com fluxos de trabalho profissionais.
+        </p>
+      </section>
+
+    </article>
+
+  </main>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- Footer Unificado -->
+<footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Lógico do Cortador de Áudio -->
+  <script>
+    let audioContext = null;
+    let audioBuffer = null;
+    let activeSource = null;
+    let activeGainNode = null;
+    
+    // Tempos de início, fim e fades
+    let duration = 0;
+    let cutStart = 0;
+    let cutEnd = 0;
+    let fadeInDuration = 0;
+    let fadeOutDuration = 0;
+    let fadeType = 'linear';
+    
+    // Elementos da Interface
+    const uploadZone = document.getElementById('upload-zone');
+    const audioInput = document.getElementById('audio-input');
+    const trimmerWorkspace = document.getElementById('trimmer-workspace');
+    
+    const sliderStart = document.getElementById('slider-start');
+    const sliderEnd = document.getElementById('slider-end');
+    const sliderFadeIn = document.getElementById('slider-fade-in');
+    const sliderFadeOut = document.getElementById('slider-fade-out');
+    
+    const valStart = document.getElementById('start-time-val');
+    const valEnd = document.getElementById('end-time-val');
+    const valFadeIn = document.getElementById('fade-in-val');
+    const valFadeOut = document.getElementById('fade-out-val');
+    const fadeTypeSelect = document.getElementById('fade-type');
+    
+    const btnPlay = document.getElementById('btn-play');
+    const playIcon = document.getElementById('play-icon');
+    const playText = document.getElementById('play-text');
+    const btnExport = document.getElementById('btn-export');
+    const processingIndicator = document.getElementById('processing-indicator');
+    
+    const canvas = document.getElementById('waveform-canvas');
+    const fileInfo = document.getElementById('file-info');
+
+    let isPlaying = false;
+    let playStartTimeSystem = 0;
+    let playStartOffset = 0;
+    let progressTimer = null;
+
+    // Ação de Clique na Zona de Upload
+    uploadZone.addEventListener('click', () => audioInput.click());
+
+    // Eventos Drag and Drop
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('border-brand-accent');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('border-brand-accent');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('border-brand-accent');
+      if (e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    audioInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        handleFile(e.target.files[0]);
+      }
+    });
+
+    // Leitura e Decodificação do Arquivo
+    function handleFile(file) {
+      if (file.size > 120 * 1024 * 1024) {
+        alert("O tamanho do arquivo excede o limite de 120MB.");
+        return;
+      }
+
+      fileInfo.textContent = "Carregando...";
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        const arrayBuffer = e.target.result;
+        
+        // Inicializa Contexto
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        audioContext.decodeAudioData(arrayBuffer, (decodedBuffer) => {
+          audioBuffer = decodedBuffer;
+          duration = audioBuffer.duration;
+          
+          // Configura limites padrão
+          cutStart = 0;
+          cutEnd = duration;
+          fadeInDuration = 0;
+          fadeOutDuration = 0;
+
+          // Atualiza Interface
+          setupSliders();
+          drawWaveform();
+          
+          fileInfo.textContent = `${file.name} (${duration.toFixed(2)}s)`;
+          uploadZone.classList.add('hidden');
+          trimmerWorkspace.classList.remove('hidden');
+        }, (err) => {
+          alert("Ocorreu um erro ao decodificar este arquivo de áudio. Verifique se o arquivo está corrompido.");
+          fileInfo.textContent = "Erro";
+        });
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+
+    // Configura Sliders de Acordo com a Duração do Arquivo
+    function setupSliders() {
+      sliderStart.min = 0;
+      sliderStart.max = duration;
+      sliderStart.value = 0;
+      
+      sliderEnd.min = 0;
+      sliderEnd.max = duration;
+      sliderEnd.value = duration;
+
+      sliderFadeIn.min = 0;
+      sliderFadeIn.max = Math.min(10, duration / 2);
+      sliderFadeIn.value = 0;
+
+      sliderFadeOut.min = 0;
+      sliderFadeOut.max = Math.min(10, duration / 2);
+      sliderFadeOut.value = 0;
+
+      updateLabels();
+    }
+
+    function updateLabels() {
+      valStart.textContent = `${parseFloat(sliderStart.value).toFixed(2)}s`;
+      valEnd.textContent = `${parseFloat(sliderEnd.value).toFixed(2)}s`;
+      valFadeIn.textContent = `${parseFloat(sliderFadeIn.value).toFixed(1)}s`;
+      valFadeOut.textContent = `${parseFloat(sliderFadeOut.value).toFixed(1)}s`;
+
+      cutStart = parseFloat(sliderStart.value);
+      cutEnd = parseFloat(sliderEnd.value);
+      fadeInDuration = parseFloat(sliderFadeIn.value);
+      fadeOutDuration = parseFloat(sliderFadeOut.value);
+    }
+
+    // Sincroniza Sliders para Evitar Sobreposições Inválidas
+    sliderStart.addEventListener('input', () => {
+      if (parseFloat(sliderStart.value) >= parseFloat(sliderEnd.value)) {
+        sliderStart.value = parseFloat(sliderEnd.value) - 0.1;
+      }
+      updateLabels();
+      drawWaveform();
+    });
+
+    sliderEnd.addEventListener('input', () => {
+      if (parseFloat(sliderEnd.value) <= parseFloat(sliderStart.value)) {
+        sliderEnd.value = parseFloat(sliderStart.value) + 0.1;
+      }
+      updateLabels();
+      drawWaveform();
+    });
+
+    sliderFadeIn.addEventListener('input', updateLabels);
+    sliderFadeOut.addEventListener('input', updateLabels);
+    fadeTypeSelect.addEventListener('change', (e) => { fadeType = e.target.value; });
+
+    // Desenha Waveform no Canvas com Região de Seleção Ativa
+    function drawWaveform() {
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width = canvas.offsetWidth;
+      const height = canvas.height = canvas.offsetHeight;
+      
+      ctx.clearRect(0, 0, width, height);
+      
+      if (!audioBuffer) return;
+      
+      // Amostragem simples do canal esquerdo para desenho rápido
+      const data = audioBuffer.getChannelData(0);
+      const step = Math.ceil(data.length / width);
+      const amp = height / 2;
+      
+      // Desenha ondas
+      ctx.fillStyle = '#475569'; // Cinza para partes não ativas
+      for (let i = 0; i < width; i++) {
+        let min = 1.0;
+        let max = -1.0;
+        for (let j = 0; j < step; j++) {
+          const dat = data[i * step + j];
+          if (dat < min) min = dat;
+          if (dat > max) max = dat;
+        }
+        
+        // Posições em relação à seleção de corte
+        const currentSec = (i / width) * duration;
+        const isActive = (currentSec >= cutStart && currentSec <= cutEnd);
+        
+        ctx.fillStyle = isActive ? '#6366f1' : '#1e293b'; // Indigo para seleção, cinza escuro para o resto
+        ctx.fillRect(i, amp + min * amp, 1, (max - min) * amp);
+      }
+    }
+
+    // Cria as tabelas de valores para a curva do tipo "S-Curve"
+    function createSCurvePoints(steps, isFadeIn) {
+      const curve = new Float32Array(steps);
+      for (let i = 0; i < steps; i++) {
+        const t = i / (steps - 1);
+        // Curva S harmônica matemática clássica
+        const val = 0.5 * (1 + Math.sin(Math.PI * t - Math.PI / 2));
+        curve[i] = isFadeIn ? val : (1 - val);
+      }
+      return curve;
+    }
+
+    // Aplicação Flexível das Curvas de Volume no Ganho
+    function applyFades(gainParam, durationSegment, fadeInDur, fadeOutDur, type, baseTime) {
+      gainParam.setValueAtTime(0, baseTime);
+
+      // Fade-In
+      if (fadeInDur > 0) {
+        if (type === 'linear') {
+          gainParam.linearRampToValueAtTime(1, baseTime + fadeInDur);
+        } else if (type === 'exponential') {
+          gainParam.setValueAtTime(0.001, baseTime);
+          gainParam.exponentialRampToValueAtTime(1, baseTime + fadeInDur);
+        } else if (type === 's-curve') {
+          const curve = createSCurvePoints(12, true);
+          gainParam.setValueCurveAtTime(curve, baseTime, fadeInDur);
+        }
+      } else {
+        gainParam.setValueAtTime(1, baseTime);
+      }
+
+      // Sustentação (Manter em 1 até o início do Fade-Out)
+      const fadeOutStartTime = baseTime + Math.max(fadeInDur, durationSegment - fadeOutDur);
+      if (fadeOutStartTime > baseTime + fadeInDur) {
+        gainParam.setValueAtTime(1, fadeOutStartTime);
+      }
+
+      // Fade-Out
+      if (fadeOutDur > 0 && fadeOutStartTime < baseTime + durationSegment) {
+        if (type === 'linear') {
+          gainParam.linearRampToValueAtTime(0, fadeOutStartTime + fadeOutDur);
+        } else if (type === 'exponential') {
+          gainParam.setValueAtTime(1, fadeOutStartTime);
+          gainParam.exponentialRampToValueAtTime(0.001, fadeOutStartTime + fadeOutDur);
+          gainParam.setValueAtTime(0, fadeOutStartTime + fadeOutDur);
+        } else if (type === 's-curve') {
+          const curve = createSCurvePoints(12, false);
+          gainParam.setValueCurveAtTime(curve, fadeOutStartTime, fadeOutDur);
+        }
+      } else {
+        gainParam.setValueAtTime(1, baseTime + durationSegment);
+      }
+    }
+
+    // Função de Reprodução de Pré-visualização
+    function togglePreview() {
+      if (isPlaying) {
+        stopPreview();
+      } else {
+        startPreview();
+      }
+    }
+
+    function startPreview() {
+      if (!audioBuffer) return;
+
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+
+      isPlaying = true;
+      btnPlay.classList.add('bg-red-600', 'hover:bg-red-700');
+      btnPlay.classList.remove('bg-slate-800', 'hover:bg-slate-700');
+      playIcon.textContent = '■';
+      playText.textContent = 'Parar Reprodução';
+
+      // Cria fonte
+      activeSource = audioContext.createBufferSource();
+      activeSource.buffer = audioBuffer;
+
+      activeGainNode = audioContext.createGain();
+      
+      activeSource.connect(activeGainNode);
+      activeGainNode.connect(audioContext.destination);
+
+      const segmentDuration = cutEnd - cutStart;
+      const now = audioContext.currentTime;
+
+      // Aplica envelopes de fades na reprodução em tempo real
+      applyFades(activeGainNode.gain, segmentDuration, fadeInDuration, fadeOutDuration, fadeType, now);
+
+      activeSource.start(0, cutStart, segmentDuration);
+      playStartTimeSystem = now;
+      playStartOffset = cutStart;
+
+      // Evento ao término da execução
+      activeSource.onended = () => {
+        if (isPlaying) {
+          stopPreview();
+        }
+      };
+    }
+
+    function stopPreview() {
+      isPlaying = false;
+      btnPlay.classList.remove('bg-red-600', 'hover:bg-red-700');
+      btnPlay.classList.add('bg-slate-800', 'hover:bg-slate-700');
+      playIcon.textContent = '▶';
+      playText.textContent = 'Pré-visualizar';
+
+      if (activeSource) {
+        try { activeSource.stop(); } catch(e){}
+        activeSource.disconnect();
+        activeSource = null;
+      }
+      if (activeGainNode) {
+        activeGainNode.disconnect();
+        activeGainNode = null;
+      }
+    }
+
+    btnPlay.addEventListener('click', togglePreview);
+
+    // Renderização Offline e Exportação como Arquivo WAV local
+    btnExport.addEventListener('click', () => {
+      if (!audioBuffer) return;
+
+      stopPreview();
+      btnExport.disabled = true;
+      processingIndicator.classList.remove('hidden');
+
+      const segmentDuration = cutEnd - cutStart;
+      const sampleRate = audioBuffer.sampleRate;
+      const numChannels = audioBuffer.numberOfChannels;
+
+      // Contexto Offline de Alta Velocidade de Renderização
+      const offlineCtx = new OfflineAudioContext(numChannels, segmentDuration * sampleRate, sampleRate);
+      
+      const offlineSource = offlineCtx.createBufferSource();
+      offlineSource.buffer = audioBuffer;
+
+      const offlineGain = offlineCtx.createGain();
+
+      offlineSource.connect(offlineGain);
+      offlineGain.connect(offlineCtx.destination);
+
+      // Aplica fades e transições na renderização offline
+      applyFades(offlineGain.gain, segmentDuration, fadeInDuration, fadeOutDuration, fadeType, 0);
+
+      // Inicia renderização offline
+      offlineSource.start(0, cutStart, segmentDuration);
+
+      offlineCtx.startRendering().then((renderedBuffer) => {
+        const wavBlob = bufferToWav(renderedBuffer);
+        const url = URL.createObjectURL(wavBlob);
+        
+        // Dispara o download nativo do navegador
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `audio_editado_estudioneto.wav`;
+        document.body.appendChild(a);
+        a.click();
+        
+        // Limpeza de recursos temporários
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        btnExport.disabled = false;
+        processingIndicator.classList.add('hidden');
+      }).catch(err => {
+        alert("Falha ao exportar arquivo.");
+        btnExport.disabled = false;
+        processingIndicator.classList.add('hidden');
+      });
+    });
+
+    // Função auxiliar: Codificação Binária de Áudio para o Formato WAV (16-bit PCM)
+    function bufferToWav(buffer) {
+      let numOfChan = buffer.numberOfChannels,
+          length = buffer.length * numOfChan * 2 + 44,
+          bufferArr = new ArrayBuffer(length),
+          view = new DataView(bufferArr),
+          channels = [], i, sample,
+          offset = 0,
+          pos = 0;
+
+      // Cabeçalho do arquivo WAV (RIFF Header)
+      setUint32(0x46464952);                         // "RIFF"
+      setUint32(length - 8);                         // Tamanho do arquivo
+      setUint32(0x45564157);                         // "WAVE"
+
+      setUint32(0x20746d66);                         // Chunk "fmt "
+      setUint32(16);                                 // Comprimento do Chunk
+      setUint16(1);                                  // Formato Linear PCM (1)
+      setUint16(numOfChan);
+      setUint32(buffer.sampleRate);
+      setUint32(buffer.sampleRate * 2 * numOfChan);  // Taxa de bytes/s
+      setUint16(numOfChan * 2);                      // Alinhamento de canais
+      setUint16(16);                                 // Profundidade de 16-bits
+
+      setUint32(0x61746164);                         // Chunk "data"
+      setUint32(length - pos - 4);                   // Comprimento do sinal
+
+      // Coleta dados dos canais disponíveis
+      for(i=0; i<buffer.numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+      }
+
+      // Intercala e converte as amostras em inteiros de 16-bit com sinal
+      while(pos < length) {
+        for(i=0; i<numOfChan; i++) {
+          sample = Math.max(-1, Math.min(1, channels[i][offset])); // Limita a escala
+          sample = (sample < 0 ? sample * 0x8000 : sample * 0x7FFF); // Converte para PCM 16-bit
+          view.setInt16(pos, sample, true);
+          pos += 2;
+        }
+        offset++;
+      }
+
+      return new Blob([bufferArr], {type: "audio/wav"});
+
+      function setUint16(data) {
+        view.setUint16(pos, data, true);
+        pos += 2;
+      }
+
+      function setUint32(data) {
+        view.setUint32(pos, data, true);
+        pos += 4;
+      }
+    }
+
+    // Desenha waveform limpa na inicialização
+    drawWaveform();
+    
+    // Atualiza waveform dinamicamente se redimensionar a janela
+    window.addEventListener('resize', drawWaveform);
+  </script>
+
+</body>
+</html>

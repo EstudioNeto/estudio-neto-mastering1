@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio Neto — Conversor de Áudio Profissional</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070a13',
+              card: '#0f1423',
+              accent: '#6366f1',
+              accentHover: '#4f46e5',
+              success: '#10b981',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">🔄</span>
+          <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">
+            Estúdio Neto Audio Converter
+          </h1>
+        </div>
+        <!-- Botão Voltar ao Estúdio Neto -->
+        <a href="https://www.estudioneto.com.br/" class="bg-brand-border hover:bg-slate-800 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all border border-slate-700">
+          ← Voltar ao Estúdio Neto
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
+    <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
+      
+      <!-- Script Oficial Adsterra 728x90 -->
+      <script>
+        atOptions = {
+          'key' : '075895c4649089c88bfd69bcfe7dc655',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
+
+    </div>
+  </div>
+
+  <!-- WORKSPACE PRINCIPAL -->
+  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Lado Esquerdo: Upload e Lista de Arquivos -->
+    <section class="lg:col-span-7 space-y-6">
+      <!-- Upload Zone -->
+      <div id="dropzone" class="border-2 border-dashed border-brand-border hover:border-brand-accent/50 transition-colors rounded-2xl p-8 bg-brand-card text-center cursor-pointer group">
+        <input type="file" id="file-input" accept="audio/*" class="hidden" multiple>
+        <div class="flex flex-col items-center gap-4">
+          <div class="w-16 h-16 rounded-full bg-indigo-500/10 flex items-center justify-center text-brand-accent group-hover:scale-105 transition-transform">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-white">Carregue seus arquivos de áudio</p>
+            <p class="text-xs text-gray-400 mt-1">Arraste múltiplos arquivos para conversão em lote ou clique para buscar</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila de Arquivos Carregados -->
+      <div id="queue-container" class="bg-brand-card rounded-2xl border border-brand-border p-6 hidden space-y-4">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Fila de Conversão</h3>
+        <div id="queue-list" class="space-y-2 max-h-64 overflow-y-auto pr-2">
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Lado Direito: Opções de Saída e Execução -->
+    <section class="lg:col-span-5 space-y-6">
+      <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-6">
+        <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>⚙️</span> Configurações de Saída</h2>
+        
+        <!-- Formato de Saída -->
+        <div class="space-y-2">
+          <label class="text-xs text-gray-400 font-semibold uppercase tracking-wider block">Formato Container</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button id="fmt-wav" class="py-2.5 rounded-lg border border-brand-accent/50 bg-brand-accent/10 text-white font-bold text-sm transition-all">
+              WAV (Lossless)
+            </button>
+            <button id="fmt-mp3" class="py-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-400 hover:text-white font-bold text-sm transition-all">
+              MP3 (Compactado)
+            </button>
+          </div>
+        </div>
+
+        <!-- Opções Dinâmicas - WAV -->
+        <div id="wav-options" class="space-y-4">
+          <div class="space-y-2">
+            <label for="wav-sr" class="text-xs text-gray-400 font-semibold block">Taxa de Amostragem (Sample Rate)</label>
+            <select id="wav-sr" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-sm text-white focus:border-brand-accent outline-none cursor-pointer">
+              <option value="44100" selected>44.1 kHz (Padrão CD/Streaming)</option>
+              <option value="48000">48.0 kHz (Padrão Vídeo/Cinema)</option>
+              <option value="88200">88.2 kHz (Alta Resolução)</option>
+              <option value="96000">96.0 kHz (Estúdio profissional)</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label for="wav-bd" class="text-xs text-gray-400 font-semibold block">Profundidade de Bits (Bit Depth)</label>
+            <select id="wav-bd" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-sm text-white focus:border-brand-accent outline-none cursor-pointer">
+              <option value="16" selected>16-bit PCM (Fidelidade Padrão)</option>
+              <option value="24">24-bit PCM (Dinâmica Profissional)</option>
+              <option value="32">32-bit Float (Máxima Precisão/Sem Clipping)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Opções Dinâmicas - MP3 -->
+        <div id="mp3-options" class="space-y-4 hidden">
+          <div class="space-y-2">
+            <label for="mp3-br" class="text-xs text-gray-400 font-semibold block">Taxa de Bits (Bitrate)</label>
+            <select id="mp3-br" class="w-full bg-brand-dark border border-brand-border rounded-lg px-3 py-2.5 text-sm text-white focus:border-brand-accent outline-none cursor-pointer">
+              <option value="320" selected>320 kbps (Melhor Qualidade/Transparente)</option>
+              <option value="256">256 kbps (Excelente Relação Tamanho/Som)</option>
+              <option value="192">192 kbps (Qualidade Média de Rádio)</option>
+              <option value="128">128 kbps (Compactação Máxima)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Painel de Ação de Conversão -->
+        <div class="pt-4 border-t border-brand-border">
+          <button id="btn-convert" disabled class="w-full bg-brand-success hover:bg-emerald-600 disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+            Converter Fila de Arquivos
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- TEXTOS INFORMATIVOS E EXPLICATIVOS -->
+  <section class="max-w-6xl w-full mx-auto p-4 md:p-8 space-y-12 text-gray-300 border-t border-brand-border">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <!-- Estrutura de Arquivos -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>📦</span> Resolução Sem Perdas (Lossless) vs. Compactação
+        </h3>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Formatos como <strong>WAV</strong> gravam dados de forma pura e linear (PCM). Isso significa que cada oscilação da onda acústica é descrita numericamente sem aproximações, mantendo a integridade total do áudio original. Ao trabalhar com áudio profissional, arquivamento ou edição em DAWs, o WAV é o formato de eleição.
+        </p>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Em contrapartida, o contêiner <strong>MP3</strong> aplica compressão com perdas (<em>lossy</em>). Ele utiliza algoritmos psicoacústicos para descartar frequências que o ouvido humano possui dificuldade de distinguir em condições normais, reduzindo o arquivo a até 10% do tamanho bruto original.
+        </p>
+      </div>
+
+      <!-- Dicas de Configuração -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>💡</span> Amostragem e Profundidade de Bits
+        </h3>
+        <p class="text-sm leading-relaxed text-gray-400">
+          A <strong>Taxa de Amostragem</strong> (Sample Rate) representa quantas vezes por segundo a onda é lida. 44.1 kHz atende ao teorema de Nyquist para cobrir todo o espectro auditivo humano. Taxas maiores (como 48 kHz ou 96 kHz) são úteis para produções integradas ao vídeo ou processos que exigem estiramento de tempo sem degradação.
+        </p>
+        <p class="text-sm leading-relaxed text-gray-400">
+          A <strong>Profundidade de Bits</strong> (Bit Depth) determina a faixa dinâmica do áudio. O padrão de 16 bits oferece 96 dB de faixa dinâmica, excelente para distribuição final. Já o formato de 24 bits estende isso a 144 dB, ideal para gravação e mixagem, mitigando o ruído de fundo (noise floor).
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal de Carregamento e Progresso -->
+  <div id="loader-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-brand-card border border-brand-border p-8 rounded-2xl max-w-sm w-full text-center space-y-4 shadow-2xl">
+      <div id="loader-spinner" class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <h3 id="loader-title" class="text-lg font-bold text-white">Carregando</h3>
+      <p id="loader-text" class="text-sm text-gray-400">Por favor, aguarde...</p>
+      <!-- Barra de Progresso Interna -->
+      <div id="progress-container" class="w-full bg-brand-dark rounded-full h-2 hidden">
+        <div id="progress-bar" class="bg-brand-success h-2 rounded-full transition-all duration-100" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
+      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-3">
+          <span class="text-2xl">🎛️</span>
+          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
+        </div>
+        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+        </p>
+      </div>
+
+      <!-- Links das Colunas -->
+      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
+          </ul>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-gray-500 text-center md:text-left">
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
+      </div>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE CODIFICAÇÃO (WAV & MP3 via LameJS) -->
+  <script>
+    // Variáveis Globais de Processamento
+    let audioCtx = null;
+    let fileQueue = [];
+    let selectedFormat = "wav"; // "wav" ou "mp3"
+
+    // Elementos DOM
+    const dropzone = document.getElementById("dropzone");
+    const fileInput = document.getElementById("file-input");
+    const queueContainer = document.getElementById("queue-container");
+    const queueList = document.getElementById("queue-list");
+    const btnConvert = document.getElementById("btn-convert");
+
+    // Seletores de Formato
+    const fmtWavBtn = document.getElementById("fmt-wav");
+    const fmtMp3Btn = document.getElementById("fmt-mp3");
+    const wavOptions = document.getElementById("wav-options");
+    const mp3options = document.getElementById("mp3-options");
+
+    // Loader Modal
+    const loaderModal = document.getElementById("loader-modal");
+    const loaderTitle = document.getElementById("loader-title");
+    const loaderText = document.getElementById("loader-text");
+    const loaderSpinner = document.getElementById("loader-spinner");
+    const progressContainer = document.getElementById("progress-container");
+    const progressBar = document.getElementById("progress-bar");
+
+    function showLoader(title, text, showProgress = false) {
+      loaderTitle.textContent = title;
+      loaderText.textContent = text;
+      loaderModal.classList.remove("opacity-0", "pointer-events-none");
+      if (showProgress) {
+        loaderSpinner.classList.add("hidden");
+        progressContainer.classList.remove("hidden");
+        progressBar.style.width = "0%";
+      } else {
+        loaderSpinner.classList.remove("hidden");
+        progressContainer.classList.add("hidden");
+      }
+    }
+
+    function updateLoaderProgress(percent, text) {
+      loaderText.textContent = text;
+      progressBar.style.width = `${percent}%`;
+    }
+
+    function hideLoader() {
+      loaderModal.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    // Toggle de Formato
+    fmtWavBtn.addEventListener("click", () => {
+      selectedFormat = "wav";
+      fmtWavBtn.className = "py-2.5 rounded-lg border border-brand-accent/50 bg-brand-accent/10 text-white font-bold text-sm transition-all";
+      fmtMp3Btn.className = "py-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-400 hover:text-white font-bold text-sm transition-all";
+      wavOptions.classList.remove("hidden");
+      mp3options.classList.add("hidden");
+    });
+
+    fmtMp3Btn.addEventListener("click", () => {
+      selectedFormat = "mp3";
+      fmtMp3Btn.className = "py-2.5 rounded-lg border border-brand-accent/50 bg-brand-accent/10 text-white font-bold text-sm transition-all";
+      fmtWavBtn.className = "py-2.5 rounded-lg border border-brand-border bg-brand-dark hover:border-brand-accent/30 text-gray-400 hover:text-white font-bold text-sm transition-all";
+      mp3options.classList.remove("hidden");
+      wavOptions.classList.add("hidden");
+    });
+
+    // Gerenciador de Entrada de Arquivos
+    dropzone.addEventListener("click", () => fileInput.click());
+    dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("border-brand-accent"); });
+    dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-brand-accent"));
+    dropzone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropzone.classList.remove("border-brand-accent");
+      if (e.dataTransfer.files.length > 0) appendFilesToQueue(e.dataTransfer.files);
+    });
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files.length > 0) appendFilesToQueue(e.target.files);
+    });
+
+    function appendFilesToQueue(files) {
+      for (let i = 0; i < files.length; i++) {
+        fileQueue.push(files[i]);
+      }
+      renderQueue();
+    }
+
+    function renderQueue() {
+      if (fileQueue.length === 0) {
+        queueContainer.classList.add("hidden");
+        btnConvert.disabled = true;
+        return;
+      }
+
+      queueContainer.classList.remove("hidden");
+      btnConvert.disabled = false;
+      queueList.innerHTML = "";
+
+      fileQueue.forEach((file, index) => {
+        const item = document.createElement("div");
+        item.className = "flex items-center justify-between p-3 bg-brand-dark/60 border border-brand-border rounded-lg text-xs";
+        item.innerHTML = `
+          <div class="truncate pr-4 flex items-center gap-2">
+            <span class="text-indigo-400">📄</span>
+            <span class="text-white font-medium truncate font-mono">${file.name}</span>
+            <span class="text-gray-500 font-mono">(${(file.size / (1024 * 1024)).toFixed(2)} MB)</span>
+          </div>
+          <button onclick="removeQueueItem(${index})" class="text-red-400 hover:text-red-300 font-semibold p-1 transition-colors">Remover</button>
+        `;
+        queueList.appendChild(item);
+      });
+    }
+
+    window.removeQueueItem = function(index) {
+      fileQueue.splice(index, 1);
+      renderQueue();
+    };
+
+    // Helper de carregamento de scripts externos (CORS Safe)
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    // Ação de Conversão em Bloco
+    btnConvert.addEventListener("click", async () => {
+      if (fileQueue.length === 0) return;
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      showLoader("Preparando", "Inicializando os processos locais...", true);
+
+      // Carrega LameJS sob demanda se escolher MP3
+      if (selectedFormat === "mp3" && typeof lamejs === "undefined") {
+        updateLoaderProgress(10, "Carregando biblioteca do compressor MP3...");
+        try {
+          await loadScript("https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.all.min.js");
+        } catch (err) {
+          alert("Erro ao carregar o codificador de MP3. Verifique sua conexão.");
+          hideLoader();
+          return;
+        }
+      }
+
+      // Executa fila sequencialmente
+      for (let k = 0; k < fileQueue.length; k++) {
+        const file = fileQueue[k];
+        const stepPercentStart = (k / fileQueue.length) * 100;
+        const stepPercentEnd = ((k + 1) / fileQueue.length) * 100;
+
+        updateLoaderProgress(stepPercentStart, `Analisando arquivo [${k + 1}/${fileQueue.length}]: ${file.name}`);
+
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          const sourceBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+
+          let finalBuffer = sourceBuffer;
+
+          // Se for WAV, realiza reamostragem opcional (Resampling via OfflineAudioContext)
+          if (selectedFormat === "wav") {
+            const targetSampleRate = parseInt(document.getElementById("wav-sr").value);
+            if (sourceBuffer.sampleRate !== targetSampleRate) {
+              updateLoaderProgress(stepPercentStart + 5, `Reamostrando para ${targetSampleRate / 1000} kHz...`);
+              finalBuffer = await resampleAudioBuffer(sourceBuffer, targetSampleRate);
+            }
+          }
+
+          let outputBlob;
+          const cleanName = file.name.split('.').slice(0, -1).join('.');
+
+          if (selectedFormat === "wav") {
+            const bitDepth = parseInt(document.getElementById("wav-bd").value);
+            updateLoaderProgress(stepPercentStart + 15, `Codificando formato WAV de ${bitDepth}-bit...`);
+            outputBlob = bufferToWav(finalBuffer, bitDepth);
+            triggerDownload(outputBlob, `${cleanName}_EstudioNeto.wav`);
+          } else {
+            const bitrate = parseInt(document.getElementById("mp3-br").value);
+            updateLoaderProgress(stepPercentStart + 10, "Compactando e gravando estrutura MP3...");
+            outputBlob = await bufferToMp3(finalBuffer, bitrate, (prog) => {
+              const currentProgress = stepPercentStart + 10 + (prog * (stepPercentEnd - stepPercentStart - 15));
+              updateLoaderProgress(currentProgress, `Processando MP3: ${Math.round(prog * 100)}%`);
+            });
+            triggerDownload(outputBlob, `${cleanName}_EstudioNeto.mp3`);
+          }
+
+        } catch (err) {
+          console.error(err);
+          alert(`Ocorreu um problema ao processar o arquivo: ${file.name}`);
+        }
+      }
+
+      updateLoaderProgress(100, "Concluído!");
+      setTimeout(() => {
+        hideLoader();
+        fileQueue = [];
+        renderQueue();
+      }, 1000);
+    });
+
+    // Reamostrador de Áudio de Alta Qualidade (Offline Audio Context)
+    function resampleAudioBuffer(sourceBuffer, targetSampleRate) {
+      const offlineCtx = new OfflineAudioContext(
+        sourceBuffer.numberOfChannels,
+        sourceBuffer.duration * targetSampleRate,
+        targetSampleRate
+      );
+      const bufferSource = offlineCtx.createBufferSource();
+      bufferSource.buffer = sourceBuffer;
+      bufferSource.connect(offlineCtx.destination);
+      bufferSource.start();
+      return offlineCtx.startRendering();
+    }
+
+    // Codificador de WAV Linear PCM (16-bit, 24-bit ou 32-bit Float)
+    function bufferToWav(buffer, bitDepth) {
+      let numOfChan = buffer.numberOfChannels,
+          sampleRate = buffer.sampleRate,
+          format = bitDepth === 32 ? 3 : 1, // 3 = IEEE Float (sem perdas), 1 = PCM Integer
+          bytesPerSample = bitDepth / 8,
+          blockAlign = numOfChan * bytesPerSample,
+          byteRate = sampleRate * blockAlign,
+          dataLength = buffer.length * blockAlign,
+          bufferArr = new ArrayBuffer(44 + dataLength),
+          view = new DataView(bufferArr);
+
+      writeString(view, 0, 'RIFF');
+      view.setUint32(4, 36 + dataLength, true);
+      writeString(view, 8, 'WAVE');
+      writeString(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, format, true);
+      view.setUint16(22, numOfChan, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, byteRate, true);
+      view.setUint16(32, blockAlign, true);
+      view.setUint16(34, bitDepth, true);
+      writeString(view, 36, 'data');
+      view.setUint32(40, dataLength, true);
+
+      // Escrita de Amostras de Áudio
+      let offset = 44;
+      for (let i = 0; i < buffer.length; i++) {
+        for (let channel = 0; channel < numOfChan; channel++) {
+          let sample = buffer.getChannelData(channel)[i];
+          
+          // Truncamento rígido seguro contra clipping digital
+          if (sample > 1) sample = 1;
+          else if (sample < -1) sample = -1;
+
+          if (bitDepth === 16) {
+            sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+            view.setInt16(offset, sample, true);
+          } else if (bitDepth === 24) {
+            sample = sample < 0 ? sample * 0x800000 : sample * 0x7FFFFF;
+            view.setInt8(offset, sample & 0xFF);
+            view.setInt8(offset + 1, (sample >> 8) & 0xFF);
+            view.setInt8(offset + 2, (sample >> 16) & 0xFF);
+          } else if (bitDepth === 32) {
+            view.setFloat32(offset, sample, true);
+          }
+          offset += bytesPerSample;
+        }
+      }
+      return new Blob([bufferArr], { type: 'audio/wav' });
+    }
+
+    function writeString(view, offset, string) {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    }
+
+    // Compactador MP3 (LameJS)
+    function bufferToMp3(buffer, bitrate, onProgress) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const channels = buffer.numberOfChannels;
+          const sampleRate = buffer.sampleRate;
+          const mp3encoder = new lamejs.Mp3Encoder(channels, sampleRate, bitrate);
+          const mp3Data = [];
+
+          const left = buffer.getChannelData(0);
+          const right = channels > 1 ? buffer.getChannelData(1) : null;
+          
+          const sampleBlockSize = 1152;
+          const leftInt16 = new Int16Array(left.length);
+          const rightInt16 = right ? new Int16Array(right.length) : null;
+
+          // Conversão Float32 para PCM Int16
+          for (let i = 0; i < left.length; i++) {
+            let lSample = left[i];
+            leftInt16[i] = lSample < 0 ? lSample * 0x8000 : lSample * 0x7FFF;
+            if (right) {
+              let rSample = right[i];
+              rightInt16[i] = rSample < 0 ? rSample * 0x8000 : rSample * 0x7FFF;
+            }
+          }
+
+          let i = 0;
+          function encodeChunk() {
+            if (i < leftInt16.length) {
+              const leftChunk = leftInt16.subarray(i, i + sampleBlockSize);
+              let mp3buf;
+              if (rightInt16) {
+                const rightChunk = rightInt16.subarray(i, i + sampleBlockSize);
+                mp3buf = mp3encoder.encodeBuffer(leftChunk, rightChunk);
+              } else {
+                mp3buf = mp3encoder.encodeBuffer(leftChunk);
+              }
+              if (mp3buf.length > 0) {
+                mp3Data.push(mp3buf);
+              }
+              i += sampleBlockSize;
+              
+              if (onProgress) onProgress(i / leftInt16.length);
+              setTimeout(encodeChunk, 0); // Libera thread para não congelar UI
+            } else {
+              const mp3buf = mp3encoder.flush();
+              if (mp3buf.length > 0) {
+                mp3Data.push(mp3buf);
+              }
+              resolve(new Blob(mp3Data, { type: 'audio/mp3' }));
+            }
+          }
+          encodeChunk();
+        }, 50);
+      });
+    }
+
+    // Aciona download do arquivo convertido
+    function triggerDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>

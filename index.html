@@ -388,16 +388,13 @@
   </div>
 
   <!-- RODAPÉ COMPLETO COM DIRETÓRIO DE LINKS (ESTILO ONLINE-CONVERT) -->
-  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500">
+ <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       
-      <!-- Lado Esquerdo do Rodapé (Identidade de Marca) -->
+      <!-- Logo e Descrição -->
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
-          <!-- Ícone Fader SVG em vez de Emoji para compatibilidade de renderização -->
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-          </svg>
+          <span class="text-2xl">🎛️</span>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
         <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
@@ -405,10 +402,8 @@
         </p>
       </div>
 
-      <!-- Lado Direito do Rodapé (Diretório Mapeado em Colunas) -->
+      <!-- Links das Colunas -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-        
-        <!-- Coluna 1: Soluções de Conversão -->
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
           <ul class="space-y-1.5 text-gray-400">
@@ -417,8 +412,6 @@
             <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
           </ul>
         </div>
-
-        <!-- Coluna 2: Estúdio Neto Ferramentas -->
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
           <ul class="space-y-1.5 text-gray-400">
@@ -427,8 +420,6 @@
             <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
           </ul>
         </div>
-
-        <!-- Coluna 3: Empresa -->
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
           <ul class="space-y-1.5 text-gray-400">
@@ -437,8 +428,6 @@
             <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
           </ul>
         </div>
-
-        <!-- Coluna 4: Suporte e Contato -->
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
           <ul class="space-y-1.5 text-gray-400">
@@ -446,21 +435,20 @@
             <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
           </ul>
         </div>
-
       </div>
     </div>
 
-    <!-- SEÇÃO INFERIOR DA DIVISÓRIA (CONFIRMANDO CRIAÇÃO E CONFORMIDADE) -->
-    <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- Divisória Final e Links de Privacidade (Corrigidos) -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
       </div>
       
-      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-gray-400 font-semibold text-[11px]">
-        <button id="btn-privacy-footer" class="hover:text-white transition-colors focus:outline-none">Política de privacidade</button>
-        <span class="text-gray-600">|</span>
-        <button id="btn-terms-footer" class="hover:text-white transition-colors focus:outline-none">Termos de uso</button>
-        <span class="text-gray-600">|</span>
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
         <span class="text-gray-500 cursor-default">PT 🌐</span>
       </div>
     </div>

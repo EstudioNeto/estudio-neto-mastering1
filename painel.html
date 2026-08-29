@@ -420,7 +420,6 @@
         const decodedContent = decodeURIComponent(atob(fileData.content).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         let produtos = JSON.parse(decodedContent);
 
-        // Garante geração de ID numérico seguro
         let maxId = 0;
         produtos.forEach(p => {
           let num = parseInt(p.id);
@@ -479,7 +478,6 @@
         if (localInventory.length === 0) return tableBody.innerHTML = `<tr><td colspan="2" class="p-4 text-center italic">Vazio.</td></tr>`;
         
         localInventory.forEach(prod => {
-          // Os aspas simples no clique previnem erros se o ID for texto
           tableBody.innerHTML += `<tr class="border-b border-brand-border/60 hover:bg-brand-card/30">
             <td class="p-3 font-mono font-bold text-white">${prod.titulo}</td>
             <td class="p-3 text-right">
@@ -491,7 +489,6 @@
     });
 
     window.excluirProduto = async function(id) {
-      // Blindagem para texto/número na busca
       const prod = localInventory.find(p => String(p.id) === String(id));
       if (!confirm(`Remover "${prod ? prod.titulo : 'este produto'}"?`)) return;
       

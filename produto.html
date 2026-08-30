@@ -10,13 +10,6 @@
       theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', border: '#1e293b' } } } }
     }
   </script>
-  <script type="text/javascript">
-    function importHotmart(){ 
-      var imported = document.createElement('script'); imported.src = 'https://static.hotmart.com/checkout/widget.min.js'; document.head.appendChild(imported); 
-      var link = document.createElement('link'); link.rel = 'stylesheet'; link.type = 'text/css'; link.href = 'https://static.hotmart.com/css/hotmart-fb.min.css'; document.head.appendChild(link);
-    } 
-    importHotmart(); 
-  </script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
@@ -26,7 +19,7 @@
         <span class="text-3xl">🎛️</span>
         <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
       </div>
-      <a href="loja.html" class="text-sm font-semibold text-brand-accent hover:underline">← Voltar à Loja</a>
+      <a href="loja.html" class="text-sm font-semibold text-brand-accent hover:underline text-decoration-none">← Voltar à Loja</a>
     </div>
   </header>
 
@@ -59,7 +52,7 @@
 
         <div id="detalhe-links-secundarios" class="w-full pt-4"></div>
         
-        <!-- Bloco de Conversão -->
+        <!-- Bloco de Conversão (COMPRAR) -->
         <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mt-6 space-y-4">
           <div id="detalhe-botao-compra" class="w-full"></div>
 
@@ -70,7 +63,7 @@
           </div>
         </div>
 
-        <!-- CONTAINER MÚLTIPLOS DEPOIMENTOS -->
+        <!-- DEPOIMENTOS -->
         <div id="detalhe-depoimentos-container" class="space-y-4 pt-4"></div>
 
       </div>
@@ -79,6 +72,7 @@
     <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
   </main>
 
+  <!-- RODAPÉ CORRIGIDO -->
   <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
@@ -95,17 +89,17 @@
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
           <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-audio.html">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-8d.html">Conversor 8D</a></li>
             <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
           </ul>
         </div>
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
           <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="masterizador.html">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="removedor-vocal.html">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="afinador.html">Afinador</a></li>
           </ul>
         </div>
         <div class="space-y-2">
@@ -126,16 +120,18 @@
       </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <!-- Divisória Final e Links de Privacidade -->
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
       </div>
-      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-gray-400 font-semibold text-[11px]">
-        <a href="privacidade.html" class="hover:text-white transition-colors text-decoration-none">Política de privacidade</a>
-        <span class="text-gray-600">|</span>
-        <a href="termos.html" class="hover:text-white transition-colors text-decoration-none">Termos de uso</a>
-        <span class="text-gray-600">|</span>
-        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Termos de Uso</a>
+        <span class="text-gray-600 select-none">|</span>
+        <span class="text-gray-500 cursor-default py-1">PT 🌐</span>
       </div>
     </div>
   </footer>
@@ -166,7 +162,7 @@
         if(prod.tag1) tagsContainer.innerHTML += `<span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-[10px] uppercase border border-indigo-200">${prod.tag1}</span>`;
         if(prod.tag2) tagsContainer.innerHTML += `<span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full text-[10px] uppercase border border-emerald-200">${prod.tag2}</span>`;
 
-        // LISTA
+        // LISTA DE REQUISITOS
         const reqList = document.getElementById('detalhe-requisitos');
         if (prod.requisitos && prod.requisitos.length > 0) {
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
@@ -203,24 +199,42 @@
         }
         depoContainer.innerHTML = htmlDepoimentos;
 
-        // BOTÕES SECUNDÁRIOS
+        // BOTÕES SECUNDÁRIOS (LISTAS/AMOSTRAS)
         const linksSec = document.getElementById('detalhe-links-secundarios');
         if (prod.link_listas || prod.link_amostras) {
           linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
           let botoesHtml = '';
-          if (prod.link_listas) botoesHtml += `<a href="${prod.link_listas}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">📁 Ver Lista</a>`;
-          if (prod.link_amostras) botoesHtml += `<a href="${prod.link_amostras}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">⬇️ Baixar Amostra</a>`;
+          if (prod.link_listas) {
+            let linkListas = prod.link_listas;
+            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
+            botoesHtml += `<a href="${linkListas}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">📁 Ver Lista</a>`;
+          }
+          if (prod.link_amostras) {
+            let linkAmostras = prod.link_amostras;
+            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
+            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">⬇️ Baixar Amostra</a>`;
+          }
           linksSec.innerHTML = botoesHtml;
         }
 
-        // COMPRA
+        // --- CORREÇÃO DO BOTÃO DE COMPRA ---
         const btnCompra = document.getElementById('detalhe-botao-compra');
+        
+        // Proteção: força o link a ter https:// se o usuário esquecer
+        let linkSeguro = prod.link || '#';
+        if (linkSeguro !== '#' && !linkSeguro.startsWith('http')) {
+          linkSeguro = 'https://' + linkSeguro;
+        }
+
         if (prod.tipo_botao === 'hotmart') {
-          btnCompra.innerHTML = `<a onclick="return false;" href="${prod.link}" class="hotmart-fb hotmart__button-checkout inline-block hover:scale-105 transition-transform"><img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar"></a>`;
+          // Centralizado e sem bloqueio de clique
+          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="inline-block hover:scale-105 transition-transform"><img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar" class="h-14"></a></div>`;
         } else if (prod.tipo_botao === 'padrao') {
-          btnCompra.innerHTML = `<a href="${prod.link}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-8 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center hover:scale-105 transition-all text-decoration-none w-full">Garanta Seu Acesso Agora</a>`;
+          // Centralizado e com padding ajustado
+          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-12 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center hover:scale-105 transition-all text-decoration-none">Comprar Agora</a></div>`;
         } else {
-          btnCompra.innerHTML = `<a href="${prod.link}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-8 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center gap-2 hover:scale-105 transition-all text-decoration-none w-full">Falar no WhatsApp</a>`;
+          // Centralizado (WhatsApp)
+          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-12 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center gap-2 hover:scale-105 transition-all text-decoration-none">Falar no WhatsApp</a></div>`;
         }
 
         // COMPARTILHAMENTO

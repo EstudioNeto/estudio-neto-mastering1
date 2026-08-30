@@ -14,7 +14,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- CABEÇALHO PADRÃO ESTÚDIO NETO (Escuro para manter a identidade do site) -->
+  <!-- CABEÇALHO PADRÃO ESTÚDIO NETO -->
   <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-[1200px] mx-auto flex items-center justify-between">
       <a href="loja.html" class="flex items-center gap-3 text-decoration-none">
@@ -88,7 +88,7 @@
       <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
         
         <div class="text-[12px] text-gray-400 mb-3 font-semibold uppercase tracking-wider">
-          Produto Digital <span class="text-brand-accent ml-2 font-bold px-2 py-0.5 bg-indigo-50 rounded-md">+1000 vendidos</span>
+          Produto Digital <span id="detalhe-vendas" class="text-brand-accent ml-2 font-bold px-2 py-0.5 bg-indigo-50 rounded-md hidden"></span>
         </div>
         
         <h1 id="detalhe-titulo" class="text-[22px] md:text-[24px] font-bold text-gray-900 leading-tight mb-3"></h1>
@@ -131,7 +131,6 @@
         <!-- Botões de Ação Principal -->
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
-          <div id="detalhe-botao-whatsapp" class="w-full"></div>
         </div>
 
         <!-- Gatilhos Mentais / Benefícios -->
@@ -154,7 +153,7 @@
     </div>
   </main>
 
-  <!-- RODAPÉ COMPLETO ESTÚDIO NETO (Com todas as colunas) -->
+  <!-- RODAPÉ COMPLETO ESTÚDIO NETO -->
   <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       
@@ -251,6 +250,13 @@
           subEl.classList.remove('hidden');
         }
 
+        // VENDAS (Ex: +1000 vendidos)
+        if (prod.vendas) {
+          const vendasEl = document.getElementById('detalhe-vendas');
+          vendasEl.textContent = prod.vendas;
+          vendasEl.classList.remove('hidden');
+        }
+
         // CÁLCULO DE PREÇO E DESCONTO
         const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
         const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
@@ -333,9 +339,8 @@
           linksSec.innerHTML = botoesHtml;
         }
 
-        // BOTÕES PRINCIPAIS DE CONVERSÃO
+        // BOTÃO PRINCIPAL DE CONVERSÃO
         const btnCompra = document.getElementById('detalhe-botao-compra');
-        const btnWhats = document.getElementById('detalhe-botao-whatsapp');
         
         let linkSeguro = prod.link || '#';
         if (linkSeguro !== '#' && !linkSeguro.startsWith('http')) {
@@ -345,10 +350,8 @@
         if (prod.tipo_botao === 'whatsapp') {
           btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#10b981] hover:bg-[#059669] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Falar no WhatsApp</a>`;
         } else {
+          // Apenas Comprar Agora (Removido o botão de WhatsApp extra)
           btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#3483fa] hover:bg-[#2968c8] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Comprar agora</a>`;
-          
-          const zapUrl = "https://api.whatsapp.com/send?text=Olá! Gostaria de tirar dúvidas sobre o produto: " + encodeURIComponent(prod.titulo);
-          btnWhats.innerHTML = `<a href="${zapUrl}" target="_blank" class="block w-full bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3.5 rounded-xl font-semibold text-[14px] transition-colors mt-3">Dúvidas? Fale no WhatsApp</a>`;
         }
 
         statusMsg.style.display = 'none';

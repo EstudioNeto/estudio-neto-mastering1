@@ -4,87 +4,172 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes da Oferta — Estúdio Neto</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', border: '#1e293b' } } } }
+      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
     }
   </script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
-    <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
+  <!-- CABEÇALHO PADRÃO ESTÚDIO NETO (Escuro para manter a identidade do site) -->
+  <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+      <a href="loja.html" class="flex items-center gap-3 text-decoration-none">
         <span class="text-3xl">🎛️</span>
         <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
-      </div>
-      <a href="loja.html" class="text-sm font-semibold text-brand-accent hover:underline text-decoration-none">← Voltar à Loja</a>
+      </a>
+      <a href="loja.html" class="text-sm font-semibold text-brand-accent hover:text-indigo-300 transition-colors">← Voltar à Loja</a>
     </div>
   </header>
 
-  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow">
-    <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-10 items-start hidden">
+  <main class="max-w-[1200px] w-full mx-auto px-4 py-6 md:py-8 flex-grow">
+    
+    <!-- BREADCRUMB -->
+    <div class="text-[13px] text-gray-500 mb-6 flex gap-2 font-medium">
+      <a href="index.html" class="hover:text-brand-accent transition-colors">Início</a> <span>&gt;</span>
+      <a href="loja.html" class="hover:text-brand-accent transition-colors">Loja Virtual</a> <span>&gt;</span>
+      <span class="text-gray-400 cursor-default">Produtos Digitais</span>
+    </div>
+
+    <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
+
+    <!-- CONTAINER PRINCIPAL DIVIDIDO (Estrutura de Conversão com Fundo Branco) -->
+    <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col lg:flex-row hidden items-start">
       
-      <!-- Lado Esquerdo: Imagem ou Vídeo -->
-      <div class="flex flex-col gap-6 sticky top-24">
-        <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-black">
-          <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div id="detalhe-imagem-container" class="bg-gray-50 border border-gray-100 rounded-2xl p-8 flex items-center justify-center aspect-square shadow-inner">
-          <img id="detalhe-imagem" src="" alt="" class="max-w-full max-h-full object-contain drop-shadow-xl">
-        </div>
-      </div>
-
-      <!-- Lado Direito: Informações e Conversão -->
-      <div class="space-y-6">
-        <div class="flex flex-wrap gap-2" id="detalhe-tags"></div>
-        <div>
-          <h1 id="detalhe-titulo" class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight leading-tight"></h1>
-          <p id="detalhe-subtitulo" class="text-sm font-bold text-indigo-600 mt-3 uppercase tracking-wider"></p>
-        </div>
-        <p id="detalhe-descricao" class="text-sm text-gray-600 leading-relaxed"></p>
-
-        <div id="detalhe-requisitos-container" class="border-t border-gray-200 pt-5">
-          <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-3">O que você recebe:</h4>
-          <ul id="detalhe-requisitos" class="text-sm text-gray-600 space-y-2 list-disc list-inside font-medium"></ul>
-        </div>
-
-        <div id="detalhe-links-secundarios" class="w-full pt-4"></div>
+      <!-- LADO ESQUERDO: Conteúdo (Imagem, Requisitos, Descrição, Depoimentos) -->
+      <div class="w-full lg:w-[65%] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200">
         
-        <!-- Bloco de Conversão (COMPRAR) -->
-        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mt-6 space-y-4">
-          <div id="detalhe-botao-compra" class="w-full"></div>
-
-          <!-- BOTÕES DE COMPARTILHAMENTO -->
-          <div class="pt-5 mt-5 border-t border-gray-200 flex flex-col items-center justify-center gap-3">
-            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Compartilhe com amigos:</span>
-            <div class="flex gap-4" id="share-buttons-container"></div>
+        <!-- Galeria / Imagem Principal -->
+        <div class="flex flex-col items-center">
+          <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-xl bg-black overflow-hidden shadow-md mb-8">
+            <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8">
+            <img id="detalhe-imagem" src="" alt="Imagem do Produto" class="max-w-full max-h-full object-contain">
           </div>
         </div>
 
-        <!-- DEPOIMENTOS -->
-        <div id="detalhe-depoimentos-container" class="space-y-4 pt-4"></div>
+        <hr class="border-gray-200 my-8">
+
+        <!-- Características / Requisitos -->
+        <div id="detalhe-requisitos-container">
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que você precisa saber sobre este produto</h2>
+          <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-brand-accent"></ul>
+        </div>
+
+        <hr class="border-gray-200 my-8">
+
+        <!-- Descrição Completa -->
+        <div>
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Descrição Completa</h2>
+          <p id="detalhe-descricao" class="text-[16px] text-gray-600 leading-relaxed whitespace-pre-wrap"></p>
+        </div>
+
+        <!-- Depoimentos -->
+        <div id="detalhe-depoimentos-wrapper" class="hidden">
+          <hr class="border-gray-200 my-8">
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Opiniões sobre o produto</h2>
+          <div class="flex items-center gap-4 mb-8 bg-gray-50 border border-gray-200 p-6 rounded-xl inline-flex">
+            <div class="text-[48px] font-light text-brand-accent leading-none">5.0</div>
+            <div>
+              <div class="text-brand-accent text-[20px] tracking-widest">★★★★★</div>
+              <div class="text-[13px] text-gray-500 font-semibold mt-1">Avaliação Geral</div>
+            </div>
+          </div>
+          <div id="detalhe-depoimentos-container" class="space-y-4"></div>
+        </div>
+
+      </div>
+
+      <!-- LADO DIREITO: BUY BOX (Módulo Flutuante de Conversão) -->
+      <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
+        
+        <div class="text-[12px] text-gray-400 mb-3 font-semibold uppercase tracking-wider">
+          Produto Digital <span class="text-brand-accent ml-2 font-bold px-2 py-0.5 bg-indigo-50 rounded-md">+1000 vendidos</span>
+        </div>
+        
+        <h1 id="detalhe-titulo" class="text-[22px] md:text-[24px] font-bold text-gray-900 leading-tight mb-3"></h1>
+        
+        <div class="flex items-center gap-1 mb-6 text-brand-accent text-[14px]">
+          ★★★★★ <span class="text-gray-400 text-[12px] ml-1 font-medium">(Ver avaliações)</span>
+        </div>
+
+        <!-- Subtítulo / Tag -->
+        <div id="detalhe-subtitulo" class="inline-block bg-orange-500 text-white text-[12px] font-bold px-3 py-1 rounded-full mb-6 hidden uppercase tracking-wider"></div>
+
+        <!-- Bloco de Preço -->
+        <div class="mb-8" id="preco-box">
+          <s id="detalhe-preco-antigo" class="text-[16px] text-gray-400 hidden block mb-1"></s>
+          <div class="flex items-start gap-3">
+            <span class="text-[36px] font-light text-gray-900 leading-none tracking-tighter flex items-start">
+              <span class="text-[18px] mt-1.5 mr-1 font-normal">R$</span>
+              <span id="detalhe-preco-inteiro">0</span>
+              <span id="detalhe-preco-centavos" class="text-[18px] mt-1.5 ml-0.5 font-normal">00</span>
+            </span>
+            <span id="detalhe-desconto" class="text-[16px] text-emerald-600 font-medium mt-2 hidden"></span>
+          </div>
+          <p class="text-[14px] text-brand-accent mt-2 font-medium hover:underline cursor-pointer">
+            Ver os meios de pagamento
+          </p>
+        </div>
+
+        <!-- Informação de Envio -->
+        <div class="flex items-start gap-3 mb-8 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-emerald-600 mt-0.5 flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-7v-2h2v2h-2z"/></svg>
+          <div>
+            <p class="text-[15px] text-emerald-700 font-bold">Acesso imediato ao conteúdo</p>
+            <p class="text-[13px] text-emerald-600/80 mt-1">O material será enviado automaticamente para o seu e-mail assim que o pagamento for aprovado.</p>
+          </div>
+        </div>
+
+        <!-- Botões Secundários (Amostra / Lista) -->
+        <div id="detalhe-links-secundarios" class="w-full mb-6"></div>
+
+        <!-- Botões de Ação Principal -->
+        <div class="space-y-3 mb-8">
+          <div id="detalhe-botao-compra" class="w-full"></div>
+          <div id="detalhe-botao-whatsapp" class="w-full"></div>
+        </div>
+
+        <!-- Gatilhos Mentais / Benefícios -->
+        <ul class="space-y-5 text-[14px] text-gray-600">
+          <li class="flex items-start gap-3">
+            <span class="text-gray-400 text-xl">🛡️</span>
+            <p><span class="text-brand-accent font-semibold cursor-pointer">Compra Garantida.</span> Receba exatamente o acesso prometido ou devolvemos o seu dinheiro.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-gray-400 text-xl">🏆</span>
+            <p><span class="text-gray-900 font-semibold">Suporte Direto.</span> Acesso prioritário para dúvidas após a compra.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-gray-400 text-xl">💾</span>
+            <p><span class="text-gray-900 font-semibold">Acesso Vitalício.</span> Baixe e use os arquivos para sempre, sem mensalidades.</p>
+          </li>
+        </ul>
 
       </div>
     </div>
-    
-    <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
   </main>
 
-  <!-- RODAPÉ CORRIGIDO -->
-  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
+  <!-- RODAPÉ COMPLETO ESTÚDIO NETO (Com todas as colunas) -->
+  <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
+      
+      <!-- Logo e Descrição -->
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <span class="text-2xl">🎛️</span>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
         <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente na sua máquina para máxima performance.
         </p>
       </div>
 
+      <!-- Links das Colunas -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
@@ -152,17 +237,44 @@
         if (!prod) return statusMsg.textContent = "Produto não encontrado.";
 
         // INFO BÁSICA
-        document.getElementById('detalhe-imagem').src = prod.imagem;
+        let imgSrc = prod.imagem || '';
+        if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
+          imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+        }
+        document.getElementById('detalhe-imagem').src = imgSrc;
         document.getElementById('detalhe-titulo').textContent = prod.titulo;
-        document.getElementById('detalhe-subtitulo').textContent = prod.subtitulo;
         document.getElementById('detalhe-descricao').textContent = prod.descricao;
 
-        // TAGS
-        const tagsContainer = document.getElementById('detalhe-tags');
-        if(prod.tag1) tagsContainer.innerHTML += `<span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-full text-[10px] uppercase border border-indigo-200">${prod.tag1}</span>`;
-        if(prod.tag2) tagsContainer.innerHTML += `<span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full text-[10px] uppercase border border-emerald-200">${prod.tag2}</span>`;
+        if (prod.subtitulo) {
+          const subEl = document.getElementById('detalhe-subtitulo');
+          subEl.textContent = prod.subtitulo;
+          subEl.classList.remove('hidden');
+        }
 
-        // LISTA DE REQUISITOS
+        // CÁLCULO DE PREÇO E DESCONTO
+        const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
+        const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
+        
+        if (precoAtual > 0) {
+          const partesPreco = precoAtual.toFixed(2).split('.');
+          document.getElementById('detalhe-preco-inteiro').textContent = partesPreco[0];
+          document.getElementById('detalhe-preco-centavos').textContent = partesPreco[1];
+
+          if (precoAntigo > precoAtual) {
+            const elAntigo = document.getElementById('detalhe-preco-antigo');
+            elAntigo.textContent = `R$ ${precoAntigo.toFixed(2).replace('.', ',')}`;
+            elAntigo.classList.remove('hidden');
+
+            const desconto = Math.round(((precoAntigo - precoAtual) / precoAntigo) * 100);
+            const elDesconto = document.getElementById('detalhe-desconto');
+            elDesconto.textContent = `${desconto}% OFF`;
+            elDesconto.classList.remove('hidden');
+          }
+        } else {
+          document.getElementById('preco-box').style.display = 'none';
+        }
+
+        // CARACTERÍSTICAS / REQUISITOS
         const reqList = document.getElementById('detalhe-requisitos');
         if (prod.requisitos && prod.requisitos.length > 0) {
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
@@ -185,21 +297,25 @@
         const depoContainer = document.getElementById('detalhe-depoimentos-container');
         let htmlDepoimentos = '';
         
-        const d1Texto = prod.depo1_texto || prod.depoimento_texto;
-        const d1Autor = prod.depo1_autor || prod.depoimento_autor;
-        
-        if (d1Texto) {
-          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${d1Texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${d1Autor || 'Cliente'}</p></div>`;
-        }
-        if (prod.depo2_texto) {
-          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${prod.depo2_texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${prod.depo2_autor || 'Cliente'}</p></div>`;
-        }
-        if (prod.depo3_texto) {
-          htmlDepoimentos += `<div class="bg-white border border-gray-200 shadow-sm rounded-xl p-5 relative"><div class="absolute -top-3 left-5 bg-white px-2 text-yellow-400 text-lg">★★★★★</div><p class="text-sm text-gray-700 italic mb-2 mt-2 font-medium leading-relaxed">"${prod.depo3_texto}"</p><p class="text-xs font-extrabold text-gray-900 uppercase tracking-wider">${prod.depo3_autor || 'Cliente'}</p></div>`;
-        }
-        depoContainer.innerHTML = htmlDepoimentos;
+        const criardepo = (txt, aut) => {
+          if(!txt) return '';
+          return `<div class="bg-white border border-gray-200 rounded-xl p-6 relative shadow-sm">
+                    <div class="absolute -top-3 left-6 bg-white border border-gray-200 px-3 py-0.5 rounded-full text-brand-accent text-[12px] font-bold">★★★★★</div>
+                    <p class="text-[15px] text-gray-700 italic mt-2 mb-3">"${txt}"</p>
+                    <p class="text-[12px] text-gray-500 font-bold uppercase tracking-wider">${aut || 'Cliente Verificado'}</p>
+                  </div>`;
+        };
 
-        // BOTÕES SECUNDÁRIOS (LISTAS/AMOSTRAS)
+        htmlDepoimentos += criardepo(prod.depo1_texto || prod.depoimento_texto, prod.depo1_autor || prod.depoimento_autor);
+        htmlDepoimentos += criardepo(prod.depo2_texto, prod.depo2_autor);
+        htmlDepoimentos += criardepo(prod.depo3_texto, prod.depo3_autor);
+        
+        if (htmlDepoimentos) {
+          document.getElementById('detalhe-depoimentos-wrapper').classList.remove('hidden');
+          depoContainer.innerHTML = htmlDepoimentos;
+        }
+
+        // BOTÕES SECUNDÁRIOS (Ver Lista / Amostras)
         const linksSec = document.getElementById('detalhe-links-secundarios');
         if (prod.link_listas || prod.link_amostras) {
           linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
@@ -207,46 +323,33 @@
           if (prod.link_listas) {
             let linkListas = prod.link_listas;
             if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
-            botoesHtml += `<a href="${linkListas}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">📁 Ver Lista</a>`;
+            botoesHtml += `<a href="${linkListas}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">📁 Ver Lista</a>`;
           }
           if (prod.link_amostras) {
             let linkAmostras = prod.link_amostras;
             if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
-            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-100 text-gray-700 font-bold py-3 rounded-xl transition-colors text-xs uppercase tracking-wider text-decoration-none shadow-sm">⬇️ Baixar Amostra</a>`;
+            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">⬇️ Baixar Amostra</a>`;
           }
           linksSec.innerHTML = botoesHtml;
         }
 
-        // --- CORREÇÃO DO BOTÃO DE COMPRA ---
+        // BOTÕES PRINCIPAIS DE CONVERSÃO
         const btnCompra = document.getElementById('detalhe-botao-compra');
+        const btnWhats = document.getElementById('detalhe-botao-whatsapp');
         
-        // Proteção: força o link a ter https:// se o usuário esquecer
         let linkSeguro = prod.link || '#';
         if (linkSeguro !== '#' && !linkSeguro.startsWith('http')) {
           linkSeguro = 'https://' + linkSeguro;
         }
 
-        if (prod.tipo_botao === 'hotmart') {
-          // Centralizado e sem bloqueio de clique
-          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="inline-block hover:scale-105 transition-transform"><img src="https://static.hotmart.com/img/btn-buy-green.png" alt="Comprar" class="h-14"></a></div>`;
-        } else if (prod.tipo_botao === 'padrao') {
-          // Centralizado e com padding ajustado
-          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-12 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center hover:scale-105 transition-all text-decoration-none">Comprar Agora</a></div>`;
+        if (prod.tipo_botao === 'whatsapp') {
+          btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#10b981] hover:bg-[#059669] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Falar no WhatsApp</a>`;
         } else {
-          // Centralizado (WhatsApp)
-          btnCompra.innerHTML = `<div class="flex justify-center w-full"><a href="${linkSeguro}" target="_blank" class="bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold px-12 py-4 rounded-xl shadow-md text-sm uppercase flex items-center justify-center gap-2 hover:scale-105 transition-all text-decoration-none">Falar no WhatsApp</a></div>`;
+          btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#3483fa] hover:bg-[#2968c8] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Comprar agora</a>`;
+          
+          const zapUrl = "https://api.whatsapp.com/send?text=Olá! Gostaria de tirar dúvidas sobre o produto: " + encodeURIComponent(prod.titulo);
+          btnWhats.innerHTML = `<a href="${zapUrl}" target="_blank" class="block w-full bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3.5 rounded-xl font-semibold text-[14px] transition-colors mt-3">Dúvidas? Fale no WhatsApp</a>`;
         }
-
-        // COMPARTILHAMENTO
-        const pageUrl = encodeURIComponent(window.location.href);
-        const shareText = encodeURIComponent(`Dá uma olhada neste produto incrível: ${prod.titulo}`);
-        const shareContainer = document.getElementById('share-buttons-container');
-        
-        shareContainer.innerHTML = `
-          <a href="https://api.whatsapp.com/send?text=${shareText}%20${pageUrl}" target="_blank" class="bg-[#25D366] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no WhatsApp"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.03 12.008.03c3.202.001 6.212 1.244 8.477 3.497 2.266 2.253 3.507 5.253 3.505 8.475-.004 6.657-5.34 11.975-11.948 11.975-2.005-.001-3.973-.5-5.76-1.451L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.355 1.449 5.514 0 10.003-4.487 10.006-10 .002-2.67-1.019-5.18-2.87-7.03C17.236 1.724 14.73 1.7 12.012 1.7c-5.518 0-10.011 4.487-10.014 10-.001 1.945.511 3.841 1.484 5.515l-.979 3.57 3.654-.958z"/></svg></a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="bg-[#1877F2] text-white p-3 rounded-full hover:scale-110 transition-transform shadow-md" title="Compartilhar no Facebook"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copiado!');" class="bg-gray-200 text-gray-700 p-3 rounded-full hover:scale-110 hover:bg-gray-300 transition-transform shadow-md" title="Copiar Link"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg></button>
-        `;
 
         statusMsg.style.display = 'none';
         boxDetalhe.classList.remove('hidden');

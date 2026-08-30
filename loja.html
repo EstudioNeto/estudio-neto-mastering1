@@ -1,64 +1,98 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- SEU ÍCONE AQUI -->
-  <link rel="icon" type="image/png" href="favicon.png">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY67JDVNH9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PY67JDVNH9');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja Virtual — Estúdio Neto</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', border: '#1e293b' } } } }
+      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
     }
   </script>
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
+  <!-- CABEÇALHO PADRÃO ESTÚDIO NETO (Escuro para manter a identidade do site) -->
+  <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 text-decoration-none">
         <span class="text-3xl">🎛️</span>
         <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
-      </div>
-      <nav class="flex items-center gap-5 text-sm font-semibold">
-        <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Início</a>
-        <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
-        <a href="loja.html" class="text-white border-b-2 border-brand-accent pb-1">Loja Virtual</a>
-        <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
-        <a href="contato.html" class="text-gray-400 hover:text-white transition-colors">Contato</a>
+      </a>
+      <nav class="hidden md:flex gap-6 text-sm font-semibold">
+        <a href="index.html" class="hover:text-white transition-colors">Início</a>
+        <a href="ferramentas.html" class="hover:text-white transition-colors">Ferramentas</a>
+        <a href="loja.html" class="text-white border-b-2 border-brand-accent pb-1">Loja</a>
+        <a href="contato.html" class="hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-8">
-    <h2 class="text-2xl font-bold text-gray-900 border-b border-gray-200 pb-4">Loja Virtual — Produtos Digitais</h2>
+  <main class="max-w-[1200px] w-full mx-auto px-4 py-8 flex-grow flex flex-col lg:flex-row gap-8">
     
-    <div id="produtos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse"></div>
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden sm:block"></div>
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 h-64 animate-pulse hidden lg:block"></div>
-    </div>
+    <!-- LADO ESQUERDO: Filtros e Categorias (Estilo ML) -->
+    <aside class="w-full lg:w-[250px] flex-shrink-0">
+      <div class="mb-6">
+        <h1 class="text-[26px] font-semibold text-gray-900 leading-tight">Nossos Produtos</h1>
+        <p class="text-sm text-gray-500 mt-1" id="total-produtos">Carregando...</p>
+      </div>
+
+      <div class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm hidden lg:block">
+        <h3 class="font-semibold text-gray-900 mb-3">Categorias</h3>
+        <ul class="space-y-2 text-[14px] text-gray-600">
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Plugins & VSTs <span class="text-gray-400 text-xs ml-1">(12)</span></a></li>
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Bibliotecas MIDI <span class="text-gray-400 text-xs ml-1">(8)</span></a></li>
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Presets de Áudio <span class="text-gray-400 text-xs ml-1">(15)</span></a></li>
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Manuais & Guias <span class="text-gray-400 text-xs ml-1">(5)</span></a></li>
+        </ul>
+
+        <hr class="my-5 border-gray-200">
+
+        <h3 class="font-semibold text-gray-900 mb-3">Preço</h3>
+        <ul class="space-y-2 text-[14px] text-gray-600">
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Até R$50</a></li>
+          <li><a href="#" class="hover:text-brand-accent transition-colors">R$50 a R$150</a></li>
+          <li><a href="#" class="hover:text-brand-accent transition-colors">Mais de R$150</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- LADO DIREITO: Lista de Produtos -->
+    <section class="flex-grow">
+      
+      <!-- Controles Superiores -->
+      <div class="flex justify-between items-center bg-white p-3 rounded-lg border border-gray-200 shadow-sm mb-6">
+        <div class="text-[14px] text-gray-600">
+          Ordenar por: <span class="font-semibold text-gray-900 cursor-pointer">Mais relevantes ▼</span>
+        </div>
+        <div class="flex gap-2">
+          <button class="p-1.5 text-brand-accent bg-indigo-50 rounded"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></button>
+          <button class="p-1.5 text-gray-400 hover:text-gray-600"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></button>
+        </div>
+      </div>
+
+      <!-- Grid de Produtos -->
+      <div id="produtos-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- Produtos injetados via JS -->
+      </div>
+      
+      <div id="loading-msg" class="text-center py-10 text-gray-500">Buscando produtos...</div>
+
+    </section>
   </main>
 
-  <footer class="bg-brand-card/85 border-t border-brand-border py-12 text-xs text-gray-500 mt-8">
+  <!-- RODAPÉ COMPLETO ESTÚDIO NETO -->
+  <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-          </svg>
+          <span class="text-2xl">🎛️</span>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
         <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente na sua máquina para máxima performance.
         </p>
       </div>
 
@@ -66,17 +100,17 @@
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
           <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversordeaudio/">Conversor Local</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Conversor-udio8D-/">Conversor 8D</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-audio.html">Conversor Local</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-8d.html">Conversor 8D</a></li>
             <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
           </ul>
         </div>
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
           <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Masterizador/">Masterizador</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Removedorvocal/">Removedor Vocal</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="https://estudioneto.github.io/Afinadorviolaoguitarra/">Afinador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="masterizador.html">Masterizador</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="removedor-vocal.html">Removedor Vocal</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="afinador.html">Afinador</a></li>
           </ul>
         </div>
         <div class="space-y-2">
@@ -97,53 +131,99 @@
       </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 border-t border-brand-border/40 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-indigo-400 hover:text-indigo-300 text-decoration-none transition-colors" href="https://www.estudioneto.com.br/">Estúdio Neto</a>
+        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
       </div>
-      <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-gray-400 font-semibold text-[11px]">
-        <a href="privacidade.html" class="hover:text-white transition-colors text-decoration-none">Política de privacidade</a>
-        <span class="text-gray-600">|</span>
-        <a href="termos.html" class="hover:text-white transition-colors text-decoration-none">Termos de uso</a>
-        <span class="text-gray-600">|</span>
-        <span class="text-gray-500 cursor-default">PT 🌐</span>
+      
+      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
+        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Política de Privacidade</a>
+        <span class="text-gray-600 select-none">|</span>
+        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Termos de Uso</a>
       </div>
     </div>
   </footer>
 
   <script>
-    async function carregarProdutos() {
-      const container = document.getElementById('produtos-container');
+    async function carregarLoja() {
+      const grid = document.getElementById('produtos-grid');
+      const msg = document.getElementById('loading-msg');
+      const total = document.getElementById('total-produtos');
+
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
-        if (!response.ok) throw new Error("Erro na rede.");
+        if (!response.ok) throw new Error("Erro de rede");
         const produtos = await response.json();
-        container.innerHTML = ''; 
+        
+        if (produtos.length === 0) {
+          msg.textContent = "Nenhum produto disponível no momento.";
+          total.textContent = "0 resultados";
+          return;
+        }
 
-        produtos.forEach(prod => {
-          const card = document.createElement('a');
-          card.href = `produto.html?id=${prod.id}`;
-          card.className = "bg-white border border-gray-200 rounded-2xl p-5 flex flex-col text-center space-y-4 shadow-sm hover:shadow-lg hover:border-brand-accent transition-all cursor-pointer group text-decoration-none";
+        total.textContent = `${produtos.length} resultados`;
+        msg.style.display = 'none';
+
+        const criarCartaoML = (prod) => {
+          let imgSrc = prod.imagem || '';
+          if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
+            imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+          }
+
+          const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
+          const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
           
-          card.innerHTML = `
-            <div class="aspect-square w-full rounded-xl overflow-hidden bg-gray-50 relative p-4 flex items-center justify-center">
-              <img src="${prod.imagem}" alt="${prod.titulo}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none';">
-            </div>
-            <div class="flex-grow flex flex-col justify-center">
-              <h3 class="text-base font-bold text-gray-900 leading-tight">${prod.titulo}</h3>
-              <p class="text-[11px] text-brand-accent font-semibold mt-1">${prod.subtitulo}</p>
-            </div>
-            <div class="w-full bg-indigo-50 text-brand-accent group-hover:bg-brand-accent group-hover:text-white text-xs font-bold py-2.5 rounded-lg transition-colors">
-              Ver Detalhes
-            </div>
+          let htmlPreco = '';
+          if (precoAtual > 0) {
+            const partesPreco = precoAtual.toFixed(2).split('.');
+            let htmlAntigo = '';
+            let htmlDesconto = '';
+            if (precoAntigo > precoAtual) {
+              htmlAntigo = `<s class="text-[12px] text-gray-400 block mb-0.5">R$ ${precoAntigo.toFixed(2).replace('.', ',')}</s>`;
+              const desconto = Math.round(((precoAntigo - precoAtual) / precoAntigo) * 100);
+              htmlDesconto = `<span class="text-[13px] text-emerald-600 font-medium ml-2">${desconto}% OFF</span>`;
+            }
+            
+            htmlPreco = `
+              ${htmlAntigo}
+              <div class="flex items-center">
+                <span class="text-[24px] text-gray-900 leading-none">R$ ${partesPreco[0]}<span class="text-[14px] align-top ml-0.5">${partesPreco[1]}</span></span>
+                ${htmlDesconto}
+              </div>
+              <div class="text-[12px] text-emerald-600 font-semibold mt-1">Frete grátis</div>
+            `;
+          }
+
+          return `
+            <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col relative group text-decoration-none">
+              <!-- Imagem com Aspect Ratio e borda inferior -->
+              <div class="w-full aspect-square border-b border-gray-100 flex items-center justify-center p-4 relative bg-white">
+                <img src="${imgSrc}" alt="${prod.titulo}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105" onerror="this.style.display='none';">
+              </div>
+              
+              <!-- Corpo do Card -->
+              <div class="p-4 flex flex-col flex-grow">
+                ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">${prod.vendas}</span>` : ''}
+                
+                <h3 class="text-[14px] font-normal text-gray-700 leading-snug mb-3 line-clamp-2">${prod.titulo}</h3>
+                
+                <div class="mt-auto">
+                  ${htmlPreco}
+                </div>
+              </div>
+            </a>
           `;
-          container.appendChild(card);
-        });
+        };
+
+        grid.innerHTML = produtos.map(criarCartaoML).join('');
+
       } catch (err) {
-        container.innerHTML = `<div class="col-span-12 text-center py-12"><p class="text-red-500">Erro: ${err.message}</p></div>`;
+        msg.textContent = "Erro ao carregar produtos: " + err.message;
+        msg.classList.add('text-red-500');
       }
     }
-    window.addEventListener('DOMContentLoaded', carregarProdutos);
+
+    window.addEventListener('DOMContentLoaded', carregarLoja);
   </script>
 </body>
 </html>

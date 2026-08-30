@@ -138,11 +138,14 @@
   },
   {
     "id": 8,
+    "titulo": "BAILÃO MIDI SELEÇÃO 01",
+    "subtitulo": "Seleção Profissional",
+    "vendas": "",
+    "preco": "99.90",
+    "preco_antigo": "125.90",
     "tag1": "MIDI",
     "tag2": "Música ao vivo",
     "imagem": "imagens/midium.png",
-    "titulo": "BAILÃO MIDI SELEÇÃO 01",
-    "subtitulo": "Seleção Profissional",
     "descricao": "Prepare-se para animar qualquer festa ou ensaio com o Bailão MIDI Seleção 01!\nEste pacote exclusivo traz 100 blocos prontos para bailão, todos acompanhados de letra, garantindo praticidade e diversão para músicos e tecladistas.\n\n✨ Destaques do produto:\n\n100 blocos MIDI prontos: repertório variado e completo para bailão.\n\nTodos com letra: facilite o acompanhamento e a performance.\n\nCompatível com teclado musical: basta carregar e começar a tocar.\n\nIdeal para ensaios, shows e festas: perfeito para quem busca agilidade e qualidade sonora.\n\nCom este material, você terá em mãos uma seleção prática e organizada, pronta para transformar qualquer evento em um verdadeiro bailão.\n\n👉 Indicado para: músicos, tecladistas, bandas de baile e apaixonados por música popular que querem ter um repertório completo e acessível na ponta dos dedos.",
     "requisitos": [
       "Lista dos Midis - Seleção emendada.",
@@ -534,11 +537,9 @@
     "depo1_autor": "Marcos T., Tecladista de Baile",
     "depo2_texto": "Foco na agilidade para montar repertório (Ideal para músicos e bandas)\n\"A seleção de músicas desse volume 01 é fantástica e super atualizada. Uso muito nos ensaios e também quando toco sozinho em eventos menores. A agilidade que isso me deu para organizar o setlist não tem preço, sem falar que a qualidade sonora dos MIDIs é excelente. Recomendo para qualquer músico que queira praticidade e um repertório de peso na ponta dos dedos.\"",
     "depo2_autor": "Leandro S., Músico Profissional",
-    "depo3_texto": "\"Comprei para animar festas e eventos e foi a melhor escolha que fiz. Como todas as músicas já vêm com letra, o pessoal se empolga e acaba cantando junto como se fosse um karaokê de luxo. É literalmente ter um 'baile pronto' guardado no pendrive. Muito fácil de usar e não deixa a pista esfriar um minuto sequer!\"",
-    "depo3_autor": "Roberto C., Animador de Eventos e Apaixonado por Música",
     "link_listas": "",
     "link_amostras": "",
-    "tipo_botao": "hotmart",
+    "tipo_botao": "",
     "link": "https://pay.hotmart.com/L103613934W"
   }
 ]

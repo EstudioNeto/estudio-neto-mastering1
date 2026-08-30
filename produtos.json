@@ -140,7 +140,8 @@
     "id": 8,
     "titulo": "BAILÃO MIDI SELEÇÃO 01",
     "subtitulo": "Seleção Profissional",
-    "vendas": "",
+    "categoria": "MIDI",
+    "vendas": "+500 Vendidos",
     "preco": "99.90",
     "preco_antigo": "125.90",
     "tag1": "MIDI",
@@ -539,7 +540,7 @@
     "depo2_autor": "Leandro S., Músico Profissional",
     "link_listas": "",
     "link_amostras": "",
-    "tipo_botao": "",
+    "tipo_botao": "padrao",
     "link": "https://pay.hotmart.com/L103613934W"
   }
 ]

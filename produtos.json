@@ -88,11 +88,15 @@
   },
   {
     "id": 6,
-    "tag1": "MIDI",
-    "tag2": "Música ao vivo",
-    "imagem": "imagens/bailao_midi.jpg",
     "titulo": "Bailão MIDI emendado com letra 500 blocos",
     "subtitulo": "Seleção Profissional",
+    "categoria": "MIDI",
+    "vendas": "+500 Vendidos",
+    "preco": "175.90",
+    "preco_antigo": "277.90",
+    "tag1": "MIDI",
+    "tag2": "Música ao vivo",
+    "imagem": "imagens/bailaomidi.png",
     "descricao": "Roda em teclados e em programas que rodam midi no notbook. Os mídis são usados em teclados, estúdios e música ao vivo. A qualidade do midi depende dos timbres do teclado usado para rodar o midi. No midi também é possivel alterar o tom, mutar qualquer pista que desejar, mas depende da tecnologia do teclado que está rodando o arquivo. Todos os midis tem letra e são emendados. +Bônus: Programa para rodar midi no computador.",
     "requisitos": [
       "Compatibilidade ampla: Funciona em teclados e programas que rodam MIDI em notebooks.",
@@ -108,11 +112,9 @@
     "depo1_autor": "Sérgio A., Músico de Baile",
     "depo2_texto": "\"Eu não tenho um teclado de última geração, então o programa bônus para rodar os MIDIs direto no notebook salvou minha vida! Rodo tudo pelo computador usando meus próprios plugins de áudio, e o som fica gigante. Consigo alterar o tom na hora para adequar à voz da cantora e mutar a pista da melodia principal sem dificuldade nenhuma. Flexibilidade total.\"",
     "depo2_autor": "Felipe C., Tecladista e Produtor",
-    "depo3_texto": "\"Dá para ver que foi uma seleção feita por profissionais. A estrutura dos arquivos é excelente, compatibilidade perfeita e, quando uso os bons timbres do meu teclado, a qualidade final fica parecendo gravação de estúdio. O fato de poder mutar as pistas que eu não quero usar e deixar só a 'cozinha' tocando me permite criar arranjos muito mais ricos ao vivo. Vale cada centavo do investimento.\"",
-    "depo3_autor": "Carlos M., Dono de Home Studio",
     "link_listas": "https://drive.google.com/file/d/14nSuoBf9_p8Yk39-bUl9awq5aXQSrhs0/view?usp=drive_link",
     "link_amostras": "https://drive.google.com/file/d/1VZN6gV8Eb2xE8SjZICdEANPGwt9CMltB/view?usp=drive_link",
-    "tipo_botao": "hotmart",
+    "tipo_botao": "",
     "link": "https://pay.hotmart.com/P106131608L"
   },
   {

@@ -1,11 +1,15 @@
 [
   {
     "id": 3,
+    "titulo": "Dominando a Mixagem",
+    "subtitulo": "Som de nível de estúdio com ferramentas nativas",
+    "categoria": "Ebook",
+    "vendas": "+550 Vendidos",
+    "preco": "25.90",
+    "preco_antigo": "49.90",
     "tag1": "Ebook Digital",
     "tag2": "Formato PDF",
     "imagem": "imagens/dominandomixagem.png",
-    "titulo": "Dominando a Mixagem",
-    "subtitulo": "Som de nível de estúdio com ferramentas nativas",
     "descricao": "Aprenda a obter sonoridade de estúdio usando apenas os recursos do Reaper. Guia focado no ReaEQ, ReaComp e roteamento de barramentos para estruturar mixagens com peso e definição, sem depender de plugins caros.",
     "requisitos": [
       "Passo a passo do zero ao master",
@@ -18,11 +22,9 @@
     "depo1_autor": "Carlos M., Produtor Musical",
     "depo2_texto": "\"A virada de chave para mim foi a parte sobre roteamento de barramentos. Minhas sessões eram uma bagunça e sempre soavam emboladas. Aplicando as técnicas de estruturação ensinadas, consegui dar definição e espaço para cada instrumento na mix. O som final ficou com cara de estúdio, com zero custo adicional em softwares.\"",
     "depo2_autor": "Juliana T., Engenheira de Áudio",
-    "depo3_texto": "\"Material direto ao ponto. Entender a fundo a compressão e a equalização do Reaper me fez parar de caçar soluções mágicas na internet. O guia ensina a pensar na mixagem focando no que realmente importa: técnica e estrutura. Minhas produções caseiras finalmente perderam o aspecto amador e ganharam clareza absurda.\"",
-    "depo3_autor": "Rafael K., Músico Independente",
     "link_listas": "",
     "link_amostras": "",
-    "tipo_botao": "hotmart",
+    "tipo_botao": "",
     "link": "https://pay.hotmart.com/O103179484A?checkoutMode=2"
   },
   {

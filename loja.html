@@ -6,341 +6,215 @@
   <title>Loja Virtual — Estúdio Neto</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
-    }
-  </script>
+  
   <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('DAAEV63C77UA372K02KG');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('DAAEV63C77UA372K02KG'); ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- CABEÇALHO -->
-  <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
+  <header class="border-b border-gray-200 bg-gray-900 sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-[1200px] mx-auto flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 text-decoration-none">
         <span class="text-3xl">🎛️</span>
-        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
+        <h1 class="text-xl font-bold text-white">Estúdio Neto</h1>
       </a>
       <nav class="hidden md:flex gap-6 text-sm font-semibold">
         <a href="index.html" class="hover:text-white transition-colors">Início</a>
-        <a href="ferramentas.html" class="hover:text-white transition-colors">Ferramentas</a>
-        <a href="loja.html" class="text-white border-b-2 border-brand-accent pb-1">Loja</a>
+        <a href="loja.html" class="text-white border-b-2 border-indigo-500 pb-1">Loja</a>
         <a href="contato.html" class="hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
   </header>
 
   <main class="max-w-[1200px] w-full mx-auto px-4 py-8 flex-grow flex flex-col lg:flex-row gap-8">
-    
-    <!-- LADO ESQUERDO: Filtros e Categorias -->
     <aside class="w-full lg:w-[250px] flex-shrink-0">
       <div class="mb-6">
         <h1 class="text-[26px] font-semibold text-gray-900 leading-tight">Nossos Produtos</h1>
         <p class="text-sm text-gray-500 mt-1" id="total-produtos">Carregando...</p>
       </div>
-
       <div class="bg-white rounded-lg p-5 border border-gray-200 shadow-sm hidden lg:block">
         <h3 class="font-semibold text-gray-900 mb-3">Categorias</h3>
         <ul class="space-y-2 text-[14px] text-gray-600" id="lista-categorias">
-          <li><a href="#" class="hover:text-brand-accent transition-colors text-gray-400 italic">Buscando categorias...</a></li>
+          <li><span class="text-gray-400 italic">Buscando categorias...</span></li>
         </ul>
       </div>
     </aside>
 
-    <!-- LADO DIREITO: Lista de Produtos -->
     <section class="flex-grow">
-      
-      <!-- Controles Superiores -->
       <div class="flex justify-between items-center bg-white p-3 rounded-lg border border-gray-200 shadow-sm mb-6">
         <div class="text-[14px] text-gray-600 flex items-center gap-2">
           <span>Ordenar por:</span>
-          <select id="sort-select" class="font-semibold text-gray-900 bg-transparent border-none outline-none cursor-pointer focus:ring-0">
+          <select id="sort-select" class="font-semibold text-gray-900 bg-transparent border-none outline-none cursor-pointer">
             <option value="relevantes">Mais relevantes</option>
             <option value="menor_preco">Menor preço</option>
             <option value="maior_preco">Maior preço</option>
           </select>
         </div>
         <div class="flex gap-2">
-          <!-- Botão Grade -->
-          <button id="btn-grid" class="p-1.5 rounded transition-colors text-brand-accent bg-indigo-50" aria-label="Visualização em grade">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg>
-          </button>
-          <!-- Botão Lista -->
-          <button id="btn-list" class="p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent" aria-label="Visualização em lista">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
-          </button>
+          <button id="btn-grid" class="p-1.5 rounded transition-colors text-indigo-600 bg-indigo-50"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></svg></button>
+          <button id="btn-list" class="p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg></button>
         </div>
       </div>
 
-      <!-- Grid de Produtos -->
-      <div id="produtos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <!-- Produtos injetados via JS -->
-      </div>
-      
+      <div id="produtos-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
       <div id="loading-msg" class="text-center py-10 text-gray-500">Buscando produtos...</div>
-
     </section>
   </main>
 
-  <!-- RODAPÉ COMPLETO -->
-  <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
-      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-3">
-          <span class="text-2xl">🎛️</span>
-          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
-        </div>
-        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente na sua máquina para máxima performance.
-        </p>
-      </div>
-
-      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-audio.html">Conversor Local</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-8d.html">Conversor 8D</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="masterizador.html">Masterizador</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="removedor-vocal.html">Removedor Vocal</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="afinador.html">Afinador</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
-      </div>
-      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
-        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Política de Privacidade</a>
-        <span class="text-gray-600 select-none">|</span>
-        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Termos de Uso</a>
-      </div>
+  <footer class="bg-gray-900 border-t border-gray-800 py-12 text-xs text-gray-500 w-full mt-auto">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      Criado no Brasil por <a class="font-bold text-indigo-400" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
     </div>
   </footer>
 
   <script>
-    // Variáveis Globais de Estado
     let todosOsProdutos = [];
     let categoriaFiltro = null;
-    let modoVisualizacao = 'grid'; // 'grid' ou 'list'
+    let modoVisualizacao = 'grid';
 
-    // Elementos DOM
     const container = document.getElementById('produtos-container');
     const msg = document.getElementById('loading-msg');
     const total = document.getElementById('total-produtos');
     const listaCategorias = document.getElementById('lista-categorias');
     const sortSelect = document.getElementById('sort-select');
-    const btnGrid = document.getElementById('btn-grid');
-    const btnList = document.getElementById('btn-list');
 
-    // Mudar Visualização Grade/Lista
-    btnGrid.addEventListener('click', () => {
+    document.getElementById('btn-grid').addEventListener('click', (e) => {
       modoVisualizacao = 'grid';
-      btnGrid.className = "p-1.5 rounded transition-colors text-brand-accent bg-indigo-50";
-      btnList.className = "p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent";
+      e.currentTarget.className = "p-1.5 rounded transition-colors text-indigo-600 bg-indigo-50";
+      document.getElementById('btn-list').className = "p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent";
       renderizarLoja();
     });
 
-    btnList.addEventListener('click', () => {
+    document.getElementById('btn-list').addEventListener('click', (e) => {
       modoVisualizacao = 'list';
-      btnList.className = "p-1.5 rounded transition-colors text-brand-accent bg-indigo-50";
-      btnGrid.className = "p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent";
+      e.currentTarget.className = "p-1.5 rounded transition-colors text-indigo-600 bg-indigo-50";
+      document.getElementById('btn-grid').className = "p-1.5 rounded transition-colors text-gray-400 hover:text-gray-600 bg-transparent";
       renderizarLoja();
     });
 
-    // Mudar Ordenação
-    sortSelect.addEventListener('change', () => {
-      renderizarLoja();
-    });
+    sortSelect.addEventListener('change', () => renderizarLoja());
 
-    // Função Principal de Carregamento
     async function carregarDados() {
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
-        if (!response.ok) throw new Error("Erro de rede");
+        if (!response.ok) throw new Error("Erro");
         todosOsProdutos = await response.json();
-        
-        if (todosOsProdutos.length === 0) {
-          msg.textContent = "Nenhum produto disponível no momento.";
-          total.textContent = "0 resultados";
-          return;
-        }
+        if (todosOsProdutos.length === 0) return msg.textContent = "Nenhum produto.";
         msg.style.display = 'none';
-
         extrairCategorias();
         renderizarLoja();
-
-      } catch (err) {
-        msg.textContent = "Erro ao carregar produtos: " + err.message;
-        msg.classList.add('text-red-500');
-      }
+      } catch (err) { msg.textContent = "Erro ao carregar produtos."; }
     }
 
-    // Gerar Menu Lateral de Categorias
     function extrairCategorias() {
-      const categoriasCount = {};
-      todosOsProdutos.forEach(p => {
-        let cat = p.categoria ? p.categoria.trim() : "Outros";
-        if (!cat) cat = "Outros";
-        categoriasCount[cat] = (categoriasCount[cat] || 0) + 1;
-      });
-
-      let htmlCat = `<li><a href="#" onclick="filtrarCategoria(null, event)" class="hover:text-brand-accent transition-colors ${categoriaFiltro === null ? 'font-bold text-gray-900' : ''}">Todas as Categorias <span class="text-gray-400 text-xs ml-1">(${todosOsProdutos.length})</span></a></li>`;
-      
-      for (const [cat, count] of Object.entries(categoriasCount)) {
-        const isAtivo = categoriaFiltro === cat ? 'font-bold text-gray-900' : '';
-        htmlCat += `<li><a href="#" onclick="filtrarCategoria('${cat}', event)" class="hover:text-brand-accent transition-colors ${isAtivo}">${cat} <span class="text-gray-400 text-xs ml-1">(${count})</span></a></li>`;
+      const catCount = {};
+      todosOsProdutos.forEach(p => { let c = p.categoria ? p.categoria.trim() : "Outros"; catCount[c] = (catCount[c] || 0) + 1; });
+      let html = `<li><a href="#" onclick="filtrarCategoria(null, event)" class="hover:text-indigo-600 transition-colors ${!categoriaFiltro ? 'font-bold text-gray-900' : ''}">Todas as Categorias <span class="text-gray-400 text-xs ml-1">(${todosOsProdutos.length})</span></a></li>`;
+      for (const [c, count] of Object.entries(catCount)) {
+        html += `<li><a href="#" onclick="filtrarCategoria('${c}', event)" class="hover:text-indigo-600 transition-colors ${categoriaFiltro === c ? 'font-bold text-gray-900' : ''}">${c} <span class="text-gray-400 text-xs ml-1">(${count})</span></a></li>`;
       }
-      listaCategorias.innerHTML = htmlCat;
+      listaCategorias.innerHTML = html;
     }
 
-    // Filtrar Categoria
-    window.filtrarCategoria = function(cat, event) {
-      if(event) event.preventDefault();
+    window.filtrarCategoria = function(cat, e) {
+      if(e) e.preventDefault();
       categoriaFiltro = cat;
-      extrairCategorias(); // Recriar para aplicar o "negrito" no link selecionado
+      extrairCategorias();
       renderizarLoja();
     };
 
-    // Renderizar Produtos (Filtra + Ordena + Decide Layout)
     function renderizarLoja() {
-      let filtrados = todosOsProdutos;
+      let f = todosOsProdutos;
+      if (categoriaFiltro) f = f.filter(p => (p.categoria ? p.categoria.trim() : "Outros") === categoriaFiltro);
+      
+      if (sortSelect.value === 'menor_preco') f.sort((a, b) => (parseFloat(a.preco||0) - parseFloat(b.preco||0)));
+      else if (sortSelect.value === 'maior_preco') f.sort((a, b) => (parseFloat(b.preco||0) - parseFloat(a.preco||0)));
+      else f.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 
-      // Filtro de Categoria
-      if (categoriaFiltro) {
-        filtrados = filtrados.filter(p => {
-          const cat = p.categoria ? p.categoria.trim() : "Outros";
-          return cat === categoriaFiltro;
-        });
-      }
+      total.textContent = `${f.length} resultados`;
 
-      // Ordenação
-      const modoOrdem = sortSelect.value;
-      if (modoOrdem === 'menor_preco') {
-        filtrados.sort((a, b) => (parseFloat(a.preco||0) - parseFloat(b.preco||0)));
-      } else if (modoOrdem === 'maior_preco') {
-        filtrados.sort((a, b) => (parseFloat(b.preco||0) - parseFloat(a.preco||0)));
-      } else {
-        // Relevantes - mantém ordem padrão original do JSON
-        filtrados.sort((a, b) => parseInt(a.id) - parseInt(b.id)); 
-      }
-
-      total.textContent = `${filtrados.length} resultados`;
-
-      // Aplicação do CSS Pai (Grade ou Lista)
       if (modoVisualizacao === 'grid') {
         container.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4";
-        container.innerHTML = filtrados.map(criarCartaoGrid).join('');
+        container.innerHTML = f.map(criarCartao).join('');
       } else {
         container.className = "flex flex-col gap-4 border-t border-gray-200 pt-4";
-        container.innerHTML = filtrados.map(criarCartaoLista).join('');
+        container.innerHTML = f.map(criarCartao).join('');
       }
     }
 
-    // Componentes de Preço Comuns aos dois cartões
-    function gerarBlocoPreco(prod) {
+    function criarCartao(prod) {
+      let imgSrc = prod.imagem || '';
+      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+
+      let seloHtml = '';
+      if(prod.selo === 'mais_vendido') seloHtml = `<div class="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🔥 MAIS VENDIDO</div>`;
+      else if(prod.selo === 'oferta') seloHtml = `<div class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">⏳ OFERTA RELÂMPAGO</div>`;
+      else if(prod.selo === 'bonus') seloHtml = `<div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🎁 COM BÔNUS</div>`;
+      else if(prod.selo === 'lancamento') seloHtml = `<div class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🚀 LANÇAMENTO</div>`;
+
       const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
       const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
+      const parcelas = parseInt(prod.parcelas) || 1;
       
-      if (precoAtual === 0) return '';
-      
-      const partesPreco = precoAtual.toFixed(2).split('.');
-      let htmlAntigo = '';
-      let htmlDesconto = '';
-      
-      if (precoAntigo > precoAtual) {
-        htmlAntigo = `<s class="text-[12px] text-gray-400 block mb-0.5">R$ ${precoAntigo.toFixed(2).replace('.', ',')}</s>`;
-        const desconto = Math.round(((precoAntigo - precoAtual) / precoAntigo) * 100);
-        htmlDesconto = `<span class="text-[13px] text-emerald-600 font-medium ml-2">${desconto}% OFF</span>`;
+      let htmlPreco = '';
+      if (precoAtual > 0) {
+        const partesPreco = precoAtual.toFixed(2).split('.');
+        let htmlAntigo = '', htmlDesconto = '', htmlParcela = '';
+        
+        if (precoAntigo > precoAtual) {
+          htmlAntigo = `<s class="text-[12px] text-gray-400 block mb-0.5">R$ ${precoAntigo.toFixed(2).replace('.', ',')}</s>`;
+          htmlDesconto = `<span class="text-[13px] text-emerald-600 font-medium ml-2">${Math.round(((precoAntigo - precoAtual)/precoAntigo)*100)}% OFF</span>`;
+        }
+        if (parcelas > 1) {
+          htmlParcela = `<div class="text-[13px] text-emerald-600 font-medium leading-tight mt-1">em ${parcelas}x R$ ${(precoAtual/parcelas).toFixed(2).replace('.',',')} sem juros</div>`;
+        }
+        
+        htmlPreco = `
+          ${htmlAntigo}
+          <div class="flex items-center">
+            <span class="text-[24px] text-gray-900 leading-none">R$ ${partesPreco[0]}<span class="text-[14px] align-top ml-0.5">${partesPreco[1]}</span></span>
+            ${htmlDesconto}
+          </div>
+          ${htmlParcela}
+          <div class="text-[12px] text-emerald-600 font-bold mt-1">Envio imediato ⚡</div>
+        `;
       }
-      
-      return `
-        ${htmlAntigo}
-        <div class="flex items-center">
-          <span class="text-[24px] text-gray-900 leading-none">R$ ${partesPreco[0]}<span class="text-[14px] align-top ml-0.5">${partesPreco[1]}</span></span>
-          ${htmlDesconto}
-        </div>
-        <div class="text-[12px] text-emerald-600 font-semibold mt-1">Frete grátis</div>
-      `;
-    }
 
-    // Design do Card em GRADE
-    function criarCartaoGrid(prod) {
-      let imgSrc = prod.imagem || '';
-      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
-        imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+      if(modoVisualizacao === 'list') {
+        return `
+          <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-row relative group text-decoration-none h-[180px]">
+            ${seloHtml}
+            <div class="w-[180px] flex-shrink-0 border-r border-gray-100 flex items-center justify-center p-4 bg-white relative">
+              <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-6 flex flex-col flex-grow justify-center">
+              ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">${prod.vendas}</span>` : ''}
+              <h3 class="text-[18px] font-normal text-gray-800 leading-snug mb-2 line-clamp-2">${prod.titulo}</h3>
+              <div>${htmlPreco}</div>
+            </div>
+          </a>`;
       }
 
       return `
         <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col relative group text-decoration-none">
+          ${seloHtml}
           <div class="w-full aspect-square border-b border-gray-100 flex items-center justify-center p-4 relative bg-white">
-            <img src="${imgSrc}" alt="${prod.titulo}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105" onerror="this.style.display='none';">
+            <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
           </div>
           <div class="p-4 flex flex-col flex-grow">
             ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">${prod.vendas}</span>` : ''}
             <h3 class="text-[14px] font-normal text-gray-700 leading-snug mb-3 line-clamp-2">${prod.titulo}</h3>
-            <div class="mt-auto">${gerarBlocoPreco(prod)}</div>
+            <div class="mt-auto">${htmlPreco}</div>
           </div>
-        </a>
-      `;
-    }
-
-    // Design do Card em LISTA
-    function criarCartaoLista(prod) {
-      let imgSrc = prod.imagem || '';
-      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
-        imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
-      }
-
-      return `
-        <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-row relative group text-decoration-none h-[180px]">
-          <div class="w-[180px] flex-shrink-0 border-r border-gray-100 flex items-center justify-center p-4 bg-white">
-            <img src="${imgSrc}" alt="${prod.titulo}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105" onerror="this.style.display='none';">
-          </div>
-          <div class="p-6 flex flex-col flex-grow justify-center">
-            ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">${prod.vendas}</span>` : ''}
-            <h3 class="text-[18px] font-normal text-gray-800 leading-snug mb-2 line-clamp-2">${prod.titulo}</h3>
-            <div>${gerarBlocoPreco(prod)}</div>
-          </div>
-        </a>
-      `;
+        </a>`;
     }
 
     window.addEventListener('DOMContentLoaded', carregarDados);

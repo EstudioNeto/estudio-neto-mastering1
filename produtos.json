@@ -119,11 +119,15 @@
   },
   {
     "id": 7,
-    "tag1": "MIDI",
-    "tag2": "Baile MIDI",
-    "imagem": "imagens/bailemidi114.png",
     "titulo": "BAILE PRONTO MIDI COM LETRA - 114 BLOCOS DE  MÚSICAS GAÚCHAS E BANDINHAS DO SUL + BÔNUS",
     "subtitulo": "Midi com letra e emendado",
+    "categoria": "MIDI",
+    "vendas": "+600 Vendidos",
+    "preco": "57.90",
+    "preco_antigo": "79.90",
+    "tag1": "MIDI",
+    "tag2": "Baile MIDI",
+    "imagem": "imagens/midi114.png",
     "descricao": "BAILE PRONTO MIDI COM LETRA Transforme qualquer evento em um verdadeiro baile com este pacote completo e exclusivo! Composto por 114 blocos de músicas em formato MIDI, este produto reúne os maiores sucessos da música gaúcha e das tradicionais bandinhas do Sul. Ideal para animar festas, encontros e celebrações, este material digital oferece versatilidade e praticidade.\n\nDestaques do Produto:\n\nRepertório Diversificado: Uma seleção incrível de músicas gaúchas e bandinhas tradicionais que encantam todos os públicos.\n\nFormatos MIDI: Alta compatibilidade para tocar em diferentes dispositivos e softwares.\n\nLetras Inclusas: Perfeito para acompanhar ou ensaiar cada canção.\n\nBônus Especial: Conteúdo adicional exclusivo para agregar ainda mais valor ao seu evento.\n\nSeja no palco, em um baile ou apenas entre amigos, o \"Baile Pronto MIDI com Letra\" é a solução ideal para criar momentos inesquecíveis ao som da cultura e tradição do Sul!",
     "requisitos": [
       "Repertório variado: Inclui 114 blocos de músicas que abrangem sucessos da música gaúcha e das tradicionais bandinhas do Sul.",
@@ -137,11 +141,9 @@
     "depo1_autor": "João P., Tecladista e Músico da Noite",
     "depo2_texto": "\"Comprei o pacote pela praticidade dos MIDIs com letra, que facilitam demais os ensaios, mas o que me surpreendeu mesmo foi o bônus. O guia de 1ª e 2ª voz e os exercícios para desenvolver a voz abriram a minha mente! Estudar as harmonias vocais com esse material melhorou muito a qualidade das minhas apresentações ao vivo. Valeu cada centavo!\"",
     "depo2_autor": "Cláudia M., Cantora Regional",
-    "depo3_texto": "\"Material de altíssima qualidade e compatibilidade. Abro no meu notebook ou direto no teclado e roda liso, sem dor de cabeça ou incompatibilidade. Só sucesso atrás de sucesso! Quem trabalha animando festas, encontros de família ou até produzindo no estúdio sabe como a tradição do Sul levanta o público, e esse pacote agora é a minha principal ferramenta de trabalho.\"",
-    "depo3_autor": "Rodrigo T., Produtor Musical e Animador",
     "link_listas": "https://drive.google.com/drive/folders/1FNgojuPVOG6OXQlcfFvtvlK4grrGj6cM?usp=drive_link",
     "link_amostras": "https://drive.google.com/file/d/1uAB3PyLAd8ipZZfqL0SIm9sXpDizdDZ_/view?usp=drive_link",
-    "tipo_botao": "hotmart",
+    "tipo_botao": "",
     "link": "https://pay.hotmart.com/E99479240A"
   },
   {

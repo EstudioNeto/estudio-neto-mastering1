@@ -62,9 +62,16 @@
           <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-indigo-500"></ul>
         </div>
 
+        <!-- BLOCO DE AMOSTRAS E LISTAS (Novo Local de Destaque) -->
+        <div id="detalhe-amostras-wrapper" class="hidden mt-8 mb-8 bg-indigo-50 border border-indigo-100 rounded-2xl p-6 md:p-8">
+          <h3 class="text-[20px] font-bold text-indigo-900 mb-2">Quer testar antes de comprar?</h3>
+          <p class="text-[15px] text-indigo-700/80 mb-6">Baixe uma amostra gratuita para testar no seu equipamento ou confira a lista completa de arquivos que vêm no pacote.</p>
+          <div id="detalhe-links-secundarios"></div>
+        </div>
+
         <hr class="border-gray-200 my-8">
 
-        <!-- VÍDEO (Reposicionado para o meio da página) -->
+        <!-- VÍDEO -->
         <div id="detalhe-video-wrapper" class="hidden mb-8">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Veja em detalhes</h2>
           <div class="w-full aspect-video rounded-xl bg-black overflow-hidden shadow-lg border border-gray-200">
@@ -101,7 +108,7 @@
 
       </div>
 
-      <!-- LADO DIREITO: BUY BOX -->
+      <!-- LADO DIREITO: BUY BOX (Agora 100% focada em venda) -->
       <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
         
         <!-- Timer de Urgência -->
@@ -144,7 +151,7 @@
           </div>
         </div>
 
-        <div id="detalhe-links-secundarios" class="w-full mb-6"></div>
+        <!-- ONDE FICAVAM OS BOTÕES FOI REMOVIDO PARA LIMPAR A ÁREA -->
 
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
@@ -268,6 +275,53 @@
           document.getElementById('preco-box').style.display = 'none';
         }
 
+        // CARACTERÍSTICAS
+        const reqList = document.getElementById('detalhe-requisitos');
+        if (prod.requisitos && prod.requisitos.length > 0) {
+          prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
+        } else { document.getElementById('detalhe-requisitos-container').style.display = 'none'; }
+
+        // NOVOS BOTÕES DE AMOSTRAS E LISTAS (LADO ESQUERDO)
+        const amostrasWrapper = document.getElementById('detalhe-amostras-wrapper');
+        const linksSec = document.getElementById('detalhe-links-secundarios');
+        
+        if (prod.link_listas || prod.link_amostras) {
+          linksSec.className = `flex flex-col sm:flex-row gap-4 w-full`;
+          let botoesHtml = '';
+          
+          if (prod.link_amostras) {
+            let linkAmostras = prod.link_amostras;
+            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
+            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-lg transition-transform hover:scale-[1.02] flex items-center justify-center gap-2">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              Baixar Amostra Grátis
+            </a>`;
+          }
+          
+          if (prod.link_listas) {
+            let linkListas = prod.link_listas;
+            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
+            botoesHtml += `<a href="${linkListas}" target="_blank" class="flex-1 bg-white hover:bg-gray-50 text-indigo-600 border-2 border-indigo-200 text-center py-4 rounded-xl font-bold text-[16px] transition-colors flex items-center justify-center gap-2">
+              📄 Ver Lista Completa
+            </a>`;
+          }
+          
+          linksSec.innerHTML = botoesHtml;
+          amostrasWrapper.classList.remove('hidden');
+        }
+
+        // VÍDEO
+        if (prod.video_url) {
+          let videoId = '';
+          if(prod.video_url.includes('youtube.com/watch?v=')) videoId = prod.video_url.split('v=')[1].split('&')[0];
+          else if(prod.video_url.includes('youtu.be/')) videoId = prod.video_url.split('youtu.be/')[1].split('?')[0];
+          
+          if(videoId) {
+            document.getElementById('detalhe-video-wrapper').classList.remove('hidden');
+            document.getElementById('detalhe-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
+          }
+        }
+
         // EMPILHAMENTO DE BÔNUS (Value Stacking)
         let htmlBonus = '';
         if(prod.bonus1_nome) {
@@ -294,12 +348,6 @@
           document.getElementById('detalhe-faq-wrapper').classList.remove('hidden');
         }
 
-        // CARACTERÍSTICAS
-        const reqList = document.getElementById('detalhe-requisitos');
-        if (prod.requisitos && prod.requisitos.length > 0) {
-          prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
-        } else { document.getElementById('detalhe-requisitos-container').style.display = 'none'; }
-
         // DEPOIMENTOS
         const depoContainer = document.getElementById('detalhe-depoimentos-container');
         let htmlDepoimentos = '';
@@ -317,36 +365,6 @@
         if (htmlDepoimentos) {
           document.getElementById('detalhe-depoimentos-wrapper').classList.remove('hidden');
           depoContainer.innerHTML = htmlDepoimentos;
-        }
-
-        // VÍDEO (No novo local)
-        if (prod.video_url) {
-          let videoId = '';
-          if(prod.video_url.includes('youtube.com/watch?v=')) videoId = prod.video_url.split('v=')[1].split('&')[0];
-          else if(prod.video_url.includes('youtu.be/')) videoId = prod.video_url.split('youtu.be/')[1].split('?')[0];
-          
-          if(videoId) {
-            document.getElementById('detalhe-video-wrapper').classList.remove('hidden');
-            document.getElementById('detalhe-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
-          }
-        }
-
-        // BOTÕES SECUNDÁRIOS
-        const linksSec = document.getElementById('detalhe-links-secundarios');
-        if (prod.link_listas || prod.link_amostras) {
-          linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
-          let botoesHtml = '';
-          if (prod.link_listas) {
-            let linkListas = prod.link_listas;
-            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
-            botoesHtml += `<a href="${linkListas}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">📁 Ver Lista</a>`;
-          }
-          if (prod.link_amostras) {
-            let linkAmostras = prod.link_amostras;
-            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
-            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">⬇️ Baixar Amostra</a>`;
-          }
-          linksSec.innerHTML = botoesHtml;
         }
 
         // BOTÃO PRINCIPAL DE COMPRA

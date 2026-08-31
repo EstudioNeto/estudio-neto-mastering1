@@ -6,11 +6,6 @@
   <title>Detalhes da Oferta — Estúdio Neto</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
-    }
-  </script>
   
   <!-- TikTok Pixel Code Start -->
   <script>
@@ -18,75 +13,83 @@
     w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
   var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
   ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-    ttq.load('DAAEV63C77UA372K02KG');
-    ttq.page();
+    ttq.load('DAAEV63C77UA372K02KG'); ttq.page();
   }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
-  
 </head>
-<body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
+<body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between pb-20 md:pb-0">
 
-  <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
+  <header class="border-b border-gray-200 bg-gray-900 sticky top-0 z-40 px-6 py-4 text-gray-200">
     <div class="max-w-[1200px] mx-auto flex items-center justify-between">
       <a href="loja.html" class="flex items-center gap-3 text-decoration-none">
         <span class="text-3xl">🎛️</span>
-        <h1 class="text-xl font-bold bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-transparent">Estúdio Neto</h1>
+        <h1 class="text-xl font-bold text-white">Estúdio Neto</h1>
       </a>
-      <a href="loja.html" class="text-sm font-semibold text-brand-accent hover:text-indigo-300 transition-colors">← Voltar à Loja</a>
+      <a href="loja.html" class="text-sm font-semibold text-indigo-400 hover:text-white transition-colors">← Voltar à Loja</a>
     </div>
   </header>
 
   <main class="max-w-[1200px] w-full mx-auto px-4 py-6 md:py-8 flex-grow">
     
-    <div class="text-[13px] text-gray-500 mb-6 flex gap-2 font-medium">
-      <a href="index.html" class="hover:text-brand-accent transition-colors">Início</a> <span>&gt;</span>
-      <a href="loja.html" class="hover:text-brand-accent transition-colors">Loja Virtual</a> <span>&gt;</span>
-      <span class="text-gray-400 cursor-default">Produtos Digitais</span>
-    </div>
-
     <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
 
-    <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col lg:flex-row hidden items-start">
+    <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col lg:flex-row hidden items-start relative">
       
-      <!-- LADO ESQUERDO -->
+      <!-- LADO ESQUERDO: Conteúdo -->
       <div class="w-full lg:w-[65%] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200">
         
         <div class="flex flex-col items-center">
           <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-xl bg-black overflow-hidden shadow-md mb-8">
-            <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
           </div>
-          <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8">
+          <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8 relative">
+            <div id="detalhe-selo-img" class="hidden"></div>
             <img id="detalhe-imagem" src="" alt="Imagem do Produto" class="max-w-full max-h-full object-contain">
           </div>
         </div>
 
-        <hr class="border-gray-200 my-8">
+        <!-- Escudo de Garantia Visual -->
+        <div class="flex items-center gap-4 bg-emerald-50 border border-emerald-100 rounded-xl p-5 mb-8">
+          <span class="text-4xl">🛡️</span>
+          <div>
+            <p class="font-bold text-emerald-800 text-lg">7 Dias de Garantia Incondicional</p>
+            <p class="text-sm text-emerald-700 mt-1">Risco zero. Se você não gostar do material por qualquer motivo, devolvemos 100% do seu dinheiro. Sem burocracia.</p>
+          </div>
+        </div>
 
+        <!-- Características -->
         <div id="detalhe-requisitos-container">
-          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que você precisa saber sobre este produto</h2>
-          <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-brand-accent"></ul>
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que você vai receber</h2>
+          <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-indigo-500"></ul>
         </div>
 
         <hr class="border-gray-200 my-8">
 
+        <!-- Descrição Completa -->
         <div>
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Descrição Completa</h2>
           <p id="detalhe-descricao" class="text-[16px] text-gray-600 leading-relaxed whitespace-pre-wrap"></p>
         </div>
 
+        <!-- BÔNUS (Value Stacking) -->
+        <div id="detalhe-bonus-wrapper" class="hidden mt-10 bg-indigo-50 border border-indigo-100 rounded-2xl p-6 md:p-8">
+          <h3 class="text-[22px] font-bold text-indigo-900 mb-6 flex items-center gap-2">🎁 Presentes Exclusivos (Hoje)</h3>
+          <ul id="detalhe-bonus-lista" class="space-y-4"></ul>
+        </div>
+
+        <!-- Depoimentos -->
         <div id="detalhe-depoimentos-wrapper" class="hidden">
-          <hr class="border-gray-200 my-8">
-          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Opiniões sobre o produto</h2>
-          <div class="flex items-center gap-4 mb-8 bg-gray-50 border border-gray-200 p-6 rounded-xl inline-flex">
-            <div class="text-[48px] font-light text-brand-accent leading-none">5.0</div>
-            <div>
-              <div class="text-brand-accent text-[20px] tracking-widest">★★★★★</div>
-              <div class="text-[13px] text-gray-500 font-semibold mt-1">Avaliação Geral</div>
-            </div>
-          </div>
+          <hr class="border-gray-200 my-10">
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que dizem sobre o produto</h2>
           <div id="detalhe-depoimentos-container" class="space-y-4"></div>
+        </div>
+
+        <!-- FAQ (Perguntas Frequentes) -->
+        <div id="detalhe-faq-wrapper" class="hidden mt-10">
+          <hr class="border-gray-200 my-10">
+          <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Perguntas Frequentes</h2>
+          <div id="detalhe-faq-lista" class="space-y-3"></div>
         </div>
 
       </div>
@@ -94,63 +97,62 @@
       <!-- LADO DIREITO: BUY BOX -->
       <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
         
-        <div class="text-[12px] text-gray-400 mb-3 font-semibold uppercase tracking-wider">
-          Produto Digital <span id="detalhe-vendas" class="text-brand-accent ml-2 font-bold px-2 py-0.5 bg-indigo-50 rounded-md hidden"></span>
-        </div>
-        
-        <h1 id="detalhe-titulo" class="text-[22px] md:text-[24px] font-bold text-gray-900 leading-tight mb-3"></h1>
-        
-        <div class="flex items-center gap-1 mb-6 text-brand-accent text-[14px]">
-          ★★★★★ <span class="text-gray-400 text-[12px] ml-1 font-medium">(Ver avaliações)</span>
+        <!-- Timer de Urgência -->
+        <div id="detalhe-cronometro" class="bg-red-50 text-red-600 border border-red-200 p-3 rounded-xl mb-6 flex items-center justify-between hidden">
+          <span class="font-bold flex items-center gap-1.5"><svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Oferta encerra em:</span>
+          <span class="font-mono font-bold text-lg tracking-wider" id="timer-display">02:14:59</span>
         </div>
 
-        <!-- Subtítulo / Tag -->
-        <div id="detalhe-subtitulo" class="inline-block bg-orange-500 text-white text-[12px] font-bold px-3 py-1 rounded-full mb-6 hidden uppercase tracking-wider"></div>
+        <div class="text-[12px] text-gray-400 mb-3 font-semibold uppercase tracking-wider">
+          Produto Digital <span id="detalhe-vendas" class="text-indigo-600 ml-2 font-bold px-2 py-0.5 bg-indigo-50 rounded-md hidden"></span>
+        </div>
+        
+        <h1 id="detalhe-titulo" class="text-[24px] font-bold text-gray-900 leading-tight mb-3"></h1>
+        
+        <div class="flex items-center gap-1 mb-6 text-yellow-400 text-[14px]">
+          ★★★★★ <span class="text-gray-400 text-[12px] ml-1 font-medium">(Produto 5 Estrelas)</span>
+        </div>
 
         <!-- Bloco de Preço -->
         <div class="mb-8" id="preco-box">
           <s id="detalhe-preco-antigo" class="text-[16px] text-gray-400 hidden block mb-1"></s>
           <div class="flex items-start gap-3">
-            <span class="text-[36px] font-light text-gray-900 leading-none tracking-tighter flex items-start">
+            <span class="text-[38px] font-light text-gray-900 leading-none tracking-tighter flex items-start">
               <span class="text-[18px] mt-1.5 mr-1 font-normal">R$</span>
-              <span id="detalhe-preco-inteiro">0</span>
-              <span id="detalhe-preco-centavos" class="text-[18px] mt-1.5 ml-0.5 font-normal">00</span>
+              <span id="detalhe-preco-inteiro" class="font-bold">0</span>
+              <span id="detalhe-preco-centavos" class="text-[18px] mt-1.5 ml-0.5 font-bold">00</span>
             </span>
             <span id="detalhe-desconto" class="text-[16px] text-emerald-600 font-medium mt-2 hidden"></span>
           </div>
-          
-          <!-- PARCELAS AQUI -->
-          <p id="detalhe-parcelas" class="text-[18px] text-gray-900 mt-1 hidden font-normal">
-            em <span class="text-emerald-600 font-medium" id="detalhe-parcelas-texto"></span>
+          <p id="detalhe-parcelas" class="text-[16px] text-gray-900 mt-2 hidden font-normal">
+            em <span class="text-emerald-600 font-bold" id="detalhe-parcelas-texto"></span>
           </p>
         </div>
 
         <div class="flex items-start gap-3 mb-8 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
-          <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-emerald-600 mt-0.5 flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-7v-2h2v2h-2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#00a650" class="w-6 h-6 mt-0.5 flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-7v-2h2v2h-2z"/></svg>
           <div>
-            <p class="text-[15px] text-emerald-700 font-bold">Acesso imediato ao conteúdo</p>
-            <p class="text-[13px] text-emerald-600/80 mt-1">O material será enviado automaticamente para o seu e-mail assim que o pagamento for aprovado.</p>
+            <p class="text-[15px] text-emerald-700 font-bold">Acesso Liberado Imediatamente</p>
+            <p class="text-[13px] text-emerald-600/80 mt-1">O link de acesso chegará em seu e-mail assim que a compra for aprovada.</p>
           </div>
         </div>
-
-        <div id="detalhe-links-secundarios" class="w-full mb-6"></div>
 
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
         </div>
 
         <ul class="space-y-5 text-[14px] text-gray-600">
-          <li class="flex items-start gap-3">
-            <span class="text-gray-400 text-xl">🛡️</span>
-            <p><span class="text-brand-accent font-semibold cursor-pointer">Compra Garantida.</span> Receba exatamente o acesso prometido ou devolvemos o seu dinheiro.</p>
+          <li class="flex items-center gap-3">
+            <span class="text-emerald-500 text-xl">✔</span>
+            <p><span class="font-semibold text-gray-900">Acesso Vitalício.</span> Sem mensalidades.</p>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="text-gray-400 text-xl">🏆</span>
-            <p><span class="text-gray-900 font-semibold">Suporte Direto.</span> Acesso prioritário para dúvidas após a compra.</p>
+          <li class="flex items-center gap-3">
+            <span class="text-emerald-500 text-xl">✔</span>
+            <p><span class="font-semibold text-gray-900">Suporte Direto</span> com nossa equipe.</p>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="text-gray-400 text-xl">💾</span>
-            <p><span class="text-gray-900 font-semibold">Acesso Vitalício.</span> Baixe e use os arquivos para sempre, sem mensalidades.</p>
+          <li class="flex items-center gap-3">
+            <span class="text-emerald-500 text-xl">✔</span>
+            <p><span class="font-semibold text-gray-900">Ambiente 100% Seguro.</span></p>
           </li>
         </ul>
 
@@ -158,67 +160,31 @@
     </div>
   </main>
 
-  <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
-      <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
-        <div class="flex items-center justify-center md:justify-start gap-3">
-          <span class="text-2xl">🎛️</span>
-          <span class="text-base font-extrabold text-white">Estúdio Neto</span>
-        </div>
-        <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente na sua máquina para máxima performance.
-        </p>
-      </div>
+  <!-- STICKY BUTTON MOBILE -->
+  <div id="mobile-sticky-buy" class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 md:hidden shadow-[0_-5px_10px_rgba(0,0,0,0.05)] hidden"></div>
 
-      <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-audio.html">Conversor Local</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="conversor-8d.html">Conversor 8D</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="formula-compasso.html">Fórmula do Compasso</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Estúdio Neto</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="masterizador.html">Masterizador</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="removedor-vocal.html">Removedor Vocal</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="afinador.html">Afinador</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div class="text-gray-500 text-center md:text-left">
-        Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
-      </div>
-      
-      <div class="flex flex-wrap justify-center items-center gap-4 text-gray-400 font-semibold text-[11px] sm:text-xs">
-        <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Política de Privacidade</a>
-        <span class="text-gray-600 select-none">|</span>
-        <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Termos de Uso</a>
-      </div>
+  <!-- RODAPÉ DA PÁGINA -->
+  <footer class="bg-gray-900 border-t border-gray-800 py-12 text-xs text-gray-500 w-full mt-auto">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      Criado no Brasil por <a class="font-bold text-indigo-400" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
     </div>
   </footer>
 
   <script>
+    function iniciarCronometro() {
+      // 2h, 14m, 59s
+      let time = 2 * 3600 + 14 * 60 + 59; 
+      const display = document.getElementById('timer-display');
+      setInterval(() => {
+        time--;
+        if(time < 0) time = 0;
+        const h = Math.floor(time / 3600).toString().padStart(2, '0');
+        const m = Math.floor((time % 3600) / 60).toString().padStart(2, '0');
+        const s = (time % 60).toString().padStart(2, '0');
+        display.textContent = `${h}:${m}:${s}`;
+      }, 1000);
+    }
+
     async function carregarDetalhe() {
       const urlParams = new URLSearchParams(window.location.search);
       const productId = parseInt(urlParams.get('id'));
@@ -242,10 +208,20 @@
         document.getElementById('detalhe-titulo').textContent = prod.titulo;
         document.getElementById('detalhe-descricao').textContent = prod.descricao;
 
-        if (prod.subtitulo) {
-          const subEl = document.getElementById('detalhe-subtitulo');
-          subEl.textContent = prod.subtitulo;
-          subEl.classList.remove('hidden');
+        // SELO DE VITRINE
+        if(prod.selo) {
+          const seloEl = document.getElementById('detalhe-selo-img');
+          if(prod.selo === 'mais_vendido') seloEl.innerHTML = `<div class="absolute top-4 left-4 bg-orange-500 text-white text-[12px] font-bold px-3 py-1.5 rounded shadow-md z-10">🔥 MAIS VENDIDO</div>`;
+          else if(prod.selo === 'oferta') seloEl.innerHTML = `<div class="absolute top-4 left-4 bg-red-600 text-white text-[12px] font-bold px-3 py-1.5 rounded shadow-md z-10">⏳ OFERTA RELÂMPAGO</div>`;
+          else if(prod.selo === 'bonus') seloEl.innerHTML = `<div class="absolute top-4 left-4 bg-indigo-600 text-white text-[12px] font-bold px-3 py-1.5 rounded shadow-md z-10">🎁 COM BÔNUS</div>`;
+          else if(prod.selo === 'lancamento') seloEl.innerHTML = `<div class="absolute top-4 left-4 bg-emerald-600 text-white text-[12px] font-bold px-3 py-1.5 rounded shadow-md z-10">🚀 LANÇAMENTO</div>`;
+          seloEl.classList.remove('hidden');
+        }
+
+        // CRONÔMETRO DE URGÊNCIA
+        if(prod.cronometro) {
+          document.getElementById('detalhe-cronometro').classList.remove('hidden');
+          iniciarCronometro();
         }
 
         if (prod.vendas) {
@@ -254,7 +230,7 @@
           vendasEl.classList.remove('hidden');
         }
 
-        // PREÇO E PARCELAS
+        // CÁLCULO DE PREÇO E PARCELAS
         const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
         const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
         const parcelas = parseInt(prod.parcelas) || 1;
@@ -275,15 +251,39 @@
             elDesconto.classList.remove('hidden');
           }
 
-          // Ativando as parcelas dinâmicas (se configurado 2x ou mais)
           if (parcelas > 1) {
             const valorParcela = (precoAtual / parcelas).toFixed(2).replace('.', ',');
             document.getElementById('detalhe-parcelas-texto').textContent = `${parcelas}x R$ ${valorParcela} sem juros`;
             document.getElementById('detalhe-parcelas').classList.remove('hidden');
           }
-
         } else {
           document.getElementById('preco-box').style.display = 'none';
+        }
+
+        // EMPILHAMENTO DE BÔNUS (Value Stacking)
+        let htmlBonus = '';
+        if(prod.bonus1_nome) {
+          htmlBonus += `<li class="flex items-center gap-3 bg-white p-4 rounded-xl border border-indigo-100 shadow-sm"><span class="text-2xl">🎁</span><div class="flex-grow"><p class="text-gray-900 font-bold text-lg">${prod.bonus1_nome}</p><p class="text-sm text-gray-500">De <s class="text-red-400">${prod.bonus1_valor}</s> por <span class="text-emerald-600 font-bold uppercase tracking-wider">Grátis</span> hoje</p></div></li>`;
+        }
+        if(prod.bonus2_nome) {
+          htmlBonus += `<li class="flex items-center gap-3 bg-white p-4 rounded-xl border border-indigo-100 shadow-sm"><span class="text-2xl">🎁</span><div class="flex-grow"><p class="text-gray-900 font-bold text-lg">${prod.bonus2_nome}</p><p class="text-sm text-gray-500">De <s class="text-red-400">${prod.bonus2_valor}</s> por <span class="text-emerald-600 font-bold uppercase tracking-wider">Grátis</span> hoje</p></div></li>`;
+        }
+        if(htmlBonus !== '') {
+          document.getElementById('detalhe-bonus-lista').innerHTML = htmlBonus;
+          document.getElementById('detalhe-bonus-wrapper').classList.remove('hidden');
+        }
+
+        // FAQ SANFONA
+        let htmlFaq = '';
+        if(prod.faq1_p) {
+          htmlFaq += `<details class="bg-gray-50 border border-gray-200 rounded-xl mb-3 group"><summary class="font-bold p-5 cursor-pointer text-gray-800 outline-none group-open:text-indigo-600">${prod.faq1_p}</summary><div class="p-5 pt-0 text-gray-600 leading-relaxed">${prod.faq1_r}</div></details>`;
+        }
+        if(prod.faq2_p) {
+          htmlFaq += `<details class="bg-gray-50 border border-gray-200 rounded-xl mb-3 group"><summary class="font-bold p-5 cursor-pointer text-gray-800 outline-none group-open:text-indigo-600">${prod.faq2_p}</summary><div class="p-5 pt-0 text-gray-600 leading-relaxed">${prod.faq2_r}</div></details>`;
+        }
+        if(htmlFaq !== '') {
+          document.getElementById('detalhe-faq-lista').innerHTML = htmlFaq;
+          document.getElementById('detalhe-faq-wrapper').classList.remove('hidden');
         }
 
         // CARACTERÍSTICAS
@@ -292,27 +292,13 @@
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
         } else { document.getElementById('detalhe-requisitos-container').style.display = 'none'; }
 
-        // VÍDEO
-        if (prod.video_url) {
-          let videoId = '';
-          if(prod.video_url.includes('youtube.com/watch?v=')) videoId = prod.video_url.split('v=')[1].split('&')[0];
-          else if(prod.video_url.includes('youtu.be/')) videoId = prod.video_url.split('youtu.be/')[1].split('?')[0];
-          
-          if(videoId) {
-            document.getElementById('detalhe-imagem-container').classList.add('hidden');
-            document.getElementById('detalhe-video-container').classList.remove('hidden');
-            document.getElementById('detalhe-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
-          }
-        }
-
         // DEPOIMENTOS
         const depoContainer = document.getElementById('detalhe-depoimentos-container');
         let htmlDepoimentos = '';
-        
         const criardepo = (txt, aut) => {
           if(!txt) return '';
           return `<div class="bg-white border border-gray-200 rounded-xl p-6 relative shadow-sm">
-                    <div class="absolute -top-3 left-6 bg-white border border-gray-200 px-3 py-0.5 rounded-full text-brand-accent text-[12px] font-bold">★★★★★</div>
+                    <div class="absolute -top-3 left-6 bg-white border border-gray-200 px-3 py-0.5 rounded-full text-indigo-500 text-[12px] font-bold">★★★★★</div>
                     <p class="text-[15px] text-gray-700 italic mt-2 mb-3">"${txt}"</p>
                     <p class="text-[12px] text-gray-500 font-bold uppercase tracking-wider">${aut || 'Cliente Verificado'}</p>
                   </div>`;
@@ -320,44 +306,32 @@
 
         htmlDepoimentos += criardepo(prod.depo1_texto || prod.depoimento_texto, prod.depo1_autor || prod.depoimento_autor);
         htmlDepoimentos += criardepo(prod.depo2_texto, prod.depo2_autor);
-        htmlDepoimentos += criardepo(prod.depo3_texto, prod.depo3_autor);
-        
         if (htmlDepoimentos) {
           document.getElementById('detalhe-depoimentos-wrapper').classList.remove('hidden');
           depoContainer.innerHTML = htmlDepoimentos;
         }
 
-        // BOTÕES SECUNDÁRIOS
-        const linksSec = document.getElementById('detalhe-links-secundarios');
-        if (prod.link_listas || prod.link_amostras) {
-          linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
-          let botoesHtml = '';
-          if (prod.link_listas) {
-            let linkListas = prod.link_listas;
-            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
-            botoesHtml += `<a href="${linkListas}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">📁 Ver Lista</a>`;
-          }
-          if (prod.link_amostras) {
-            let linkAmostras = prod.link_amostras;
-            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
-            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">⬇️ Baixar Amostra</a>`;
-          }
-          linksSec.innerHTML = botoesHtml;
-        }
-
-        // BOTÃO PRINCIPAL DE CONVERSÃO
+        // BOTÃO PRINCIPAL DE COMPRA
         const btnCompra = document.getElementById('detalhe-botao-compra');
+        const btnSticky = document.getElementById('mobile-sticky-buy');
         
         let linkSeguro = prod.link || '#';
-        if (linkSeguro !== '#' && !linkSeguro.startsWith('http')) {
-          linkSeguro = 'https://' + linkSeguro;
-        }
+        if (linkSeguro !== '#' && !linkSeguro.startsWith('http')) linkSeguro = 'https://' + linkSeguro;
+
+        let btnClass = "block w-full bg-[#3483fa] hover:bg-[#2968c8] text-white text-center py-4 rounded-xl font-bold text-[18px] shadow-lg transition-transform hover:scale-[1.02] uppercase tracking-wide";
+        let btnText = "Comprar agora";
 
         if (prod.tipo_botao === 'whatsapp') {
-          btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#10b981] hover:bg-[#059669] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Falar no WhatsApp</a>`;
-        } else {
-          btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#3483fa] hover:bg-[#2968c8] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Comprar agora</a>`;
+          btnClass = "block w-full bg-[#10b981] hover:bg-[#059669] text-white text-center py-4 rounded-xl font-bold text-[18px] shadow-lg transition-transform hover:scale-[1.02] uppercase tracking-wide";
+          btnText = "Falar no WhatsApp";
         }
+
+        const btnHTML = `<a href="${linkSeguro}" target="_blank" class="${btnClass}">${btnText}</a>`;
+        btnCompra.innerHTML = btnHTML;
+
+        // Sticky button no celular (só mostra em telas pequenas)
+        btnSticky.innerHTML = btnHTML;
+        btnSticky.classList.remove('hidden');
 
         statusMsg.style.display = 'none';
         boxDetalhe.classList.remove('hidden');

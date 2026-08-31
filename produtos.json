@@ -57,11 +57,15 @@
   },
   {
     "id": 5,
+    "titulo": "A vida de um Músico",
+    "subtitulo": "Baseado em fatos reais",
+    "categoria": "Ebook",
+    "vendas": "+1000 Vendidos",
+    "preco": "39.90",
+    "preco_antigo": "49.90",
     "tag1": "ebook digital",
     "tag2": "formato pdf",
     "imagem": "imagens/musico.png",
-    "titulo": "A vida de um Músico",
-    "subtitulo": "Baseado em fatos reais",
     "descricao": "\"Um violão quebrado, uma corda faltando e um segredo de família que se recusa a ser esquecido.\"\nJosé cresceu ouvindo que a música era a destruição. Mas quando ele encontra um instrumento escondido com uma marca de aliança gravada na madeira, ele inicia uma fuga desesperada em busca da sua própria voz. A Vida de um Músico é um mergulho visceral nos bastidores da arte: das vans barulhentas na estrada ao isolamento frio dos estúdios de gravação. Nesta narrativa poderosa, você acompanhará a ascensão, a queda e a redenção de um homem que descobriu que o aplauso de milhares de pessoas não vale nada se você não conseguir perdoar o silêncio de quem você ama.",
     "requisitos": [
       "Um mergulho intenso nos bastidores da música, revelando tanto o brilho quanto as sombras da vida artística.",
@@ -72,16 +76,14 @@
       "Ascensão, queda e redenção, oferecendo ao leitor uma jornada completa e emocionante.",
       "O verdadeiro valor da música não está no aplauso, mas na capacidade de reconciliar-se com quem se ama."
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/f4lXKfFWmPA",
     "depo1_texto": "\"Terminei a leitura com lágrimas nos olhos. A história do José não é apenas sobre o mundo da música, é sobre as feridas familiares que carregamos. A mensagem de que o aplauso de milhares de pessoas não compensa o silêncio de quem amamos me tocou profundamente. Uma jornada emocionante sobre perdão, amor e redenção que qualquer pessoa, sendo músico ou não, vai se identificar e levar para a vida.\"",
     "depo1_autor": "Ana C., Leitora Voraz",
     "depo2_texto": "\"Finalmente uma obra que mostra a verdadeira realidade da vida na estrada! A forma como o autor descreve as viagens intermináveis nas vans barulhentas e a solidão fria dentro dos estúdios é visceral e extremamente realista. Acompanhar a ascensão e a queda do José me fez reviver muitos momentos da minha própria carreira. Um retrato cru, autêntico e arrebatador das luzes e sombras dos bastidores da arte.\"",
     "depo2_autor": "Roberto S., Músico Profissional",
-    "depo3_texto": "\"Fiquei preso na leitura desde o momento em que o violão quebrado com a marca de aliança foi revelado. Os conflitos internos do José, o peso dos segredos da família e a sua busca desesperada por uma voz própria são descritos com uma sensibilidade ímpar. É genial como o livro usa o instrumento como uma metáfora de dor e esperança ao mesmo tempo. Uma narrativa intensa do início ao fim.\"",
-    "depo3_autor": "Fernando L., Crítico Literário e Escritor",
     "link_listas": "",
     "link_amostras": "",
-    "tipo_botao": "hotmart",
+    "tipo_botao": "",
     "link": "https://pay.hotmart.com/R105620339G"
   },
   {

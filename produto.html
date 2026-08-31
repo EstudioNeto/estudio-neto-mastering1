@@ -39,13 +39,17 @@
       <!-- LADO ESQUERDO: Conteúdo -->
       <div class="w-full lg:w-[65%] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200">
         
-        <div class="flex flex-col items-center">
-          <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-xl bg-black overflow-hidden shadow-md mb-8">
-            <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8 relative">
+        <!-- Galeria de Mídia (Imagem + Vídeo) -->
+        <div class="flex flex-col items-center w-full">
+          <!-- IMAGEM (Sempre visível) -->
+          <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8 relative border border-gray-100 rounded-xl overflow-hidden">
             <div id="detalhe-selo-img" class="hidden"></div>
-            <img id="detalhe-imagem" src="" alt="Imagem do Produto" class="max-w-full max-h-full object-contain">
+            <img id="detalhe-imagem" src="" alt="Imagem do Produto" class="max-w-full max-h-full object-contain mix-blend-multiply">
+          </div>
+
+          <!-- VÍDEO (Aparece abaixo da imagem se existir) -->
+          <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-xl bg-black overflow-hidden shadow-lg mb-8 border border-gray-200">
+            <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -136,6 +140,8 @@
             <p class="text-[13px] text-emerald-600/80 mt-1">O link de acesso chegará em seu e-mail assim que a compra for aprovada.</p>
           </div>
         </div>
+
+        <div id="detalhe-links-secundarios" class="w-full mb-6"></div>
 
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
@@ -311,6 +317,36 @@
           depoContainer.innerHTML = htmlDepoimentos;
         }
 
+        // VÍDEO NOVO: Aparece JUNTO com a imagem
+        if (prod.video_url) {
+          let videoId = '';
+          if(prod.video_url.includes('youtube.com/watch?v=')) videoId = prod.video_url.split('v=')[1].split('&')[0];
+          else if(prod.video_url.includes('youtu.be/')) videoId = prod.video_url.split('youtu.be/')[1].split('?')[0];
+          
+          if(videoId) {
+            document.getElementById('detalhe-video-container').classList.remove('hidden');
+            document.getElementById('detalhe-video-iframe').src = `https://www.youtube.com/embed/${videoId}`;
+          }
+        }
+
+        // BOTÕES SECUNDÁRIOS
+        const linksSec = document.getElementById('detalhe-links-secundarios');
+        if (prod.link_listas || prod.link_amostras) {
+          linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
+          let botoesHtml = '';
+          if (prod.link_listas) {
+            let linkListas = prod.link_listas;
+            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
+            botoesHtml += `<a href="${linkListas}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">📁 Ver Lista</a>`;
+          }
+          if (prod.link_amostras) {
+            let linkAmostras = prod.link_amostras;
+            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
+            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="bg-indigo-50 hover:bg-indigo-100 text-brand-accent text-center py-3 rounded-xl font-bold text-[14px] transition-colors">⬇️ Baixar Amostra</a>`;
+          }
+          linksSec.innerHTML = botoesHtml;
+        }
+
         // BOTÃO PRINCIPAL DE COMPRA
         const btnCompra = document.getElementById('detalhe-botao-compra');
         const btnSticky = document.getElementById('mobile-sticky-buy');
@@ -329,7 +365,7 @@
         const btnHTML = `<a href="${linkSeguro}" target="_blank" class="${btnClass}">${btnText}</a>`;
         btnCompra.innerHTML = btnHTML;
 
-        // Sticky button no celular (só mostra em telas pequenas)
+        // Sticky button no celular
         btnSticky.innerHTML = btnHTML;
         btnSticky.classList.remove('hidden');
 

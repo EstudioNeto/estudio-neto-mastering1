@@ -11,23 +11,23 @@
       theme: { extend: { colors: { brand: { dark: '#070a13', card: '#0f1423', accent: '#6366f1', accentHover: '#4f46e5', success: '#10b981', border: '#1e293b' } } } }
     }
   </script>
+  
   <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-
-  ttq.load('DAAEV63C77UA372K02KG');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+    ttq.load('DAAEV63C77UA372K02KG');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+  
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- CABEÇALHO PADRÃO ESTÚDIO NETO (Escuro para manter a identidade do site) -->
   <header class="border-b border-brand-border bg-brand-dark/95 backdrop-blur sticky top-0 z-50 px-6 py-4 text-gray-200">
     <div class="max-w-[1200px] mx-auto flex items-center justify-between">
       <a href="loja.html" class="flex items-center gap-3 text-decoration-none">
@@ -40,7 +40,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
   <main class="max-w-[1200px] w-full mx-auto px-4 py-6 md:py-8 flex-grow">
     
-    <!-- BREADCRUMB -->
     <div class="text-[13px] text-gray-500 mb-6 flex gap-2 font-medium">
       <a href="index.html" class="hover:text-brand-accent transition-colors">Início</a> <span>&gt;</span>
       <a href="loja.html" class="hover:text-brand-accent transition-colors">Loja Virtual</a> <span>&gt;</span>
@@ -49,13 +48,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
     <div id="mensagem-status" class="text-center py-20 text-gray-500 font-semibold">Carregando informações da oferta...</div>
 
-    <!-- CONTAINER PRINCIPAL DIVIDIDO (Estrutura de Conversão com Fundo Branco) -->
     <div id="produto-detalhe" class="bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col lg:flex-row hidden items-start">
       
-      <!-- LADO ESQUERDO: Conteúdo (Imagem, Requisitos, Descrição, Depoimentos) -->
+      <!-- LADO ESQUERDO -->
       <div class="w-full lg:w-[65%] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200">
         
-        <!-- Galeria / Imagem Principal -->
         <div class="flex flex-col items-center">
           <div id="detalhe-video-container" class="hidden w-full aspect-video rounded-xl bg-black overflow-hidden shadow-md mb-8">
             <iframe id="detalhe-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -67,7 +64,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         <hr class="border-gray-200 my-8">
 
-        <!-- Características / Requisitos -->
         <div id="detalhe-requisitos-container">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que você precisa saber sobre este produto</h2>
           <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-brand-accent"></ul>
@@ -75,13 +71,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
         <hr class="border-gray-200 my-8">
 
-        <!-- Descrição Completa -->
         <div>
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Descrição Completa</h2>
           <p id="detalhe-descricao" class="text-[16px] text-gray-600 leading-relaxed whitespace-pre-wrap"></p>
         </div>
 
-        <!-- Depoimentos -->
         <div id="detalhe-depoimentos-wrapper" class="hidden">
           <hr class="border-gray-200 my-8">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Opiniões sobre o produto</h2>
@@ -97,7 +91,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
       </div>
 
-      <!-- LADO DIREITO: BUY BOX (Módulo Flutuante de Conversão) -->
+      <!-- LADO DIREITO: BUY BOX -->
       <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
         
         <div class="text-[12px] text-gray-400 mb-3 font-semibold uppercase tracking-wider">
@@ -124,9 +118,13 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             </span>
             <span id="detalhe-desconto" class="text-[16px] text-emerald-600 font-medium mt-2 hidden"></span>
           </div>
+          
+          <!-- PARCELAS AQUI -->
+          <p id="detalhe-parcelas" class="text-[18px] text-gray-900 mt-1 hidden font-normal">
+            em <span class="text-emerald-600 font-medium" id="detalhe-parcelas-texto"></span>
+          </p>
         </div>
 
-        <!-- Informação de Envio -->
         <div class="flex items-start gap-3 mb-8 bg-emerald-50 p-4 rounded-xl border border-emerald-100">
           <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-emerald-600 mt-0.5 flex-shrink-0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5h2v5h-2zm0-7v-2h2v2h-2z"/></svg>
           <div>
@@ -135,16 +133,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           </div>
         </div>
 
-        <!-- Botões Secundários (Amostra / Lista) -->
         <div id="detalhe-links-secundarios" class="w-full mb-6"></div>
 
-        <!-- Botões de Ação Principal -->
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
-          <div id="detalhe-botao-whatsapp" class="w-full"></div>
         </div>
 
-        <!-- Gatilhos Mentais / Benefícios -->
         <ul class="space-y-5 text-[14px] text-gray-600">
           <li class="flex items-start gap-3">
             <span class="text-gray-400 text-xl">🛡️</span>
@@ -164,11 +158,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </main>
 
-  <!-- RODAPÉ COMPLETO ESTÚDIO NETO (Com todas as colunas) -->
   <footer class="bg-[#0f1423]/95 border-t border-[#1e293b] py-12 text-xs text-gray-500 w-full mt-auto">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
-      
-      <!-- Logo e Descrição -->
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
           <span class="text-2xl">🎛️</span>
@@ -179,7 +170,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </p>
       </div>
 
-      <!-- Links das Colunas -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
@@ -215,7 +205,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
     </div>
 
-    <!-- Divisória Final e Links de Privacidade -->
     <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
         Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
@@ -225,8 +214,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <a href="privacidade.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Política de Privacidade</a>
         <span class="text-gray-600 select-none">|</span>
         <a href="termos.html" class="hover:text-white transition-colors cursor-pointer text-decoration-none py-1">Termos de Uso</a>
-        <span class="text-gray-600 select-none">|</span>
-        <span class="text-gray-500 cursor-default py-1">PT 🌐</span>
       </div>
     </div>
   </footer>
@@ -261,16 +248,16 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           subEl.classList.remove('hidden');
         }
 
-        // VENDAS (Ex: +1000 vendidos)
         if (prod.vendas) {
           const vendasEl = document.getElementById('detalhe-vendas');
           vendasEl.textContent = prod.vendas;
           vendasEl.classList.remove('hidden');
         }
 
-        // CÁLCULO DE PREÇO E DESCONTO
+        // PREÇO E PARCELAS
         const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
         const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
+        const parcelas = parseInt(prod.parcelas) || 1;
         
         if (precoAtual > 0) {
           const partesPreco = precoAtual.toFixed(2).split('.');
@@ -287,11 +274,19 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             elDesconto.textContent = `${desconto}% OFF`;
             elDesconto.classList.remove('hidden');
           }
+
+          // Ativando as parcelas dinâmicas (se configurado 2x ou mais)
+          if (parcelas > 1) {
+            const valorParcela = (precoAtual / parcelas).toFixed(2).replace('.', ',');
+            document.getElementById('detalhe-parcelas-texto').textContent = `${parcelas}x R$ ${valorParcela} sem juros`;
+            document.getElementById('detalhe-parcelas').classList.remove('hidden');
+          }
+
         } else {
           document.getElementById('preco-box').style.display = 'none';
         }
 
-        // CARACTERÍSTICAS / REQUISITOS
+        // CARACTERÍSTICAS
         const reqList = document.getElementById('detalhe-requisitos');
         if (prod.requisitos && prod.requisitos.length > 0) {
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
@@ -332,7 +327,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           depoContainer.innerHTML = htmlDepoimentos;
         }
 
-        // BOTÕES SECUNDÁRIOS (Ver Lista / Amostras)
+        // BOTÕES SECUNDÁRIOS
         const linksSec = document.getElementById('detalhe-links-secundarios');
         if (prod.link_listas || prod.link_amostras) {
           linksSec.className = `grid ${prod.link_listas && prod.link_amostras ? 'grid-cols-2' : 'grid-cols-1'} gap-3 w-full`;
@@ -361,7 +356,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         if (prod.tipo_botao === 'whatsapp') {
           btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#10b981] hover:bg-[#059669] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Falar no WhatsApp</a>`;
         } else {
-          // Apenas Comprar Agora (Removido o botão de WhatsApp extra)
           btnCompra.innerHTML = `<a href="${linkSeguro}" target="_blank" class="block w-full bg-[#3483fa] hover:bg-[#2968c8] text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-md transition-transform hover:scale-[1.02]">Comprar agora</a>`;
         }
 

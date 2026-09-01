@@ -39,7 +39,6 @@
       <!-- LADO ESQUERDO: Conteúdo -->
       <div class="w-full lg:w-[65%] p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200">
         
-        <!-- Galeria de Mídia (Apenas Imagem no Topo) -->
         <div class="flex flex-col items-center w-full">
           <div id="detalhe-imagem-container" class="w-full flex justify-center bg-white h-[300px] md:h-[450px] mb-8 relative border border-gray-100 rounded-xl overflow-hidden">
             <div id="detalhe-selo-img" class="hidden"></div>
@@ -47,7 +46,6 @@
           </div>
         </div>
 
-        <!-- Escudo de Garantia Visual -->
         <div class="flex items-center gap-4 bg-emerald-50 border border-emerald-100 rounded-xl p-5 mb-8">
           <span class="text-4xl">🛡️</span>
           <div>
@@ -56,22 +54,20 @@
           </div>
         </div>
 
-        <!-- Características -->
         <div id="detalhe-requisitos-container">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que você vai receber</h2>
           <ul id="detalhe-requisitos" class="space-y-3 text-[16px] text-gray-600 font-normal list-disc pl-5 marker:text-indigo-500"></ul>
         </div>
 
-        <!-- BLOCO DE AMOSTRAS E LISTAS (Novo Local de Destaque) -->
+        <!-- BLOCO DE AMOSTRA (Atualizado e focado) -->
         <div id="detalhe-amostras-wrapper" class="hidden mt-8 mb-8 bg-indigo-50 border border-indigo-100 rounded-2xl p-6 md:p-8">
           <h3 class="text-[20px] font-bold text-indigo-900 mb-2">Quer testar antes de comprar?</h3>
-          <p class="text-[15px] text-indigo-700/80 mb-6">Baixe uma amostra gratuita para testar no seu equipamento ou confira a lista completa de arquivos que vêm no pacote.</p>
+          <p class="text-[15px] text-indigo-700/80 mb-6">Baixe uma amostra gratuita para testar no seu equipamento. Comprove a qualidade dos arranjos e veja na prática como o material vai facilitar a sua rotina musical antes mesmo de fazer o pedido.</p>
           <div id="detalhe-links-secundarios"></div>
         </div>
 
         <hr class="border-gray-200 my-8">
 
-        <!-- VÍDEO -->
         <div id="detalhe-video-wrapper" class="hidden mb-8">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Veja em detalhes</h2>
           <div class="w-full aspect-video rounded-xl bg-black overflow-hidden shadow-lg border border-gray-200">
@@ -80,26 +76,22 @@
           <hr class="border-gray-200 mt-8">
         </div>
 
-        <!-- Descrição Completa -->
         <div>
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Descrição Completa</h2>
           <p id="detalhe-descricao" class="text-[16px] text-gray-600 leading-relaxed whitespace-pre-wrap"></p>
         </div>
 
-        <!-- BÔNUS (Value Stacking) -->
         <div id="detalhe-bonus-wrapper" class="hidden mt-10 bg-indigo-50 border border-indigo-100 rounded-2xl p-6 md:p-8">
           <h3 class="text-[22px] font-bold text-indigo-900 mb-6 flex items-center gap-2">🎁 Presentes Exclusivos (Hoje)</h3>
           <ul id="detalhe-bonus-lista" class="space-y-4"></ul>
         </div>
 
-        <!-- Depoimentos -->
         <div id="detalhe-depoimentos-wrapper" class="hidden">
           <hr class="border-gray-200 my-10">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">O que dizem sobre o produto</h2>
           <div id="detalhe-depoimentos-container" class="space-y-4"></div>
         </div>
 
-        <!-- FAQ (Perguntas Frequentes) -->
         <div id="detalhe-faq-wrapper" class="hidden mt-10">
           <hr class="border-gray-200 my-10">
           <h2 class="text-[20px] md:text-[24px] font-bold text-gray-900 mb-6">Perguntas Frequentes</h2>
@@ -108,10 +100,9 @@
 
       </div>
 
-      <!-- LADO DIREITO: BUY BOX (Agora 100% focada em venda) -->
+      <!-- LADO DIREITO: BUY BOX -->
       <div class="w-full lg:w-[35%] p-6 md:p-8 lg:sticky lg:top-24">
         
-        <!-- Timer de Urgência -->
         <div id="detalhe-cronometro" class="bg-red-50 text-red-600 border border-red-200 p-3 rounded-xl mb-6 flex items-center justify-between hidden">
           <span class="font-bold flex items-center gap-1.5"><svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Oferta encerra em:</span>
           <span class="font-mono font-bold text-lg tracking-wider" id="timer-display">02:14:59</span>
@@ -127,7 +118,6 @@
           ★★★★★ <span class="text-gray-400 text-[12px] ml-1 font-medium">(Produto 5 Estrelas)</span>
         </div>
 
-        <!-- Bloco de Preço -->
         <div class="mb-8" id="preco-box">
           <s id="detalhe-preco-antigo" class="text-[16px] text-gray-400 hidden block mb-1"></s>
           <div class="flex items-start gap-3">
@@ -150,8 +140,6 @@
             <p class="text-[13px] text-emerald-600/80 mt-1">O link de acesso chegará em seu e-mail assim que a compra for aprovada.</p>
           </div>
         </div>
-
-        <!-- ONDE FICAVAM OS BOTÕES FOI REMOVIDO PARA LIMPAR A ÁREA -->
 
         <div class="space-y-3 mb-8">
           <div id="detalhe-botao-compra" class="w-full"></div>
@@ -176,7 +164,6 @@
     </div>
   </main>
 
-  <!-- STICKY BUTTON MOBILE -->
   <div id="mobile-sticky-buy" class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 z-50 md:hidden shadow-[0_-5px_10px_rgba(0,0,0,0.05)] hidden"></div>
 
   <footer class="bg-gray-900 border-t border-gray-800 py-12 text-xs text-gray-500 w-full mt-auto">
@@ -187,7 +174,6 @@
 
   <script>
     function iniciarCronometro() {
-      // 2h, 14m, 59s
       let time = 2 * 3600 + 14 * 60 + 59; 
       const display = document.getElementById('timer-display');
       setInterval(() => {
@@ -223,7 +209,6 @@
         document.getElementById('detalhe-titulo').textContent = prod.titulo;
         document.getElementById('detalhe-descricao').textContent = prod.descricao;
 
-        // SELO DE VITRINE
         if(prod.selo) {
           const seloEl = document.getElementById('detalhe-selo-img');
           if(prod.selo === 'mais_vendido') seloEl.innerHTML = `<div class="absolute top-4 left-4 bg-orange-500 text-white text-[12px] font-bold px-3 py-1.5 rounded shadow-md z-10">🔥 MAIS VENDIDO</div>`;
@@ -233,7 +218,6 @@
           seloEl.classList.remove('hidden');
         }
 
-        // CRONÔMETRO DE URGÊNCIA
         if(prod.cronometro) {
           document.getElementById('detalhe-cronometro').classList.remove('hidden');
           iniciarCronometro();
@@ -245,7 +229,6 @@
           vendasEl.classList.remove('hidden');
         }
 
-        // CÁLCULO DE PREÇO E PARCELAS
         const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
         const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
         const parcelas = parseInt(prod.parcelas) || 1;
@@ -275,42 +258,26 @@
           document.getElementById('preco-box').style.display = 'none';
         }
 
-        // CARACTERÍSTICAS
         const reqList = document.getElementById('detalhe-requisitos');
         if (prod.requisitos && prod.requisitos.length > 0) {
           prod.requisitos.forEach(req => reqList.innerHTML += `<li>${req}</li>`);
         } else { document.getElementById('detalhe-requisitos-container').style.display = 'none'; }
 
-        // NOVOS BOTÕES DE AMOSTRAS E LISTAS (LADO ESQUERDO)
+        // BOTÃO EXCLUSIVO DE AMOSTRA (LADO ESQUERDO)
         const amostrasWrapper = document.getElementById('detalhe-amostras-wrapper');
         const linksSec = document.getElementById('detalhe-links-secundarios');
         
-        if (prod.link_listas || prod.link_amostras) {
-          linksSec.className = `flex flex-col sm:flex-row gap-4 w-full`;
-          let botoesHtml = '';
+        if (prod.link_amostras) {
+          let linkAmostras = prod.link_amostras;
+          if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
           
-          if (prod.link_amostras) {
-            let linkAmostras = prod.link_amostras;
-            if(!linkAmostras.startsWith('http')) linkAmostras = 'https://' + linkAmostras;
-            botoesHtml += `<a href="${linkAmostras}" target="_blank" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-center py-4 rounded-xl font-bold text-[16px] shadow-lg transition-transform hover:scale-[1.02] flex items-center justify-center gap-2">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              Baixar Amostra Grátis
-            </a>`;
-          }
-          
-          if (prod.link_listas) {
-            let linkListas = prod.link_listas;
-            if(!linkListas.startsWith('http')) linkListas = 'https://' + linkListas;
-            botoesHtml += `<a href="${linkListas}" target="_blank" class="flex-1 bg-white hover:bg-gray-50 text-indigo-600 border-2 border-indigo-200 text-center py-4 rounded-xl font-bold text-[16px] transition-colors flex items-center justify-center gap-2">
-              📄 Ver Lista Completa
-            </a>`;
-          }
-          
-          linksSec.innerHTML = botoesHtml;
+          linksSec.innerHTML = `<a href="${linkAmostras}" target="_blank" class="block w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white text-center py-4 px-8 rounded-xl font-bold text-[16px] shadow-lg transition-transform hover:scale-[1.02] inline-flex items-center justify-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Baixar Amostra Grátis
+          </a>`;
           amostrasWrapper.classList.remove('hidden');
         }
 
-        // VÍDEO
         if (prod.video_url) {
           let videoId = '';
           if(prod.video_url.includes('youtube.com/watch?v=')) videoId = prod.video_url.split('v=')[1].split('&')[0];
@@ -322,7 +289,6 @@
           }
         }
 
-        // EMPILHAMENTO DE BÔNUS (Value Stacking)
         let htmlBonus = '';
         if(prod.bonus1_nome) {
           htmlBonus += `<li class="flex items-center gap-3 bg-white p-4 rounded-xl border border-indigo-100 shadow-sm"><span class="text-2xl">🎁</span><div class="flex-grow"><p class="text-gray-900 font-bold text-lg">${prod.bonus1_nome}</p><p class="text-sm text-gray-500">De <s class="text-red-400">${prod.bonus1_valor}</s> por <span class="text-emerald-600 font-bold uppercase tracking-wider">Grátis</span> hoje</p></div></li>`;
@@ -335,7 +301,6 @@
           document.getElementById('detalhe-bonus-wrapper').classList.remove('hidden');
         }
 
-        // FAQ SANFONA
         let htmlFaq = '';
         if(prod.faq1_p) {
           htmlFaq += `<details class="bg-gray-50 border border-gray-200 rounded-xl mb-3 group"><summary class="font-bold p-5 cursor-pointer text-gray-800 outline-none group-open:text-indigo-600">${prod.faq1_p}</summary><div class="p-5 pt-0 text-gray-600 leading-relaxed">${prod.faq1_r}</div></details>`;
@@ -348,7 +313,6 @@
           document.getElementById('detalhe-faq-wrapper').classList.remove('hidden');
         }
 
-        // DEPOIMENTOS
         const depoContainer = document.getElementById('detalhe-depoimentos-container');
         let htmlDepoimentos = '';
         const criardepo = (txt, aut) => {
@@ -367,7 +331,6 @@
           depoContainer.innerHTML = htmlDepoimentos;
         }
 
-        // BOTÃO PRINCIPAL DE COMPRA
         const btnCompra = document.getElementById('detalhe-botao-compra');
         const btnSticky = document.getElementById('mobile-sticky-buy');
         
@@ -385,7 +348,6 @@
         const btnHTML = `<a href="${linkSeguro}" target="_blank" class="${btnClass}">${btnText}</a>`;
         btnCompra.innerHTML = btnHTML;
 
-        // Sticky button no celular
         btnSticky.innerHTML = btnHTML;
         btnSticky.classList.remove('hidden');
 

@@ -37,7 +37,7 @@
             overflow: hidden;
         }
 
-        /* Topo Premium Ajustado para o Banner 728x90 */
+        /* Topo */
         header {
             background: rgba(20, 20, 25, 0.95);
             backdrop-filter: blur(16px);
@@ -51,7 +51,6 @@
             gap: 15px;
         }
 
-        /* 1. Lado Esquerdo: Logo */
         .logo-area {
             display: flex;
             align-items: center;
@@ -86,7 +85,7 @@
             white-space: nowrap;
         }
 
-        /* 2. CENTRO: BANNER ADSTERRA (Entre o Logo e o Ao Vivo) */
+        /* Banner Adsterra 728x90 */
         .header-ad-center {
             flex: 1;
             display: flex;
@@ -100,7 +99,6 @@
             background: rgba(0, 0, 0, 0.2);
         }
 
-        /* 3. Lado Direito: Ações */
         .header-actions {
             display: flex;
             align-items: center;
@@ -171,9 +169,8 @@
             height: calc(100vh - 105px);
         }
 
-        /* Coluna 1: Categorias */
         .sidebar-categories {
-            width: 280px;
+            width: 290px;
             background-color: var(--bg-surface);
             border-right: 1px solid var(--border-color);
             overflow-y: auto;
@@ -227,9 +224,8 @@
             color: var(--text-muted);
         }
 
-        /* Coluna 2: Canais */
         .sidebar-channels {
-            width: 340px;
+            width: 350px;
             background-color: var(--bg-base);
             border-right: 1px solid var(--border-color);
             display: flex;
@@ -288,6 +284,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .channel-item:hover {
@@ -304,7 +301,23 @@
             font-weight: 700;
         }
 
-        /* Coluna 3: Player */
+        .channel-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+
+        .channel-sub {
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* Player & Gabinete Retrô */
         .player-container {
             flex: 1;
             display: flex;
@@ -327,6 +340,9 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 200, 55, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         video {
@@ -360,7 +376,216 @@
             opacity: 1;
         }
 
-        /* Modal Transmissão */
+        /* GABINETE VINTAGE RETRÔ */
+        .vintage-radio-cabinet {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, #3a2012 0%, #1f0f08 70%, #120904 100%);
+            border: 12px solid #2a150b;
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8);
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            z-index: 6;
+            color: #d8c29d;
+        }
+
+        .vintage-radio-cabinet.active {
+            display: flex;
+        }
+
+        .vintage-header-brass {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #8e6a39;
+            padding-bottom: 12px;
+        }
+
+        .vintage-brand-badge {
+            font-family: 'Georgia', serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e5c058;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(229, 192, 88, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tube-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-family: monospace;
+            color: #ff9d00;
+        }
+
+        .tube-glow {
+            width: 10px;
+            height: 10px;
+            background: #ff7700;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff7700, 0 0 30px #ffaa00;
+            animation: tubeFlicker 3s infinite alternate;
+        }
+
+        @keyframes tubeFlicker {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 20px #ff9900; }
+            100% { opacity: 0.85; }
+        }
+
+        .vintage-dial-window {
+            background: #120a05;
+            border: 3px solid #78532b;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.95), 0 0 15px rgba(255,140,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dial-scale-container {
+            position: relative;
+            height: 55px;
+            border-bottom: 1px dashed rgba(229, 192, 88, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .dial-numbers {
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+            font-size: 13px;
+            color: #d19a4d;
+            letter-spacing: 1px;
+        }
+
+        .dial-sub-numbers {
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+            font-size: 10px;
+            color: #8c6330;
+            margin-top: 6px;
+        }
+
+        .dial-needle {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 3px;
+            height: 60px;
+            background: #ff3b30;
+            box-shadow: 0 0 12px #ff3b30, 0 0 4px #fff;
+            transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .vintage-station-screen {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(229, 192, 88, 0.25);
+            border-radius: 6px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .station-display-text {
+            font-family: monospace;
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffaa00;
+            text-shadow: 0 0 12px rgba(255, 170, 0, 0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .vintage-vu-meter {
+            width: 80px;
+            height: 38px;
+            background: #f4ecd8;
+            border: 2px solid #55331a;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+        }
+
+        .vu-meter-scale {
+            position: absolute;
+            top: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8px;
+            color: #442200;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .vu-meter-needle {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 2px;
+            height: 32px;
+            background: #990000;
+            transform-origin: bottom center;
+            transform: rotate(-35deg);
+            transition: transform 0.15s ease-out;
+        }
+
+        .vintage-controls-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding-top: 10px;
+        }
+
+        .vintage-btn {
+            background: radial-gradient(circle at 35% 35%, #5a351e, #2b1408);
+            border: 2px solid #8e6a39;
+            color: #ecd7b5;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #140803, 0 10px 20px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.1s ease;
+        }
+
+        .vintage-btn:hover {
+            filter: brightness(1.15);
+            color: #fff;
+        }
+
+        .vintage-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #140803, 0 4px 10px rgba(0,0,0,0.6);
+        }
+
+        .vintage-btn-main {
+            background: radial-gradient(circle at 35% 35%, #966f35, #553712);
+            border-color: #ffd700;
+            color: #fff;
+            padding: 14px 30px;
+            font-size: 14px;
+            box-shadow: 0 6px 0 #281907, 0 10px 25px rgba(255, 170, 0, 0.25);
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -373,9 +598,7 @@
             padding: 20px;
         }
 
-        .modal.open {
-            display: flex;
-        }
+        .modal.open { display: flex; }
 
         .modal-content {
             background: var(--bg-surface);
@@ -394,18 +617,8 @@
             margin-bottom: 20px;
         }
 
-        .modal-header h3 {
-            font-size: 18px;
-            color: var(--accent-gold);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 24px;
-            cursor: pointer;
-        }
+        .modal-header h3 { font-size: 18px; color: var(--accent-gold); }
+        .close-btn { background: none; border: none; color: #888; font-size: 24px; cursor: pointer; }
 
         .tv-card {
             background: var(--bg-elevated);
@@ -414,49 +627,26 @@
             margin-bottom: 10px;
             border: 1px solid var(--border-color);
         }
+        .tv-card strong { color: #fff; display: block; margin-bottom: 4px; font-size: 14px; }
+        .tv-card p { color: var(--text-muted); font-size: 12px; line-height: 1.5; }
 
-        .tv-card strong {
-            color: #fff;
-            display: block;
-            margin-bottom: 4px;
-            font-size: 14px;
-        }
-
-        .tv-card p {
-            color: var(--text-muted);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        /* Scrollbars */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
 
-        /* Responsividade para telas menores */
         @media (max-width: 1280px) {
-            header {
-                min-height: auto;
-                flex-wrap: wrap;
-                padding: 12px 20px;
-                justify-content: space-between;
-            }
-            .header-ad-center {
-                order: 3;
-                width: 100%;
-                margin-top: 10px;
-            }
-            main {
-                height: calc(100vh - 170px);
-            }
+            header { min-height: auto; flex-wrap: wrap; padding: 12px 20px; justify-content: space-between; }
+            .header-ad-center { order: 3; width: 100%; margin-top: 10px; }
+            main { height: calc(100vh - 170px); }
         }
 
         @media (max-width: 950px) {
             body { overflow: auto; height: auto; }
             main { flex-direction: column; height: auto; }
             .player-container { padding: 10px; order: -1; }
-            .video-box { height: 56vw; border-radius: var(--radius-md); }
+            .video-box { height: 75vw; min-height: 340px; border-radius: var(--radius-md); }
             .sidebar-categories, .sidebar-channels { width: 100%; max-height: 300px; }
+            .vintage-controls-bar { gap: 10px; }
+            .vintage-btn { padding: 10px 14px; font-size: 11px; }
         }
     </style>
 </head>
@@ -464,7 +654,6 @@
 
     <!-- Topo -->
     <header>
-        <!-- Lado Esquerdo: Logo -->
         <div class="logo-area">
             <div class="logo-icon">
                 <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
@@ -472,7 +661,6 @@
             <div class="logo-title">ESTÚDIO NETO TV</div>
         </div>
 
-        <!-- CENTRO: BANNER ADSTERRA (Exatamente entre o Logo e o Ao Vivo) -->
         <div class="header-ad-center">
             <script>
               atOptions = {
@@ -486,14 +674,12 @@
             <script src="https://bauval.org/22/075895c4649089c88bfd69bcfe7dc655"></script>
         </div>
 
-        <!-- Lado Direito: Ações -->
         <div class="header-actions">
             <div class="live-tag">
                 <span class="pulse-dot"></span>
                 <span>AO VIVO</span>
             </div>
 
-            <!-- Botão de Transmitir -->
             <button class="cast-btn" onclick="iniciarTransmissao()">
                 <svg viewBox="0 0 24 24"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
                 <span>Transmitir na TV</span>
@@ -501,7 +687,6 @@
         </div>
     </header>
 
-    <!-- Estrutura Principal -->
     <main>
         <!-- Coluna 1: Categorias Principais -->
         <div class="sidebar-categories">
@@ -509,45 +694,94 @@
             <div id="categoryContainer"></div>
         </div>
 
-        <!-- Coluna 2: Canais -->
+        <!-- Coluna 2: Lista de Canais -->
         <div class="sidebar-channels">
             <div class="search-wrapper">
                 <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Buscar canal..." onkeyup="filterChannels()">
+                <input type="text" id="searchInput" placeholder="Buscar canal..." oninput="handleSearch()">
             </div>
             <div id="channelContainer" class="channels-list"></div>
         </div>
 
-        <!-- Coluna 3: Player Cinematográfico -->
+        <!-- Coluna 3: Player & Gabinete Retrô -->
         <div class="player-container">
             <div class="video-box">
                 <div class="channel-overlay" id="channelOverlay">
                     <span class="pulse-dot"></span>
-                    <span id="overlayTitle">Selecione um canal</span>
+                    <span id="overlayTitle">Selecione uma transmissão</span>
                 </div>
+
+                <!-- PAINEL VINTAGE DE RÁDIO ANTIGO -->
+                <div class="vintage-radio-cabinet" id="vintageRadioPanel">
+                    <div class="vintage-header-brass">
+                        <div class="vintage-brand-badge">
+                            <span>📻 ESTÚDIO NETO</span>
+                            <span style="font-size: 11px; opacity: 0.6; font-family: sans-serif;">HI-FI TUBE RECEIVER</span>
+                        </div>
+                        <div class="tube-indicator">
+                            <span class="tube-glow"></span>
+                            <span>VALVE ACTIVE</span>
+                        </div>
+                    </div>
+
+                    <div class="vintage-dial-window">
+                        <div class="dial-scale-container">
+                            <div class="dial-needle" id="vintageDialNeedle"></div>
+                            <div class="dial-numbers">
+                                <span>88</span><span>92</span><span>96</span><span>100</span><span>104</span><span>108</span>
+                            </div>
+                            <div class="dial-sub-numbers">
+                                <span>540</span><span>700</span><span>900</span><span>1200</span><span>1400</span><span>1600</span>
+                            </div>
+                        </div>
+
+                        <div class="vintage-station-screen">
+                            <div class="station-display-text" id="vintageStationTitle">SINTONIZANDO RÁDIO MUNDIAL...</div>
+                            <div class="vintage-vu-meter">
+                                <div class="vu-meter-scale">VU SIGNAL</div>
+                                <div class="vu-meter-needle" id="vintageVuNeedle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vintage-controls-bar">
+                        <button class="vintage-btn" onclick="voltarRadio()">
+                            <span>⏮</span><span>ANTERIOR</span>
+                        </button>
+                        <button class="vintage-btn vintage-btn-main" onclick="togglePlayPauseRadio()" id="btnVintagePlay">
+                            <span>▶</span><span>PLAY</span>
+                        </button>
+                        <button class="vintage-btn" onclick="pararRadio()">
+                            <span>⏹</span><span>PARAR</span>
+                        </button>
+                        <button class="vintage-btn" onclick="avancarRadio()">
+                            <span>PRÓXIMA</span><span>⏭</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Player de Vídeo Nativo para TV -->
                 <video id="videoPlayer" controls autoplay playsinline></video>
+                <!-- Player Exclusivo de Áudio para Rádios -->
+                <audio id="audioPlayer" preload="none"></audio>
             </div>
         </div>
     </main>
 
-    <!-- Modal Auxiliar de Transmissão -->
     <div class="modal" id="castModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Transmitir para Smart TV</h3>
                 <button class="close-btn" onclick="fecharModal()">&times;</button>
             </div>
-
             <div class="tv-card">
                 <strong>Samsung / LG / Roku / Android TV (Chrome/Edge):</strong>
                 <p>Clique nos <b>3 pontinhos</b> no topo direito do navegador e selecione <b>"Transmitir..."</b> ou aperte as teclas <b>Windows + K</b> no computador.</p>
             </div>
-
             <div class="tv-card">
                 <strong>iPhone / iPad / Mac (Apple AirPlay):</strong>
                 <p>Abra o player em tela cheia e toque no ícone do <b>AirPlay</b> para conectar direto à sua TV.</p>
             </div>
-
             <div class="tv-card">
                 <strong>Celular Android:</strong>
                 <p>Deslize o menu do topo do celular e toque em <b>Smart View</b> ou <b>Transmitir</b> para espelhar na TV.</p>
@@ -561,14 +795,26 @@
         let categoriesData = {};
         let currentCategory = "";
         let currentChannels = [];
-        let hls = null;
+        let currentRadioIndex = 0;
+        let hlsVideo = null;
+        let hlsAudio = null;
+        let searchDebounceTimer = null;
+        let vuAnimationTimer = null;
 
         const categoryContainer = document.getElementById("categoryContainer");
         const channelContainer = document.getElementById("channelContainer");
         const searchInput = document.getElementById("searchInput");
         const video = document.getElementById("videoPlayer");
+        const audio = document.getElementById("audioPlayer");
         const overlayTitle = document.getElementById("overlayTitle");
 
+        const vintageRadioPanel = document.getElementById("vintageRadioPanel");
+        const vintageStationTitle = document.getElementById("vintageStationTitle");
+        const vintageDialNeedle = document.getElementById("vintageDialNeedle");
+        const vintageVuNeedle = document.getElementById("vintageVuNeedle");
+        const btnVintagePlay = document.getElementById("btnVintagePlay");
+
+        // CATEGORIAS MESTRES LIMPAS (CANIS ABERTOS EM 1º LUGAR)
         const MASTER_CATEGORIES = [
             "⭐ CANAIS ABERTOS",
             "🎬 FILMES E SÉRIES",
@@ -577,6 +823,7 @@
             "🧸 INFANTIL",
             "🦁 DOCUMENTÁRIOS",
             "🍿 VARIEDADES & MÚSICA",
+            "📻 RÁDIOS DO MUNDO (45.000+)",
             "🙏 RELIGIOSOS",
             "📺 DIVERSOS"
         ];
@@ -619,7 +866,7 @@
                 const text = await response.text();
                 parseM3U(text);
             } catch (err) {
-                overlayTitle.innerText = "Erro ao carregar lista de canais.";
+                parseM3U("");
             }
         }
 
@@ -647,7 +894,7 @@
                     }
 
                 } else if (line.startsWith("http") && tempTitle !== "") {
-                    // Pula o servidor problemático que cortava em 1 min
+                    // Pula o servidor de 1 minuto
                     if (line.toLowerCase().includes("governosptx.org")) {
                         tempTitle = "";
                         continue;
@@ -661,7 +908,8 @@
                     const finalCategory = classificarCategoria(rawCategory, tempTitle);
                     categoriesData[finalCategory].push({
                         title: tempTitle,
-                        url: streamUrl
+                        url: streamUrl,
+                        isRadio: false
                     });
 
                     tempTitle = "";
@@ -676,19 +924,29 @@
             let firstRendered = null;
 
             MASTER_CATEGORIES.forEach((cat) => {
+                const isWorldRadio = cat.includes("45.000+");
                 const channelCount = categoriesData[cat] ? categoriesData[cat].length : 0;
-                if (channelCount > 0) {
+
+                if (isWorldRadio || channelCount > 0) {
                     const div = document.createElement("div");
                     div.className = "category-item";
-                    div.innerHTML = `<span>${cat}</span><span class="category-badge">${channelCount}</span>`;
+                    let badgeText = channelCount;
+                    if (isWorldRadio) badgeText = "45k+";
+
+                    div.innerHTML = `<span>${cat}</span><span class="category-badge">${badgeText}</span>`;
                     div.onclick = () => selectCategory(cat, div);
                     categoryContainer.appendChild(div);
 
-                    if (!firstRendered) firstRendered = { cat: cat, el: div };
+                    // A primeira categoria a abrir sempre será ⭐ CANAIS ABERTOS
+                    if (!firstRendered) {
+                        firstRendered = { cat: cat, el: div };
+                    }
                 }
             });
 
-            if (firstRendered) selectCategory(firstRendered.cat, firstRendered.el);
+            if (firstRendered) {
+                selectCategory(firstRendered.cat, firstRendered.el);
+            }
         }
 
         function selectCategory(category, element) {
@@ -696,33 +954,123 @@
             document.querySelectorAll(".category-item").forEach(el => el.classList.remove("active"));
             if (element) element.classList.add("active");
 
-            currentChannels = categoriesData[category] || [];
             searchInput.value = "";
-            renderChannels(currentChannels);
+
+            if (category.includes("45.000+")) {
+                searchInput.placeholder = "🔍 Digite qualquer rádio ou país do mundo...";
+                vintageRadioPanel.classList.add("active");
+                carregarRadiosMundiaisIniciais();
+            } else {
+                searchInput.placeholder = "Buscar canal...";
+                vintageRadioPanel.classList.remove("active");
+                currentChannels = categoriesData[category] || [];
+                renderChannels(currentChannels);
+            }
+        }
+
+        async function carregarRadiosMundiaisIniciais() {
+            channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Carregando rádios populares do mundo...</div>";
+            try {
+                const res = await fetch("https://de1.api.radio-browser.info/json/stations/topvote/40?hidebroken=true");
+                const data = await res.json();
+                renderizarRadiosAPI(data);
+            } catch (e) {
+                channelContainer.innerHTML = "<div style='padding:20px;color:#FF4444;'>Digite o nome de uma rádio acima para buscar.</div>";
+            }
+        }
+
+        async function buscarRadiosMundiais(query) {
+            if (!query || query.trim().length === 0) {
+                carregarRadiosMundiaisIniciais();
+                return;
+            }
+
+            channelContainer.innerHTML = `<div style='padding:20px;color:#FFC837;'>Buscando "${query}" no mundo inteiro...</div>`;
+            
+            try {
+                const url = `https://de1.api.radio-browser.info/json/stations/search?name=${encodeURIComponent(query)}&limit=50&order=clickcount&reverse=true&hidebroken=true`;
+                const res = await fetch(url);
+                const data = await res.json();
+
+                if (!data || data.length === 0) {
+                    channelContainer.innerHTML = `<div style='padding:20px;color:#888;'>Nenhuma rádio encontrada para "${query}".</div>`;
+                    return;
+                }
+
+                renderizarRadiosAPI(data);
+            } catch (e) {
+                channelContainer.innerHTML = "<div style='padding:20px;color:#FF4444;'>Erro na pesquisa online de rádios.</div>";
+            }
+        }
+
+        function renderizarRadiosAPI(stations) {
+            channelContainer.innerHTML = "";
+            currentChannels = [];
+
+            stations.forEach((station, index) => {
+                const country = station.countrycode ? station.countrycode.toUpperCase() : "MUNDO";
+                const bitrate = station.bitrate ? `${station.bitrate}k` : "";
+                const streamUrl = station.url_resolved || station.url;
+
+                const radioObj = {
+                    title: station.name + " (" + country + ")",
+                    url: streamUrl,
+                    sub: country,
+                    isRadio: true
+                };
+
+                currentChannels.push(radioObj);
+
+                const div = document.createElement("div");
+                div.className = "channel-item";
+                div.innerHTML = `
+                    <span class="channel-title">📻 ${station.name}</span>
+                    <span class="channel-sub">${country} ${bitrate}</span>
+                `;
+
+                div.onclick = () => {
+                    currentRadioIndex = index;
+                    playStream(radioObj, div);
+                };
+
+                channelContainer.appendChild(div);
+            });
+        }
+
+        function handleSearch() {
+            const query = searchInput.value.trim();
+
+            if (currentCategory.includes("45.000+")) {
+                clearTimeout(searchDebounceTimer);
+                searchDebounceTimer = setTimeout(() => {
+                    buscarRadiosMundiais(query);
+                }, 300);
+            } else {
+                const filtered = currentChannels.filter(c => c.title.toLowerCase().includes(query.toLowerCase()));
+                renderChannels(filtered);
+            }
         }
 
         function renderChannels(channels) {
             channelContainer.innerHTML = "";
             if (channels.length === 0) {
-                channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Nenhum canal.</div>";
+                channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Nenhum canal encontrado.</div>";
                 return;
             }
 
-            channels.forEach((channel) => {
+            channels.forEach((channel, index) => {
                 const div = document.createElement("div");
                 div.className = "channel-item";
-                div.innerText = channel.title;
-                div.onclick = () => playStream(channel, div);
+                div.innerHTML = `<span class="channel-title">${channel.title}</span>`;
+                div.onclick = () => {
+                    currentRadioIndex = index;
+                    playStream(channel, div);
+                };
                 channelContainer.appendChild(div);
             });
         }
 
-        function filterChannels() {
-            const query = searchInput.value.toLowerCase();
-            const filtered = currentChannels.filter(c => c.title.toLowerCase().includes(query));
-            renderChannels(filtered);
-        }
-
+        // MOTOR DE REPRODUÇÃO (TV OU RÁDIO)
         function playStream(channel, element) {
             if (element) {
                 document.querySelectorAll(".channel-item").forEach(el => el.classList.remove("active"));
@@ -731,31 +1079,125 @@
 
             overlayTitle.innerText = channel.title;
 
-            if (hls) {
-                hls.destroy();
-                hls = null;
+            // 1. MODO RÁDIO: Ativa o Painel Vintage
+            if (channel.isRadio || currentCategory.includes("45.000+")) {
+                if (hlsVideo) { try { hlsVideo.destroy(); } catch(e){} hlsVideo = null; }
+                video.pause();
+                video.removeAttribute('src');
+
+                vintageRadioPanel.classList.add("active");
+                vintageStationTitle.innerText = "SINTONIZANDO: " + channel.title.toUpperCase();
+                btnVintagePlay.innerHTML = "<span>⏸</span><span>PAUSAR</span>";
+                
+                moverPonteiroSintonia();
+
+                if (hlsAudio) { try { hlsAudio.destroy(); } catch(e){} hlsAudio = null; }
+                audio.pause();
+                audio.removeAttribute('src');
+
+                if (channel.url.includes(".m3u8") && Hls.isSupported()) {
+                    hlsAudio = new Hls({ enableWorker: true, lowLatencyMode: false });
+                    hlsAudio.loadSource(channel.url);
+                    hlsAudio.attachMedia(audio);
+                    hlsAudio.on(Hls.Events.MANIFEST_PARSED, () => {
+                        audio.play().then(() => iniciarAgulhaVU()).catch(() => {});
+                    });
+                } else {
+                    audio.src = channel.url;
+                    audio.play().then(() => {
+                        iniciarAgulhaVU();
+                        vintageStationTitle.innerText = "NO AR: " + channel.title.toUpperCase();
+                    }).catch(err => {
+                        vintageStationTitle.innerText = "SINTONIA INSTÁVEL (TENTANDO...)";
+                    });
+                }
+
+            // 2. MODO TV / VÍDEO: Desliga o rádio e aciona o player de vídeo
+            } else {
+                if (hlsAudio) { try { hlsAudio.destroy(); } catch(e){} hlsAudio = null; }
+                audio.pause();
+                audio.removeAttribute('src');
+
+                vintageRadioPanel.classList.remove("active");
+                pararAgulhaVU();
+
+                if (hlsVideo) { try { hlsVideo.destroy(); } catch(e){} hlsVideo = null; }
+                video.pause();
+                video.removeAttribute('src');
+
+                if (channel.url.includes(".m3u8") && Hls.isSupported()) {
+                    hlsVideo = new Hls({ enableWorker: true, lowLatencyMode: false });
+                    hlsVideo.loadSource(channel.url);
+                    hlsVideo.attachMedia(video);
+                    hlsVideo.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+                } else {
+                    video.src = channel.url;
+                    video.play().catch(() => {});
+                }
             }
+        }
 
-            if (Hls.isSupported()) {
-                hls = new Hls({ enableWorker: true, lowLatencyMode: false });
-                hls.loadSource(channel.url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
-
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    if (data.fatal) {
-                        switch (data.type) {
-                            case Hls.ErrorTypes.NETWORK_ERROR: hls.startLoad(); break;
-                            case Hls.ErrorTypes.MEDIA_ERROR: hls.recoverMediaError(); break;
-                            default: hls.destroy(); break;
-                        }
-                    }
-                });
-
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = channel.url;
-                video.addEventListener('loadedmetadata', () => video.play());
+        // CONTROLES DO PAINEL VINTAGE
+        function togglePlayPauseRadio() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btnVintagePlay.innerHTML = "<span>⏸</span><span>PAUSAR</span>";
+                    iniciarAgulhaVU();
+                }).catch(() => {});
+            } else {
+                audio.pause();
+                btnVintagePlay.innerHTML = "<span>▶</span><span>PLAY</span>";
+                pararAgulhaVU();
             }
+        }
+
+        function pararRadio() {
+            audio.pause();
+            audio.currentTime = 0;
+            btnVintagePlay.innerHTML = "<span>▶</span><span>PLAY</span>";
+            vintageStationTitle.innerText = "SINTONIA PARADA";
+            pararAgulhaVU();
+        }
+
+        function avancarRadio() {
+            if (currentChannels.length === 0) return;
+            currentRadioIndex = (currentRadioIndex + 1) % currentChannels.length;
+            sintonizarPorIndice(currentRadioIndex, currentChannels[currentRadioIndex]);
+        }
+
+        function voltarRadio() {
+            if (currentChannels.length === 0) return;
+            currentRadioIndex = (currentRadioIndex - 1 + currentChannels.length) % currentChannels.length;
+            sintonizarPorIndice(currentRadioIndex, currentChannels[currentRadioIndex]);
+        }
+
+        function sintonizarPorIndice(index, canalObj) {
+            const itens = channelContainer.querySelectorAll(".channel-item");
+            const itemElemento = itens[index];
+            playStream(canalObj, itemElemento);
+            if (itemElemento) {
+                itemElemento.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function moverPonteiroSintonia() {
+            const novaPosicao = 10 + Math.floor(Math.random() * 80);
+            vintageDialNeedle.style.left = novaPosicao + "%";
+        }
+
+        function iniciarAgulhaVU() {
+            clearInterval(vuAnimationTimer);
+            vuAnimationTimer = setInterval(() => {
+                if (!audio.paused) {
+                    const randomAngle = -20 + Math.floor(Math.random() * 55);
+                    vintageVuNeedle.style.transform = `rotate(${randomAngle}deg)`;
+                }
+            }, 140);
+        }
+
+        function pararAgulhaVU() {
+            clearInterval(vuAnimationTimer);
+            vintageVuNeedle.style.transform = "rotate(-38deg)";
         }
 
         function iniciarTransmissao() {
@@ -768,13 +1210,8 @@
             }
         }
 
-        function abrirModal() {
-            document.getElementById("castModal").classList.add("open");
-        }
-
-        function fecharModal() {
-            document.getElementById("castModal").classList.remove("open");
-        }
+        function abrirModal() { document.getElementById("castModal").classList.add("open"); }
+        function fecharModal() { document.getElementById("castModal").classList.remove("open"); }
 
         loadPlaylist();
     </script>

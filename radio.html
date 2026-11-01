@@ -44,13 +44,12 @@
         }
 
         .back-link {
-            position: absolute;
-            top: 24px;
-            left: 24px;
+            align-self: flex-start;
+            margin-bottom: 15px;
             color: var(--text-muted);
             text-decoration: none;
             font-size: 0.9rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: color 0.2s ease;
@@ -118,7 +117,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* Moldura Widescreen */
         .artwork-wrapper {
             position: relative;
             width: 100%;
@@ -134,7 +132,6 @@
             justify-content: center;
         }
 
-        /* Imagem da Logo */
         .radio-logo-img {
             width: 100%;
             height: 100%;
@@ -304,66 +301,123 @@
             border-radius: 50%;
             cursor: pointer;
         }
+
+        .ad-container {
+            width: 100%;
+            max-width: 728px;
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 14px;
+            background: rgba(15, 20, 35, 0.4);
+            border: 1px solid var(--border);
+            padding: 4px;
+        }
+
+        .ad-scaler {
+            width: 728px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center center;
+            transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .ad-container { height: 60px; }
+            .ad-scaler { transform: scale(0.58); }
+        }
+
+        @media (max-width: 480px) {
+            .ad-container { height: 52px; }
+            .ad-scaler { transform: scale(0.46); }
+        }
+
+        @media (max-width: 360px) {
+            .ad-container { height: 44px; }
+            .ad-scaler { transform: scale(0.38); }
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
-        Estúdio Neto Principal
-    </a>
+    <div style="width: 100%; max-width: 728px; display: flex; flex-direction: column; align-items: center;">
+        
+        <a href="index.html" class="back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            Estúdio Neto Principal
+        </a>
 
-    <main class="player-container">
-        <div class="station-header">
-            <span class="station-name">Estúdio Neto</span>
-            <div class="live-badge">
-                <span class="live-dot"></span> NO AR
-            </div>
-        </div>
-
-        <!-- MOLDURA COM A SUA IMAGEM -->
-        <div class="artwork-wrapper">
-            <img src="imagens/logoradio.jpg" alt="Estúdio Neto Web Rádio" class="radio-logo-img">
-            
-            <div class="overlay-gradient">
-                <div class="visualizer" id="visualizer">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
+        <main class="player-container">
+            <div class="station-header">
+                <span class="station-name">Estúdio Neto</span>
+                <div class="live-badge">
+                    <span class="live-dot"></span> NO AR
                 </div>
             </div>
+
+            <div class="artwork-wrapper">
+                <img src="imagens/logoradio.jpg" alt="Estúdio Neto Web Rádio" class="radio-logo-img">
+                
+                <div class="overlay-gradient">
+                    <div class="visualizer" id="visualizer">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="track-details">
+                <span class="genre-tag" id="track-category">Web Rádio</span>
+                <div class="track-title" id="track-title">Sintonizando rádio...</div>
+                <div class="track-artist" id="track-artist">Aguarde um instante</div>
+            </div>
+
+            <div class="error-box" id="error-box"></div>
+
+            <div class="player-controls">
+                <button class="control-btn" id="prev-btn" title="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+                </button>
+
+                <button class="control-btn btn-play" id="play-btn" title="Reproduzir">
+                    <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+
+                <button class="control-btn" id="next-btn" title="Próxima">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                </button>
+            </div>
+
+            <div class="volume-box">
+                <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
+                <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </div>
+        </main>
+
+        <div class="ad-container">
+            <div class="ad-scaler">
+                <script>
+                  atOptions = {
+                    'key' : '075895c4649089c88bfd69bcfe7dc655',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                  };
+                </script>
+                <script src="https://bauval.org/22/075895c4649089c88bfd69bcfe7dc655"></script>
+            </div>
         </div>
 
-        <div class="track-details">
-            <span class="genre-tag" id="track-category">Web Rádio</span>
-            <div class="track-title" id="track-title">Buscando músicas...</div>
-            <div class="track-artist" id="track-artist">Aguarde um instante</div>
-        </div>
-
-        <div class="error-box" id="error-box"></div>
-
-        <div class="player-controls">
-            <button class="control-btn" id="prev-btn" title="Anterior">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-            </button>
-
-            <button class="control-btn btn-play" id="play-btn" title="Reproduzir">
-                <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </button>
-
-            <button class="control-btn" id="next-btn" title="Próxima">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
-            </button>
-        </div>
-
-        <div class="volume-box">
-            <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.8">
-            <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-        </div>
-    </main>
+    </div>
 
     <audio id="audio-player" preload="metadata"></audio>
 
@@ -424,11 +478,33 @@
                     };
                 });
 
+                // ==============================================================
+                // ORDENAÇÃO: COLOCA A VINHETA AUTOMATICAMENTE NO INÍCIO (Posição 0)
+                // ==============================================================
+                const vinhetaIndex = playlist.findIndex(track => 
+                    track.src.toLowerCase().includes("vinheta") ||
+                    track.src.includes("Web Rádio Estúdio Neto - Vinheta.mp3")
+                );
+
+                if (vinhetaIndex > -1) {
+                    const [vinheta] = playlist.splice(vinhetaIndex, 1);
+                    vinheta.category = "Vinheta Oficial";
+                    vinheta.artist = "Estúdio Neto";
+                    vinheta.title = "Vinheta de Abertura";
+                    playlist.unshift(vinheta); // Coloca em 1º lugar
+                }
+
                 loadTrack(0);
 
             } catch (err) {
                 console.warn("Aviso na API, usando faixa direta de segurança:", err);
                 playlist = [
+                    {
+                        title: "Vinheta de Abertura",
+                        artist: "Estúdio Neto",
+                        category: "Vinheta Oficial",
+                        src: "audio/Web Rádio Estúdio Neto - Vinheta.mp3"
+                    },
                     {
                         title: "Brisa do Horizonte",
                         artist: "Estúdio Neto",
@@ -502,6 +578,7 @@
         nextBtn.addEventListener("click", nextTrack);
         prevBtn.addEventListener("click", prevTrack);
 
+        // Quando a vinheta acaba, toca a próxima música na sequência!
         audio.addEventListener("ended", () => {
             nextTrack();
             play();

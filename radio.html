@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
     <title>Estúdio Neto Web Rádio | Ao Vivo</title>
+    
+    <!-- Fonte Moderna do Estúdio Neto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #6366f1;
@@ -40,6 +44,7 @@
             padding: 20px;
         }
 
+        /* Botão para voltar ao site principal */
         .back-link {
             position: absolute;
             top: 24px;
@@ -56,6 +61,7 @@
             color: var(--text-main);
         }
 
+        /* Container do Player */
         .player-container {
             background: var(--card-bg);
             backdrop-filter: blur(24px);
@@ -72,6 +78,7 @@
             position: relative;
         }
 
+        /* Cabeçalho da Estação */
         .station-header {
             display: flex;
             justify-content: space-between;
@@ -115,6 +122,7 @@
             50% { opacity: 0.3; }
         }
 
+        /* Artwork / Equalizador Visual */
         .artwork-wrapper {
             position: relative;
             width: 200px;
@@ -166,6 +174,7 @@
             100% { height: 26px; }
         }
 
+        /* Informações da Música */
         .track-details {
             text-align: center;
             width: 100%;
@@ -197,7 +206,7 @@
             word-break: break-word;
         }
 
-        /* Alerta de Erro Visual */
+        /* Alerta de erro informativo */
         .error-box {
             display: none;
             background: rgba(239, 68, 68, 0.15);
@@ -211,6 +220,7 @@
             line-height: 1.4;
         }
 
+        /* Controles de Reprodução */
         .player-controls {
             display: flex;
             align-items: center;
@@ -252,6 +262,7 @@
             box-shadow: 0 0 35px var(--primary-glow);
         }
 
+        /* Barra de Volume */
         .volume-box {
             display: flex;
             align-items: center;
@@ -312,12 +323,12 @@
         </div>
 
         <div class="track-details">
-            <span class="genre-tag" id="track-category">Rádio</span>
-            <div class="track-title" id="track-title">Carregando...</div>
+            <span class="genre-tag" id="track-category">Carregando...</span>
+            <div class="track-title" id="track-title">Carregando rádio...</div>
             <div class="track-artist" id="track-artist">Aguarde</div>
         </div>
 
-        <!-- Caixa de Erro Informativa -->
+        <!-- Mensagem de Alerta se o arquivo não estiver disponível -->
         <div class="error-box" id="error-box"></div>
 
         <div class="player-controls">
@@ -344,8 +355,11 @@
     <audio id="audio-player" preload="metadata"></audio>
 
     <script>
-   
-    // SUA PLAYLIST CONFIGURADA COM A SUA MÚSICA EXATA:
+        // ====================================================================
+        // PLAYLIST DA RÁDIO:
+        // Quando quiser adicionar mais músicas, basta colocar uma vírgula
+        // e adicionar outro bloco { ... } com o nome do seu novo arquivo mp3.
+        // ====================================================================
         const playlist = [
             {
                 title: "Brisa do Horizonte",
@@ -376,8 +390,8 @@
         function loadTrack(index) {
             errorBox.style.display = "none";
             const track = playlist[index];
-            
-            // encodeURI resolve automaticamente os espaços no nome do arquivo!
+
+            // encodeURI resolve os espaços do nome do arquivo na internet
             audio.src = encodeURI(track.src);
             audio.load();
 
@@ -386,11 +400,11 @@
             categoryEl.textContent = track.category;
         }
 
-        // Se houver erro, avisa exatamente onde está o problema
+        // Caso o arquivo ainda esteja compilando ou com erro
         audio.addEventListener("error", function() {
             const track = playlist[currentIndex];
             errorBox.style.display = "block";
-            errorBox.innerHTML = `⚠️ <b>Arquivo não encontrado (Erro 404):</b><br>O site tentou abrir:<br><code>${encodeURI(track.src)}</code><br><br><b>O que fazer:</b> Aguarde 1 a 2 minutos para o GitHub publicar os novos arquivos ou confirme se a pasta no repositório se chama exatamente <b>audio</b>.`;
+            errorBox.innerHTML = `⚠️ <b>Aguardando publicação do áudio:</b><br>O site procurou por: <code>${encodeURI(track.src)}</code><br><br>Se acabou de subir o arquivo, aguarde 1 a 2 minutos para o GitHub finalizar a publicação e recarregue a página.`;
             visualizer.classList.remove("playing");
             playIcon.innerHTML = playSVG;
             isPlaying = false;
@@ -403,7 +417,7 @@
                 visualizer.classList.add("playing");
                 errorBox.style.display = "none";
             }).catch(err => {
-                console.warn("Aguardando clique do usuário:", err);
+                console.warn("Autoplay bloqueado pelo navegador. Aguardando interação do usuário.");
             });
         }
 
@@ -434,6 +448,7 @@
         nextBtn.addEventListener("click", nextTrack);
         prevBtn.addEventListener("click", prevTrack);
 
+        // Ao terminar a faixa, toca a próxima da lista continuamente
         audio.addEventListener("ended", () => {
             nextTrack();
             play();
@@ -443,5 +458,8 @@
             audio.volume = e.target.value;
         });
 
-        // Carrega a música
+        // Carrega a primeira música ao abrir a página
         loadTrack(currentIndex);
+    </script>
+</body>
+</html>

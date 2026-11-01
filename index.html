@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <!-- SEU ÍCONE AQUI -->
   <link rel="icon" type="image/png" href="favicon.png">
+  
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PY67JDVNH9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PY67JDVNH9');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY67JDVNH9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PY67JDVNH9');
+  </script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estúdio Neto — Soluções e Engenharia de Áudio</title>
-  <meta name="description" content="Processadores de áudio digital locais executados diretamente em seu navegador. Acesse nossa suíte com masterização, removedor de vocais, afinador e conversores sem uploads.">
-  <meta name="keywords" content="estudio neto, masterizacao online, removedor vocal, afinador guitarra, conversor de audio, dsp local, web audio api">
+  <meta name="description" content="Processadores de áudio digital locais e streaming ao vivo Estúdio Neto TV direto no seu navegador.">
+  <meta name="keywords" content="estudio neto, masterizacao online, removedor vocal, afinador guitarra, conversor de audio, dsp local, tv online, web player">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,6 +30,8 @@
               card: '#0f1423',
               accent: '#6366f1',
               accentHover: '#4f46e5',
+              gold: '#FFD700',
+              goldHover: '#FFA500',
               success: '#10b981',
               border: '#1e293b'
             }
@@ -43,7 +45,7 @@
   <style>
     @keyframes infinite-scroll {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-33.33333%); } /* Rola 1/3 pois duplicamos a lista 3 vezes */
+      100% { transform: translateX(-33.33333%); }
     }
     .animate-infinite-scroll {
       display: flex;
@@ -53,34 +55,31 @@
     .animate-infinite-scroll:hover {
       animation-play-state: paused;
     }
-    /* Oculta barra de rolagem mas mantém overflow funcionando */
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 
-  <!-- Script de Verificação e Veiculação do Google AdSense -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7887570051470520" crossorigin="anonymous"></script>
-  <!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+  
+  <!-- TikTok Pixel -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.n;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-
-  ttq.load('DAAEV63C77UA372K02KG');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
+    ttq.load('DAAEV63C77UA372K02KG');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
 </head>
 <body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- Header Unificado -->
+  <!-- Header com a Nova Aba "Estúdio Neto TV" -->
   <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <!-- Ícone Fader SVG -->
         <svg class="w-8 h-8 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
         </svg>
@@ -89,9 +88,16 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </h1>
       </div>
       
-      <!-- Menu de Opções Separados (Navegação Física de Alta Velocidade) -->
-      <nav class="flex items-center gap-5 text-sm font-semibold">
+      <!-- Menu de Navegação -->
+      <nav class="flex flex-wrap items-center justify-center gap-5 text-sm font-semibold">
         <a href="index.html" class="text-white border-b-2 border-brand-accent pb-1">Início</a>
+        
+        <!-- ABA NOVA: ESTÚDIO NETO TV AO VIVO -->
+        <a href="tv.html" class="flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:text-amber-300 hover:bg-amber-500/20 rounded-lg transition-all shadow-[0_0_12px_rgba(255,215,0,0.2)]">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          <span>Estúdio Neto TV</span>
+        </a>
+
         <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
         <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
         <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
@@ -100,11 +106,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </header>
 
-  <!-- ANÚNCIO DE TOPO (Leaderboard de Alta Fidelidade 728x90) -->
+  <!-- ANÚNCIO DE TOPO -->
   <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
     <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
-      
-      <!-- Script Oficial Adsterra 728x90 -->
       <script>
         atOptions = {
           'key' : '075895c4649089c88bfd69bcfe7dc655',
@@ -115,11 +119,10 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         };
       </script>
       <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
-
     </div>
   </div>
 
-  <!-- CONTEÚDO EDITORIAL DA PÁGINA PRINCIPAL -->
+  <!-- CONTEÚDO EDITORIAL -->
   <main class="max-w-6xl w-full mx-auto p-4 md:p-8 flex-grow space-y-16">
     
     <!-- Seção de Boas-Vindas -->
@@ -128,14 +131,40 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         Bem-vindo ao Estúdio Neto
       </h2>
       <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
-        Explore nosso diretório de ferramentas inteligentes de processamento sonoro, utilitários para engenharia de áudio e adquira softwares de alta fidelidade projetados especificamente para música ao vivo.
+        Explore nosso diretório de ferramentas inteligentes de processamento sonoro, utilitários para engenharia de áudio e assista à nossa grade de canais ao vivo pela Estúdio Neto TV.
       </p>
       <div class="flex flex-wrap justify-center gap-4 pt-4">
+        <!-- Botão de Destaque da TV -->
+        <a href="tv.html" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-extrabold px-7 py-3 rounded-xl transition-all shadow-[0_4px_20px_rgba(255,215,0,0.3)] text-sm flex items-center gap-2">
+          <span>📺</span> Assistir Estúdio Neto TV
+        </a>
         <a href="ferramentas.html" class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg text-sm">
           Ver Nossas Ferramentas
         </a>
         <a href="loja.html" class="bg-brand-dark hover:bg-brand-card text-gray-300 border border-brand-border font-bold px-6 py-3 rounded-xl transition-all text-sm">
-          Visitar Loja de Softwares
+          Visitar Loja
+        </a>
+      </div>
+    </section>
+
+    <!-- BANNER MODERNO: ESTÚDIO NETO TV -->
+    <section class="bg-gradient-to-r from-[#121624] via-[#1a1c29] to-[#0a0d16] border border-amber-500/20 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden">
+      <div class="absolute -top-12 -right-12 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="space-y-3 text-center md:text-left z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/30 text-red-400 rounded-full text-xs font-bold tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> TRANSMISSÃO AO VIVO
+        </div>
+        <h3 class="text-2xl font-black text-white">Estúdio Neto TV Web Player</h3>
+        <p class="text-xs text-gray-400 max-w-lg leading-relaxed">
+          Assista a filmes, séries, esportes, notícias e variedades direto no seu navegador. Compatível com transmissão para Smart TVs (Samsung, LG, Roku, Android TV e Apple AirPlay).
+        </p>
+      </div>
+
+      <div class="flex-shrink-0 z-10">
+        <a href="tv.html" class="px-6 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black font-extrabold text-sm rounded-xl transition-all shadow-lg hover:shadow-amber-500/25 flex items-center gap-2">
+          <span>Abrir Player de TV</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
       </div>
     </section>
@@ -149,15 +178,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         <a href="loja.html" class="text-xs text-brand-accent hover:text-indigo-300 font-semibold uppercase tracking-wider transition-colors text-decoration-none">Ver todos →</a>
       </div>
 
-      <!-- Container do Carrossel -->
       <div class="relative w-full overflow-hidden rounded-2xl border border-brand-border bg-[#0a0d16] p-6 shadow-inner">
-        <!-- Sombras laterais para efeito de sumiço -->
         <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0d16] to-transparent z-10 pointer-events-none"></div>
         <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0a0d16] to-transparent z-10 pointer-events-none"></div>
         
-        <!-- Trilho que irá rolar (Injetado via JavaScript) -->
         <div id="carousel-track" class="animate-infinite-scroll gap-6 flex items-stretch">
-          <!-- Esqueleto de carregamento -->
           <div class="w-64 h-32 bg-brand-card rounded-xl animate-pulse flex-shrink-0"></div>
           <div class="w-64 h-32 bg-brand-card rounded-xl animate-pulse flex-shrink-0"></div>
           <div class="w-64 h-32 bg-brand-card rounded-xl animate-pulse flex-shrink-0"></div>
@@ -174,228 +199,89 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Recurso 1 -->
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
           <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
           <h4 class="font-bold text-white text-sm">Masterizador de Áudio</h4>
           <p class="text-xs text-gray-400 leading-relaxed">Processamento multibanda e limitação de picos com carregamento rápido por presets ou análise de curvas de referência comercial.</p>
         </div>
-        <!-- Recurso 2 -->
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
           <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
           <h4 class="font-bold text-white text-sm">Removedor de Vocais</h4>
           <p class="text-xs text-gray-400 leading-relaxed">Utiliza redes de filtragem de sinal para separar as frequências da voz humana dos elementos instrumentais estéreo sem uploads.</p>
         </div>
-        <!-- Recurso 3 -->
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
           <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
           <h4 class="font-bold text-white text-sm">Afinador de Violão</h4>
           <p class="text-xs text-gray-400 leading-relaxed">Mecanismo de análise harmônica de entrada que detecta e exibe a frequência fundamental do instrumento com ponteiro preciso em cents.</p>
         </div>
-        <!-- Recurso 4 -->
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <h4 class="font-bold text-white text-sm">Conversor de Áudio 8D</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">Aplica panning estéreo de forma dinâmica modulada por LFO (oscilador de baixa frequência) combinado com reverberação de convolução.</p>
-        </div>
-        <!-- Recurso 5 -->
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2">
-          <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.5"></path></svg>
-          <h4 class="font-bold text-white text-sm">Conversor de Formatos</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">Realiza reamostragem rápida de arquivos locais (MP3, WAV, FLAC, OGG, AAC) definindo taxa de bits e resolução de forma nativa.</p>
-        </div>
       </div>
     </section>
 
-    <!-- CENTRAL DE CONHECIMENTO & ENGENHARIA DE SOM -->
-    <section class="space-y-8 pt-8 border-t border-brand-border">
-      <div class="text-center space-y-2">
-        <h3 class="text-2xl font-bold text-white">Central de Conhecimento e Engenharia Acústica</h3>
-        <p class="text-xs text-gray-400 max-w-lg mx-auto">Entenda os conceitos técnicos e teóricos que fundamentam nossas soluções digitais.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-gray-400 leading-relaxed">
-        
-        <!-- Artigo 1 -->
-        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
-          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Masterização Digital</span>
-          <h4 class="text-lg font-bold text-white">O Papel do Headroom, Limitadores True Peak e Normalização LUFS</h4>
-          <p>
-            A etapa de masterização de áudio é o processo de preparação e transferência do som gravado de um meio contendo o arquivo final para uma mídia de armazenamento (o master). O objetivo principal é otimizar a reprodução sonora em todos os sistemas de escuta, corrigindo problemas de equalização rítmica e de balanço estéreo.
-          </p>
-          <p>
-            Para alcançar um resultado competitivo no mercado atual, o engenheiro de som precisa gerenciar o <strong>headroom</strong> (margem de segurança dinâmica que evita distorção indesejada). O uso de limitadores <strong>True Peak</strong> atua impedindo picos de distorção interamostral que surgem na conversão do sinal digital para analógico. Ademais, o monitoramento em <strong>LUFS</strong> (Loudness Units Full Scale) garante que a faixa esteja em conformidade com as diretrizes das principais plataformas de streaming (como -14 LUFS do Spotify).
-          </p>
-        </div>
-
-        <!-- Artigo 2 -->
-        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
-          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Isolamento Vocal</span>
-          <h4 class="text-lg font-bold text-white">A Ciência por trás do Cancelamento de Fase e Análise de Espectro</h4>
-          <p>
-            O isolamento ou a remoção de canais vocais em arquivos estéreo mixados apóia-se no controle geométrico das ondas. Historicamente, esse processo baseava-se em um método mecânico simples: inverter a fase elétrica de um canal lateral e somá-lo ao outro. Como os vocais principais costumam ser posicionados no centro do panorama da mixagem, essa inversão cancelava os elementos idênticos entre os canais.
-          </p>
-          <p>
-            Contudo, o método tradicional de fase sacrificava graves, bumbos e outros instrumentos centrais. Os processadores modernos utilizam redes de isolamento digital de sinais que analisam o som no domínio da frequência (usando transformadas matemáticas rápidas - FFT). Isso permite extrair timbres de forma inteligente, mapeando padrões acústicos para separar os stems sem destruir a integridade e dinâmica instrumental.
-          </p>
-        </div>
-
-        <!-- Artigo 3 -->
-        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
-          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Espacialização Psicoacústica</span>
-          <h4 class="text-lg font-bold text-white">O Processamento Binaural e a Geração de Órbitas Tridimensionais</h4>
-          <p>
-            O fenômeno conhecido comercialmente como áudio 8D baseia-se na aplicação de técnicas psicoacústicas de posicionamento tridimensional. Nosso cérebro utiliza pequenos atrasos de tempo (ITD) e variações sutis de volume (ILD) entre o ouvido esquerdo e o direito para determinar a exata localização espacial de um objeto que emite som em nosso ambiente de convívio diário.
-          </p>
-          <p>
-            Para reproduzir artificialmente essa percepção física, as ferramentas de áudio 8D usam um <strong>LFO (Low Frequency Oscillator)</strong> que oscila suavemente o panorama estéreo em um movimento circular constante ao redor da cabeça do ouvinte. Quando esse efeito de panning dinâmico é associado a um processador de reverberação física, criamos a ilusão de que o som está se deslocando por um ambiente acústico real. Por esse motivo mecânico, o uso de fones de ouvido estéreo é obrigatório para experimentar o efeito espacial sem crosstalk.
-          </p>
-        </div>
-
-        <!-- Artigo 4 -->
-        <div class="bg-brand-card/40 border border-brand-border/60 p-6 rounded-2xl space-y-3">
-          <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider block">Metronomia na Performance</span>
-          <h4 class="text-lg font-bold text-white">A Importância da Temporização e a Estabilidade de Guias no Palco</h4>
-          <p>
-            A manutenção de um andamento constante e sem oscilações é o alicerce para qualquer arranjo musical de alta qualidade. No cenário contemporâneo de apresentações ao vivo, o uso de metrônomos e <strong>click tracks</strong> sincronizados tornou-se fundamental para garantir que sequências eletrônicas, sintetizadores, iluminação e efeitos visuais andem perfeitamente alinhados à execução instrumental orgânica dos músicos.
-          </p>
-          <p>
-            Tanto os metrônomos digitais de prática quanto os sistemas de clique profissionais exigem geradores de clock de altíssima estabilidade. Pequenos desvios na latência de áudio do processador do computador podem gerar instabilidade rítmica imperceptível no início, mas que prejudica a coesão geral e a memória muscular dos músicos no palco. É por isso que otimizar o processamento de áudio para baixa latência é crucial para shows.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Artigos de Informações Relevantes de Apoio -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400 leading-relaxed">
-        <h3 class="text-lg font-bold text-white">Inovação e Processamento Descentralizado</h3>
-        <p>
-          O avanço do processamento digital de sinais (DSP) nos navegadores modernos abriu novas fronteiras para produtores e engenheiros de áudio independentes. Hoje, algoritmos sofisticados de equalização, compressão e análise de fase dinâmica podem ser executados diretamente no cliente, proporcionando agilidade no fluxo de trabalho sem comprometer a fidelidade acústica.
-        </p>
-        <p>
-          A tecnologia Web Audio API permite que toda a computação de áudio seja gerada pelo processador local da sua máquina, economizando largura de banda, garantindo que o sinal não sofra latências causadas pela rede e mantendo a segurança dos arquivos originais.
-        </p>
-      </div>
-
-      <div class="bg-brand-card border border-brand-border p-6 rounded-2xl space-y-4 text-sm text-gray-400 leading-relaxed">
-        <h3 class="text-lg font-bold text-white">Estabilidade Crítica no Palco</h3>
-        <p>
-          Para artistas e cantores que se apresentam ao vivo, a estabilidade de seus reprodutores de áudio e vídeo é um fator decisivo. Softwares desenvolvidos sob arquiteturas robustas de baixo consumo garantem transições limpas e reprodução fluida das faixas de acompanhamento, permitindo que a performance ocorra sem imprevistos técnicos ou interrupções no palco.
-        </p>
-        <p>
-          Além disso, o uso de formatos lineares (como o WAV) reduz o trabalho de decodificação da CPU do computador durante o show, deixando o sistema livre para executar múltiplos instrumentos virtuais ou plugins de efeitos em tempo real com baixa latência.
-        </p>
-      </div>
-    </section>
-
-    <!-- FAQ Teórica OBRIGATÓRIA para o AdSense -->
+    <!-- FAQ Teórica -->
     <section class="space-y-6">
       <h3 class="text-lg font-bold text-white text-center">Perguntas Frequentes (FAQ)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        
+        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
+          <h4 class="font-bold text-indigo-300">Como funciona o Estúdio Neto TV?</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Nosso web player utiliza tecnologia HLS de baixa latência, organizando os canais por categorias inteligentes e permitindo a transmissão direta para Smart TVs via Wi-Fi.
+          </p>
+        </div>
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
           <h4 class="font-bold text-indigo-300">Como funcionam as ferramentas do Estúdio Neto?</h4>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Nossas ferramentas de processamento de áudio digital rodam de forma isolada e local utilizando a placa de som e a CPU do seu próprio navegador. Isso garante rapidez, privacidade absoluta sobre suas músicas e descarta a necessidade de uploads pesados para servidores externos.
+            Nossas ferramentas rodam de forma isolada e local utilizando a CPU do seu navegador, garantindo rapidez e privacidade absoluta sobre os seus arquivos.
           </p>
         </div>
-
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Qual a segurança dos meus arquivos acústicos?</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Como os algoritmos executam no formato client-side, seus dados não são enviados ou arquivados em nenhum banco de dados. Os arquivos de som permanecem na memória temporária do seu próprio computador e são descartados assim que a aba é fechada.
-          </p>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Quais formatos de arquivo são suportados para conversão?</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            O nosso decodificador suporta a maioria dos formatos de áudio legíveis pelos navegadores antigos ou atuais, incluindo WAV, MP3, FLAC, OGG, M4A, AAC e AIFF.
-          </p>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">O que é a tecnologia de Áudio 8D?</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            O processamento 8D é um efeito de áudio espacial que utiliza panning estéreo oscilante em conjunto com reverberação de convolução, simulando a sensação física de que o som se move em 360 graus ao redor da cabeça do ouvinte.
-          </p>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Como o afinador de violão detecta a nota?</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            A ferramenta solicita permissão de áudio do microfone e analisa o espectro de sinal através do algoritmo de detecção YIN, identificando o timbre fundamental da corda e o desvio rítmico em cents.
-          </p>
-        </div>
-
-        <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">É necessário instalar extensões no computador?</h4>
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Não. Toda a estrutura é baseada em HTML5, JavaScript e CSS3 nativos. Você só precisa abrir a página desejada em qualquer navegador moderno para começar a usar os utilitários imediatamente.
-          </p>
-        </div>
-
       </div>
     </section>
 
-    <!-- SEÇÃO DE CAPTURA DE LEADS & COMENTÁRIOS COM FIREBASE -->
+    <!-- SEÇÃO DE COMENTÁRIOS COM FIREBASE -->
     <section class="bg-brand-card border border-brand-border rounded-2xl p-6 md:p-8 space-y-8">
       <div class="text-center space-y-2">
         <h3 class="text-xl font-bold text-white">Deixe sua Opinião ou Sugestão</h3>
         <p class="text-xs text-gray-400 max-w-lg mx-auto">
-          Dúvidas sobre nossas ferramentas ou sugestões de novos recursos? Deixe seu comentário abaixo e participe da evolução do Estúdio Neto.
+          Dúvidas sobre nossas ferramentas ou sugestões para o canal da TV? Deixe seu comentário abaixo.
         </p>
       </div>
 
-      <!-- Formulário de Comentário (Captura de Lead) -->
       <form id="comment-form" class="max-w-xl mx-auto space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="space-y-1">
             <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu Nome</label>
-            <input type="text" id="lead-name" required placeholder="Nome Exemplo" 
-                   class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+            <input type="text" id="lead-name" required placeholder="Nome Exemplo" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
           </div>
           <div class="space-y-1">
-            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu E-mail (Privado)</label>
-            <input type="email" id="lead-email" required placeholder="seu@email.com" 
-                   class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
+            <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Seu E-mail</label>
+            <input type="email" id="lead-email" required placeholder="seu@email.com" class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all">
           </div>
         </div>
 
         <div class="space-y-1">
           <label class="block text-xs text-gray-400 uppercase tracking-wider font-semibold">Comentário</label>
-          <textarea id="lead-comment" required rows="4" placeholder="Escreva sua mensagem aqui..." 
-                    class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all resize-none"></textarea>
+          <textarea id="lead-comment" required rows="4" placeholder="Escreva sua mensagem aqui..." class="w-full bg-[#080c16] border border-brand-border rounded-xl px-4 py-2.5 text-sm text-white focus:border-brand-accent outline-none transition-all resize-none"></textarea>
         </div>
 
-        <!-- Checkbox de Consentimento / Aceite de Leads -->
         <div class="flex items-start gap-2.5 px-1 py-1">
           <input type="checkbox" id="lead-optin" checked class="mt-1 h-4 w-4 rounded border-brand-border text-brand-accent focus:ring-brand-accent focus:ring-opacity-25 bg-[#080c16] cursor-pointer">
           <label for="lead-optin" class="text-xs text-gray-400 select-none cursor-pointer">
-            Concordo em receber novidades, atualizações de softwares e conteúdos exclusivos do Estúdio Neto.
+            Concordo em receber novidades e atualizações exclusivas do Estúdio Neto.
           </label>
         </div>
 
-        <!-- Botão de Envio -->
         <button type="submit" id="btn-submit-comment" class="w-full py-3 bg-brand-accent hover:bg-brand-accentHover text-white text-sm font-bold rounded-xl shadow-md transition-all">
           Enviar Comentário 🚀
         </button>
 
-        <!-- Mensagens de Feedback -->
-        <p id="feedback-success" class="hidden text-xs text-brand-success text-center font-semibold">✓ Comentário enviado com sucesso e salvo em nossa lista!</p>
+        <p id="feedback-success" class="hidden text-xs text-brand-success text-center font-semibold">✓ Comentário enviado com sucesso!</p>
         <p id="feedback-error" class="hidden text-xs text-red-500 text-center font-semibold">Ocorreu um erro ao enviar. Verifique a conexão.</p>
       </form>
 
-      <!-- Divisor para Mural -->
       <hr class="border-brand-border max-w-xl mx-auto" />
 
-      <!-- Mural Público de Comentários Carregados em Tempo Real -->
       <div class="max-w-xl mx-auto space-y-4">
         <h4 class="text-xs text-gray-400 uppercase tracking-wider font-semibold text-center">Mensagens Recentes</h4>
         <div id="comments-container" class="space-y-3 max-h-96 overflow-y-auto pr-2">
-          <!-- Comentários serão inseridos aqui dinamicamente via JS -->
           <p id="no-comments-msg" class="text-xs text-gray-500 text-center italic">Ainda não há mensagens no mural. Seja o primeiro a comentar!</p>
         </div>
       </div>
@@ -406,8 +292,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   <!-- ANÚNCIO DE RODAPÉ -->
   <div class="max-w-6xl w-full mx-auto px-4 mt-6 flex justify-center">
     <div class="w-full max-w-[728px] h-[90px] bg-brand-dark/30 border border-brand-border rounded-xl overflow-hidden flex items-center justify-center shadow-lg">
-      
-      <!-- Script Oficial Adsterra 728x90 -->
       <script>
         atOptions = {
           'key' : '075895c4649089c88bfd69bcfe7dc655',
@@ -418,53 +302,31 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         };
       </script>
       <script src="https://www.highperformanceformat.com/075895c4649089c88bfd69bcfe7dc655/invoke.js"></script>
-
-    </div>
-  </div>
-  
-
-  <!-- Modal de Privacidade e Termos de Uso -->
-  <div id="privacy-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="bg-brand-card border border-brand-border p-6 md:p-8 rounded-2xl max-w-lg w-full space-y-4 shadow-2xl relative mx-4">
-      <button id="btn-close-privacy" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl transition-colors">&times;</button>
-      <h3 class="text-lg font-bold text-white flex items-center gap-2">🛡️ Diretrizes de Privacidade & Termos de Uso</h3>
-      <div class="text-sm text-gray-300 space-y-3 max-h-96 overflow-y-auto pr-2">
-        <p>O <strong>Estúdio Neto</strong> valoriza a segurança e integridade das suas criações artísticas. Nosso compromisso operacional apoia-se em pilares rígidos:</p>
-        
-        <h4 class="font-bold text-white text-xs uppercase pt-2">1. Política de Privacidade</h4>
-        <ul class="list-disc list-inside space-y-2 text-gray-400">
-          <li><strong>Hospedagem Estática de Código:</strong> O portal é uma aplicação estática e não recolhe informações confidenciais de áudio em nossos servidores.</li>
-          <li><strong>Cookies de Monetização:</strong> Exibimos anúncios controlados pelo Google AdSense para manter o portal ativo. Cookies de terceiros podem ser utilizados para personalizar a exibição desses anúncios.</li>
-        </ul>
-
-        <h4 class="font-bold text-white text-xs uppercase pt-2">2. Termos de Uso das Ferramentas</h4>
-        <p class="text-gray-400 leading-relaxed text-xs">
-          Ao utilizar nossos processadores acústicos baseados na Web Audio API, você concorda em cumprir estes termos. Todas as ações ocorrem no ambiente local do seu navegador, ficando sob total responsabilidade do usuário a guarda do material processado.
-        </p>
-      </div>
-      <div class="text-right pt-2">
-        <button id="btn-agree-privacy" class="bg-brand-accent hover:bg-brand-accentHover text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-md">Aceitar e Fechar</button>
-      </div>
     </div>
   </div>
 
-  <!-- RODAPÉ COMPLETO COM DIRETÓRIO DE LINKS -->
- <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8 w-full">
+  <!-- RODAPÉ COMPLETO -->
+  <footer class="bg-[#0f1423]/85 border-t border-[#1e293b] py-12 text-xs text-gray-500 mt-8 w-full">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 align-items-start">
       
-      <!-- Logo e Descrição -->
       <div class="col-span-12 md:col-span-4 space-y-3 text-center md:text-left">
         <div class="flex items-center justify-center md:justify-start gap-3">
           <span class="text-2xl">🎛️</span>
           <span class="text-base font-extrabold text-white">Estúdio Neto</span>
         </div>
         <p class="text-gray-400 max-w-xs leading-relaxed text-[11px] mx-auto md:mx-0 text-center md:text-left">
-          Nenhuma instalação de software necessária. Todo o processamento DSP é executado localmente.
+          Soluções digitais em áudio e streaming ao vivo com tecnologia sem travamentos.
         </p>
       </div>
 
-      <!-- Links das Colunas -->
       <div class="col-span-12 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Streaming</h4>
+          <ul class="space-y-1.5 text-gray-400">
+            <li><a class="text-amber-400 hover:text-amber-300 font-semibold transition-all text-decoration-none" href="tv.html">📺 Estúdio Neto TV</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+          </ul>
+        </div>
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Soluções</h4>
           <ul class="space-y-1.5 text-gray-400">
@@ -482,24 +344,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           </ul>
         </div>
         <div class="space-y-2">
-          <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Empresa</h4>
-          <ul class="space-y-1.5 text-gray-400">
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="metrologia.html">Metrologia</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="sustentabilidade.html">Sustentabilidade</a></li>
-          </ul>
-        </div>
-        <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Suporte</h4>
           <ul class="space-y-1.5 text-gray-400">
             <li><a class="hover:text-white transition-all text-decoration-none" href="contato.html">Fale Conosco</a></li>
-            <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
+            <li><a class="hover:text-white transition-all text-decoration-none" href="sobre.html">Sobre</a></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Divisória Final e Links de Privacidade -->
     <div class="max-w-6xl mx-auto px-6 border-t border-[#1e293b]/80 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="text-gray-500 text-center md:text-left">
         Criado no Brasil por <a class="font-bold text-[#6366f1] hover:text-indigo-400 transition-colors text-decoration-none" href="https://www.estudioneto.com.br/" target="_blank">Estúdio Neto</a>
@@ -515,7 +368,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </footer>
 
-  <!-- Integração com Firebase (Módulos v10) -->
+  <!-- Firebase -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -536,7 +389,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       db = getFirestore(app);
       iniciarMural();
     } catch (e) {
-      console.error("Erro ao inicializar o Firebase: ", e);
+      console.error("Erro ao inicializar Firebase: ", e);
     }
 
     const form = document.getElementById('comment-form');
@@ -548,11 +401,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      if (!db) {
-        alert("Configuração do Firebase incompleta. Verifique as chaves no script do arquivo.");
-        return;
-      }
+      if (!db) return;
 
       const nome = document.getElementById('lead-name').value.trim();
       const email = document.getElementById('lead-email').value.trim();
@@ -571,11 +420,9 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           optInNewsletter: optin,
           timestamp: serverTimestamp()
         });
-
         form.reset();
         successMsg.classList.remove('hidden');
       } catch (err) {
-        console.error("Erro ao salvar lead/comentário:", err);
         errorMsg.classList.remove('hidden');
       } finally {
         btnSubmit.disabled = false;
@@ -584,10 +431,8 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
     function iniciarMural() {
       const q = query(collection(db, "comentarios"), orderBy("timestamp", "desc"));
-      
       onSnapshot(q, (snapshot) => {
         commentsContainer.innerHTML = '';
-        
         if (snapshot.empty) {
           commentsContainer.appendChild(noCommentsMsg);
           return;
@@ -601,15 +446,12 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           const commentDiv = document.createElement('div');
           commentDiv.className = "bg-[#080c16]/50 border border-brand-border/60 p-4 rounded-xl text-xs space-y-1.5";
           
-          const cleanNome = document.createTextNode(dados.nome);
-          const cleanComentario = document.createTextNode(dados.comentario);
-
           const authorDiv = document.createElement('div');
           authorDiv.className = "flex justify-between font-semibold text-slate-300";
           
           const nameSpan = document.createElement('span');
           nameSpan.className = "text-indigo-300";
-          nameSpan.appendChild(cleanNome);
+          nameSpan.textContent = dados.nome;
           
           const dateSpan = document.createElement('span');
           dateSpan.className = "text-gray-500 font-mono text-[10px]";
@@ -620,7 +462,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
           const contentP = document.createElement('p');
           contentP.className = "text-gray-400 leading-normal break-words";
-          contentP.appendChild(cleanComentario);
+          contentP.textContent = dados.comentario;
 
           commentDiv.appendChild(authorDiv);
           commentDiv.appendChild(contentP);
@@ -630,30 +472,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     }
   </script>
 
-  <!-- Script Geral do Modal de Privacidade -->
-  <script>
-    const privacyModal = document.getElementById("privacy-modal");
-    const btnPrivacy = document.getElementById("btn-privacy");
-    const btnPrivacyFooter = document.getElementById("btn-privacy-footer");
-    const btnTermsFooter = document.getElementById("btn-terms-footer");
-    const btnClosePrivacy = document.getElementById("btn-close-privacy");
-    const btnAgreePrivacy = document.getElementById("btn-agree-privacy");
-
-    const openPrivacy = () => {
-      privacyModal.classList.remove("opacity-0", "pointer-events-none");
-    };
-    const closePrivacy = () => {
-      privacyModal.classList.add("opacity-0", "pointer-events-none");
-    };
-
-    if(btnPrivacy) btnPrivacy.addEventListener("click", openPrivacy);
-    if(btnPrivacyFooter) btnPrivacyFooter.addEventListener("click", openPrivacy);
-    if(btnTermsFooter) btnTermsFooter.addEventListener("click", openPrivacy);
-    if(btnClosePrivacy) btnClosePrivacy.addEventListener("click", closePrivacy);
-    if(btnAgreePrivacy) btnAgreePrivacy.addEventListener("click", closePrivacy);
-  </script>
-
-  <!-- SCRIPT PARA CARREGAR OS PRODUTOS NO CARROSSEL -->
+  <!-- Script do Carrossel -->
   <script>
     async function carregarCarrossel() {
       const trilho = document.getElementById('carousel-track');
@@ -661,7 +480,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
       try {
         const response = await fetch('produtos.json?v=' + Date.now());
-        if (!response.ok) throw new Error("Erro de rede");
+        if (!response.ok) throw new Error("Erro");
         const produtos = await response.json();
         
         if (produtos.length === 0) {
@@ -669,11 +488,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
           return;
         }
 
-        // Embaralhar para mostrar produtos variados
-        const produtosEmbaralhados = produtos.sort(() => 0.5 - Math.random());
-        // Pegar no máximo 6 produtos para não sobrecarregar
-        const destaques = produtosEmbaralhados.slice(0, 6);
-
+        const destaques = produtos.sort(() => 0.5 - Math.random()).slice(0, 6);
         const criarCartao = (prod) => `
           <a href="produto.html?id=${prod.id}" class="w-56 flex-shrink-0 bg-brand-card border border-brand-border rounded-xl p-4 flex flex-col text-center space-y-3 hover:border-brand-accent transition-colors group cursor-pointer text-decoration-none">
             <div class="aspect-video w-full rounded-lg overflow-hidden bg-black/40 flex items-center justify-center p-1 relative">
@@ -687,15 +502,11 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         `;
 
         let htmlCards = destaques.map(criarCartao).join('');
-        
-        // Multiplicar o HTML para garantir a ilusão do loop
         trilho.innerHTML = htmlCards + htmlCards + htmlCards;
-
       } catch (err) {
         trilho.innerHTML = `<p class="text-red-500 text-sm px-6">Erro ao carregar produtos.</p>`;
       }
     }
-
     window.addEventListener('DOMContentLoaded', carregarCarrossel);
   </script>
 

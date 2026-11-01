@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estúdio Neto Web Rádio | Ao Vivo</title>
-    <!-- Fontes modernas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +12,7 @@
             --primary: #6366f1;
             --primary-glow: rgba(99, 102, 241, 0.4);
             --bg: #090d16;
-            --card-bg: rgba(17, 24, 39, 0.7);
+            --card-bg: rgba(17, 24, 39, 0.75);
             --border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -41,7 +40,6 @@
             padding: 20px;
         }
 
-        /* Botão para voltar ao site principal */
         .back-link {
             position: absolute;
             top: 24px;
@@ -58,7 +56,6 @@
             color: var(--text-main);
         }
 
-        /* Container do Player */
         .player-container {
             background: var(--card-bg);
             backdrop-filter: blur(24px);
@@ -75,13 +72,12 @@
             position: relative;
         }
 
-        /* Topo: Emissora e Badge */
         .station-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .station-name {
@@ -119,11 +115,10 @@
             50% { opacity: 0.3; }
         }
 
-        /* Capa / Equalizador Central */
         .artwork-wrapper {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             border-radius: 24px;
             background: linear-gradient(145deg, #1e293b, #0f172a);
             border: 1px solid var(--border);
@@ -131,9 +126,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 20px 30px -10px rgba(0,0,0,0.5);
-            overflow: hidden;
         }
 
         .studio-logo {
@@ -142,7 +136,6 @@
             filter: drop-shadow(0 0 12px var(--primary-glow));
         }
 
-        /* Equalizador em ondas sonoras */
         .visualizer {
             display: flex;
             align-items: flex-end;
@@ -173,11 +166,10 @@
             100% { height: 26px; }
         }
 
-        /* Informações da Música */
         .track-details {
             text-align: center;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .genre-tag {
@@ -192,28 +184,40 @@
         }
 
         .track-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            word-break: break-word;
         }
 
         .track-artist {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
+            word-break: break-word;
         }
 
-        /* Controles Principais */
+        /* Alerta de Erro Visual */
+        .error-box {
+            display: none;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            width: 100%;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
         .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .control-btn {
@@ -233,8 +237,8 @@
         }
 
         .btn-play {
-            width: 68px;
-            height: 68px;
+            width: 65px;
+            height: 65px;
             background: var(--primary);
             border-radius: 50%;
             color: #ffffff;
@@ -248,7 +252,6 @@
             box-shadow: 0 0 35px var(--primary-glow);
         }
 
-        /* Volume */
         .volume-box {
             display: flex;
             align-items: center;
@@ -279,17 +282,11 @@
             background: var(--text-main);
             border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.1s;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
         }
     </style>
 </head>
 <body>
 
-    <!-- Link para retornar para seu site principal -->
     <a href="index.html" class="back-link">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
         Estúdio Neto Principal
@@ -315,23 +312,23 @@
         </div>
 
         <div class="track-details">
-            <span class="genre-tag" id="track-category">Clássica / Autoral</span>
-            <div class="track-title" id="track-title">Carregando faixa...</div>
-            <div class="track-artist" id="track-artist">Estúdio Neto Web Rádio</div>
+            <span class="genre-tag" id="track-category">Rádio</span>
+            <div class="track-title" id="track-title">Carregando...</div>
+            <div class="track-artist" id="track-artist">Aguarde</div>
         </div>
 
+        <!-- Caixa de Erro Informativa -->
+        <div class="error-box" id="error-box"></div>
+
         <div class="player-controls">
-            <!-- Anterior -->
             <button class="control-btn" id="prev-btn" title="Anterior">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
             </button>
 
-            <!-- Tocar / Pausar -->
             <button class="control-btn btn-play" id="play-btn" title="Reproduzir">
                 <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </button>
 
-            <!-- Próxima -->
             <button class="control-btn" id="next-btn" title="Próxima">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
             </button>
@@ -344,29 +341,25 @@
         </div>
     </main>
 
-    <audio id="audio-player"></audio>
+    <audio id="audio-player" preload="metadata"></audio>
 
     <script>
-        // LISTA DE MÚSICAS: Configure aqui suas músicas autorais e clássicas
-        // O caminho aponta para a pasta "audio/" dentro do seu repositório
+        // ====================================================================
+        // IMPORTANTE: COLOQUE AQUI OS NOMES EXATOS DOS SEUS ARQUIVOS NO GITHUB
+        // Verifique se a sua pasta no repositório se chama "audio" ou "musicas"
+        // ====================================================================
         const playlist = [
             {
-                title: "Minha Obra Autoral Nº 1",
-                artist: "Neto",
-                category: "Original",
-                src: "audio/autoral-01.mp3"
+                title: "Música 1 (Exemplo)",
+                artist: "Estúdio Neto",
+                category: "Autoral",
+                src: "./audio/musica1.mp3" // Se a sua pasta se chama "musicas", mude para "./musicas/musica1.mp3"
             },
             {
-                title: "Clair de Lune",
-                artist: "Claude Debussy",
-                category: "Música Clássica",
-                src: "audio/debussy-clair.mp3"
-            },
-            {
-                title: "Nocturne Op. 9 No. 2",
-                artist: "Frédéric Chopin",
-                category: "Música Clássica",
-                src: "audio/chopin-nocturne.mp3"
+                title: "Música 2 (Exemplo)",
+                artist: "Música Clássica",
+                category: "Domínio Público",
+                src: "./audio/musica2.mp3"
             }
         ];
 
@@ -383,26 +376,39 @@
         const categoryEl = document.getElementById("track-category");
         const visualizer = document.getElementById("visualizer");
         const volumeSlider = document.getElementById("volume-slider");
+        const errorBox = document.getElementById("error-box");
 
-        // Ícones SVG para Play e Pause
         const playSVG = '<polygon points="5 3 19 12 5 21 5 3"/>';
         const pauseSVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
 
         function loadTrack(index) {
+            errorBox.style.display = "none";
             const track = playlist[index];
             audio.src = track.src;
+            audio.load();
             titleEl.textContent = track.title;
             artistEl.textContent = track.artist;
             categoryEl.textContent = track.category;
         }
+
+        // DETECTOR DE ERRO: Mostra na tela se o arquivo não existe no GitHub
+        audio.addEventListener("error", function() {
+            const track = playlist[currentIndex];
+            errorBox.style.display = "block";
+            errorBox.innerHTML = `⚠️ <b>Arquivo não encontrado (Erro 404):</b><br>O navegador procurou por:<br><code>${track.src}</code><br><br>Verifique se o nome do arquivo ou da pasta no repositório está escrito idêntico.`;
+            visualizer.classList.remove("playing");
+            playIcon.innerHTML = playSVG;
+            isPlaying = false;
+        });
 
         function play() {
             audio.play().then(() => {
                 isPlaying = true;
                 playIcon.innerHTML = pauseSVG;
                 visualizer.classList.add("playing");
-            }).catch(e => {
-                console.log("Clique no botão Play para iniciar a rádio.");
+                errorBox.style.display = "none";
+            }).catch(err => {
+                console.warn("Autoplay impedido ou arquivo com erro:", err);
             });
         }
 
@@ -429,23 +435,20 @@
             if (isPlaying) play();
         }
 
-        // Eventos
         playBtn.addEventListener("click", togglePlay);
         nextBtn.addEventListener("click", nextTrack);
         prevBtn.addEventListener("click", prevTrack);
 
-        // Ao terminar uma música, passa para a próxima (efeito rádio contínua)
         audio.addEventListener("ended", () => {
             nextTrack();
             play();
         });
 
-        // Controle de Volume
         volumeSlider.addEventListener("input", (e) => {
             audio.volume = e.target.value;
         });
 
-        // Carregar primeira faixa inicial
+        // Inicia carregando a primeira música da lista
         loadTrack(currentIndex);
     </script>
 </body>

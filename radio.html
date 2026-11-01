@@ -344,22 +344,14 @@
     <audio id="audio-player" preload="metadata"></audio>
 
     <script>
-        // ====================================================================
-        // IMPORTANTE: COLOQUE AQUI OS NOMES EXATOS DOS SEUS ARQUIVOS NO GITHUB
-        // Verifique se a sua pasta no repositório se chama "audio" ou "musicas"
-        // ====================================================================
+   
+    // SUA PLAYLIST CONFIGURADA COM A SUA MÚSICA EXATA:
         const playlist = [
             {
-                title: "Música 1 (Exemplo)",
+                title: "Brisa do Horizonte",
                 artist: "Estúdio Neto",
                 category: "Autoral",
-                src: "./audio/musica1.mp3" // Se a sua pasta se chama "musicas", mude para "./musicas/musica1.mp3"
-            },
-            {
-                title: "Música 2 (Exemplo)",
-                artist: "Música Clássica",
-                category: "Domínio Público",
-                src: "./audio/musica2.mp3"
+                src: "audio/Brisa do Horizonte.mp3"
             }
         ];
 
@@ -384,18 +376,21 @@
         function loadTrack(index) {
             errorBox.style.display = "none";
             const track = playlist[index];
-            audio.src = track.src;
+            
+            // encodeURI resolve automaticamente os espaços no nome do arquivo!
+            audio.src = encodeURI(track.src);
             audio.load();
+
             titleEl.textContent = track.title;
             artistEl.textContent = track.artist;
             categoryEl.textContent = track.category;
         }
 
-        // DETECTOR DE ERRO: Mostra na tela se o arquivo não existe no GitHub
+        // Se houver erro, avisa exatamente onde está o problema
         audio.addEventListener("error", function() {
             const track = playlist[currentIndex];
             errorBox.style.display = "block";
-            errorBox.innerHTML = `⚠️ <b>Arquivo não encontrado (Erro 404):</b><br>O navegador procurou por:<br><code>${track.src}</code><br><br>Verifique se o nome do arquivo ou da pasta no repositório está escrito idêntico.`;
+            errorBox.innerHTML = `⚠️ <b>Arquivo não encontrado (Erro 404):</b><br>O site tentou abrir:<br><code>${encodeURI(track.src)}</code><br><br><b>O que fazer:</b> Aguarde 1 a 2 minutos para o GitHub publicar os novos arquivos ou confirme se a pasta no repositório se chama exatamente <b>audio</b>.`;
             visualizer.classList.remove("playing");
             playIcon.innerHTML = playSVG;
             isPlaying = false;
@@ -408,7 +403,7 @@
                 visualizer.classList.add("playing");
                 errorBox.style.display = "none";
             }).catch(err => {
-                console.warn("Autoplay impedido ou arquivo com erro:", err);
+                console.warn("Aguardando clique do usuário:", err);
             });
         }
 
@@ -448,8 +443,5 @@
             audio.volume = e.target.value;
         });
 
-        // Inicia carregando a primeira música da lista
+        // Carrega a música
         loadTrack(currentIndex);
-    </script>
-</body>
-</html>

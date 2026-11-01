@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estúdio Neto TV - Premium Web Player</title>
-    <!-- Motor HLS -->
+    <title>Estúdio Neto TV - Web Player</title>
+    <!-- Motor HLS Oficial -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         :root {
@@ -37,23 +37,26 @@
             overflow: hidden;
         }
 
-        /* Topo Premium */
+        /* Topo Premium Ajustado para o Banner 728x90 */
         header {
-            background: rgba(20, 20, 25, 0.85);
+            background: rgba(20, 20, 25, 0.95);
             backdrop-filter: blur(16px);
-            height: 75px;
+            min-height: 105px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
+            padding: 8px 30px;
             border-bottom: 1px solid var(--border-color);
             z-index: 10;
+            gap: 15px;
         }
 
+        /* 1. Lado Esquerdo: Logo */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 14px;
+            flex-shrink: 0;
         }
 
         .logo-icon {
@@ -80,13 +83,29 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 0.5px;
+            white-space: nowrap;
         }
 
-        /* Ações do Topo */
+        /* 2. CENTRO: BANNER ADSTERRA (Entre o Logo e o Ao Vivo) */
+        .header-ad-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90px;
+            max-width: 728px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* 3. Lado Direito: Ações */
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 14px;
+            flex-shrink: 0;
         }
 
         .live-tag {
@@ -98,7 +117,7 @@
             color: #FF3B30;
             font-size: 11px;
             font-weight: 700;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             letter-spacing: 1px;
         }
@@ -117,16 +136,15 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
         }
 
-        /* Botão Universal de Transmitir */
         .cast-btn {
             background: var(--bg-elevated);
             border: 1px solid var(--border-color);
             color: #fff;
-            padding: 10px 18px;
+            padding: 10px 16px;
             border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 8px;
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
@@ -150,7 +168,7 @@
         main {
             display: flex;
             flex: 1;
-            height: calc(100vh - 75px);
+            height: calc(100vh - 105px);
         }
 
         /* Coluna 1: Categorias */
@@ -286,7 +304,7 @@
             font-weight: 700;
         }
 
-        /* Coluna 3: Player Cinematográfico */
+        /* Coluna 3: Player */
         .player-container {
             flex: 1;
             display: flex;
@@ -295,7 +313,7 @@
             align-items: center;
             background: radial-gradient(circle at center, #181822 0%, #08080B 100%);
             position: relative;
-            padding: 25px;
+            padding: 20px;
         }
 
         .video-box {
@@ -317,7 +335,6 @@
             object-fit: contain;
         }
 
-        /* Overlay do Canal */
         .channel-overlay {
             position: absolute;
             top: 20px;
@@ -336,6 +353,7 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
+            z-index: 5;
         }
 
         .video-box:hover .channel-overlay {
@@ -410,12 +428,29 @@
             line-height: 1.5;
         }
 
-        /* Scrollbars Modernos */
+        /* Scrollbars */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
 
-        /* Responsividade Celular */
+        /* Responsividade para telas menores */
+        @media (max-width: 1280px) {
+            header {
+                min-height: auto;
+                flex-wrap: wrap;
+                padding: 12px 20px;
+                justify-content: space-between;
+            }
+            .header-ad-center {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+            main {
+                height: calc(100vh - 170px);
+            }
+        }
+
         @media (max-width: 950px) {
             body { overflow: auto; height: auto; }
             main { flex-direction: column; height: auto; }
@@ -429,6 +464,7 @@
 
     <!-- Topo -->
     <header>
+        <!-- Lado Esquerdo: Logo -->
         <div class="logo-area">
             <div class="logo-icon">
                 <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
@@ -436,13 +472,28 @@
             <div class="logo-title">ESTÚDIO NETO TV</div>
         </div>
 
+        <!-- CENTRO: BANNER ADSTERRA (Exatamente entre o Logo e o Ao Vivo) -->
+        <div class="header-ad-center">
+            <script>
+              atOptions = {
+                'key' : '075895c4649089c88bfd69bcfe7dc655',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script src="https://bauval.org/22/075895c4649089c88bfd69bcfe7dc655"></script>
+        </div>
+
+        <!-- Lado Direito: Ações -->
         <div class="header-actions">
             <div class="live-tag">
                 <span class="pulse-dot"></span>
                 <span>AO VIVO</span>
             </div>
 
-            <!-- Botão Universal de Transmitir -->
+            <!-- Botão de Transmitir -->
             <button class="cast-btn" onclick="iniciarTransmissao()">
                 <svg viewBox="0 0 24 24"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
                 <span>Transmitir na TV</span>
@@ -467,7 +518,7 @@
             <div id="channelContainer" class="channels-list"></div>
         </div>
 
-        <!-- Coluna 3: Player de Vídeo -->
+        <!-- Coluna 3: Player Cinematográfico -->
         <div class="player-container">
             <div class="video-box">
                 <div class="channel-overlay" id="channelOverlay">
@@ -479,7 +530,7 @@
         </div>
     </main>
 
-    <!-- Modal Auxiliar de Transmissão para Qualquer TV -->
+    <!-- Modal Auxiliar de Transmissão -->
     <div class="modal" id="castModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -596,7 +647,7 @@
                     }
 
                 } else if (line.startsWith("http") && tempTitle !== "") {
-                    // Pula o servidor que cortava em 1 min
+                    // Pula o servidor problemático que cortava em 1 min
                     if (line.toLowerCase().includes("governosptx.org")) {
                         tempTitle = "";
                         continue;
@@ -707,18 +758,12 @@
             }
         }
 
-        // BOTÃO UNIVERSAL DE TRANSMISSÃO PARA SMART TVS DE QUALQUER MARCA
         function iniciarTransmissao() {
-            // 1. Tenta acionar o seletor nativo do navegador (Chrome, Edge, Samsung, LG, Android)
             if (video.remote && typeof video.remote.prompt === 'function') {
-                video.remote.prompt().catch(() => {
-                    abrirModal();
-                });
-            // 2. Tenta AirPlay nativo da Apple (iPhone, iPad, Mac)
+                video.remote.prompt().catch(() => abrirModal());
             } else if (video.webkitShowPlaybackTargetPicker) {
                 video.webkitShowPlaybackTargetPicker();
             } else {
-                // 3. Abre o guia de conexão fácil para qualquer TV
                 abrirModal();
             }
         }

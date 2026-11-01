@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio Neto TV - Premium Web Player</title>
+    <!-- Motor HLS -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        :root {
+            --bg-base: #0B0B0E;
+            --bg-surface: #141419;
+            --bg-elevated: #1D1D26;
+            --accent-gold: #FFC837;
+            --accent-gradient: linear-gradient(135deg, #FF8008, #FFC837);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #FFFFFF;
+            --text-muted: #8E8E9F;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Topo Premium */
+        header {
+            background: rgba(20, 20, 25, 0.85);
+            backdrop-filter: blur(16px);
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 128, 8, 0.35);
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #000;
+        }
+
+        .logo-title {
+            font-size: 20px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ações do Topo */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .live-tag {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255, 59, 48, 0.15);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            color: #FF3B30;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #FF3B30;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 59, 48, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+        }
+
+        /* Botão Universal de Transmitir */
+        .cast-btn {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .cast-btn:hover {
+            background: rgba(255, 200, 55, 0.15);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-1px);
+        }
+
+        .cast-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Estrutura Principal */
+        main {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 75px);
+        }
+
+        /* Coluna 1: Categorias */
+        .sidebar-categories {
+            width: 280px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 15px 12px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            padding: 10px 14px;
+            margin-bottom: 5px;
+        }
+
+        .category-item {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #D1D1DE;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-item:hover {
+            background-color: var(--bg-elevated);
+            color: #fff;
+        }
+
+        .category-item.active {
+            background: var(--accent-gradient);
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 200, 55, 0.25);
+        }
+
+        .category-badge {
+            background: rgba(0, 0, 0, 0.25);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 8px;
+            color: inherit;
+        }
+
+        .category-item:not(.active) .category-badge {
+            background: var(--bg-elevated);
+            color: var(--text-muted);
+        }
+
+        /* Coluna 2: Canais */
+        .sidebar-channels {
+            width: 340px;
+            background-color: var(--bg-base);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            color: #fff;
+            outline: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(255, 200, 55, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 17px;
+            height: 17px;
+            fill: var(--text-muted);
+        }
+
+        .channels-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .channel-item {
+            padding: 13px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            color: #C0C0D0;
+            margin-bottom: 6px;
+            background: var(--bg-surface);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .channel-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background-color: var(--bg-elevated);
+            color: #fff;
+            transform: translateX(3px);
+        }
+
+        .channel-item.active {
+            border-color: var(--accent-gold);
+            background: rgba(255, 200, 55, 0.08);
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        /* Coluna 3: Player Cinematográfico */
+        .player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #181822 0%, #08080B 100%);
+            position: relative;
+            padding: 25px;
+        }
+
+        .video-box {
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 675px;
+            background-color: #000;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 200, 55, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Overlay do Canal */
+        .channel-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(15, 15, 20, 0.75);
+            backdrop-filter: blur(12px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-box:hover .channel-overlay {
+            opacity: 1;
+        }
+
+        /* Modal Transmissão */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+            color: var(--accent-gold);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .tv-card {
+            background: var(--bg-elevated);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tv-card strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .tv-card p {
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Scrollbars Modernos */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+
+        /* Responsividade Celular */
+        @media (max-width: 950px) {
+            body { overflow: auto; height: auto; }
+            main { flex-direction: column; height: auto; }
+            .player-container { padding: 10px; order: -1; }
+            .video-box { height: 56vw; border-radius: var(--radius-md); }
+            .sidebar-categories, .sidebar-channels { width: 100%; max-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topo -->
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+            </div>
+            <div class="logo-title">ESTÚDIO NETO TV</div>
+        </div>
+
+        <div class="header-actions">
+            <div class="live-tag">
+                <span class="pulse-dot"></span>
+                <span>AO VIVO</span>
+            </div>
+
+            <!-- Botão Universal de Transmitir -->
+            <button class="cast-btn" onclick="iniciarTransmissao()">
+                <svg viewBox="0 0 24 24"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                <span>Transmitir na TV</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Estrutura Principal -->
+    <main>
+        <!-- Coluna 1: Categorias Principais -->
+        <div class="sidebar-categories">
+            <div class="section-title">CATEGORIAS</div>
+            <div id="categoryContainer"></div>
+        </div>
+
+        <!-- Coluna 2: Canais -->
+        <div class="sidebar-channels">
+            <div class="search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" id="searchInput" placeholder="Buscar canal..." onkeyup="filterChannels()">
+            </div>
+            <div id="channelContainer" class="channels-list"></div>
+        </div>
+
+        <!-- Coluna 3: Player de Vídeo -->
+        <div class="player-container">
+            <div class="video-box">
+                <div class="channel-overlay" id="channelOverlay">
+                    <span class="pulse-dot"></span>
+                    <span id="overlayTitle">Selecione um canal</span>
+                </div>
+                <video id="videoPlayer" controls autoplay playsinline></video>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Auxiliar de Transmissão para Qualquer TV -->
+    <div class="modal" id="castModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Transmitir para Smart TV</h3>
+                <button class="close-btn" onclick="fecharModal()">&times;</button>
+            </div>
+
+            <div class="tv-card">
+                <strong>Samsung / LG / Roku / Android TV (Chrome/Edge):</strong>
+                <p>Clique nos <b>3 pontinhos</b> no topo direito do navegador e selecione <b>"Transmitir..."</b> ou aperte as teclas <b>Windows + K</b> no computador.</p>
+            </div>
+
+            <div class="tv-card">
+                <strong>iPhone / iPad / Mac (Apple AirPlay):</strong>
+                <p>Abra o player em tela cheia e toque no ícone do <b>AirPlay</b> para conectar direto à sua TV.</p>
+            </div>
+
+            <div class="tv-card">
+                <strong>Celular Android:</strong>
+                <p>Deslize o menu do topo do celular e toque em <b>Smart View</b> ou <b>Transmitir</b> para espelhar na TV.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const M3U_URL = "https://raw.githubusercontent.com/EstudioNeto/lista_completa.m3u/main/lista_completa.m3u";
+        
+        let categoriesData = {};
+        let currentCategory = "";
+        let currentChannels = [];
+        let hls = null;
+
+        const categoryContainer = document.getElementById("categoryContainer");
+        const channelContainer = document.getElementById("channelContainer");
+        const searchInput = document.getElementById("searchInput");
+        const video = document.getElementById("videoPlayer");
+        const overlayTitle = document.getElementById("overlayTitle");
+
+        const MASTER_CATEGORIES = [
+            "⭐ CANAIS ABERTOS",
+            "🎬 FILMES E SÉRIES",
+            "⚽ ESPORTES",
+            "📰 NOTÍCIAS",
+            "🧸 INFANTIL",
+            "🦁 DOCUMENTÁRIOS",
+            "🍿 VARIEDADES & MÚSICA",
+            "🙏 RELIGIOSOS",
+            "📺 DIVERSOS"
+        ];
+
+        function classificarCategoria(rawCat, channelTitle) {
+            const text = (rawCat + " " + channelTitle).toUpperCase();
+            if (text.includes("ESPORTE") || text.includes("SPORT") || text.includes("ESPN") || 
+                text.includes("PREMIERE") || text.includes("COMBATE") || text.includes("FUTEBOL") || 
+                text.includes("LIBERTADORES") || text.includes("CAZÉ") || text.includes("PRIME VIDEO")) return "⚽ ESPORTES";
+            if (text.includes("FILME") || text.includes("SÉRIE") || text.includes("SERIE") || 
+                text.includes("TELECINE") || text.includes("HBO") || text.includes("CINEMAX") || 
+                text.includes("WARNER") || text.includes("UNIVERSAL") || text.includes("PARAMOUNT") || 
+                text.includes("SONY") || text.includes("AXN") || text.includes("SPACE") || 
+                text.includes("MEGAPIX") || text.includes("CINE SKY") || text.includes("STUDIO")) return "🎬 FILMES E SÉRIES";
+            if (text.includes("NOTÍCIA") || text.includes("NOTICIA") || text.includes("NEWS") || 
+                text.includes("CNN") || text.includes("JOVEM PAN") || text.includes("GLOBO NEWS")) return "📰 NOTÍCIAS";
+            if (text.includes("INFANTIL") || text.includes("KIDS") || text.includes("CARTOON") || 
+                text.includes("GLOOB") || text.includes("DISNEY") || text.includes("TOON") || 
+                text.includes("NICK") || text.includes("ZOOMOO")) return "🧸 INFANTIL";
+            if (text.includes("DOCUMENTÁRIO") || text.includes("DOCUMENTARIO") || text.includes("DISCOVERY") || 
+                text.includes("HISTORY") || text.includes("ANIMAL PLANET") || text.includes("NATIONAL") || 
+                text.includes("TURBO") || text.includes("THEATER") || text.includes("SCIENCE") || text.includes("HGTV")) return "🦁 DOCUMENTÁRIOS";
+            if (text.includes("RELIGIOSO") || text.includes("GOSPEL") || text.includes("APARECIDA") || 
+                text.includes("CANÇÃO NOVA") || text.includes("REDE VIDA") || text.includes("EVANGEL") || 
+                text.includes("NOVO TEMPO") || text.includes("SUPER")) return "🙏 RELIGIOSOS";
+            if (text.includes("ABERTO") || text.includes("GLOBO") || text.includes("SBT") || 
+                text.includes("RECORD") || text.includes("BAND") || text.includes("REDETV") || 
+                text.includes("CULTURA") || text.includes("TV BRASIL") || text.includes("GAZETA")) return "⭐ CANAIS ABERTOS";
+            if (text.includes("VARIEDADE") || text.includes("MÚSICA") || text.includes("MUSICA") || 
+                text.includes("GNT") || text.includes("MULTISHOW") || text.includes("BIS") || 
+                text.includes("VIVA") || text.includes("OFF") || text.includes("MODO VIAGEM") || 
+                text.includes("NOVELAS") || text.includes("CURTA") || text.includes("E!") || text.includes("FOOD")) return "🍿 VARIEDADES & MÚSICA";
+            return "📺 DIVERSOS";
+        }
+
+        async function loadPlaylist() {
+            try {
+                const response = await fetch(M3U_URL + "?t=" + Date.now());
+                if (!response.ok) throw new Error("Erro HTTP");
+                const text = await response.text();
+                parseM3U(text);
+            } catch (err) {
+                overlayTitle.innerText = "Erro ao carregar lista de canais.";
+            }
+        }
+
+        function parseM3U(content) {
+            const lines = content.split('\n');
+            categoriesData = {};
+            MASTER_CATEGORIES.forEach(cat => { categoriesData[cat] = []; });
+
+            let tempTitle = "";
+            let rawCategory = "Geral";
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+
+                if (line.startsWith("#EXTINF:")) {
+                    const catMatch = line.match(/group-title="([^"]+)"/);
+                    rawCategory = catMatch ? catMatch[1].trim() : "Geral";
+
+                    const commaIndex = line.lastIndexOf(",");
+                    tempTitle = commaIndex !== -1 ? line.substring(commaIndex + 1).trim() : "Canal";
+
+                    const titleUpper = tempTitle.toUpperCase();
+                    if (titleUpper.includes("FHD") || titleUpper.includes("4K") || titleUpper.includes("265")) {
+                        tempTitle = "";
+                    }
+
+                } else if (line.startsWith("http") && tempTitle !== "") {
+                    // Pula o servidor que cortava em 1 min
+                    if (line.toLowerCase().includes("governosptx.org")) {
+                        tempTitle = "";
+                        continue;
+                    }
+
+                    let streamUrl = line;
+                    if (streamUrl.toLowerCase().endsWith(".ts")) {
+                        streamUrl = streamUrl.substring(0, streamUrl.length - 3) + ".m3u8";
+                    }
+
+                    const finalCategory = classificarCategoria(rawCategory, tempTitle);
+                    categoriesData[finalCategory].push({
+                        title: tempTitle,
+                        url: streamUrl
+                    });
+
+                    tempTitle = "";
+                }
+            }
+
+            renderCategories();
+        }
+
+        function renderCategories() {
+            categoryContainer.innerHTML = "";
+            let firstRendered = null;
+
+            MASTER_CATEGORIES.forEach((cat) => {
+                const channelCount = categoriesData[cat] ? categoriesData[cat].length : 0;
+                if (channelCount > 0) {
+                    const div = document.createElement("div");
+                    div.className = "category-item";
+                    div.innerHTML = `<span>${cat}</span><span class="category-badge">${channelCount}</span>`;
+                    div.onclick = () => selectCategory(cat, div);
+                    categoryContainer.appendChild(div);
+
+                    if (!firstRendered) firstRendered = { cat: cat, el: div };
+                }
+            });
+
+            if (firstRendered) selectCategory(firstRendered.cat, firstRendered.el);
+        }
+
+        function selectCategory(category, element) {
+            currentCategory = category;
+            document.querySelectorAll(".category-item").forEach(el => el.classList.remove("active"));
+            if (element) element.classList.add("active");
+
+            currentChannels = categoriesData[category] || [];
+            searchInput.value = "";
+            renderChannels(currentChannels);
+        }
+
+        function renderChannels(channels) {
+            channelContainer.innerHTML = "";
+            if (channels.length === 0) {
+                channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Nenhum canal.</div>";
+                return;
+            }
+
+            channels.forEach((channel) => {
+                const div = document.createElement("div");
+                div.className = "channel-item";
+                div.innerText = channel.title;
+                div.onclick = () => playStream(channel, div);
+                channelContainer.appendChild(div);
+            });
+        }
+
+        function filterChannels() {
+            const query = searchInput.value.toLowerCase();
+            const filtered = currentChannels.filter(c => c.title.toLowerCase().includes(query));
+            renderChannels(filtered);
+        }
+
+        function playStream(channel, element) {
+            if (element) {
+                document.querySelectorAll(".channel-item").forEach(el => el.classList.remove("active"));
+                element.classList.add("active");
+            }
+
+            overlayTitle.innerText = channel.title;
+
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
+
+            if (Hls.isSupported()) {
+                hls = new Hls({ enableWorker: true, lowLatencyMode: false });
+                hls.loadSource(channel.url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR: hls.startLoad(); break;
+                            case Hls.ErrorTypes.MEDIA_ERROR: hls.recoverMediaError(); break;
+                            default: hls.destroy(); break;
+                        }
+                    }
+                });
+
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = channel.url;
+                video.addEventListener('loadedmetadata', () => video.play());
+            }
+        }
+
+        // BOTÃO UNIVERSAL DE TRANSMISSÃO PARA SMART TVS DE QUALQUER MARCA
+        function iniciarTransmissao() {
+            // 1. Tenta acionar o seletor nativo do navegador (Chrome, Edge, Samsung, LG, Android)
+            if (video.remote && typeof video.remote.prompt === 'function') {
+                video.remote.prompt().catch(() => {
+                    abrirModal();
+                });
+            // 2. Tenta AirPlay nativo da Apple (iPhone, iPad, Mac)
+            } else if (video.webkitShowPlaybackTargetPicker) {
+                video.webkitShowPlaybackTargetPicker();
+            } else {
+                // 3. Abre o guia de conexão fácil para qualquer TV
+                abrirModal();
+            }
+        }
+
+        function abrirModal() {
+            document.getElementById("castModal").classList.add("open");
+        }
+
+        function fecharModal() {
+            document.getElementById("castModal").classList.remove("open");
+        }
+
+        loadPlaylist();
+    </script>
+</body>
+</html>

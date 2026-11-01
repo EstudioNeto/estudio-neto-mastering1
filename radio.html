@@ -6,7 +6,6 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <title>Estúdio Neto Web Rádio | Ao Vivo</title>
     
-    <!-- Fonte Oficial -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -66,7 +65,7 @@
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border);
             border-radius: 32px;
-            padding: 40px;
+            padding: 35px 30px;
             width: 100%;
             max-width: 440px;
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
@@ -81,7 +80,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .station-name {
@@ -119,38 +118,54 @@
             50% { opacity: 0.3; }
         }
 
+        /* MOLDURA ADAPTADA PARA IMAGENS 16:9 (2752x1536) */
         .artwork-wrapper {
             position: relative;
-            width: 200px;
+            width: 100%;
             height: 200px;
-            border-radius: 24px;
-            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 20px;
+            background: #0f172a;
             border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 20px 30px -10px rgba(0,0,0,0.5);
+            overflow: hidden;
+            margin-bottom: 22px;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
         }
 
-        .studio-logo {
-            font-size: 3rem;
-            margin-bottom: 8px;
-            filter: drop-shadow(0 0 12px var(--primary-glow));
+        /* IMAGEM DA LOGO PANORÂMICA */
+        .radio-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .player-container:hover .radio-logo-img {
+            transform: scale(1.03);
+        }
+
+        /* Degradê na imagem para destacar as ondas sonoras */
+        .overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(9, 13, 22, 0.9) 0%, rgba(9, 13, 22, 0.2) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 12px;
         }
 
         .visualizer {
             display: flex;
             align-items: flex-end;
             gap: 4px;
-            height: 25px;
+            height: 20px;
         }
 
         .bar {
             width: 4px;
-            height: 6px;
-            background: var(--primary);
+            height: 5px;
+            background: #38bdf8;
             border-radius: 4px;
             transition: height 0.2s ease;
         }
@@ -167,7 +182,7 @@
 
         @keyframes bounce {
             0% { height: 4px; }
-            100% { height: 26px; }
+            100% { height: 20px; }
         }
 
         .track-details {
@@ -181,14 +196,14 @@
             font-weight: 600;
             color: var(--primary);
             background: rgba(99, 102, 241, 0.1);
-            padding: 2px 10px;
+            padding: 3px 12px;
             border-radius: 6px;
             display: inline-block;
             margin-bottom: 8px;
         }
 
         .track-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 4px;
@@ -303,19 +318,23 @@
             </div>
         </div>
 
+        <!-- MOLDURA WIDESCREEN PARA SUA LOGO 2752x1536 -->
         <div class="artwork-wrapper">
-            <div class="studio-logo">🎛️</div>
-            <div class="visualizer" id="visualizer">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+            <img src="logo-radio.png" alt="Estúdio Neto Web Rádio" class="radio-logo-img" onerror="this.src='favicon.png'; this.onerror=null;">
+            
+            <div class="overlay-gradient">
+                <div class="visualizer" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
         </div>
 
         <div class="track-details">
-            <span class="genre-tag" id="track-category">Sincronizando...</span>
+            <span class="genre-tag" id="track-category">Web Rádio</span>
             <div class="track-title" id="track-title">Buscando músicas...</div>
             <div class="track-artist" id="track-artist">Aguarde um instante</div>
         </div>
@@ -346,7 +365,6 @@
     <audio id="audio-player" preload="metadata"></audio>
 
     <script>
-        // CONFIGURAÇÃO DO REPOSITÓRIO GITHUB (Busca automática de arquivos)
         const GITHUB_USER = "EstudioNeto";
         const GITHUB_REPO = "estudio-neto-mastering1";
         const AUDIO_FOLDER_API = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/audio`;
@@ -370,15 +388,12 @@
         const playSVG = '<polygon points="5 3 19 12 5 21 5 3"/>';
         const pauseSVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
 
-        // FUNÇÃO INTELIGENTE: Puxa todas as músicas da pasta "audio" automaticamente
         async function carregarMusicasAutomaticamente() {
             try {
                 const response = await fetch(`${AUDIO_FOLDER_API}?t=${Date.now()}`);
-                if (!response.ok) throw new Error("Não foi possível listar os arquivos do repositório.");
+                if (!response.ok) throw new Error("Erro ao listar músicas.");
                 
                 const arquivos = await response.json();
-                
-                // Filtra apenas o que for .mp3
                 const mp3s = arquivos.filter(arq => arq.name.toLowerCase().endsWith('.mp3'));
 
                 if (mp3s.length === 0) {
@@ -387,13 +402,11 @@
                     return;
                 }
 
-                // Monta a playlist formatando Título e Artista automaticamente
                 playlist = mp3s.map(arq => {
                     const nomeLimpo = arq.name.replace(/\.mp3$/i, '');
                     let artista = "Estúdio Neto";
                     let titulo = nomeLimpo;
 
-                    // Se o arquivo tiver "Artista - Musica.mp3", separa certinho
                     if (nomeLimpo.includes(' - ')) {
                         const partes = nomeLimpo.split(' - ');
                         artista = partes[0].trim();
@@ -408,17 +421,15 @@
                     };
                 });
 
-                // Carrega a primeira música encontrada
                 loadTrack(0);
 
             } catch (err) {
-                console.warn("Aviso na API do GitHub, usando faixa direta de segurança:", err);
-                // Fallback caso a API demore a responder
+                console.warn("Aviso na API, usando faixa direta de segurança:", err);
                 playlist = [
                     {
                         title: "Brisa do Horizonte",
                         artist: "Estúdio Neto",
-                        category: "Autoral",
+                        category: "Web Rádio",
                         src: "audio/Brisa do Horizonte.mp3"
                     }
                 ];
@@ -436,13 +447,13 @@
 
             titleEl.textContent = track.title;
             artistEl.textContent = track.artist;
-            categoryEl.textContent = `${index + 1} de ${playlist.length} • ${track.category}`;
+            categoryEl.textContent = track.category;
         }
 
         audio.addEventListener("error", function() {
             if (!playlist[currentIndex]) return;
             errorBox.style.display = "block";
-            errorBox.innerHTML = `⚠️ <b>Aguardando liberação do arquivo:</b><br>O áudio ainda está sendo publicado pelo GitHub. Aguarde 1 minuto e atualize.`;
+            errorBox.innerHTML = `⚠️ <b>Aguardando liberação do áudio:</b><br>O arquivo está sendo publicado pelo GitHub. Aguarde 1 minuto e atualize.`;
             visualizer.classList.remove("playing");
             playIcon.innerHTML = playSVG;
             isPlaying = false;
@@ -455,7 +466,7 @@
                 visualizer.classList.add("playing");
                 errorBox.style.display = "none";
             }).catch(err => {
-                console.warn("Aguardando interação do ouvinte:", err);
+                console.warn("Aguardando interação:", err);
             });
         }
 
@@ -488,7 +499,6 @@
         nextBtn.addEventListener("click", nextTrack);
         prevBtn.addEventListener("click", prevTrack);
 
-        // Música acabou? Passa para a próxima automaticamente!
         audio.addEventListener("ended", () => {
             nextTrack();
             play();
@@ -498,7 +508,6 @@
             audio.volume = e.target.value;
         });
 
-        // Inicializa o leitor automático ao abrir a página
         carregarMusicasAutomaticamente();
     </script>
 </body>

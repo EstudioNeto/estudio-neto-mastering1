@@ -16,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estúdio Neto — Soluções e Engenharia de Áudio</title>
   <meta name="description" content="Processadores de áudio digital locais e streaming ao vivo Estúdio Neto TV direto no seu navegador.">
-  <meta name="keywords" content="estudio neto, masterizacao online, removedor vocal, afinador guitarra, conversor de audio, dsp local, tv online, web player">
+  <meta name="keywords" content="estudio neto, masterizacao online, removedor vocal, afinador guitarra, conversor de audio, dsp local, tv online, web player, web radio">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -76,7 +76,7 @@
 </head>
 <body class="bg-[#04060b] text-gray-200 min-h-screen font-sans flex flex-col justify-between">
 
-  <!-- Header com a Nova Aba "Estúdio Neto TV" -->
+  <!-- Header com Botões da TV e da RÁDIO -->
   <header class="border-b border-brand-border bg-brand-dark/90 backdrop-blur sticky top-0 z-50 px-6 py-4">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
@@ -89,18 +89,24 @@
       </div>
       
       <!-- Menu de Navegação -->
-      <nav class="flex flex-wrap items-center justify-center gap-5 text-sm font-semibold">
+      <nav class="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold">
         <a href="index.html" class="text-white border-b-2 border-brand-accent pb-1">Início</a>
         
-        <!-- ABA NOVA: ESTÚDIO NETO TV AO VIVO -->
+        <!-- BOTÃO ESTÚDIO NETO TV -->
         <a href="tv.html" class="flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:text-amber-300 hover:bg-amber-500/20 rounded-lg transition-all shadow-[0_0_12px_rgba(255,215,0,0.2)]">
           <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-          <span>Estúdio Neto TV</span>
+          <span>TV Online</span>
+        </a>
+
+        <!-- NOVO: BOTÃO ESTÚDIO NETO WEB RÁDIO -->
+        <a href="radio.html" class="flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 hover:text-white hover:bg-indigo-500/25 rounded-lg transition-all shadow-[0_0_12px_rgba(99,102,241,0.25)]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Web Rádio 📻</span>
         </a>
 
         <a href="ferramentas.html" class="text-gray-400 hover:text-white transition-colors">Ferramentas IA</a>
         <a href="loja.html" class="text-gray-400 hover:text-white transition-colors">Loja Virtual</a>
-        <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas e Apps</a>
+        <a href="programas.html" class="text-gray-400 hover:text-white transition-colors">Programas</a>
         <a href="contato.html" class="text-gray-400 hover:text-white transition-colors">Contato</a>
       </nav>
     </div>
@@ -131,18 +137,19 @@
         Bem-vindo ao Estúdio Neto
       </h2>
       <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
-        Explore nosso diretório de ferramentas inteligentes de processamento sonoro, utilitários para engenharia de áudio e assista à nossa grade de canais ao vivo pela Estúdio Neto TV.
+        Explore nosso diretório de ferramentas inteligentes de processamento sonoro, utilitários para engenharia de áudio, nossa Web Rádio 24h e nossa grade ao vivo pela Estúdio Neto TV.
       </p>
       <div class="flex flex-wrap justify-center gap-4 pt-4">
-        <!-- Botão de Destaque da TV -->
-        <a href="tv.html" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-extrabold px-7 py-3 rounded-xl transition-all shadow-[0_4px_20px_rgba(255,215,0,0.3)] text-sm flex items-center gap-2">
-          <span>📺</span> Assistir Estúdio Neto TV
+        <!-- Botão Rádio -->
+        <a href="radio.html" class="bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-[0_4px_20px_rgba(99,102,241,0.3)] text-sm flex items-center gap-2">
+          <span>📻</span> Ouvir Web Rádio
+        </a>
+        <!-- Botão TV -->
+        <a href="tv.html" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-black font-extrabold px-6 py-3 rounded-xl transition-all shadow-[0_4px_20px_rgba(255,215,0,0.3)] text-sm flex items-center gap-2">
+          <span>📺</span> Estúdio Neto TV
         </a>
         <a href="ferramentas.html" class="bg-brand-accent hover:bg-brand-accentHover text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg text-sm">
-          Ver Nossas Ferramentas
-        </a>
-        <a href="loja.html" class="bg-brand-dark hover:bg-brand-card text-gray-300 border border-brand-border font-bold px-6 py-3 rounded-xl transition-all text-sm">
-          Visitar Loja
+          Ver Ferramentas
         </a>
       </div>
     </section>
@@ -222,15 +229,15 @@
       <h3 class="text-lg font-bold text-white text-center">Perguntas Frequentes (FAQ)</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Como funciona o Estúdio Neto TV?</h4>
+          <h4 class="font-bold text-indigo-300">Como funciona a Estúdio Neto Web Rádio?</h4>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Nosso web player utiliza tecnologia HLS de baixa latência, organizando os canais por categorias inteligentes e permitindo a transmissão direta para Smart TVs via Wi-Fi.
+            Nossa rádio toca obras clássicas e composições autorais exclusivas do Estúdio Neto em fluxo contínuo e sem anúncios no meio da música.
           </p>
         </div>
         <div class="bg-brand-card border border-brand-border p-5 rounded-xl space-y-2 text-sm text-gray-400">
-          <h4 class="font-bold text-indigo-300">Como funcionam as ferramentas do Estúdio Neto?</h4>
+          <h4 class="font-bold text-indigo-300">Como funciona o Estúdio Neto TV?</h4>
           <p class="text-xs text-gray-400 leading-relaxed">
-            Nossas ferramentas rodam de forma isolada e local utilizando a CPU do seu navegador, garantindo rapidez e privacidade absoluta sobre os seus arquivos.
+            Nosso web player utiliza tecnologia HLS de baixa latência, organizando os canais por categorias e permitindo transmissão para Smart TVs via Wi-Fi.
           </p>
         </div>
       </div>
@@ -241,7 +248,7 @@
       <div class="text-center space-y-2">
         <h3 class="text-xl font-bold text-white">Deixe sua Opinião ou Sugestão</h3>
         <p class="text-xs text-gray-400 max-w-lg mx-auto">
-          Dúvidas sobre nossas ferramentas ou sugestões para o canal da TV? Deixe seu comentário abaixo.
+          Dúvidas sobre nossas ferramentas ou sugestões para a Web Rádio e TV? Deixe seu comentário abaixo.
         </p>
       </div>
 
@@ -323,6 +330,7 @@
         <div class="space-y-2">
           <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-2">Streaming</h4>
           <ul class="space-y-1.5 text-gray-400">
+            <li><a class="text-indigo-400 hover:text-indigo-300 font-semibold transition-all text-decoration-none" href="radio.html">📻 Web Rádio</a></li>
             <li><a class="text-amber-400 hover:text-amber-300 font-semibold transition-all text-decoration-none" href="tv.html">📺 Estúdio Neto TV</a></li>
             <li><a class="hover:text-white transition-all text-decoration-none" href="programas.html">Programas e Apps</a></li>
           </ul>

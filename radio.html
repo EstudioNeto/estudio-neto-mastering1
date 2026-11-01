@@ -118,7 +118,7 @@
             50% { opacity: 0.3; }
         }
 
-        /* MOLDURA ADAPTADA PARA IMAGENS 16:9 (2752x1536) */
+        /* Moldura 16:9 */
         .artwork-wrapper {
             position: relative;
             width: 100%;
@@ -131,7 +131,7 @@
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
         }
 
-        /* IMAGEM DA LOGO PANORÂMICA */
+        /* Imagem .jpg */
         .radio-logo-img {
             width: 100%;
             height: 100%;
@@ -144,7 +144,6 @@
             transform: scale(1.03);
         }
 
-        /* Degradê na imagem para destacar as ondas sonoras */
         .overlay-gradient {
             position: absolute;
             inset: 0;
@@ -318,9 +317,9 @@
             </div>
         </div>
 
-        <!-- MOLDURA WIDESCREEN PARA SUA LOGO 2752x1536 -->
         <div class="artwork-wrapper">
-            <img src="logo-radio.png" alt="Estúdio Neto Web Rádio" class="radio-logo-img" onerror="this.src='favicon.png'; this.onerror=null;">
+            <!-- AGORA PROCURA POR logo-radio.jpg -->
+            <img src="logo-radio.jpg" alt="Estúdio Neto Web Rádio" class="radio-logo-img" onerror="this.src='favicon.png'; this.onerror=null;">
             
             <div class="overlay-gradient">
                 <div class="visualizer" id="visualizer">

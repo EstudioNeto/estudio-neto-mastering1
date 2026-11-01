@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <title>Estúdio Neto Web Rádio | Ao Vivo</title>
     
-    <!-- Fonte Moderna do Estúdio Neto -->
+    <!-- Fonte Oficial -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -44,7 +44,6 @@
             padding: 20px;
         }
 
-        /* Botão para voltar ao site principal */
         .back-link {
             position: absolute;
             top: 24px;
@@ -61,7 +60,6 @@
             color: var(--text-main);
         }
 
-        /* Container do Player */
         .player-container {
             background: var(--card-bg);
             backdrop-filter: blur(24px);
@@ -78,7 +76,6 @@
             position: relative;
         }
 
-        /* Cabeçalho da Estação */
         .station-header {
             display: flex;
             justify-content: space-between;
@@ -122,7 +119,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* Artwork / Equalizador Visual */
         .artwork-wrapper {
             position: relative;
             width: 200px;
@@ -174,7 +170,6 @@
             100% { height: 26px; }
         }
 
-        /* Informações da Música */
         .track-details {
             text-align: center;
             width: 100%;
@@ -206,7 +201,6 @@
             word-break: break-word;
         }
 
-        /* Alerta de erro informativo */
         .error-box {
             display: none;
             background: rgba(239, 68, 68, 0.15);
@@ -220,7 +214,6 @@
             line-height: 1.4;
         }
 
-        /* Controles de Reprodução */
         .player-controls {
             display: flex;
             align-items: center;
@@ -262,7 +255,6 @@
             box-shadow: 0 0 35px var(--primary-glow);
         }
 
-        /* Barra de Volume */
         .volume-box {
             display: flex;
             align-items: center;
@@ -323,12 +315,11 @@
         </div>
 
         <div class="track-details">
-            <span class="genre-tag" id="track-category">Carregando...</span>
-            <div class="track-title" id="track-title">Carregando rádio...</div>
-            <div class="track-artist" id="track-artist">Aguarde</div>
+            <span class="genre-tag" id="track-category">Sincronizando...</span>
+            <div class="track-title" id="track-title">Buscando músicas...</div>
+            <div class="track-artist" id="track-artist">Aguarde um instante</div>
         </div>
 
-        <!-- Mensagem de Alerta se o arquivo não estiver disponível -->
         <div class="error-box" id="error-box"></div>
 
         <div class="player-controls">
@@ -355,20 +346,12 @@
     <audio id="audio-player" preload="metadata"></audio>
 
     <script>
-        // ====================================================================
-        // PLAYLIST DA RÁDIO:
-        // Quando quiser adicionar mais músicas, basta colocar uma vírgula
-        // e adicionar outro bloco { ... } com o nome do seu novo arquivo mp3.
-        // ====================================================================
-        const playlist = [
-            {
-                title: "Brisa do Horizonte",
-                artist: "Estúdio Neto",
-                category: "Autoral",
-                src: "audio/Brisa do Horizonte.mp3"
-            }
-        ];
+        // CONFIGURAÇÃO DO REPOSITÓRIO GITHUB (Busca automática de arquivos)
+        const GITHUB_USER = "EstudioNeto";
+        const GITHUB_REPO = "estudio-neto-mastering1";
+        const AUDIO_FOLDER_API = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/audio`;
 
+        let playlist = [];
         let currentIndex = 0;
         let isPlaying = false;
 
@@ -387,24 +370,79 @@
         const playSVG = '<polygon points="5 3 19 12 5 21 5 3"/>';
         const pauseSVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
 
+        // FUNÇÃO INTELIGENTE: Puxa todas as músicas da pasta "audio" automaticamente
+        async function carregarMusicasAutomaticamente() {
+            try {
+                const response = await fetch(`${AUDIO_FOLDER_API}?t=${Date.now()}`);
+                if (!response.ok) throw new Error("Não foi possível listar os arquivos do repositório.");
+                
+                const arquivos = await response.json();
+                
+                // Filtra apenas o que for .mp3
+                const mp3s = arquivos.filter(arq => arq.name.toLowerCase().endsWith('.mp3'));
+
+                if (mp3s.length === 0) {
+                    titleEl.textContent = "Nenhuma música encontrada";
+                    artistEl.textContent = "Suba arquivos .mp3 na pasta audio";
+                    return;
+                }
+
+                // Monta a playlist formatando Título e Artista automaticamente
+                playlist = mp3s.map(arq => {
+                    const nomeLimpo = arq.name.replace(/\.mp3$/i, '');
+                    let artista = "Estúdio Neto";
+                    let titulo = nomeLimpo;
+
+                    // Se o arquivo tiver "Artista - Musica.mp3", separa certinho
+                    if (nomeLimpo.includes(' - ')) {
+                        const partes = nomeLimpo.split(' - ');
+                        artista = partes[0].trim();
+                        titulo = partes[1].trim();
+                    }
+
+                    return {
+                        title: titulo,
+                        artist: artista,
+                        category: "Web Rádio",
+                        src: `audio/${arq.name}`
+                    };
+                });
+
+                // Carrega a primeira música encontrada
+                loadTrack(0);
+
+            } catch (err) {
+                console.warn("Aviso na API do GitHub, usando faixa direta de segurança:", err);
+                // Fallback caso a API demore a responder
+                playlist = [
+                    {
+                        title: "Brisa do Horizonte",
+                        artist: "Estúdio Neto",
+                        category: "Autoral",
+                        src: "audio/Brisa do Horizonte.mp3"
+                    }
+                ];
+                loadTrack(0);
+            }
+        }
+
         function loadTrack(index) {
+            if (!playlist || playlist.length === 0) return;
             errorBox.style.display = "none";
             const track = playlist[index];
 
-            // encodeURI resolve os espaços do nome do arquivo na internet
             audio.src = encodeURI(track.src);
             audio.load();
 
             titleEl.textContent = track.title;
             artistEl.textContent = track.artist;
-            categoryEl.textContent = track.category;
+            categoryEl.textContent = `${index + 1} de ${playlist.length} • ${track.category}`;
         }
 
-        // Caso o arquivo ainda esteja compilando ou com erro
         audio.addEventListener("error", function() {
-            const track = playlist[currentIndex];
+            if (!playlist[currentIndex]) return;
             errorBox.style.display = "block";
-            errorBox.innerHTML = `⚠️ <b>Aguardando publicação do áudio:</b><br>O site procurou por: <code>${encodeURI(track.src)}</code><br><br>Se acabou de subir o arquivo, aguarde 1 a 2 minutos para o GitHub finalizar a publicação e recarregue a página.`;
+            errorBox.innerHTML = `⚠️ <b>Aguardando liberação do arquivo:</b><br>O áudio ainda está sendo publicado pelo GitHub. Aguarde 1 minuto e atualize.`;
             visualizer.classList.remove("playing");
             playIcon.innerHTML = playSVG;
             isPlaying = false;
@@ -417,7 +455,7 @@
                 visualizer.classList.add("playing");
                 errorBox.style.display = "none";
             }).catch(err => {
-                console.warn("Autoplay bloqueado pelo navegador. Aguardando interação do usuário.");
+                console.warn("Aguardando interação do ouvinte:", err);
             });
         }
 
@@ -433,12 +471,14 @@
         }
 
         function nextTrack() {
+            if (playlist.length === 0) return;
             currentIndex = (currentIndex + 1) % playlist.length;
             loadTrack(currentIndex);
             if (isPlaying) play();
         }
 
         function prevTrack() {
+            if (playlist.length === 0) return;
             currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
             loadTrack(currentIndex);
             if (isPlaying) play();
@@ -448,7 +488,7 @@
         nextBtn.addEventListener("click", nextTrack);
         prevBtn.addEventListener("click", prevTrack);
 
-        // Ao terminar a faixa, toca a próxima da lista continuamente
+        // Música acabou? Passa para a próxima automaticamente!
         audio.addEventListener("ended", () => {
             nextTrack();
             play();
@@ -458,8 +498,8 @@
             audio.volume = e.target.value;
         });
 
-        // Carrega a primeira música ao abrir a página
-        loadTrack(currentIndex);
+        // Inicializa o leitor automático ao abrir a página
+        carregarMusicasAutomaticamente();
     </script>
 </body>
 </html>

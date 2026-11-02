@@ -58,7 +58,6 @@
             flex-shrink: 0;
         }
 
-        /* Botão Voltar ao Site */
         .btn-back-site {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-color);
@@ -89,7 +88,7 @@
             white-space: nowrap;
         }
 
-        /* Container do Banner com Escala Responsiva */
+        /* Banner Adsterra */
         .header-ad-center {
             flex: 1;
             display: flex;
@@ -146,7 +145,6 @@
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
         }
 
-        /* Botões de Ação (Transmitir e Compartilhar) */
         .action-btn {
             background: var(--bg-elevated);
             border: 1px solid var(--border-color);
@@ -321,16 +319,7 @@
             flex: 1;
         }
 
-        .channel-sub {
-            font-size: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-
-        /* Coluna 3: Player & Gabinete Retrô */
+        /* Coluna 3: Player */
         .player-container {
             flex: 1;
             display: flex;
@@ -389,7 +378,7 @@
             opacity: 1;
         }
 
-        /* GABINETE VINTAGE RETRÔ RESPONSIVO */
+        /* GABINETE VINTAGE RETRÔ */
         .vintage-radio-cabinet {
             display: none;
             position: absolute;
@@ -632,125 +621,43 @@
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; }
 
-        /* ======================================================== */
-        /* ADAPTAÇÃO TOTAL PARA CELULAR E DISPOSITIVOS MÓVEIS       */
-        /* ======================================================== */
+        /* Responsividade Celular */
         @media (max-width: 1100px) {
-            header {
-                min-height: auto;
-                flex-wrap: wrap;
-                padding: 10px 16px;
-                gap: 10px;
-            }
-            .header-ad-center {
-                order: 3;
-                width: 100%;
-                margin: 4px auto 0 auto;
-            }
-            main {
-                height: calc(100vh - 160px);
-            }
+            header { min-height: auto; flex-wrap: wrap; padding: 10px 16px; gap: 10px; }
+            .header-ad-center { order: 3; width: 100%; margin: 4px auto 0 auto; }
+            main { height: calc(100vh - 160px); }
         }
 
         @media (max-width: 768px) {
-            body {
-                overflow: auto;
-                height: auto;
-            }
-            header {
-                padding: 8px 12px;
-            }
-            .logo-title {
-                font-size: 16px;
-            }
-            .btn-back-site {
-                padding: 6px 10px;
-                font-size: 11px;
-            }
-            .action-btn {
-                padding: 7px 10px;
-                font-size: 11px;
-            }
-            .action-btn span:last-child {
-                display: none; /* Em telas muito pequenas exibe apenas os ícones */
-            }
+            body { overflow: auto; height: auto; }
+            header { padding: 8px 12px; }
+            .logo-title { font-size: 16px; }
+            .btn-back-site { padding: 6px 10px; font-size: 11px; }
+            .action-btn { padding: 7px 10px; font-size: 11px; }
+            .action-btn span:last-child { display: none; }
             
-            /* ESCALA INTELIGENTE DO BANNER 728x90 NO CELULAR */
-            .header-ad-center {
-                height: 50px;
-                max-width: 100%;
-                background: transparent;
-            }
-            .ad-scale-wrapper {
-                transform: scale(0.48);
-                transform-origin: center center;
-            }
+            .header-ad-center { height: 50px; max-width: 100%; background: transparent; }
+            .ad-scale-wrapper { transform: scale(0.48); transform-origin: center center; }
 
-            main {
-                flex-direction: column;
-                height: auto;
-            }
-            .player-container {
-                padding: 8px;
-                order: -1;
-            }
-            .video-box {
-                height: 56vw;
-                min-height: 230px;
-                border-radius: var(--radius-md);
-            }
+            main { flex-direction: column; height: auto; }
+            .player-container { padding: 8px; order: -1; }
+            .video-box { height: 56vw; min-height: 230px; border-radius: var(--radius-md); }
 
-            /* ADAPTAÇÃO DO RÁDIO RETRÔ NO CELULAR (SEM CORTES) */
-            .vintage-radio-cabinet {
-                padding: 12px 14px;
-                border-width: 6px;
-            }
-            .vintage-brand-badge {
-                font-size: 13px;
-                letter-spacing: 1px;
-            }
-            .tube-indicator {
-                font-size: 8px;
-            }
-            .vintage-dial-window {
-                padding: 8px 10px;
-            }
-            .dial-scale-container {
-                height: 38px;
-                margin-bottom: 6px;
-            }
-            .dial-numbers {
-                font-size: 10px;
-            }
-            .dial-sub-numbers {
-                font-size: 8px;
-            }
-            .dial-needle {
-                height: 42px;
-            }
-            .station-display-text {
-                font-size: 11px;
-            }
-            .vintage-vu-meter {
-                width: 52px;
-                height: 26px;
-            }
-            .vintage-controls-bar {
-                gap: 8px;
-                padding-top: 4px;
-            }
-            .vintage-btn {
-                padding: 8px 10px;
-                font-size: 10px;
-            }
-            .vintage-btn-main {
-                padding: 9px 14px;
-            }
+            .vintage-radio-cabinet { padding: 12px 14px; border-width: 6px; }
+            .vintage-brand-badge { font-size: 13px; letter-spacing: 1px; }
+            .tube-indicator { font-size: 8px; }
+            .vintage-dial-window { padding: 8px 10px; }
+            .dial-scale-container { height: 38px; margin-bottom: 6px; }
+            .dial-numbers { font-size: 10px; }
+            .dial-sub-numbers { font-size: 8px; }
+            .dial-needle { height: 42px; }
+            .station-display-text { font-size: 11px; }
+            .vintage-vu-meter { width: 52px; height: 26px; }
+            .vintage-controls-bar { gap: 8px; padding-top: 4px; }
+            .vintage-btn { padding: 8px 10px; font-size: 10px; }
+            .vintage-btn-main { padding: 9px 14px; }
 
-            .sidebar-categories, .sidebar-channels {
-                width: 100%;
-                max-height: 260px;
-            }
+            .sidebar-categories, .sidebar-channels { width: 100%; max-height: 260px; }
         }
     </style>
 </head>
@@ -758,7 +665,6 @@
 
     <!-- Topo -->
     <header>
-        <!-- Lado Esquerdo: Voltar ao Site & Logo -->
         <div class="logo-area">
             <a href="index.html" class="btn-back-site">
                 <span>⬅</span>
@@ -767,7 +673,7 @@
             <div class="logo-title">ESTÚDIO NETO TV</div>
         </div>
 
-        <!-- CENTRO: BANNER ADSTERRA (Escalado perfeitamente) -->
+        <!-- Banner Adsterra 728x90 -->
         <div class="header-ad-center">
             <div class="ad-scale-wrapper">
                 <script>
@@ -783,20 +689,17 @@
             </div>
         </div>
 
-        <!-- Lado Direito: Ações -->
         <div class="header-actions">
             <div class="live-tag">
                 <span class="pulse-dot"></span>
                 <span>AO VIVO</span>
             </div>
 
-            <!-- Botão Compartilhar -->
             <button class="action-btn" onclick="compartilharPagina()" title="Compartilhar">
                 <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
                 <span>Compartilhar</span>
             </button>
 
-            <!-- Botão Transmitir na TV -->
             <button class="action-btn" onclick="iniciarTransmissao()" title="Transmitir na TV">
                 <svg viewBox="0 0 24 24"><path d="M1 18v3h3c0-1.66-1.34-3-3-3zm0-4v2c2.76 0 5 2.24 5 5h2c0-3.87-3.13-7-7-7zm0-4v2c4.97 0 9 4.03 9 9h2c0-6.08-4.93-11-11-11zm20-7H3c-1.1 0-2 .9-2 2v3h2V5h18v14h-7v2h7c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
                 <span>Transmitir</span>
@@ -820,7 +723,7 @@
             <div id="channelContainer" class="channels-list"></div>
         </div>
 
-        <!-- Coluna 3: Player & Gabinete Retrô -->
+        <!-- Coluna 3: Player -->
         <div class="player-container">
             <div class="video-box">
                 <div class="channel-overlay" id="channelOverlay">
@@ -828,7 +731,7 @@
                     <span id="overlayTitle">Selecione uma transmissão</span>
                 </div>
 
-                <!-- PAINEL VINTAGE DE RÁDIO ANTIGO -->
+                <!-- PAINEL VINTAGE PARA RÁDIOS -->
                 <div class="vintage-radio-cabinet" id="vintageRadioPanel">
                     <div class="vintage-header-brass">
                         <div class="vintage-brand-badge">
@@ -877,15 +780,13 @@
                     </div>
                 </div>
 
-                <!-- Player de Vídeo Nativo para TV -->
                 <video id="videoPlayer" controls autoplay playsinline></video>
-                <!-- Player de Áudio Exclusivo para Rádios -->
                 <audio id="audioPlayer" preload="none"></audio>
             </div>
         </div>
     </main>
 
-    <!-- Modal Auxiliar de Transmissão -->
+    <!-- Modal Transmissão -->
     <div class="modal" id="castModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -932,8 +833,9 @@
         const vintageVuNeedle = document.getElementById("vintageVuNeedle");
         const btnVintagePlay = document.getElementById("btnVintagePlay");
 
-        // CATEGORIAS MESTRES (INICIA EM CANAIS ABERTOS)
+        // CATEGORIAS MESTRES: INCLUI A CATEGORIA DE PREMIERE
         const MASTER_CATEGORIES = [
+            "⚽ CANAIS PREMIERE",
             "⭐ CANAIS ABERTOS",
             "🎬 FILMES E SÉRIES",
             "⚽ ESPORTES",
@@ -948,32 +850,44 @@
 
         function classificarCategoria(rawCat, channelTitle) {
             const text = (rawCat + " " + channelTitle).toUpperCase();
+            
+            // Destaca os canais Premiere em uma categoria própria
+            if (text.includes("PREMIERE")) return "⚽ CANAIS PREMIERE";
+
             if (text.includes("ESPORTE") || text.includes("SPORT") || text.includes("ESPN") || 
-                text.includes("PREMIERE") || text.includes("COMBATE") || text.includes("FUTEBOL") || 
-                text.includes("LIBERTADORES") || text.includes("CAZÉ") || text.includes("PRIME VIDEO")) return "⚽ ESPORTES";
+                text.includes("COMBATE") || text.includes("FUTEBOL") || text.includes("LIBERTADORES") || 
+                text.includes("CAZÉ") || text.includes("PRIME VIDEO")) return "⚽ ESPORTES";
+            
             if (text.includes("FILME") || text.includes("SÉRIE") || text.includes("SERIE") || 
                 text.includes("TELECINE") || text.includes("HBO") || text.includes("CINEMAX") || 
                 text.includes("WARNER") || text.includes("UNIVERSAL") || text.includes("PARAMOUNT") || 
                 text.includes("SONY") || text.includes("AXN") || text.includes("SPACE") || 
                 text.includes("MEGAPIX") || text.includes("CINE SKY") || text.includes("STUDIO")) return "🎬 FILMES E SÉRIES";
+            
             if (text.includes("NOTÍCIA") || text.includes("NOTICIA") || text.includes("NEWS") || 
                 text.includes("CNN") || text.includes("JOVEM PAN") || text.includes("GLOBO NEWS")) return "📰 NOTÍCIAS";
+            
             if (text.includes("INFANTIL") || text.includes("KIDS") || text.includes("CARTOON") || 
                 text.includes("GLOOB") || text.includes("DISNEY") || text.includes("TOON") || 
                 text.includes("NICK") || text.includes("ZOOMOO")) return "🧸 INFANTIL";
+            
             if (text.includes("DOCUMENTÁRIO") || text.includes("DOCUMENTARIO") || text.includes("DISCOVERY") || 
                 text.includes("HISTORY") || text.includes("ANIMAL PLANET") || text.includes("NATIONAL") || 
                 text.includes("TURBO") || text.includes("THEATER") || text.includes("SCIENCE") || text.includes("HGTV")) return "🦁 DOCUMENTÁRIOS";
+            
             if (text.includes("RELIGIOSO") || text.includes("GOSPEL") || text.includes("APARECIDA") || 
                 text.includes("CANÇÃO NOVA") || text.includes("REDE VIDA") || text.includes("EVANGEL") || 
                 text.includes("NOVO TEMPO") || text.includes("SUPER")) return "🙏 RELIGIOSOS";
+            
             if (text.includes("ABERTO") || text.includes("GLOBO") || text.includes("SBT") || 
                 text.includes("RECORD") || text.includes("BAND") || text.includes("REDETV") || 
                 text.includes("CULTURA") || text.includes("TV BRASIL") || text.includes("GAZETA")) return "⭐ CANAIS ABERTOS";
+            
             if (text.includes("VARIEDADE") || text.includes("MÚSICA") || text.includes("MUSICA") || 
                 text.includes("GNT") || text.includes("MULTISHOW") || text.includes("BIS") || 
                 text.includes("VIVA") || text.includes("OFF") || text.includes("MODO VIAGEM") || 
                 text.includes("NOVELAS") || text.includes("CURTA") || text.includes("E!") || text.includes("FOOD")) return "🍿 VARIEDADES & MÚSICA";
+            
             return "📺 DIVERSOS";
         }
 
@@ -1006,18 +920,14 @@
                     const commaIndex = line.lastIndexOf(",");
                     tempTitle = commaIndex !== -1 ? line.substring(commaIndex + 1).trim() : "Canal";
 
+                    // Descarta apenas resoluções ultra-pesadas (FHD e 4K e H265). Mantém SD e HD normalmente!
                     const titleUpper = tempTitle.toUpperCase();
                     if (titleUpper.includes("FHD") || titleUpper.includes("4K") || titleUpper.includes("265")) {
                         tempTitle = "";
                     }
 
                 } else if (line.startsWith("http") && tempTitle !== "") {
-                    // Pula o servidor problemático de 1 minuto
-                    if (line.toLowerCase().includes("governosptx.org")) {
-                        tempTitle = "";
-                        continue;
-                    }
-
+                    // Sem bloqueio de domínios: todos os links passam livremente
                     let streamUrl = line;
                     if (streamUrl.toLowerCase().endsWith(".ts")) {
                         streamUrl = streamUrl.substring(0, streamUrl.length - 3) + ".m3u8";
@@ -1187,6 +1097,7 @@
             });
         }
 
+        // REPRODUTOR UNIVERSAL (TV E RÁDIOS)
         function playStream(channel, element) {
             if (element) {
                 document.querySelectorAll(".channel-item").forEach(el => el.classList.remove("active"));
@@ -1195,7 +1106,7 @@
 
             overlayTitle.innerText = channel.title;
 
-            // 1. MODO RÁDIO: Ativa o Painel Vintage
+            // Se for RÁDIO: Ativa o Painel Vintage
             if (channel.isRadio || currentCategory.includes("45.000+")) {
                 if (hlsVideo) { try { hlsVideo.destroy(); } catch(e){} hlsVideo = null; }
                 video.pause();
@@ -1228,7 +1139,7 @@
                     });
                 }
 
-            // 2. MODO TV / VÍDEO
+            // Se for CANAL DE TV (Premiere, Abertos, Filmes, Esportes)
             } else {
                 if (hlsAudio) { try { hlsAudio.destroy(); } catch(e){} hlsAudio = null; }
                 audio.pause();
@@ -1316,7 +1227,6 @@
             vintageVuNeedle.style.transform = "rotate(-38deg)";
         }
 
-        // FUNÇÃO DE COMPARTILHAR
         function compartilharPagina() {
             const shareData = {
                 title: 'Estúdio Neto TV',
@@ -1324,11 +1234,9 @@
                 url: window.location.href
             };
 
-            // Se for celular (Android / iOS): abre a gaveta nativa de compartilhamento
             if (navigator.share) {
                 navigator.share(shareData).catch(() => {});
             } else {
-                // Se for computador: copia o link para a área de transferência
                 navigator.clipboard.writeText(window.location.href).then(() => {
                     alert('✓ Link copiado com sucesso! Envie para seus amigos.');
                 }).catch(() => {

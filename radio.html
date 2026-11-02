@@ -188,7 +188,7 @@
         .track-details {
             text-align: center;
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .genre-tag {
@@ -203,7 +203,7 @@
         }
 
         .track-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 4px;
@@ -229,45 +229,33 @@
             line-height: 1.4;
         }
 
+        /* CONTROLE ÚNICO E ELEGANTE DE TRANSMISSÃO */
         .player-controls {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
             width: 100%;
             margin-bottom: 25px;
         }
 
-        .control-btn {
-            background: none;
+        .btn-play {
+            width: 72px;
+            height: 72px;
+            background: var(--primary);
+            border-radius: 50%;
             border: none;
-            color: var(--text-muted);
+            color: #ffffff;
             cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .control-btn:hover {
-            color: var(--text-main);
-            transform: scale(1.1);
-        }
-
-        .btn-play {
-            width: 65px;
-            height: 65px;
-            background: var(--primary);
-            border-radius: 50%;
-            color: #ffffff;
-            box-shadow: 0 0 25px var(--primary-glow);
+            box-shadow: 0 0 28px var(--primary-glow);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn-play:hover {
-            transform: scale(1.06);
-            color: #ffffff;
-            box-shadow: 0 0 35px var(--primary-glow);
+            transform: scale(1.08);
+            box-shadow: 0 0 38px var(--primary-glow);
         }
 
         .volume-box {
@@ -381,17 +369,10 @@
 
             <div class="error-box" id="error-box"></div>
 
+            <!-- APENAS O BOTÃO PLAY/PAUSE (AO VIVO) -->
             <div class="player-controls">
-                <button class="control-btn" id="prev-btn" title="Anterior">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-                </button>
-
-                <button class="control-btn btn-play" id="play-btn" title="Reproduzir">
-                    <svg id="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </button>
-
-                <button class="control-btn" id="next-btn" title="Próxima">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                <button class="btn-play" id="play-btn" title="Ouvir Rádio">
+                    <svg id="play-icon" width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </button>
             </div>
 
@@ -433,8 +414,6 @@
         const audio = document.getElementById("audio-player");
         const playBtn = document.getElementById("play-btn");
         const playIcon = document.getElementById("play-icon");
-        const nextBtn = document.getElementById("next-btn");
-        const prevBtn = document.getElementById("prev-btn");
         const titleEl = document.getElementById("track-title");
         const artistEl = document.getElementById("track-artist");
         const categoryEl = document.getElementById("track-category");
@@ -444,6 +423,15 @@
 
         const playSVG = '<polygon points="5 3 19 12 5 21 5 3"/>';
         const pauseSVG = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+        // ALGORITMO PARA EMBARALHAR AS MÚSICAS ALEATORIAMENTE
+        function embaralhar(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
         async function carregarMusicasAutomaticamente() {
             try {
@@ -459,39 +447,47 @@
                     return;
                 }
 
-                playlist = mp3s.map(arq => {
+                let vinheta = null;
+                let outrasFaixas = [];
+
+                mp3s.forEach(arq => {
                     const nomeLimpo = arq.name.replace(/\.mp3$/i, '');
-                    let artista = "Estúdio Neto";
-                    let titulo = nomeLimpo;
+                    const isVinheta = arq.name.toLowerCase().includes("vinheta");
 
-                    if (nomeLimpo.includes(' - ')) {
-                        const partes = nomeLimpo.split(' - ');
-                        artista = partes[0].trim();
-                        titulo = partes[1].trim();
+                    if (isVinheta) {
+                        vinheta = {
+                            title: "Vinheta de Abertura",
+                            artist: "Estúdio Neto",
+                            category: "Vinheta Oficial",
+                            src: `audio/${arq.name}`
+                        };
+                    } else {
+                        let artista = "Estúdio Neto";
+                        let titulo = nomeLimpo;
+
+                        if (nomeLimpo.includes(' - ')) {
+                            const partes = nomeLimpo.split(' - ');
+                            artista = partes[0].trim();
+                            titulo = partes[1].trim();
+                        }
+
+                        outrasFaixas.push({
+                            title: titulo,
+                            artist: artista,
+                            category: "Web Rádio",
+                            src: `audio/${arq.name}`
+                        });
                     }
-
-                    return {
-                        title: titulo,
-                        artist: artista,
-                        category: "Web Rádio",
-                        src: `audio/${arq.name}`
-                    };
                 });
 
-                // ==============================================================
-                // ORDENAÇÃO: COLOCA A VINHETA AUTOMATICAMENTE NO INÍCIO (Posição 0)
-                // ==============================================================
-                const vinhetaIndex = playlist.findIndex(track => 
-                    track.src.toLowerCase().includes("vinheta") ||
-                    track.src.includes("Web Rádio Estúdio Neto - Vinheta.mp3")
-                );
+                // Embaralha as músicas comuns
+                outrasFaixas = embaralhar(outrasFaixas);
 
-                if (vinhetaIndex > -1) {
-                    const [vinheta] = playlist.splice(vinhetaIndex, 1);
-                    vinheta.category = "Vinheta Oficial";
-                    vinheta.artist = "Estúdio Neto";
-                    vinheta.title = "Vinheta de Abertura";
-                    playlist.unshift(vinheta); // Coloca em 1º lugar
+                // Monta a programação: VINHETA PRIMEIRO, depois as músicas embaralhadas
+                if (vinheta) {
+                    playlist = [vinheta, ...outrasFaixas];
+                } else {
+                    playlist = outrasFaixas;
                 }
 
                 loadTrack(0);
@@ -567,18 +563,9 @@
             if (isPlaying) play();
         }
 
-        function prevTrack() {
-            if (playlist.length === 0) return;
-            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-            loadTrack(currentIndex);
-            if (isPlaying) play();
-        }
-
         playBtn.addEventListener("click", togglePlay);
-        nextBtn.addEventListener("click", nextTrack);
-        prevBtn.addEventListener("click", prevTrack);
 
-        // Quando a vinheta acaba, toca a próxima música na sequência!
+        // Quando a música (ou vinheta) termina, passa automaticamente para a próxima sorteada!
         audio.addEventListener("ended", () => {
             nextTrack();
             play();

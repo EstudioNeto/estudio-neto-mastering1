@@ -359,6 +359,83 @@
             object-fit: contain;
         }
 
+        /* OVERLAY INTERVALO COMERCIAL (SMARTLINK 30 MIN) */
+        .ad-break-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 8, 12, 0.92);
+            backdrop-filter: blur(10px);
+            z-index: 20;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .ad-break-overlay.active {
+            display: flex;
+        }
+
+        .ad-break-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255, 200, 55, 0.35);
+            border-radius: var(--radius-lg);
+            padding: 26px 24px;
+            max-width: 390px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+        }
+
+        .ad-break-badge {
+            display: inline-block;
+            background: rgba(255, 200, 55, 0.14);
+            color: var(--accent-gold);
+            border: 1px solid rgba(255, 200, 55, 0.3);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .ad-break-card h3 {
+            font-size: 19px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .ad-break-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .ad-break-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px 20px;
+            border-radius: var(--radius-md);
+            background: var(--accent-gradient);
+            color: #000;
+            font-size: 14px;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 200, 55, 0.25);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .ad-break-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(255, 200, 55, 0.4);
+        }
+
         /* GABINETE VINTAGE RETRÔ */
         .vintage-radio-cabinet {
             display: none;
@@ -624,6 +701,11 @@
             .player-container { padding: 8px; order: -1; }
             .video-box { height: 56vw; min-height: 230px; border-radius: var(--radius-md); }
 
+            .ad-break-card { padding: 16px 14px; }
+            .ad-break-card h3 { font-size: 15px; }
+            .ad-break-card p { font-size: 11px; margin-bottom: 12px; }
+            .ad-break-btn { padding: 10px 14px; font-size: 12px; }
+
             .vintage-radio-cabinet { padding: 12px 14px; border-width: 6px; }
             .vintage-brand-badge { font-size: 13px; letter-spacing: 1px; }
             .tube-indicator { font-size: 8px; }
@@ -707,6 +789,25 @@
         <!-- Coluna 3: Player -->
         <div class="player-container">
             <div class="video-box">
+                <!-- OVERLAY DO INTERVALO COMERCIAL (A CADA 30 MINUTOS) -->
+                <div class="ad-break-overlay" id="adBreakOverlay">
+                    <div class="ad-break-card">
+                        <div class="ad-break-badge">INTERVALO COMERCIAL</div>
+                        <h3>Continuar assistindo</h3>
+                        <p>Para manter o Estúdio Neto TV gratuito, clique no botão abaixo para abrir o patrocinador e retomar o filme.</p>
+                        <a
+                            href="https://asiafilm.org/4/f8381625ec6b8184ed074db309888403"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="ad-break-btn"
+                            onclick="continuarAposAnuncio()"
+                        >
+                            <span>▶</span>
+                            <span>Continuar Assistindo</span>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- PAINEL VINTAGE PARA RÁDIOS -->
                 <div class="vintage-radio-cabinet" id="vintageRadioPanel">
                     <div class="vintage-header-brass">
@@ -785,6 +886,8 @@
     </div>
 
     <script>
+        const AD_INTERVAL_SECONDS = 30 * 60; // 30 minutos em segundos
+
         const MOVIE_URLS = [
             "https://amogonetworx-charlie-1-br.tcl.wurl.tv/playlist.m3u8?ROGERIOTORRES",
             "https://stmv1.srvif.com/classique/classique/playlist.m3u8?ROGERIOTORRES",
@@ -818,11 +921,15 @@
         let searchDebounceTimer = null;
         let vuAnimationTimer = null;
 
+        let watchedSeconds = 0;
+        let isAdBreakActive = false;
+
         const categoryContainer = document.getElementById("categoryContainer");
         const channelContainer = document.getElementById("channelContainer");
         const searchInput = document.getElementById("searchInput");
         const video = document.getElementById("videoPlayer");
         const audio = document.getElementById("audioPlayer");
+        const adBreakOverlay = document.getElementById("adBreakOverlay");
 
         const vintageRadioPanel = document.getElementById("vintageRadioPanel");
         const vintageStationTitle = document.getElementById("vintageStationTitle");
@@ -834,6 +941,50 @@
             "🎬 FILMES",
             "📻 RÁDIOS DO MUNDO (45.000+)"
         ];
+
+        // Conta apenas o tempo que o vídeo estiver tocando
+        setInterval(() => {
+            if (!isAdBreakActive &&
+                !vintageRadioPanel.classList.contains("active") &&
+                !video.paused &&
+                !video.ended &&
+                video.readyState >= 2) {
+                watchedSeconds++;
+                if (watchedSeconds >= AD_INTERVAL_SECONDS) {
+                    triggerAdBreak();
+                }
+            }
+        }, 1000);
+
+        // Impede dar play direto no player durante o intervalo comercial
+        video.addEventListener("play", () => {
+            if (isAdBreakActive) {
+                video.pause();
+            }
+        });
+
+        function triggerAdBreak() {
+            isAdBreakActive = true;
+            video.pause();
+
+            // Sai da tela cheia se o vídeo estiver em fullscreen para mostrar o aviso
+            if (document.fullscreenElement === video) {
+                document.exitFullscreen().catch(() => {});
+            } else if (document.webkitFullscreenElement === video && document.webkitExitFullscreen) {
+                try { document.webkitExitFullscreen(); } catch(e) {}
+            } else if (video.webkitDisplayingFullscreen && video.webkitExitFullscreen) {
+                try { video.webkitExitFullscreen(); } catch(e) {}
+            }
+
+            adBreakOverlay.classList.add("active");
+        }
+
+        function continuarAposAnuncio() {
+            isAdBreakActive = false;
+            watchedSeconds = 0;
+            adBreakOverlay.classList.remove("active");
+            video.play().catch(() => {});
+        }
 
         function loadPlaylist() {
             categoriesData = {
@@ -883,11 +1034,15 @@
 
             if (category.includes("45.000+")) {
                 searchInput.placeholder = "🔍 Digite qualquer rádio ou país do mundo...";
+                adBreakOverlay.classList.remove("active");
                 vintageRadioPanel.classList.add("active");
                 carregarRadiosMundiaisIniciais();
             } else {
                 searchInput.placeholder = "Buscar filme...";
                 vintageRadioPanel.classList.remove("active");
+                if (isAdBreakActive) {
+                    adBreakOverlay.classList.add("active");
+                }
                 currentChannels = categoriesData[category] || [];
                 renderMovies(currentChannels);
             }
@@ -1003,6 +1158,7 @@
                 video.pause();
                 video.removeAttribute('src');
 
+                adBreakOverlay.classList.remove("active");
                 vintageRadioPanel.classList.add("active");
                 vintageStationTitle.innerText = "SINTONIZANDO: " + item.title.toUpperCase();
                 btnVintagePlay.innerHTML = "<span>⏸</span><span>PAUSAR</span>";
@@ -1045,10 +1201,12 @@
                     hlsVideo = new Hls({ enableWorker: true, lowLatencyMode: false });
                     hlsVideo.loadSource(item.url);
                     hlsVideo.attachMedia(video);
-                    hlsVideo.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+                    hlsVideo.on(Hls.Events.MANIFEST_PARSED, () => {
+                        if (!isAdBreakActive) video.play().catch(() => {});
+                    });
                 } else {
                     video.src = item.url;
-                    video.play().catch(() => {});
+                    if (!isAdBreakActive) video.play().catch(() => {});
                 }
             }
         }

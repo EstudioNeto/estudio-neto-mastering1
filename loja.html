@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja Virtual — Estúdio Neto</title>
+  <meta property="og:title" content="Loja Virtual — Estúdio Neto">
+  <meta property="og:description" content="Confira os produtos da Loja Virtual Estúdio Neto!">
   <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -170,9 +172,16 @@
       }
     }
 
-    function criarCartao(prod) {
+    function obterUrlImagem(prod) {
       let imgSrc = prod.imagem || '';
-      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+      if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) {
+        imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
+      }
+      return imgSrc;
+    }
+
+    function criarCartao(prod) {
+      const imgSrc = obterUrlImagem(prod);
 
       let seloHtml = '';
       if(prod.selo === 'mais_vendido') seloHtml = `<div class="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 pointer-events-none">🔥 MAIS VENDIDO</div>`;
@@ -274,24 +283,84 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => {
         toastShare.classList.add('opacity-0');
-      }, 2500);
+      }, 2800);
     }
 
-    async function executarCompartilhamento(titulo, texto, url) {
+    function montarResumoProduto(prod, urlProduto) {
+      const precoAtual = parseFloat(String(prod.preco || "0").replace(',', '.'));
+      const parcelas = parseInt(prod.parcelas) || 1;
+      const bruto = prod.resumo || prod.descricao || prod.subtitulo || prod.detalhes || '';
+      const textoLimpo = String(bruto).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      const resumo = textoLimpo.length > 160 ? textoLimpo.substring(0, 157) + '...' : textoLimpo;
+
+      const linhas = [`🛍️ *${prod.titulo}*`];
+
+      if (precoAtual > 0) {
+        let linhaPreco = `💰 Por apenas R$ ${precoAtual.toFixed(2).replace('.', ',')}`;
+        if (parcelas > 1) {
+          linhaPreco += ` (ou ${parcelas}x de R$ ${(precoAtual / parcelas).toFixed(2).replace('.', ',')} sem juros)`;
+        }
+        linhas.push(linhaPreco);
+      }
+
+      if (resumo) {
+        linhas.push(`📝 ${resumo}`);
+      } else if (prod.categoria) {
+        linhas.push(`📂 Categoria: ${prod.categoria} • Envio imediato ⚡`);
+      }
+
+      linhas.push(`👉 Veja mais e compre aqui: ${urlProduto}`);
+      return linhas.join('\n\n');
+    }
+
+    async function tentarCarregarArquivoImagem(imgUrl) {
+      if (!imgUrl) return null;
+      try {
+        const res = await fetch(imgUrl, { mode: 'cors' });
+        if (!res.ok) return null;
+        const blob = await res.blob();
+        if (!blob.type.startsWith('image/')) return null;
+        const ext = blob.type.split('/')[1].split('+')[0] || 'jpg';
+        return new File([blob], `produto.${ext}`, { type: blob.type });
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function executarCompartilhamento(titulo, textoCompleto, url, imgUrl = '') {
       if (navigator.share) {
+        // Tenta enviar junto a imagem como arquivo (funciona principalmente no celular)
+        if (imgUrl && typeof navigator.canShare === 'function') {
+          const arquivoImagem = await tentarCarregarArquivoImagem(imgUrl);
+          if (arquivoImagem && navigator.canShare({ files: [arquivoImagem] })) {
+            try {
+              await navigator.share({
+                title: titulo,
+                text: textoCompleto,
+                files: [arquivoImagem]
+              });
+              return;
+            } catch (err) {
+              if (err && err.name === 'AbortError') return;
+            }
+          }
+        }
+
+        // Fallback: compartilha título, resumo e link sem o arquivo
         try {
-          await navigator.share({ title: titulo, text: texto, url: url });
+          await navigator.share({ title: titulo, text: textoCompleto, url: url });
           return;
         } catch (err) {
           if (err && err.name === 'AbortError') return;
         }
       }
 
+      // Fallback no computador: copia resumo + link
       try {
-        await navigator.clipboard.writeText(url);
-        mostrarToast('✓ Link copiado para compartilhar!');
+        await navigator.clipboard.writeText(textoCompleto);
+        mostrarToast('✓ Resumo e link do produto copiados!');
       } catch (e) {
-        prompt('Copie o link abaixo para compartilhar:', url);
+        prompt('Copie o texto abaixo para compartilhar:', textoCompleto);
       }
     }
 
@@ -301,17 +370,19 @@
         e.stopPropagation();
       }
       const prod = todosOsProdutos.find(p => String(p.id) === String(id));
-      const titulo = prod ? prod.titulo : 'Produto — Estúdio Neto';
+      if (!prod) return;
+
       const urlProduto = new URL('produto.html?id=' + encodeURIComponent(id), window.location.href).href;
-      executarCompartilhamento(titulo, 'Confira este produto na Loja Estúdio Neto: ' + titulo, urlProduto);
+      const resumoCompleto = montarResumoProduto(prod, urlProduto);
+      const imgSrc = obterUrlImagem(prod);
+
+      executarCompartilhamento(prod.titulo, resumoCompleto, urlProduto, imgSrc);
     };
 
     window.compartilharLoja = function() {
-      executarCompartilhamento(
-        'Loja Virtual — Estúdio Neto',
-        'Confira os produtos da Loja Virtual Estúdio Neto!',
-        window.location.href
-      );
+      const urlLoja = window.location.href;
+      const texto = `🎛️ *Loja Virtual — Estúdio Neto*\n\nConfira nossos produtos com envio imediato ⚡\n👉 ${urlLoja}`;
+      executarCompartilhamento('Loja Virtual — Estúdio Neto', texto, urlLoja);
     };
 
     window.addEventListener('DOMContentLoaded', carregarDados);

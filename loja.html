@@ -21,16 +21,24 @@
 <body class="bg-gray-50 text-gray-800 min-h-screen font-sans flex flex-col justify-between">
 
   <header class="border-b border-gray-200 bg-gray-900 sticky top-0 z-50 px-6 py-4 text-gray-200">
-    <div class="max-w-[1200px] mx-auto flex items-center justify-between">
+    <div class="max-w-[1200px] mx-auto flex items-center justify-between gap-4">
       <a href="index.html" class="flex items-center gap-3 text-decoration-none">
         <span class="text-3xl">🎛️</span>
         <h1 class="text-xl font-bold text-white">Estúdio Neto</h1>
       </a>
-      <nav class="hidden md:flex gap-6 text-sm font-semibold">
-        <a href="index.html" class="hover:text-white transition-colors">Início</a>
-        <a href="loja.html" class="text-white border-b-2 border-indigo-500 pb-1">Loja</a>
-        <a href="contato.html" class="hover:text-white transition-colors">Contato</a>
-      </nav>
+
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-6 text-sm font-semibold items-center">
+          <a href="index.html" class="hover:text-white transition-colors">Início</a>
+          <a href="loja.html" class="text-white border-b-2 border-indigo-500 pb-1">Loja</a>
+          <a href="contato.html" class="hover:text-white transition-colors">Contato</a>
+        </nav>
+
+        <button onclick="compartilharLoja()" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-lg transition-colors shadow-sm cursor-pointer">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+          <span>Compartilhar Loja</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -75,16 +83,23 @@
     </div>
   </footer>
 
+  <!-- Aviso de link copiado -->
+  <div id="toast-share" class="fixed bottom-5 right-5 z-50 bg-gray-900 text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg border border-gray-700 opacity-0 pointer-events-none transition-opacity duration-300">
+    ✓ Link copiado para compartilhar!
+  </div>
+
   <script>
     let todosOsProdutos = [];
     let categoriaFiltro = null;
     let modoVisualizacao = 'grid';
+    let toastTimer = null;
 
     const container = document.getElementById('produtos-container');
     const msg = document.getElementById('loading-msg');
     const total = document.getElementById('total-produtos');
     const listaCategorias = document.getElementById('lista-categorias');
     const sortSelect = document.getElementById('sort-select');
+    const toastShare = document.getElementById('toast-share');
 
     document.getElementById('btn-grid').addEventListener('click', (e) => {
       modoVisualizacao = 'grid';
@@ -155,10 +170,22 @@
       if (imgSrc && !imgSrc.startsWith('http') && !imgSrc.startsWith('data:')) imgSrc = 'https://estudioneto.github.io/estudio-neto-mastering1/' + imgSrc;
 
       let seloHtml = '';
-      if(prod.selo === 'mais_vendido') seloHtml = `<div class="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🔥 MAIS VENDIDO</div>`;
-      else if(prod.selo === 'oferta') seloHtml = `<div class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">⏳ OFERTA RELÂMPAGO</div>`;
-      else if(prod.selo === 'bonus') seloHtml = `<div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🎁 COM BÔNUS</div>`;
-      else if(prod.selo === 'lancamento') seloHtml = `<div class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10">🚀 LANÇAMENTO</div>`;
+      if(prod.selo === 'mais_vendido') seloHtml = `<div class="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 pointer-events-none">🔥 MAIS VENDIDO</div>`;
+      else if(prod.selo === 'oferta') seloHtml = `<div class="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 pointer-events-none">⏳ OFERTA RELÂMPAGO</div>`;
+      else if(prod.selo === 'bonus') seloHtml = `<div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 pointer-events-none">🎁 COM BÔNUS</div>`;
+      else if(prod.selo === 'lancamento') seloHtml = `<div class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm z-10 pointer-events-none">🚀 LANÇAMENTO</div>`;
+
+      const botaoCompartilhar = `
+        <button
+          type="button"
+          onclick="compartilharProduto('${prod.id}', event)"
+          title="Compartilhar produto"
+          class="absolute top-2 right-2 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-indigo-600 text-gray-600 hover:text-white border border-gray-200 shadow-sm flex items-center justify-center transition-colors cursor-pointer"
+        >
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+          </svg>
+        </button>`;
 
       const precoAtual = parseFloat((prod.preco || "0").replace(',', '.'));
       const precoAntigo = parseFloat((prod.preco_antigo || "0").replace(',', '.'));
@@ -190,32 +217,84 @@
 
       if(modoVisualizacao === 'list') {
         return `
-          <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-row relative group text-decoration-none h-[180px]">
+          <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 relative group h-[180px]">
             ${seloHtml}
-            <div class="w-[180px] flex-shrink-0 border-r border-gray-100 flex items-center justify-center p-4 bg-white relative">
-              <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
-            </div>
-            <div class="p-6 flex flex-col flex-grow justify-center">
-              ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">${prod.vendas}</span>` : ''}
-              <h3 class="text-[18px] font-normal text-gray-800 leading-snug mb-2 line-clamp-2">${prod.titulo}</h3>
-              <div>${htmlPreco}</div>
-            </div>
-          </a>`;
+            ${botaoCompartilhar}
+            <a href="produto.html?id=${prod.id}" class="flex flex-row w-full h-full text-decoration-none">
+              <div class="w-[180px] flex-shrink-0 border-r border-gray-100 flex items-center justify-center p-4 bg-white relative">
+                <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
+              </div>
+              <div class="p-6 pr-14 flex flex-col flex-grow justify-center">
+                ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">${prod.vendas}</span>` : ''}
+                <h3 class="text-[18px] font-normal text-gray-800 leading-snug mb-2 line-clamp-2">${prod.titulo}</h3>
+                <div>${htmlPreco}</div>
+              </div>
+            </a>
+          </div>`;
       }
 
       return `
-        <a href="produto.html?id=${prod.id}" class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col relative group text-decoration-none">
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 relative group flex flex-col">
           ${seloHtml}
-          <div class="w-full aspect-square border-b border-gray-100 flex items-center justify-center p-4 relative bg-white">
-            <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
-          </div>
-          <div class="p-4 flex flex-col flex-grow">
-            ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">${prod.vendas}</span>` : ''}
-            <h3 class="text-[14px] font-normal text-gray-700 leading-snug mb-3 line-clamp-2">${prod.titulo}</h3>
-            <div class="mt-auto">${htmlPreco}</div>
-          </div>
-        </a>`;
+          ${botaoCompartilhar}
+          <a href="produto.html?id=${prod.id}" class="flex flex-col flex-grow text-decoration-none">
+            <div class="w-full aspect-square border-b border-gray-100 flex items-center justify-center p-4 relative bg-white">
+              <img src="${imgSrc}" class="max-w-full max-h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
+            </div>
+            <div class="p-4 flex flex-col flex-grow">
+              ${prod.vendas ? `<span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">${prod.vendas}</span>` : ''}
+              <h3 class="text-[14px] font-normal text-gray-700 leading-snug mb-3 line-clamp-2">${prod.titulo}</h3>
+              <div class="mt-auto">${htmlPreco}</div>
+            </div>
+          </a>
+        </div>`;
     }
+
+    function mostrarToast(texto) {
+      toastShare.textContent = texto;
+      toastShare.classList.remove('opacity-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastShare.classList.add('opacity-0');
+      }, 2500);
+    }
+
+    async function executarCompartilhamento(titulo, texto, url) {
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: titulo, text: texto, url: url });
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      try {
+        await navigator.clipboard.writeText(url);
+        mostrarToast('✓ Link copiado para compartilhar!');
+      } catch (e) {
+        prompt('Copie o link abaixo para compartilhar:', url);
+      }
+    }
+
+    window.compartilharProduto = function(id, e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const prod = todosOsProdutos.find(p => String(p.id) === String(id));
+      const titulo = prod ? prod.titulo : 'Produto — Estúdio Neto';
+      const urlProduto = new URL('produto.html?id=' + encodeURIComponent(id), window.location.href).href;
+      executarCompartilhamento(titulo, 'Confira este produto na Loja Estúdio Neto: ' + titulo, urlProduto);
+    };
+
+    window.compartilharLoja = function() {
+      executarCompartilhamento(
+        'Loja Virtual — Estúdio Neto',
+        'Confira os produtos da Loja Virtual Estúdio Neto!',
+        window.location.href
+      );
+    };
 
     window.addEventListener('DOMContentLoaded', carregarDados);
   </script>

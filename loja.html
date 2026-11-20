@@ -92,7 +92,7 @@
 
   <!-- Aviso de link copiado -->
   <div id="toast-share" class="fixed bottom-5 right-5 z-50 bg-gray-900 text-white text-sm font-medium px-4 py-3 rounded-lg shadow-lg border border-gray-700 opacity-0 pointer-events-none transition-opacity duration-300">
-    ✓ Link copiado para compartilhar!
+    ✓ Resumo e link copiados para compartilhar!
   </div>
 
   <script>
@@ -287,29 +287,20 @@
     }
 
     function montarResumoProduto(prod, urlProduto) {
-      const precoAtual = parseFloat(String(prod.preco || "0").replace(',', '.'));
-      const parcelas = parseInt(prod.parcelas) || 1;
       const bruto = prod.resumo || prod.descricao || prod.subtitulo || prod.detalhes || '';
       const textoLimpo = String(bruto).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-      const resumo = textoLimpo.length > 160 ? textoLimpo.substring(0, 157) + '...' : textoLimpo;
+      const resumo = textoLimpo.length > 180 ? textoLimpo.substring(0, 177) + '...' : textoLimpo;
 
       const linhas = [`🛍️ *${prod.titulo}*`];
-
-      if (precoAtual > 0) {
-        let linhaPreco = `💰 Por apenas R$ ${precoAtual.toFixed(2).replace('.', ',')}`;
-        if (parcelas > 1) {
-          linhaPreco += ` (ou ${parcelas}x de R$ ${(precoAtual / parcelas).toFixed(2).replace('.', ',')} sem juros)`;
-        }
-        linhas.push(linhaPreco);
-      }
 
       if (resumo) {
         linhas.push(`📝 ${resumo}`);
       } else if (prod.categoria) {
-        linhas.push(`📂 Categoria: ${prod.categoria} • Envio imediato ⚡`);
+        linhas.push(`📂 Categoria: ${prod.categoria}`);
       }
 
-      linhas.push(`👉 Veja mais e compre aqui: ${urlProduto}`);
+      linhas.push(`⚡ Produto digital com envio imediato!`);
+      linhas.push(`👉 Veja todos os detalhes e confira o valor aqui: ${urlProduto}`);
       return linhas.join('\n\n');
     }
 
@@ -327,9 +318,9 @@
       }
     }
 
-    async function executarCompartilhamento(titulo, textoCompleto, url, imgUrl = '') {
+    async function executarCompartilhamento(titulo, textoCompleto, imgUrl = '') {
       if (navigator.share) {
-        // Tenta enviar junto a imagem como arquivo (funciona principalmente no celular)
+        // Tenta enviar junto a imagem como arquivo (principalmente no celular)
         if (imgUrl && typeof navigator.canShare === 'function') {
           const arquivoImagem = await tentarCarregarArquivoImagem(imgUrl);
           if (arquivoImagem && navigator.canShare({ files: [arquivoImagem] })) {
@@ -346,9 +337,9 @@
           }
         }
 
-        // Fallback: compartilha título, resumo e link sem o arquivo
+        // Fallback sem imagem (título + resumo + link já incluso no texto)
         try {
-          await navigator.share({ title: titulo, text: textoCompleto, url: url });
+          await navigator.share({ title: titulo, text: textoCompleto });
           return;
         } catch (err) {
           if (err && err.name === 'AbortError') return;
@@ -358,7 +349,7 @@
       // Fallback no computador: copia resumo + link
       try {
         await navigator.clipboard.writeText(textoCompleto);
-        mostrarToast('✓ Resumo e link do produto copiados!');
+        mostrarToast('✓ Resumo e link copiados para compartilhar!');
       } catch (e) {
         prompt('Copie o texto abaixo para compartilhar:', textoCompleto);
       }
@@ -376,13 +367,13 @@
       const resumoCompleto = montarResumoProduto(prod, urlProduto);
       const imgSrc = obterUrlImagem(prod);
 
-      executarCompartilhamento(prod.titulo, resumoCompleto, urlProduto, imgSrc);
+      executarCompartilhamento(prod.titulo, resumoCompleto, imgSrc);
     };
 
     window.compartilharLoja = function() {
       const urlLoja = window.location.href;
-      const texto = `🎛️ *Loja Virtual — Estúdio Neto*\n\nConfira nossos produtos com envio imediato ⚡\n👉 ${urlLoja}`;
-      executarCompartilhamento('Loja Virtual — Estúdio Neto', texto, urlLoja);
+      const texto = `🎛️ *Loja Virtual — Estúdio Neto*\n\nConfira nossos produtos digitais com envio imediato ⚡\n👉 ${urlLoja}`;
+      executarCompartilhamento('Loja Virtual — Estúdio Neto', texto);
     };
 
     window.addEventListener('DOMContentLoaded', carregarDados);

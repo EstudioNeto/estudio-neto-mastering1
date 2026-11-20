@@ -235,7 +235,7 @@
             color: var(--text-muted);
         }
 
-        /* Coluna 2: Canais */
+        /* Coluna 2: Filmes e Rádios */
         .sidebar-channels {
             width: 330px;
             background-color: var(--bg-base);
@@ -319,6 +319,12 @@
             flex: 1;
         }
 
+        .channel-sub {
+            font-size: 11px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
         /* Coluna 3: Player */
         .player-container {
             flex: 1;
@@ -351,31 +357,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-
-        .channel-overlay {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(15, 15, 20, 0.75);
-            backdrop-filter: blur(12px);
-            padding: 6px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 12px;
-            font-weight: 600;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 5;
-        }
-
-        .video-box:hover .channel-overlay {
-            opacity: 1;
         }
 
         /* GABINETE VINTAGE RETRÔ */
@@ -708,17 +689,17 @@
     </header>
 
     <main>
-        <!-- Coluna 1: Categorias Principais -->
+        <!-- Coluna 1: Categorias -->
         <div class="sidebar-categories">
             <div class="section-title">CATEGORIAS</div>
             <div id="categoryContainer"></div>
         </div>
 
-        <!-- Coluna 2: Lista de Canais -->
+        <!-- Coluna 2: Lista de Filmes e Rádios -->
         <div class="sidebar-channels">
             <div class="search-wrapper">
                 <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                <input type="text" id="searchInput" placeholder="Buscar canal..." oninput="handleSearch()">
+                <input type="text" id="searchInput" placeholder="Buscar filme..." oninput="handleSearch()">
             </div>
             <div id="channelContainer" class="channels-list"></div>
         </div>
@@ -726,11 +707,6 @@
         <!-- Coluna 3: Player -->
         <div class="player-container">
             <div class="video-box">
-                <div class="channel-overlay" id="channelOverlay">
-                    <span class="pulse-dot"></span>
-                    <span id="overlayTitle">Selecione uma transmissão</span>
-                </div>
-
                 <!-- PAINEL VINTAGE PARA RÁDIOS -->
                 <div class="vintage-radio-cabinet" id="vintageRadioPanel">
                     <div class="vintage-header-brass">
@@ -809,8 +785,30 @@
     </div>
 
     <script>
-        const M3U_URL = "https://raw.githubusercontent.com/EstudioNeto/lista_completa.m3u/main/lista_completa.m3u";
-        
+        const MOVIE_URLS = [
+            "https://amogonetworx-charlie-1-br.tcl.wurl.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://stmv1.srvif.com/classique/classique/playlist.m3u8?ROGERIOTORRES",
+            "https://amg00740-sofa-amg00740c13-tcl-us-8730.playouts.now.amagi.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://amg00740-sofa-amg00740c16-tcl-us-8738.playouts.now.amagi.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8?ROGERIOTORRES",
+            "https://amogonetworx-grjngo-1-eu.plex.wurl.tv/4300.m3u8?ROGERIOTORRES",
+            "https://amg00627-banijay-amg00627c48-tcl-us-8096.playouts.now.amagi.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00353-lionsgatestudio-moviespherebrazil-runtimelatam/playlist.m3u8?ROGERIOTORRES",
+            "https://appletree-mytime-samsungbrazil.amagi.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2552",
+            "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4865",
+            "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2553",
+            "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4864",
+            "https://ssai-ads.api.leiniao.com/global-adinsertion-api/hls/live/v2/3ada6fb1fe464ae5aa5b8b60ae285c73/playlist.m3u8?ROGERIOTORRES",
+            "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4866",
+            "https://candlelightmedia-sparklightlove-3-br.tcl.wurl.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://spt-sonyoneemocoes-1-br.samsung.wurl.tv/playlist.m3u8?ROGERIOTORRES",
+            "https://amg01822-amc-amg01822c1-lg-br-8375.playouts.now.amagi.tv/playlist/amg01822-amcnetworkslatinamericallcfast-thewalkingdeadbyamcbr-lgbr/playlist.m3u8?ROGERIOTORRES",
+            "https://video03.logicahost.com.br/filmestopmixtv/filmestopmixtv/chunklist.m3u8?ROGERIOTORRES",
+            "https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8?ROGERIOTORRES"
+        ];
+
         let categoriesData = {};
         let currentCategory = "";
         let currentChannels = [];
@@ -825,7 +823,6 @@
         const searchInput = document.getElementById("searchInput");
         const video = document.getElementById("videoPlayer");
         const audio = document.getElementById("audioPlayer");
-        const overlayTitle = document.getElementById("overlayTitle");
 
         const vintageRadioPanel = document.getElementById("vintageRadioPanel");
         const vintageStationTitle = document.getElementById("vintageStationTitle");
@@ -833,116 +830,20 @@
         const vintageVuNeedle = document.getElementById("vintageVuNeedle");
         const btnVintagePlay = document.getElementById("btnVintagePlay");
 
-        // CATEGORIAS MESTRES: INCLUI A CATEGORIA DE PREMIERE
         const MASTER_CATEGORIES = [
-            "⚽ CANAIS PREMIERE",
-            "⭐ CANAIS ABERTOS",
-            "🎬 FILMES E SÉRIES",
-            "⚽ ESPORTES",
-            "📰 NOTÍCIAS",
-            "🧸 INFANTIL",
-            "🦁 DOCUMENTÁRIOS",
-            "🍿 VARIEDADES & MÚSICA",
-            "📻 RÁDIOS DO MUNDO (45.000+)",
-            "🙏 RELIGIOSOS",
-            "📺 DIVERSOS"
+            "🎬 FILMES",
+            "📻 RÁDIOS DO MUNDO (45.000+)"
         ];
 
-        function classificarCategoria(rawCat, channelTitle) {
-            const text = (rawCat + " " + channelTitle).toUpperCase();
-            
-            // Destaca os canais Premiere em uma categoria própria
-            if (text.includes("PREMIERE")) return "⚽ CANAIS PREMIERE";
-
-            if (text.includes("ESPORTE") || text.includes("SPORT") || text.includes("ESPN") || 
-                text.includes("COMBATE") || text.includes("FUTEBOL") || text.includes("LIBERTADORES") || 
-                text.includes("CAZÉ") || text.includes("PRIME VIDEO")) return "⚽ ESPORTES";
-            
-            if (text.includes("FILME") || text.includes("SÉRIE") || text.includes("SERIE") || 
-                text.includes("TELECINE") || text.includes("HBO") || text.includes("CINEMAX") || 
-                text.includes("WARNER") || text.includes("UNIVERSAL") || text.includes("PARAMOUNT") || 
-                text.includes("SONY") || text.includes("AXN") || text.includes("SPACE") || 
-                text.includes("MEGAPIX") || text.includes("CINE SKY") || text.includes("STUDIO")) return "🎬 FILMES E SÉRIES";
-            
-            if (text.includes("NOTÍCIA") || text.includes("NOTICIA") || text.includes("NEWS") || 
-                text.includes("CNN") || text.includes("JOVEM PAN") || text.includes("GLOBO NEWS")) return "📰 NOTÍCIAS";
-            
-            if (text.includes("INFANTIL") || text.includes("KIDS") || text.includes("CARTOON") || 
-                text.includes("GLOOB") || text.includes("DISNEY") || text.includes("TOON") || 
-                text.includes("NICK") || text.includes("ZOOMOO")) return "🧸 INFANTIL";
-            
-            if (text.includes("DOCUMENTÁRIO") || text.includes("DOCUMENTARIO") || text.includes("DISCOVERY") || 
-                text.includes("HISTORY") || text.includes("ANIMAL PLANET") || text.includes("NATIONAL") || 
-                text.includes("TURBO") || text.includes("THEATER") || text.includes("SCIENCE") || text.includes("HGTV")) return "🦁 DOCUMENTÁRIOS";
-            
-            if (text.includes("RELIGIOSO") || text.includes("GOSPEL") || text.includes("APARECIDA") || 
-                text.includes("CANÇÃO NOVA") || text.includes("REDE VIDA") || text.includes("EVANGEL") || 
-                text.includes("NOVO TEMPO") || text.includes("SUPER")) return "🙏 RELIGIOSOS";
-            
-            if (text.includes("ABERTO") || text.includes("GLOBO") || text.includes("SBT") || 
-                text.includes("RECORD") || text.includes("BAND") || text.includes("REDETV") || 
-                text.includes("CULTURA") || text.includes("TV BRASIL") || text.includes("GAZETA")) return "⭐ CANAIS ABERTOS";
-            
-            if (text.includes("VARIEDADE") || text.includes("MÚSICA") || text.includes("MUSICA") || 
-                text.includes("GNT") || text.includes("MULTISHOW") || text.includes("BIS") || 
-                text.includes("VIVA") || text.includes("OFF") || text.includes("MODO VIAGEM") || 
-                text.includes("NOVELAS") || text.includes("CURTA") || text.includes("E!") || text.includes("FOOD")) return "🍿 VARIEDADES & MÚSICA";
-            
-            return "📺 DIVERSOS";
-        }
-
-        async function loadPlaylist() {
-            try {
-                const response = await fetch(M3U_URL + "?t=" + Date.now());
-                if (!response.ok) throw new Error("Erro HTTP");
-                const text = await response.text();
-                parseM3U(text);
-            } catch (err) {
-                parseM3U("");
-            }
-        }
-
-        function parseM3U(content) {
-            const lines = content.split('\n');
-            categoriesData = {};
-            MASTER_CATEGORIES.forEach(cat => { categoriesData[cat] = []; });
-
-            let tempTitle = "";
-            let rawCategory = "Geral";
-
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i].trim();
-
-                if (line.startsWith("#EXTINF:")) {
-                    const catMatch = line.match(/group-title="([^"]+)"/);
-                    rawCategory = catMatch ? catMatch[1].trim() : "Geral";
-
-                    const commaIndex = line.lastIndexOf(",");
-                    tempTitle = commaIndex !== -1 ? line.substring(commaIndex + 1).trim() : "Canal";
-
-                    // Descarta apenas resoluções ultra-pesadas (FHD e 4K e H265). Mantém SD e HD normalmente!
-                    const titleUpper = tempTitle.toUpperCase();
-                    if (titleUpper.includes("FHD") || titleUpper.includes("4K") || titleUpper.includes("265")) {
-                        tempTitle = "";
-                    }
-
-                } else if (line.startsWith("http") && tempTitle !== "") {
-                    // Sem bloqueio de domínios: todos os links passam livremente
-                    let streamUrl = line;
-                    if (streamUrl.toLowerCase().endsWith(".ts")) {
-                        streamUrl = streamUrl.substring(0, streamUrl.length - 3) + ".m3u8";
-                    }
-
-                    const finalCategory = classificarCategoria(rawCategory, tempTitle);
-                    categoriesData[finalCategory].push({
-                        title: tempTitle,
-                        url: streamUrl,
-                        isRadio: false
-                    });
-
-                    tempTitle = "";
-                }
-            }
+        function loadPlaylist() {
+            categoriesData = {
+                "🎬 FILMES": MOVIE_URLS.map((url, index) => ({
+                    title: "Filmes " + String(index + 1).padStart(2, '0'),
+                    url: url,
+                    isRadio: false
+                })),
+                "📻 RÁDIOS DO MUNDO (45.000+)": []
+            };
 
             renderCategories();
         }
@@ -955,19 +856,16 @@
                 const isWorldRadio = cat.includes("45.000+");
                 const channelCount = categoriesData[cat] ? categoriesData[cat].length : 0;
 
-                if (isWorldRadio || channelCount > 0) {
-                    const div = document.createElement("div");
-                    div.className = "category-item";
-                    let badgeText = channelCount;
-                    if (isWorldRadio) badgeText = "45k+";
+                const div = document.createElement("div");
+                div.className = "category-item";
+                const badgeText = isWorldRadio ? "45k+" : channelCount;
 
-                    div.innerHTML = `<span>${cat}</span><span class="category-badge">${badgeText}</span>`;
-                    div.onclick = () => selectCategory(cat, div);
-                    categoryContainer.appendChild(div);
+                div.innerHTML = `<span>${cat}</span><span class="category-badge">${badgeText}</span>`;
+                div.onclick = () => selectCategory(cat, div);
+                categoryContainer.appendChild(div);
 
-                    if (!firstRendered) {
-                        firstRendered = { cat: cat, el: div };
-                    }
+                if (!firstRendered) {
+                    firstRendered = { cat: cat, el: div };
                 }
             });
 
@@ -988,10 +886,10 @@
                 vintageRadioPanel.classList.add("active");
                 carregarRadiosMundiaisIniciais();
             } else {
-                searchInput.placeholder = "Buscar canal...";
+                searchInput.placeholder = "Buscar filme...";
                 vintageRadioPanel.classList.remove("active");
                 currentChannels = categoriesData[category] || [];
-                renderChannels(currentChannels);
+                renderMovies(currentChannels);
             }
         }
 
@@ -1073,47 +971,40 @@
                     buscarRadiosMundiais(query);
                 }, 300);
             } else {
-                const filtered = currentChannels.filter(c => c.title.toLowerCase().includes(query.toLowerCase()));
-                renderChannels(filtered);
+                const filtered = currentChannels.filter(m => m.title.toLowerCase().includes(query.toLowerCase()));
+                renderMovies(filtered);
             }
         }
 
-        function renderChannels(channels) {
+        function renderMovies(movies) {
             channelContainer.innerHTML = "";
-            if (channels.length === 0) {
-                channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Nenhum canal encontrado.</div>";
+            if (movies.length === 0) {
+                channelContainer.innerHTML = "<div style='padding:20px;color:#888;'>Nenhum filme encontrado.</div>";
                 return;
             }
 
-            channels.forEach((channel, index) => {
+            movies.forEach((movie) => {
                 const div = document.createElement("div");
                 div.className = "channel-item";
-                div.innerHTML = `<span class="channel-title">${channel.title}</span>`;
-                div.onclick = () => {
-                    currentRadioIndex = index;
-                    playStream(channel, div);
-                };
+                div.innerHTML = `<span class="channel-title">${movie.title}</span>`;
+                div.onclick = () => playStream(movie, div);
                 channelContainer.appendChild(div);
             });
         }
 
-        // REPRODUTOR UNIVERSAL (TV E RÁDIOS)
-        function playStream(channel, element) {
+        function playStream(item, element) {
             if (element) {
                 document.querySelectorAll(".channel-item").forEach(el => el.classList.remove("active"));
                 element.classList.add("active");
             }
 
-            overlayTitle.innerText = channel.title;
-
-            // Se for RÁDIO: Ativa o Painel Vintage
-            if (channel.isRadio || currentCategory.includes("45.000+")) {
+            if (item.isRadio || currentCategory.includes("45.000+")) {
                 if (hlsVideo) { try { hlsVideo.destroy(); } catch(e){} hlsVideo = null; }
                 video.pause();
                 video.removeAttribute('src');
 
                 vintageRadioPanel.classList.add("active");
-                vintageStationTitle.innerText = "SINTONIZANDO: " + channel.title.toUpperCase();
+                vintageStationTitle.innerText = "SINTONIZANDO: " + item.title.toUpperCase();
                 btnVintagePlay.innerHTML = "<span>⏸</span><span>PAUSAR</span>";
                 
                 moverPonteiroSintonia();
@@ -1122,24 +1013,22 @@
                 audio.pause();
                 audio.removeAttribute('src');
 
-                if (channel.url.includes(".m3u8") && Hls.isSupported()) {
+                if (item.url.includes(".m3u8") && Hls.isSupported()) {
                     hlsAudio = new Hls({ enableWorker: true, lowLatencyMode: false });
-                    hlsAudio.loadSource(channel.url);
+                    hlsAudio.loadSource(item.url);
                     hlsAudio.attachMedia(audio);
                     hlsAudio.on(Hls.Events.MANIFEST_PARSED, () => {
                         audio.play().then(() => iniciarAgulhaVU()).catch(() => {});
                     });
                 } else {
-                    audio.src = channel.url;
+                    audio.src = item.url;
                     audio.play().then(() => {
                         iniciarAgulhaVU();
-                        vintageStationTitle.innerText = "NO AR: " + channel.title.toUpperCase();
-                    }).catch(err => {
+                        vintageStationTitle.innerText = "NO AR: " + item.title.toUpperCase();
+                    }).catch(() => {
                         vintageStationTitle.innerText = "SINTONIA INSTÁVEL (TENTANDO...)";
                     });
                 }
-
-            // Se for CANAL DE TV (Premiere, Abertos, Filmes, Esportes)
             } else {
                 if (hlsAudio) { try { hlsAudio.destroy(); } catch(e){} hlsAudio = null; }
                 audio.pause();
@@ -1152,13 +1041,13 @@
                 video.pause();
                 video.removeAttribute('src');
 
-                if (channel.url.includes(".m3u8") && Hls.isSupported()) {
+                if (item.url.includes(".m3u8") && Hls.isSupported()) {
                     hlsVideo = new Hls({ enableWorker: true, lowLatencyMode: false });
-                    hlsVideo.loadSource(channel.url);
+                    hlsVideo.loadSource(item.url);
                     hlsVideo.attachMedia(video);
                     hlsVideo.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
                 } else {
-                    video.src = channel.url;
+                    video.src = item.url;
                     video.play().catch(() => {});
                 }
             }
@@ -1230,7 +1119,7 @@
         function compartilharPagina() {
             const shareData = {
                 title: 'Estúdio Neto TV',
-                text: 'Assista canais de TV e Rádios ao vivo online na Estúdio Neto TV!',
+                text: 'Assista filmes e ouça rádios ao vivo online na Estúdio Neto TV!',
                 url: window.location.href
             };
 
